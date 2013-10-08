@@ -14,21 +14,32 @@ typedef struct zxFONT_struct
   zxTEXT *m_family;
 } zxFONT;
 
-#define zxDefWinEvt DefWindowProc( win->m_hdl, event->mswMsg, event->mswWP, event->mswLP )
+#define zxDefWinEvt DefWindowProc( \
+  win->m_hdl, event->m_mswMsg, event->m_mswWP, event->m_mswLP )
 #define zxEvtCBR LRESULT
 typedef HINSTANCE  zxInstance;
 typedef HWND       zxHandle;
 typedef WNDCLASS   zxWndClass;
 typedef WNDCLASSEX zxWndClassEx;
-ZXSYS LRESULT CALLBACK zx_mswEvent( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );
+ZXSYS LRESULT CALLBACK zx_mswEvent(
+  HWND hWnd,
+  UINT msg,
+  WPARAM wParam,
+  LPARAM lParam );
 
 static ATOM ZXUNUSED( zx_mswATOM )[  zxWIN_COUNT ];
 static ATOM ZXUNUSED( zx_mswATOMX )[ zxWIN_COUNT ];
 ZXSYS void zx_mswInitATOM( void );
 ZXSYS void zx_mswFreeATOM( void );
 
-ZXSYS zxuint zx_mswSetText( HWND hdl, zxTEXT* text, zxuint line, zxuint pos, HBRUSH bg );
-ZXSYS zxuint zx_mswSetCaret( HWND hdl, zxuint line, zxuint pos );
+ZXSYS zxui zx_mswSetText(
+  HWND   wh,
+  zxTEXT *txt,
+  int    line,
+  int    pos,
+  HBRUSH bg );
+
+ZXSYS zxui zx_mswSetCaret( HWND hdl, int line, int pos );
 
 ZXC_SHUT
 

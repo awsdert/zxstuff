@@ -1,4 +1,5 @@
 #include <zx/window.h>
+#if ZXMSW
 zxuint zx_mswSetCaret( HWND hdl, int line, int pos )
 {
   RECT cRect = {0}, rect = {0};
@@ -26,3 +27,4 @@ zxuint zx_mswSetCaret( HWND hdl, int line, int pos )
   SetCaretPos( pos, line );
   return 1u;
 }
+#endif

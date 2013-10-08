@@ -8,7 +8,7 @@ ZXCORE_EXP zxVECTOR* zxv_zxVECTOR_cpyEql( zxVECTOR *obj, zxVECTOR const *src )
     {
       *obj = *src;
       obj->m_data = (zxuc*)malloc( src->m_fullSize );
-      memcpy( obj->m_data, src->m_data, src->m_fullSize );
+      mcpy( obj->m_data, src->m_data, src->m_fullSize );
     }
   }
   return obj;

@@ -5,7 +5,7 @@ zxEvtCBR zxTEXTBOX__OnKeyD( zxWINDOW* win, zxEVENT* event )
 /* TODO: check for application's event handler */
   zxTEXTBOX *tbox = NULL;
   zxTEXT    *text = NULL;
-  WORD vk = LOWORD( event->mswWP );
+  WORD vk = LOWORD( event->m_mswWP );
   if ( win->m_winType != zxWIN_TEXTBOX )
     return zxDefWinEvt;
   tbox = (zxTEXTBOX*)win;
@@ -13,18 +13,14 @@ zxEvtCBR zxTEXTBOX__OnKeyD( zxWINDOW* win, zxEVENT* event )
   switch ( vk )
   {
   case VK_DELETE:
-    if ( tbox->m_pos < text->m_len )
-    {
-      text->m_len = zxstr.Rem( text->m_text,
-        tbox->m_pos, 1u, text->m_len );
-    }
+    zxstr.erase( text, tbox->m_pos, tbox->m_pos + 1 );
     break;
   case VK_LEFT:
     if ( tbox->m_pos > 0u )
       --tbox->m_pos;
     return zxDefWinEvt;
   case VK_RIGHT:
-    if ( tbox->m_pos < ( text->m_len - 1u ) )
+    if ( tbox->m_pos < zxstr.size( text ) )
       ++tbox->m_pos;
     return zxDefWinEvt;
   case VK_TAB:

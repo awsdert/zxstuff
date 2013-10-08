@@ -2,7 +2,7 @@
 #if ZXMSW
 zxEvtCBR zxOnKeyD( zxWINDOW* win, zxEVENT* event )
 {
-  WORD vk = LOWORD( event->mswWP );
+  WORD vk = LOWORD( event->m_mswWP );
   switch ( vk )
   {
   case VK_ESCAPE:

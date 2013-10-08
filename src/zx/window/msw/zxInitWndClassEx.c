@@ -1,7 +1,7 @@
 #include <zx/window.h>
-#if ZXMSW
 void zxInitWndClassEx( zxWndClassEx *wc )
 {
+#if ZXMSW
   wc->style         = 0u;
   wc->hInstance     = zxGetThisI();
   wc->lpszMenuName  = NULL;
@@ -14,5 +14,5 @@ void zxInitWndClassEx( zxWndClassEx *wc )
   wc->hCursor       = LoadCursor(NULL, IDC_ARROW);
   wc->hIcon         = NULL;
   wc->hIconSm       = NULL;
-}
 #endif
+}

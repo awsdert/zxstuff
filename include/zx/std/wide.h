@@ -27,7 +27,7 @@ typedef struct zxn_w_struct
   void   (*_initW)( zxWIDE *dst, wide const *text, size_t len );
 } zxn_w;
 
-static zxn_w zxw = {
+static zxn_w const zxw = {
   {0},
   ZXV_DEF_BODY( zxWIDE ),
   zxv_zxWIDE_len,
@@ -56,6 +56,10 @@ public:
     { zxw._kill( this ); }
   size_t size( void )
     { zxw.size( this ); }
+  wide& at( size_t const i )
+    { *zxw.at( this, i ); }
+  wide& operator[] ( size_t const i )
+    { *zxw.at( this, i ); }
 };
 
 #endif

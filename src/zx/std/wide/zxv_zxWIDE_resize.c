@@ -1,5 +1,5 @@
 #include <zx/std/wide.h>
-ZXCORE_EXP void zxv_zxWIDE_resize( zxWIDE *txt, size_t setLen, wide setNew )
+ZXCORE_EXP void zxv_zxWIDE_resize( zxWIDE *txt, size_t const setLen, wide const setNew )
 {
   if ( !txt )
     return;

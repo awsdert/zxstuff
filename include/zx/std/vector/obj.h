@@ -34,7 +34,7 @@ typedef struct zxn_v_struct
   /* Uses grow()/erase() to modify buffer */
   void   (*resize)(        zxVECTOR       *obj,
                            size_t   const  setCount,
-                           zxuchr   const *setNew );
+                           zxuc     const *setNew );
   size_t (*capacity)(      zxVECTOR const *obj );
   bool   (*empty)(         zxVECTOR const *obj );
   /* Uses zxv.grow() */
@@ -42,7 +42,7 @@ typedef struct zxn_v_struct
                            size_t          minSize );
   void   (*grow)(          zxVECTOR       *obj,
                            size_t          setCount,
-                           zxuchr   const *setNew );
+                           zxuc     const *setNew );
   void   (*shrink)(        zxVECTOR       *obj,
                            size_t          setCount );
   /* Uses zxv.shrink() */
@@ -56,7 +56,7 @@ typedef struct zxn_v_struct
                            zxVECTOR const *src,
                            size_t   const  at );
   bool   (*push_back)(     zxVECTOR       *obj,
-                           zxVECTOR   const *src );
+                           zxVECTOR const *src );
   void   (*pop_back)(      zxVECTOR       *obj );
   /** Inserts buffer BEFORE pos **/
   void   (*insert)(        zxVECTOR       *obj,
@@ -79,7 +79,7 @@ typedef struct zxn_v_struct
   void   (*clear)(         zxVECTOR       *obj );
   void   (*reverse)(       zxVECTOR       *obj );
   size_t (*copy)(          zxVECTOR const *obj,
-                           zxuchr         *des,
+                           zxuc           *des,
                            size_t   const  desCount,
                            size_t   const  from );
   zxuc*   (*at)(           zxVECTOR const *obj,
@@ -98,7 +98,7 @@ typedef struct zxn_v_struct
   bool    (*isEqual)(      zxVECTOR const *obj,
                            zxVECTOR const *src,
                            size_t         *i );
-  zxVECTOR* (*cpyEql)(      zxVECTOR       *obj,
+  zxVECTOR* (*cpyEql)(     zxVECTOR       *obj,
                            zxVECTOR const *src );
   zxVECTOR* (*opAdd)(      zxVECTOR       *obj,
                            zxVECTOR const *src );

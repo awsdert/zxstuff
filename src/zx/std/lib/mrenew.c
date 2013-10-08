@@ -9,10 +9,10 @@ ZXCORE_EXP ZXVP mrenew( ZXVP dst, size_t count, size_t Tsize, size_t newCount, Z
     if ( cpy )
     {
       for ( ; i < size; i += Tsize )
-        memcpy( &ptr[ i ], cpy, Tsize );
+        mcpy( &ptr[ i ], cpy, Tsize );
     }
     else
-      memset( &ptr[ i ], 0, size - i );
+      mset( &ptr[ i ], 0, size - i );
   }
   return ptr;
 }

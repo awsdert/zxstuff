@@ -25,6 +25,12 @@
 #define ZXDBG 0
 #endif
 
+#if defined( __UNICODE ) || defined( _UNICODE ) || defined( UNICODE )
+#define ZXUNICODE 1
+#else
+#define ZXUNICODE 0
+#endif
+
 #ifdef _MSC_VER
 #define ZX_MSC_VER _MSC_VER
 #else

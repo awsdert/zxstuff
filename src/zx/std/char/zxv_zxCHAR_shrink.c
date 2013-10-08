@@ -1,5 +1,5 @@
 #include <zx/std/char.h>
-ZXCORE_EXP void zxv_zxCHAR_shrink( zxCHAR *txt, size_t setLen )
+ZXCORE_EXP void zxv_zxCHAR_shrink( zxCHAR *txt, size_t const setLen )
 {
   if ( !txt )
     return;

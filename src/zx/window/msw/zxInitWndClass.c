@@ -1,7 +1,7 @@
 #include <zx/window.h>
-#if ZXMSW
 void zxInitWndClass( zxWndClass *wc )
 {
+#if ZXMSW
   wc->style         = 0u;
   wc->hInstance     = zxGetThisI();
   wc->lpszMenuName  = NULL;
@@ -12,5 +12,5 @@ void zxInitWndClass( zxWndClass *wc )
   wc->hbrBackground = (HBRUSH)(COLOR_BACKGROUND);
   wc->hCursor       = LoadCursor(NULL, IDC_ARROW);
   wc->hIcon         = NULL;
-}
 #endif
+}

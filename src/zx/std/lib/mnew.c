@@ -5,9 +5,9 @@ ZXCORE_EXP ZXVP mnew( size_t size, ZXVP cpy )
   if ( ptr )
   {
     if ( cpy )
-      memcpy( ptr, cpy, size );
+      mcpy( ptr, cpy, size );
     else
-      memset( ptr, 0, size );
+      mset( ptr, 0, size );
   }
   return ptr;
 }

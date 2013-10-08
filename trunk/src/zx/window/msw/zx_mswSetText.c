@@ -1,6 +1,11 @@
 #include <zx/textbox.h>
 #if ZXMSW
-ZXSYS_EXP zxuint zx_mswSetText( HWND hdl, zxTEXT* text, int line, int pos, HBRUSH bg )
+ZXSYS_EXP zxui zx_mswSetText(
+  HWND hdl,
+  zxTEXT* text,
+  int line,
+  int pos,
+  HBRUSH bg )
 {
   RECT cRect = {0}, rect = {0};
   POINT pt;

@@ -1,4 +1,5 @@
 #include "std/int.h"
+#include "std/lib.h"
 
 #ifndef ZXENDIAN_H
 #define ZXENDIAN_H

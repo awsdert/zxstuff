@@ -1,6 +1,7 @@
 #include <zx/window.h>
-int zx_NewWindow( TCHAR *text, zxWINDOW *kid, DWORD style, DWORD ext )
+int zx_NewWindow( zxTEXT *txt, zxWINDOW *kid, zxul style, zxul ext )
 {
+#if ZXMSW
   zxHandle   parent = NULL;
   if ( !kid )
     return 1;
@@ -33,8 +34,8 @@ int zx_NewWindow( TCHAR *text, zxWINDOW *kid, DWORD style, DWORD ext )
       zx_mswATOMX[ kid->m_winType ] = RegisterClassEx( kid->m_wcx );
     if ( !zx_mswATOMX[ kid->m_winType ] )
       return 1;
-    kid->m_hdl = CreateWindowEx( ext, kid->m_wcx->lpszClassName, text,
-      style, kid->m_x, kid->m_y, kid->m_w, kid->m_h,
+    kid->m_hdl = CreateWindowEx( ext, kid->m_wcx->lpszClassName,
+      txt->m_text, style, kid->m_x, kid->m_y, kid->m_w, kid->m_h,
       parent, (HMENU)kid->m_id, kid->m_wcx->hInstance, NULL );
   }
   else
@@ -57,11 +58,12 @@ int zx_NewWindow( TCHAR *text, zxWINDOW *kid, DWORD style, DWORD ext )
       zx_mswATOM[  kid->m_winType ] = RegisterClass(   kid->m_wc );
     if ( !zx_mswATOM[ kid->m_winType ] )
       return 1;
-    kid->m_hdl = CreateWindow( kid->m_wc->lpszClassName, text,
-      style, kid->m_x, kid->m_y, kid->m_w, kid->m_h,
+    kid->m_hdl = CreateWindow( kid->m_wc->lpszClassName,
+      txt->m_text, style, kid->m_x, kid->m_y, kid->m_w, kid->m_h,
       parent, (HMENU)kid->m_id, kid->m_wc->hInstance, NULL );
   }
   if ( !kid->m_hdl )
     return 2;
+#endif
   return 0;
 }

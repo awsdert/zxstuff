@@ -1,5 +1,8 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxv_zxVECTOR_resize( zxVECTOR *obj, size_t setCount, zxuchr const *setNew )
+ZXCORE_EXP void zxv_zxVECTOR_resize(
+  zxVECTOR       *obj,
+  size_t   const setCount,
+  zxuc     const *setNew )
 {
   if ( !obj )
   {

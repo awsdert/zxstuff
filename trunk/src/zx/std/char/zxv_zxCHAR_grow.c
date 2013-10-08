@@ -1,5 +1,8 @@
 #include <zx/std/char.h>
-ZXCORE_EXP void zxv_zxCHAR_grow( zxCHAR *txt, size_t setLen, char setNew )
+ZXCORE_EXP void zxv_zxCHAR_grow(
+  zxCHAR       *txt,
+  size_t const setLen,
+  char   const setNew )
 {
   if ( !txt )
     return;

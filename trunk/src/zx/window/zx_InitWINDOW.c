@@ -3,7 +3,6 @@ void zx_InitWINDOW( zxWINDOW *win )
 {
   win->m_parent    = NULL;
   win->m_kids      = NULL;
-  win->m_kidsCount = 0u;
   win->m_id        = 0u;
   win->m_x         = 0;
   win->m_y         = 0;

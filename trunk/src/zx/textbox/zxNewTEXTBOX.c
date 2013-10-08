@@ -5,7 +5,7 @@ ZXSYS_EXP zxTEXTBOX* zxNewTEXTBOX( void )
   zxWINDOW*  win  = &tbox->m_win;
   win->m_winType = zxWIN_TEXTBOX;
   zx_InitWINDOW( win  );
-  zx_InitTEXT(   &tbox->m_text );
+  zxstr._init( &tbox->m_text, NULL, 0 );
   tbox->m_pos     = 0;
 #if ZXMSW
   tbox->m_font    = NULL;

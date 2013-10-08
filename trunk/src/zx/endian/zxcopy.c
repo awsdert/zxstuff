@@ -1,7 +1,7 @@
 #include <zx/endian.h>
 ZXCORE_EXP zxuchr* zxcopy(
-	zxuchr* src, size_t ssize, zxEndian sen,
-	zxuchr* des, size_t dsize, zxEndian den )
+	zxuc* src, size_t ssize, zxEndian sen,
+	zxuc* des, size_t dsize, zxEndian den )
 {
 	size_t i = 0, t,
     end = ssize;
@@ -30,7 +30,7 @@ ZXCORE_EXP zxuchr* zxcopy(
       des[ i ] = val;
     return des;
   }
-	tmp = (zxuchr*)malloc( dsize );
+	tmp = (zxuc*)malloc( dsize );
 	switch ( sen )
 	{
 	case zxENDIAN_BIG:

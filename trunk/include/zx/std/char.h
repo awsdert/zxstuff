@@ -27,7 +27,7 @@ typedef struct zxn_c_struct
   void   (*_initW)( zxCHAR *dst, wide const *text, size_t len );
 } zxn_c;
 
-static zxn_c zxc = {
+static zxn_c const zxc = {
   {0},
   ZXV_DEF_BODY( zxCHAR ),
   zxv_zxCHAR_len,
@@ -56,6 +56,10 @@ public:
     { zxc._kill( this ); }
   size_t size( void )
     { zxc.size( this ); }
+  char& at( size_t const i )
+    { *zxc.at( this, i ); }
+  char& operator[] ( size_t const i )
+    { *zxc.at( this, i ); }
 };
 
 #endif

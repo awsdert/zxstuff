@@ -8,10 +8,10 @@ ZXCORE_EXP ZXVP mnewa( size_t Tsize, size_t count, ZXVP cpy )
     if ( cpy )
     {
       for ( ; i < size; i += Tsize )
-        memcpy( &ptr[ i ], cpy, Tsize );
+        mcpy( &ptr[ i ], cpy, Tsize );
     }
     else
-      memset( ptr, 0, size );
+      mset( ptr, 0, size );
   }
   return ptr;
 }

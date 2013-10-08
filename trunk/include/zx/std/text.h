@@ -6,7 +6,7 @@
 
 ZXC_OPEN
 
-#ifdef UNICODE
+#if ZXUNICODE
 typedef wide zxch;
 #define zxstr zxw
 #define ZX_TEXT( TEXT ) ZX_WIDE( TEXT )
@@ -23,7 +23,7 @@ typedef zxCHAR zxTEXT;
 ZXC_SHUT
 
 #if ZXCPP
-#ifdef UNICODE
+#if ZXUNICODE
 typedef zxWide zxText;
 #else
 typedef zxChar zxText;

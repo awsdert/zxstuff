@@ -4,10 +4,10 @@ LRESULT CALLBACK zx_mswEvent( HWND hdl, UINT msg, WPARAM wp, LPARAM lp )
 {
   zxWINDOW *win = zxGetWindowH( hdl );
   zxEVENT  event;
-  event.mswHwnd = hdl;
-  event.mswMsg  = msg;
-  event.mswWP   = wp;
-  event.mswLP   = lp;
+  event.m_mswHwnd = hdl;
+  event.m_mswMsg  = msg;
+  event.m_mswWP   = wp;
+  event.m_mswLP   = lp;
   if ( !win )
     return DefWindowProc( hdl, msg, wp, lp );
   switch( msg )
@@ -17,7 +17,7 @@ LRESULT CALLBACK zx_mswEvent( HWND hdl, UINT msg, WPARAM wp, LPARAM lp )
     return 0;
 #if 1
   case WM_SETFOCUS:
-    event.evtType = zxEVT_WIN_FOCUS;
+    event.m_type = zxEVT_WIN_FOCUS;
     if ( win->m_onFocus )
       return win->m_onFocus( win, &event );
     return DefWindowProc( hdl, msg, wp, lp );

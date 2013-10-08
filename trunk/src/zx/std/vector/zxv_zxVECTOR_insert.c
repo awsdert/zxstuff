@@ -1,5 +1,8 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxv_zxVECTOR_insert( zxVECTOR *obj, zxVECTOR const *src, size_t pos )
+ZXCORE_EXP void zxv_zxVECTOR_insert(
+  zxVECTOR       *obj,
+  zxVECTOR const *src,
+  size_t          pos )
 {
   size_t d, s, i, j, f, t, stop;
   if ( !obj || !src ||

@@ -1,4 +1,5 @@
 #include <zx/window.h>
+#if ZXMSW
 void zx_mswInitATOM( void )
 {
   int i = zxWIN_NULL, count = zxWIN_COUNT;
@@ -8,3 +9,4 @@ void zx_mswInitATOM( void )
     zx_mswATOMX[ i ] = 0u;
   }
 }
+#endif

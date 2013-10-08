@@ -37,19 +37,20 @@ typedef enum zxWIN_enum
 #if ZXALL
 typedef struct zxFONT_struct
 {
-  zxuint  m_style;
-  zxuint  m_weight;
-  zxuint  m_w, m_h;
-  zxchar *m_family;
+  zxui  m_style;
+  zxui  m_weight;
+  zxui  m_w, m_h;
+  zxch *m_family;
 } zxFONT;
 
 #define zxEvtCBR long
-typedef zxui zxInstance;
+typedef void* zxInstance;
 #define zxDefWinEvt 0
 typedef ZXVP zxHandle;
 typedef struct { int ignored; } zxWndClass;
 typedef struct { int ignored; } zxWndClassEx;
 #endif
+
 ZXC_SHUT
 
 #endif

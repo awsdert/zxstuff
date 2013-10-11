@@ -1,68 +1,73 @@
 #include <zx/window.h>
-int zx_NewWindow( zxTEXT *txt, zxWINDOW *kid, zxul style, zxul ext )
+int zx_mswNewWindow( zxWINDOW *kid, zxul style, zxul ext )
 {
-#if ZXMSW
-  zxHandle   parent = NULL;
+  zxWINDOW  *base = NULL;
+  zxoWINDOW *core = NULL;
+  zxTEXT    *text = &core->m_title;
   if ( !kid )
     return 1;
+  base = kid->m_base;
+  core = kid->m_core;
+#if ZXMSW
 #if 1
   style |= CS_VREDRAW | CS_HREDRAW;
 #endif
-  if ( kid->m_parent )
-  {
-    parent = kid->m_parent->m_hdl;
+  if ( base )
     style |= WS_CHILD;
-  }
   if ( ext )
   {
-    switch ( kid->m_winType )
+    switch ( core->m_win )
     {
     case zxWIN_COUNT:
-      if ( !kid->m_wc )
+      if ( !core->m_wc )
         return 1;
       break;
     case zxWIN_NULL:
-      kid->m_wcx          = &zx_WCX[ kid->m_winType ];
-      kid->m_wcx->hIcon   = LoadIcon( NULL, IDI_APPLICATION );
-      kid->m_wcx->hIconSm = LoadIcon( NULL, IDI_APPLICATION );
+      core->m_wcx          = &zx_WCX[ core->m_win ];
+      core->m_wcx->hIcon   = LoadIcon( NULL, IDI_APPLICATION );
+      core->m_wcx->hIconSm = LoadIcon( NULL, IDI_APPLICATION );
       break;
     default:
-      kid->m_wcx          = &zx_WCX[ kid->m_winType ];
+      core->m_wcx          = &zx_WCX[ core->m_win ];
     }
-    kid->m_wcx->hInstance = zxGetThisI();
-    if ( !zx_mswATOMX[ kid->m_winType ] )
-      zx_mswATOMX[ kid->m_winType ] = RegisterClassEx( kid->m_wcx );
-    if ( !zx_mswATOMX[ kid->m_winType ] )
+    core->m_wcx->hInstance = zxGetThisI();
+    if ( !zx_mswATOMX[ core->m_win ] )
+      zx_mswATOMX[ core->m_win ] = RegisterClassEx( core->m_wcx );
+    if ( !zx_mswATOMX[ core->m_win ] )
       return 1;
-    kid->m_hdl = CreateWindowEx( ext, kid->m_wcx->lpszClassName,
-      txt->m_text, style, kid->m_x, kid->m_y, kid->m_w, kid->m_h,
-      parent, (HMENU)kid->m_id, kid->m_wcx->hInstance, NULL );
+    core->m_hdl = CreateWindowEx( ext,
+      core->m_wcx->lpszClassName, text->m_text, style,
+      core->m_x, core->m_y, core->m_w, core->m_h,
+      base->m_core->m_hdl, (HMENU)core->m_id,
+      core->m_wcx->hInstance, NULL );
   }
   else
   {
-    switch ( kid->m_winType )
+    switch ( core->m_win )
     {
     case zxWIN_COUNT:
-      if ( !kid->m_wc )
+      if ( !core->m_wc )
         return 1;
       break;
     case zxWIN_NULL:
-      kid->m_wc           = &zx_WC[ kid->m_winType ];
-      kid->m_wc->hIcon    = LoadIcon( NULL, IDI_APPLICATION );
+      core->m_wc           = &zx_WC[ core->m_win ];
+      core->m_wc->hIcon    = LoadIcon( NULL, IDI_APPLICATION );
       break;
     default:
-      kid->m_wc  = &zx_WC[ kid->m_winType ];
+      core->m_wc  = &zx_WC[ core->m_win ];
     }
-    kid->m_wc->hInstance  = zxGetThisI();
-    if ( !zx_mswATOM[ kid->m_winType ] )
-      zx_mswATOM[  kid->m_winType ] = RegisterClass(   kid->m_wc );
-    if ( !zx_mswATOM[ kid->m_winType ] )
+    core->m_wc->hInstance  = zxGetThisI();
+    if ( !zx_mswATOM[ core->m_win ] )
+      zx_mswATOM[ core->m_win ] = RegisterClass( core->m_wc );
+    if ( !zx_mswATOM[ core->m_win ] )
       return 1;
-    kid->m_hdl = CreateWindow( kid->m_wc->lpszClassName,
-      txt->m_text, style, kid->m_x, kid->m_y, kid->m_w, kid->m_h,
-      parent, (HMENU)kid->m_id, kid->m_wc->hInstance, NULL );
+    core->m_hdl = CreateWindow(
+      core->m_wc->lpszClassName, txt->m_text, style,
+      kid->m_x, kid->m_y, kid->m_w, kid->m_h,
+      base->m_core->m_hdl, (HMENU)kid->m_id,
+      kid->m_wc->hInstance, NULL );
   }
-  if ( !kid->m_hdl )
+  if ( !core->m_hdl )
     return 2;
 #endif
   return 0;

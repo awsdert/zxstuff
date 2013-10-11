@@ -6,60 +6,96 @@
 
 ZXC_OPEN
 
-typedef struct zxEVENT_struct
+typedef struct zxoWINDOW_struct
 {
-  zxEVT m_type;
-#if ZXMSW
-  HWND   m_mswHwnd;
-  UINT   m_mswMsg;
-  WPARAM m_mswWP;
-  LPARAM m_mswLP;
-#endif
-} zxEVENT;
-
-ZXSYS zxInstance zxGetPrevI( void );
-ZXSYS zxInstance zxGetThisI( void );
-ZXSYS void zx_SetPrevI( zxInstance i );
-ZXSYS void zx_SetThisI( zxInstance i );
-
-#define zxWINDOW struct zxWINDOW_struct
-
-zxWINDOW
-{
-  zxWINDOW*  m_parent;
-  zxWINDOW** m_kids;
-  zxuint        m_id;
-  zxWIN         m_winType;
-  int           m_x, m_y, m_w, m_h;
-/* System Specfic */
+  size_t   m_id;
+  zxWIN    m_win;
+  zxsi     m_x, m_y, m_w, m_h;
+  zxTEXT   m_title;
+  /* System Specfic */
   zxWndClass   *m_wc;
   zxWndClassEx *m_wcx;
   zxHandle      m_hdl;
-/* Not for application development, is for default handlers */
-  zxEvtCBR    (*m_onFocus)(
-    zxWINDOW* win, zxEVENT* event );
-  zxEvtCBR    (*m_onBlur)(
-    zxWINDOW* win, zxEVENT* event );
-  zxEvtCBR    (*m_onChar)(
-    zxWINDOW* win, zxEVENT* event );
-  zxEvtCBR    (*m_onKeyD)(
-    zxWINDOW* win, zxEVENT* event );
-  zxEvtCBR    (*m_onKeyP)(
-    zxWINDOW* win, zxEVENT* event );
-  zxEvtCBR    (*m_onKeyU)(
-    zxWINDOW* win, zxEVENT* event );
-};
+} zxoWINDOW;
 
-ZXSYS int zx_NewWindow(
-  zxTEXT   *txt,
+typedef struct zxEVENT_struct
+{
+  zxEVT     m_type;
+#if ZXMSW
+  HWND      m_mswHwnd;
+  UINT      m_mswMsg;
+  WPARAM    m_mswWP;
+  LPARAM    m_mswLP;
+#endif
+} zxEVENT;
+
+zxEvtCBR zxv_zxWINDOW_onFocus( zxoWINDOW* win, zxEVENT* event );
+zxEvtCBR zxv_zxWINDOW_onBlur(  zxoWINDOW* win, zxEVENT* event );
+zxEvtCBR zxv_zxWINDOW_onChar(  zxoWINDOW* win, zxEVENT* event );
+zxEvtCBR zxv_zxWINDOW_onKeyD(  zxoWINDOW* win, zxEVENT* event );
+zxEvtCBR zxv_zxWINDOW_onKeyP(  zxoWINDOW* win, zxEVENT* event );
+zxEvtCBR zxv_zxWINDOW_onKeyU(  zxoWINDOW* win, zxEVENT* event );
+
+typedef struct zxEVENTS_struct
+{
+  zxEvtCBR (*onFocus)( zxoWINDOW* win, zxEVENT* event );
+  zxEvtCBR (*onBlur)(  zxoWINDOW* win, zxEVENT* event );
+  zxEvtCBR (*onChar)(  zxoWINDOW* win, zxEVENT* event );
+  zxEvtCBR (*onKeyD)(  zxoWINDOW* win, zxEVENT* event );
+  zxEvtCBR (*onKeyP)(  zxoWINDOW* win, zxEVENT* event );
+  zxEvtCBR (*onKeyU)(  zxoWINDOW* win, zxEVENT* event );
+} zxEVENTS;
+
+ZXV_DEC_1ST( zxWINDOW )
+{
+  zxEVENTS   m_events;
+  zxoWINDOW *m_core;
+  zxv_zxWINDOW_struct
+    *m_base;
+  zxVECTOR m_kids;
+} zxWINDOW;
+
+ZXV_DEC_2ND( zxWINDOW, zxWINDOW* );
+
+typedef struct zxn_w_struct
+{
+  ZXV_DEC_BODY( zxWINDOW, zxWINDOW* );
+  zxEVENTS defEvents;
+} zxn_w;
+
+ZXSYS zxsi zxmain(
+             zxHandle   rootWH,
+             zxInstance prevI,
+             zxInstance thisI,
+             zxTEXT*    args );
+
+ZXSYS zxInstance
+  zxGetPrevI( void );
+ZXSYS zxInstance
+  zxGetThisI( void );
+ZXSYS zxWINDOW*
+  zxo_zxWINDOW__init( zxoWINDOW* core );
+ZXSYS zxWINDOW*
+  zxo_zxWINDOW__kill( zxWINDOW*  win, bool delKids );
+ZXSYS zxHandle
+  zxo_zxWINDOW_getHandle( size_t id );
+ZXSYS zxWINDOW*
+  zxo_zxWINDOW_getWindow( size_t id );
+ZXSYS zxVECTOR*
+  zxo_zxWINDOW_allWindows( void );
+ZXSYS zxWINDOW*
+  zxo_zxWINDOW_byHandle( zxHandle wh );
+#define ZXONEWWINDOW (zxoWINDOW*)malloc( sizeof( zxoWINDOW ) )
+#define ZXFREE( PTR ) free( PTR ); PTR = NULL
+
+ZXSYS int zx_mswNewWindow(
   zxWINDOW *kid,
   zxul      style,
   zxul      ext );
 
-ZXSYS zxWINDOW*  zxNewWINDOW( void );
+ZXSYS zxWINDOW*  zxNewWINDOW( zxWINDOW *parent );
 ZXSYS zxWINDOW*  zxGetWindowH( zxHandle hdl );
-ZXSYS zxWINDOW** zxGetAllWindows( void );
-ZXSYS zxui       zxGetWindowCount( void );
+
 ZXSYS zxui       zx_ResizeWindows( zxuint initLength );
 ZXSYS void       zx_SetAllWindows( zxWINDOW** newArray );
 /**
@@ -77,11 +113,6 @@ static zxWndClassEx ZXUNUSED( zx_WCX )[ zxWIN_COUNT ];
 
 ZXSYS void zx_InitWC( void );
 ZXSYS void zx_FreeWC( void );
-
-zxEvtCBR zxOnChar( zxWINDOW* win, zxEVENT* event );
-zxEvtCBR zxOnKeyD( zxWINDOW* win, zxEVENT* event );
-zxEvtCBR zxOnKeyP( zxWINDOW* win, zxEVENT* event );
-zxEvtCBR zxOnKeyU( zxWINDOW* win, zxEVENT* event );
 
 ZXC_SHUT
 

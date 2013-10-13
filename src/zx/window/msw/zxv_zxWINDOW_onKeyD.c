@@ -1,6 +1,6 @@
 #include <zx/window.h>
 #if ZXMSW
-zxEvtCBR zxOnKeyD( zxWINDOW* win, zxEVENT* event )
+zxEvtCBR zxv_zxWINDOW_onKeyD( zxWINDOW* win, zxEVENT* event )
 {
   WORD vk = LOWORD( event->m_mswWP );
   switch ( vk )
@@ -10,7 +10,7 @@ zxEvtCBR zxOnKeyD( zxWINDOW* win, zxEVENT* event )
     break;
   default:
 #if 1
-    if ( win->m_winType == zxWIN_NULL )
+    if ( win->m_core->m_win == zxWIN_NULL )
     {
       if ( vk == VK_TAB )
         SetFocus( win->m_kids[0]->m_hdl );

@@ -1,5 +1,5 @@
 #include <zx/window.h>
-void zxInitWndClassEx( zxWndClassEx *wc )
+ZXSYS_EXP void zxv_zxWINDOW__initWCX( zxWCX *wc )
 {
 #if ZXMSW
   wc->style         = 0u;

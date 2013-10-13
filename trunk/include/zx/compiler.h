@@ -1,34 +1,11 @@
+#include "stdc.h"
 #ifndef ZX_COMPILER_H
 #define ZX_COMPILER_H
 
-#ifdef __STDC_VERSION__
-#define ZXC __STDC_VERSION__
+#if defined( _DLL ) || defined( _WINDLL )
+#define ZXDLL 1
 #else
-#define ZXC 198900
-#endif
-
-#ifdef __cplusplus
-#define ZXCPP __cplusplus
-#define ZXC_EXT  extern "C"
-#define ZXC_SHUT }
-#define ZXC_OPEN extern "C" {
-#else
-#define ZXCPP 0
-#define ZXC_EXT
-#define ZXC_SHUT
-#define ZXC_OPEN
-#endif
-
-#if defined( __DEBUG ) || defined( _DEBUG ) || defined( DEBUG )
-#define ZXDBG 1
-#else
-#define ZXDBG 0
-#endif
-
-#if defined( __UNICODE ) || defined( _UNICODE ) || defined( UNICODE )
-#define ZXUNICODE 1
-#else
-#define ZXUNICODE 0
+#define ZXDLL 0
 #endif
 
 #ifdef _MSC_VER
@@ -38,7 +15,7 @@
 #endif
 
 #ifdef __attribute__
-#define ZX_GNU_VER 1
+#define ZX_GNU_VER __VERSION__
 #define ZXATTR( ATTR ) __attribute__((ATTR))
 #else
 #define ZX_GNU_VER 0
@@ -62,17 +39,7 @@
 #define ZXDEPREC  ZXATTR( __deprecated__ )
 #define ZXNOTHROW ZXATTR( __nothrow__    )
 
-#if ZXDBG
-#if ZXC
-#include <assert.h>
-#else
-#include <cassert>
-#endif
-#else
-#define assert( _Expression )
-#endif
-
-#if ZXCPP || ZXC >= 199900 || defined( ZXPREC_GNU )
+#if ZXCPP || ZXC >= 199900L || defined( ZXPREC_GNU )
 #define ZXILL long long
 #define ZXLL( VAL ) VAL##LL
 #elif ZX_MSC_VER >= 800
@@ -90,22 +57,5 @@ typedef   signed ZXILL zxsll;
 
 #define ZXB1  ZXLL( 1 )
 #define ZXB1U ZXLL( 1U )
-
-typedef unsigned char  zxuc;
-typedef   signed char  zxsc;
-typedef unsigned short zxus;
-typedef   signed short zxss;
-typedef unsigned long  zxul;
-typedef   signed long  zxsl;
-typedef unsigned int   zxui;
-typedef   signed int   zxsi;
-
-#if ZXC >= 198900 || defined( _MSC_EXTENSIONS )
-#define ZXVP void*
-#else
-#define ZXVP zxuc*
-#endif
-
-typedef ZXVP zxvp;
 
 #endif

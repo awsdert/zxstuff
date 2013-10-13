@@ -1,36 +1,19 @@
-#include "../std/text.h"
+#include "../event.h"
+
 #ifndef ZXWINDOW_ALL_H
 #define ZXWINDOW_ALL_H
 
 ZXC_OPEN
-
-typedef enum zxEVT_enum
-{
-  zxEVT_NULL = 0u,
-  zxEVT_KEYU,
-  zxEVT_KEYP,
-  zxEVT_KEYD,
-  zxEVT_CURMV,
-  zxEVT_CURLC,
-  zxEVT_CURMC,
-  zxEVT_CURRC,
-  zxEVT_CURWH,
-  zxEVT_WIN_FOCUS,
-  zxEVT_WIN_BLUR,
-  zxEVT_WIN_OPEN,
-  zxEVT_WIN_SHUT,
-  zxEVT_WIN_QUIT,
-  zxEVT_COUNT
-} zxEVT;
-
-ZXSYS zxTEXT const* zxGetAppTitle( void );
-ZXSYS void zxSetAppTitle( zxTEXT const *txt );
 
 typedef enum zxWIN_enum
 {
   zxWIN_NULL = 0u,
   zxWIN_FRAME,
   zxWIN_TEXTBOX,
+#if ZXCPP
+  zxWIN_CPP_FRAME,
+  zxWIN_CPP_TEXTBOX,
+#endif
   zxWIN_COUNT
 } zxWIN;
 
@@ -43,12 +26,8 @@ typedef struct zxFONT_struct
   zxch *m_family;
 } zxFONT;
 
-#define zxEvtCBR long
-typedef void* zxInstance;
-#define zxDefWinEvt 0
-typedef ZXVP zxHandle;
-typedef struct { int ignored; } zxWndClass;
-typedef struct { int ignored; } zxWndClassEx;
+typedef struct { int ignored; } zxWC;
+typedef struct { int ignored; } zxWCX;
 #endif
 
 ZXC_SHUT

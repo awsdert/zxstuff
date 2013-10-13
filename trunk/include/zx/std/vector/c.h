@@ -8,11 +8,17 @@ ZXC_OPEN
 
 typedef struct zxv_zxVECTOR_struct
 {
-  zxuc*   m_data;
+  void*   m_data;
+  void**  m_ptr;
+  bool    m_isFixed;
   size_t  m_Tsize;
   size_t  m_count, m_fullCount;
   size_t  m_size,  m_fullSize;
 } zxVECTOR;
+
+#define ZXVECTOR( DATA, PTR, ISFIXED, T, COUNT ) \
+  { DATA, PTR, ISFIXED, sizeof( T ), \
+  COUNT, COUNT, sizeof( T ) * COUNT, sizeof( T ) * COUNT }
 
 /*
   These are not to be used directly,

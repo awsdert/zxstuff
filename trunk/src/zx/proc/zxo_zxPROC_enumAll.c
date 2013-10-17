@@ -7,11 +7,8 @@ ZXSYS_EXP zxui zxo_zxPROC_enumAll( zxPROC **plist, bool visibleOnly )
   zxui i = 0u, j = 0u, len = 0u;
   zxPROC* pl = NULL;
   zxVECTOR plv = zxv.def;
-  if ( !plist )
-  {
-    assert( !plist );
+  ZXASSERT( !plist )
     return 0;
-  }
   *plist = NULL;
   shot = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
   if ( !shot )

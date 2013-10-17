@@ -4,14 +4,16 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opAnd( zxVLI *src, zxVLI const *val )
 {
   size_t i = 0, j = 0, k = 0,
     end = val->m_bits, stop;
-  zxuchr bit = 0u;
+  zxuc bit = 0u,
+    *SRC = (zxuc*)src->m_vector.m_data,
+    *VAL = (zxuc*)val->m_vector.m_data;
   if ( !src || !val )
     return src;
   if ( src->m_bits < end )
     end = src->m_bits;
   stop = end;
 	for ( ; stop >= CHAR_BIT; i += CHAR_BIT, ++j )
-    src->m_vector.m_data[ j ] &= val->m_vector.m_data[ j ];
+    SRC[ j ] &= VAL[ j ];
   if ( i < end )
   {
     for ( ; i < end; ++i, ++k )
@@ -19,13 +21,13 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opAnd( zxVLI *src, zxVLI const *val )
       bit <<= 1;
       bit |= 1u;
     }
-    src->m_vector.m_data[ j ] &=
-      ( val->m_vector.m_data[ j ] & bit );
+    SRC[ j ] &=
+      ( VAL[ j ] & bit );
     ++j;
     for ( ; k < CHAR_BIT; ++k, ++i );
   }
   for ( ; i < src->m_bits; i += CHAR_BIT, ++j )
-    src->m_vector.m_data[ j ] = 0u;
+    SRC[ j ] = 0u;
   return src;
 }
 /* operator&   */

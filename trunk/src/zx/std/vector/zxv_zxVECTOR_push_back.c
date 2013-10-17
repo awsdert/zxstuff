@@ -1,21 +1,18 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP bool zxv_zxVECTOR_push_back( zxVECTOR *obj, zxVECTOR const *src )
+ZXCORE_EXP bool zxv_zxVECTOR_push_back(
+  zxVECTOR *vec,
+  zxVECTOR const *src )
 {
   size_t i, j = 0, stop;
-  if ( !obj )
-  {
-    assert( !obj );
+  zxuc *VEC, *SRC;
+  ZXASSERT( !vec || !src )
     return false;
-  }
-  if ( !src )
-  {
-    assert( !src );
-    return false;
-  }
-  i = obj->m_count;
+  i = vec->m_count;
   stop = i + src->m_count;
-  zxv.grow( obj, obj->m_count + src->m_count, NULL );
+  zxv.grow( vec, vec->m_count + src->m_count, NULL );
+  VEC = (zxuc*)vec->m_data;
+  SRC = (zxuc*)src->m_data;
   for ( ; i < stop; ++i, ++j )
-    obj->m_data[ i ] = src->m_data[ j ];
+    VEC[ i ] = SRC[ j ];
   return true;
 }

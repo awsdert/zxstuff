@@ -1,7 +1,7 @@
 #include <zx/textbox.h>
 #if ZXMSW
 ZXSYS_EXP zxui zx_mswSetText(
-  HWND hdl,
+  HWND wh,
   zxTEXT* text,
   int line,
   int pos,
@@ -13,8 +13,8 @@ ZXSYS_EXP zxui zx_mswSetText(
   HDC  dc = GetDC( NULL );
   if ( !dc )
     return 0u;
-  GetWindowRect( hdl, &rect );
-  GetClientRect( hdl, &cRect );
+  GetWindowRect( wh, &rect );
+  GetClientRect( wh, &cRect );
   pt.x = ( rect.right - rect.left ) - cRect.right;
   pt.y = ( rect.bottom - rect.top ) - cRect.bottom;
   rect.left   += pt.x;

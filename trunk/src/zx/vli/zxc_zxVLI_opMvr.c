@@ -3,14 +3,15 @@
 ZXCORE_EXP zxVLI* zxc_zxVLI_opMvr( zxVLI* src, size_t by )
 {
   size_t s = 0, F = 0, T = 0, t = 0;
-  zxuc tbit = 1, fbit = 1, val = 0;
+  zxuc tbit = 1, fbit = 1, val = 0,
+    *SRC = (zxuc*)src->m_vector.m_data;
   if ( !src || !by )
     return src;
   if ( by >= src->m_bits )
   {
-    memset( src->m_vector.m_data, 0, src->m_vector.m_size );
+    mset( SRC, 0, src->m_vector.m_size );
     if ( src->m_isSigned )
-      src->m_vector.m_data[ src->m_lastByte ] = src->m_lastBit;
+      SRC[ src->m_lastByte ] = src->m_lastBit;
     return src;
   }
   for ( ; s < by; ++s )
@@ -24,7 +25,7 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opMvr( zxVLI* src, size_t by )
   }
   for ( ; s < src->m_bits; ++s, ++t )
   {
-    if ( src->m_vector.m_data[ F ] & fbit )
+    if ( SRC[ F ] & fbit )
       val |= tbit;
     fbit <<= 1;
     if ( !fbit )
@@ -35,7 +36,7 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opMvr( zxVLI* src, size_t by )
     tbit <<= 1;
     if ( !tbit )
     {
-      src->m_vector.m_data[ T ] = val;
+      SRC[ T ] = val;
       ++T;
       tbit = 1;
       val = 0;
@@ -46,14 +47,14 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opMvr( zxVLI* src, size_t by )
     tbit <<= 1;
     if ( !tbit )
     {
-      src->m_vector.m_data[ T ] = val;
+      SRC[ T ] = val;
       ++T;
       tbit = 1;
       val = 0;
     }
   }
   if ( src->m_isSigned )
-    src->m_vector.m_data[ src->m_lastByte ] |= src->m_lastBit;
+    SRC[ src->m_lastByte ] |= src->m_lastBit;
   return src;
 }
 /* operator<<  */

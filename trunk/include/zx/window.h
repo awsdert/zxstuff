@@ -9,7 +9,7 @@ ZXC_OPEN
 
 ZXV_DEC_1ST( zxWINDOW )
 {
-  zxv_zxWINDOW_struct
+  struct zxv_zxWINDOW_struct
     *m_base;
   size_t   m_wid;
   zxWIN    m_win;
@@ -23,9 +23,10 @@ ZXV_DEC_1ST( zxWINDOW )
   zxWCX    *m_wcx;
   zxHwnd   m_wh;
   zxEVENTS m_events;
+  zxEvtPtr m_defEvts[ zxEVT_COUNT ];
 } zxWINDOW;
 
-ZXV_DEC_2ND( zxWINDOW, zxWINDOW* );
+ZXV_DEC_2ND( zxWINDOW, zxWINDOW*, ZXSYS );
 
 ZXSYS zxInstance
   zxGetPrevI( void );
@@ -37,7 +38,7 @@ ZXSYS void
 ZXSYS void
   zxv_zxWINDOW__initWCX(
     zxWCX    *wcx );
-ZXSYS zxHandle
+ZXSYS zxHwnd
   zxv_zxWINDOW_getHandle(
     size_t   wid );
 ZXSYS zxWINDOW*
@@ -48,7 +49,7 @@ ZXSYS zxVECTOR*
     void );
 ZXSYS zxWINDOW*
   zxv_zxWINDOW_byHandle(
-    zxHandle wh );
+    zxHwnd wh );
 ZXSYS zxuc
   zxv_zxWINDOW_setCaret(
     zxWINDOW *win,
@@ -68,8 +69,9 @@ ZXSYS zxui
 
 ZXSYS zxsi zx_mswNewWindow( zxWINDOW *kid );
 
-ZXSYS zxWINDOW*  zxv_zxWINDOW_opNew( zxWINDOW *win );
-ZXSYS void       zxv_zxWINDOW_opDel( zxWINDOW *win );
+ZXSYS zxWINDOW*  zxv_zxWINDOW_opNew( void );
+ZXSYS zxWINDOW*  zxv_zxWINDOW_opDel( zxWINDOW *win );
+ZXSYS void       zxv_zxWINDOW_setBase( zxWINDOW *win, zxWINDOW *base );
 /**
   @param returnCode The value you want returned
 **/
@@ -82,19 +84,26 @@ typedef struct zxn_win_struct
   void      (*_initWC)(  zxWC  *wc  );
   void      (*_initWCX)( zxWCX *wcx );
   ZXV_DEC_BODY( zxWINDOW, zxWINDOW* );
-  zxEVENTS  defEvents;
+  zxEvtPtr  defEvents[ zxEVT_COUNT ];
   zxWC      WC[  zxWIN_COUNT ];
   zxWCX     WCX[ zxWIN_COUNT ];
 #if ZXMSW
   ATOM      mswATOM[  zxWIN_COUNT ];
   ATOM      mswATOMX[ zxWIN_COUNT ];
 #endif
-  zxHandle  (*getHandle)( size_t id );
-  zxWINDOW* (*getWindow)( size_t id );
+  zxHwnd    (*getHandle)(
+    size_t    wid );
+  zxWINDOW* (*getWindow)(
+    size_t    wid );
   zxVECTOR* (*allWindows)( void );
-  zxWINDOW* (*byHandle)( zxHandle wh );
-  zxWINDOW* (*opNew)( zxWINDOW* win );
-  void      (*opDel)( zxWINDOW* win );
+  zxWINDOW* (*byHandle)(
+    zxHwnd    wh );
+  void      (*setBase)(
+    zxWINDOW *win,
+    zxWINDOW *base );
+  zxWINDOW* (*opNew)( void );
+  zxWINDOW* (*opDel)(
+    zxWINDOW* win );
 } zxn_win;
 
 static zxn_win zxwin =
@@ -111,6 +120,7 @@ static zxn_win zxwin =
   zxv_zxWINDOW_getWindow,
   zxv_zxWINDOW_allWindows,
   zxv_zxWINDOW_byHandle,
+  zxv_zxWINDOW_setBase,
   zxv_zxWINDOW_opNew,
   zxv_zxWINDOW_opDel
 };

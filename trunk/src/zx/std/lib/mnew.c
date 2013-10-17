@@ -1,13 +1,13 @@
 #include <zx/std/lib.h>
-ZXCORE_EXP ZXVP mnew( size_t size, ZXVP cpy )
+ZXCORE_EXP void* mnew( size_t const Tsize, void* const cpy )
 {
-  ZXVP ptr = malloc( size );
+  void* ptr = malloc( Tsize );
   if ( ptr )
   {
     if ( cpy )
-      mcpy( ptr, cpy, size );
+      mcpy( ptr, cpy, Tsize );
     else
-      mset( ptr, 0, size );
+      mset( ptr, 0, Tsize );
   }
   return ptr;
 }

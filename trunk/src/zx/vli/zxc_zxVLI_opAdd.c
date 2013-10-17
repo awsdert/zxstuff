@@ -2,9 +2,11 @@
 /* operator+=  */
 ZXCORE_EXP zxVLI* zxc_zxVLI_opAdd( zxVLI *src, zxVLI const *val )
 {
-  zxuchr
+  zxuc
     cBit = 0u,
-    vBit = 1u;
+    vBit = 1u,
+    *SRC = (zxuc*)src->m_vector.m_data,
+    *VAL = (zxuc*)src->m_vector.m_data;
   size_t
     V = 0,
     v = 0,
@@ -17,23 +19,23 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opAdd( zxVLI *src, zxVLI const *val )
   {
     if ( cBit > 0u )
     {
-      if ( src->m_vector.m_data[ V ] & cBit )
-        src->m_vector.m_data[ V ] &= ~cBit;
+      if ( SRC[ V ] & cBit )
+        SRC[ V ] &= ~cBit;
       else
       {
-        src->m_vector.m_data[ V ] |= cBit;
+        SRC[ V ] |= cBit;
         cBit = 0u;
       }
     }
-    if ( val->m_vector.m_data[ V ] & vBit )
+    if ( VAL[ V ] & vBit )
     {
-      if ( src->m_vector.m_data[ V ] & vBit )
+      if ( SRC[ V ] & vBit )
       {
-        src->m_vector.m_data[ V ] &= ~vBit;
+        SRC[ V ] &= ~vBit;
         cBit = vBit;
       }
       else
-        src->m_vector.m_data[ V ] |= vBit;
+        SRC[ V ] |= vBit;
     }
     vBit <<= 1u;
     if ( cBit > 0u )
@@ -50,9 +52,9 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opAdd( zxVLI *src, zxVLI const *val )
   }
   for ( ; ( v < src->m_bits && cBit > 0u ); ++v )
   {
-    if ( src->m_vector.m_data[ V ] & cBit )
+    if ( SRC[ V ] & cBit )
     {
-      src->m_vector.m_data[ V ] &= ~cBit;
+      SRC[ V ] &= ~cBit;
       cBit <<= 1u;
       if ( cBit == 0u )
       {
@@ -62,7 +64,7 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opAdd( zxVLI *src, zxVLI const *val )
     }
     else
     {
-      src->m_vector.m_data[ V ] |= cBit;
+      SRC[ V ] |= cBit;
       cBit = 0u;
     }
   }

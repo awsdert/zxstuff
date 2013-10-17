@@ -1,5 +1,6 @@
 #include "../lib.h"
 #include "../math.h"
+#include "c_functions.h"
 
 #ifndef ZXVECTOR_C_H
 #define ZXVECTOR_C_H
@@ -133,34 +134,21 @@ static zxVECTOR* (*zxv_zxVECTOR_opMvl)(
                                          T      const *src, \
                                          size_t       srcCount ); \
   DLL void   zxv_##NAME##__kill(         NAME         *obj ); \
-  DLL size_t zxv_##NAME##_size(          NAME   const *obj ); \
-  DLL size_t zxv_##NAME##_max_size(      NAME   const *obj ); \
-  DLL void   zxv_##NAME##_resize(        NAME         *obj, \
-                                         size_t const setCount, \
-                                         T      const setNew ); \
-  DLL size_t zxv_##NAME##_capacity(      NAME   const *obj ); \
-  DLL bool   zxv_##NAME##_empty(         NAME   const *obj ); \
-  DLL void   zxv_##NAME##_reserve(       NAME         *obj, \
-                                         size_t       minSize ); \
-  DLL void   zxv_##NAME##_grow(          NAME         *obj, \
-                                         size_t const setCount, \
-                                         T      const setNew ); \
-  DLL void   zxv_##NAME##_shrink(        NAME         *obj, \
-                                         size_t const setCount ); \
-  DLL void   zxv_##NAME##_shrink_to_fit( NAME         *obj ); \
-  static void (*zxv_##NAME##_assign)( \
-    NAME         *obj, \
-    size_t const setCount, \
-    T      const setNew ) = zxv_##NAME##_resize; \
-  DLL void   zxv_##NAME##_append(        NAME         *obj, \
-                                         NAME   const *src, \
-                                         size_t       pos ); \
-  DLL bool   zxv_##NAME##_push_back(     NAME         *obj, \
-                                         NAME   const *src ); \
-  DLL void   zxv_##NAME##_pop_back(      NAME         *obj ); \
-  DLL void   zxv_##NAME##_insert(        NAME         *obj, \
-                                         NAME   const *src, \
-                                         size_t       pos ); \
+  ZXV_SIZE(          NAME,    DLL ); \
+  ZXV_MAX_SIZE(      NAME,    DLL ); \
+  ZXV_RESIZE(        NAME, T, DLL ); \
+  ZXV_CAPACITY(      NAME,    DLL ); \
+  ZXV_EMPTY(         NAME,    DLL ); \
+  ZXV_RESERVE(       NAME,    DLL ); \
+  ZXV_GROW(          NAME, T, DLL ); \
+  ZXV_SHRINK(        NAME,    DLL ); \
+  ZXV_SHRINK_TO_FIT( NAME, T, DLL ); \
+  ZXV__ASSIGN(       NAME, T, static, \
+    (*zxv_##NAME##_assign) ) = zxv_##NAME##_resize; \
+  ZXV_APPEND(        NAME,    DLL ); \
+  ZXV_PUSH_BACK(     NAME,    DLL ); \
+  ZXV_POP_BACK(      NAME,    DLL ); \
+  ZXV_INSERT(        NAME,    DLL ); \
   DLL void   zxv_##NAME##_erase(         NAME         *obj, \
                                          size_t       first, \
                                          size_t       last ); \
@@ -172,18 +160,15 @@ static zxVECTOR* (*zxv_zxVECTOR_opMvl)(
                                          T            *dst, \
                                          size_t const dstCount, \
                                          size_t const from ); \
-  DLL T*     zxv_##NAME##_at(            NAME   const *obj, \
-                                         size_t const i ); \
+  ZXV_AT(            NAME, T, DLL ); \
   DLL bool   zxv_##NAME##_isEqual(       NAME   const *obj, \
                                          NAME   const *src, \
                                          size_t       *i ); \
   DLL NAME*  zxv_##NAME##_cpyEql(        NAME         *obj, \
                                          NAME   const *src ); \
-  DLL NAME*  zxv_##NAME##_opAdd(         NAME         *obj, \
-                                         NAME   const *src ); \
-  static NAME* (*zxv_##NAME##_opMvl)( \
-    NAME         *obj, \
-    NAME   const *src ) = zxv_##NAME##_opAdd; \
+  ZXV_OPADD(         NAME,    DLL ); \
+  ZXV__OPMVL(        NAME,    static, \
+    (*zxv_##NAME##_opMvl) ) = zxv_##NAME##_opAdd; \
   DLL bool   zxv_##NAME##_cmpEQ(         NAME   const *obj, \
                                          NAME   const *src ); \
   DLL bool   zxv_##NAME##_cmpNE(         NAME   const *obj, \
@@ -197,33 +182,20 @@ static zxVECTOR* (*zxv_zxVECTOR_opMvl)(
                            T      const *src, \
                            size_t       srcCount ); \
   void   (*_kill)(         NAME         *obj ); \
-  size_t (*size)(          NAME   const *obj ); \
-  size_t (*max_size)(      NAME   const *obj ); \
-  void   (*resize)(        NAME         *obj, \
-                           size_t const setCount, \
-                           T      const setNew ); \
-  size_t (*capacity)(      NAME   const *obj ); \
-  bool   (*empty)(         NAME   const *obj ); \
-  void   (*reserve)(       NAME         *obj, \
-                           size_t       minSize ); \
-  void   (*grow)(          NAME         *obj, \
-                           size_t const setCount, \
-                           T      const setNew ); \
-  void   (*shrink)(        NAME         *obj, \
-                           size_t const setCount ); \
-  void   (*shrink_to_fit)( NAME         *obj ); \
-  void   (*assign)(        NAME         *obj, \
-                           size_t const setCount, \
-                           T      const setNew ); \
-  void   (*append)(        NAME         *obj, \
-                           NAME   const *src, \
-                           size_t       at ); \
-  bool   (*push_back)(     NAME         *obj, \
-                           NAME   const *src ); \
-  void   (*pop_back)(      NAME         *obj ); \
-  void   (*insert)(        NAME         *obj, \
-                           NAME   const *src, \
-                           size_t       at ); \
+  ZXV__SIZE(          NAME,,    (*size)          ); \
+  ZXV__MAX_SIZE(      NAME,,    (*max_size)      ); \
+  ZXV__RESIZE(        NAME, T,, (*resize)        ); \
+  ZXV__CAPACITY(      NAME,,    (*capacity)      ); \
+  ZXV__EMPTY(         NAME,,    (*empty)         ); \
+  ZXV__RESERVE(       NAME,,    (*reserve)       ); \
+  ZXV__GROW(          NAME, T,, (*grow)          ); \
+  ZXV__SHRINK(        NAME,,    (*shrink)        ); \
+  ZXV__SHRINK_TO_FIT( NAME,,    (*shrink_to_fit) ); \
+  ZXV__ASSIGN(        NAME, T,, (*assign)        ); \
+  ZXV__APPEND(        NAME,,    (*append)        ); \
+  ZXV__PUSH_BACK(     NAME,,    (*push_back)     ); \
+  ZXV__POP_BACK(      NAME,,    (*pop_back)      ); \
+  ZXV__INSERT(        NAME,,    (*insert)        ); \
   void   (*erase)(         NAME         *obj, \
                            size_t        first, \
                            size_t        last ); \
@@ -235,17 +207,14 @@ static zxVECTOR* (*zxv_zxVECTOR_opMvl)(
                            T            *dst, \
                            size_t const  desCount, \
                            size_t const  from ); \
-  T*      (*at)(           NAME   const *obj, \
-                           size_t const  i ); \
+  ZXV__AT(           NAME,T,,   (*at)          ); \
   bool    (*isEqual)(      NAME   const *obj, \
                            NAME   const *src, \
                            size_t       *i ); \
   NAME*   (*cpyEql)(       NAME         *obj, \
                            NAME   const *src ); \
-  NAME*   (*opAdd)(        NAME         *obj, \
-                           NAME   const *src ); \
-  NAME*   (*opMvl)(        NAME         *obj, \
-                           NAME   const *src ); \
+  ZXV__OPADD(        NAME,,     (*opAdd)       ); \
+  ZXV__OPMVL(        NAME,,     (*opMvl)       ); \
   bool    (*cmpEQ)(        NAME   const *obj, \
                            NAME   const *cmp ); \
   bool    (*cmpNE)(        NAME   const *obj, \
@@ -284,6 +253,30 @@ static zxVECTOR* (*zxv_zxVECTOR_opMvl)(
   zxv_##NAME##_cmpNE
 /**/
 
+#define ZXV_DEF_GROW( NAME, T, PARAM, EXP ) \
+  EXP void zxv_##NAME##_grow( \
+    NAME *obj, \
+    size_t const setCount, \
+    T const setNew ) \
+  { \
+    ZXASSERT( !obj ) \
+      return; \
+    zxv.grow( &obj->##PARAM, setCount, (zxuc*)setNew ); \
+  }
+#define ZXV_DEF_SHRINK( NAME, PARAM, EXP ) \
+  EXP void zxv_##NAME##_shrink( NAME *obj, size_t const setCount ) \
+  { \
+    ZXASSERT( !obj ) \
+      return; \
+    zxv.shrink( &obj->##PARAM, setCount );
+  }
+#define ZXV_DEF_AT( NAME, T, PARAM, EXP ) \
+  EXP T* zxv_##NAME##_at( NAME *obj, size_t const i ) \
+  { \
+    ZXASSERT( !obj ) \
+      return NULL; \
+    return (T*)zxv.at( &obj->##PARAM, i ); \
+  }
 ZXC_SHUT
 
 #endif

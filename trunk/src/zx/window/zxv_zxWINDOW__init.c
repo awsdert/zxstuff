@@ -4,16 +4,14 @@ ZXSYS_EXP void zxv_zxWINDOW__init(
   zxWINDOW* const *kids,
   size_t    count )
 {
-  zxoWINDOW* core;
   zxVECTOR *data = zxwin.allWindows();
   zxWINDOW** ary = (zxWINDOW**)data->m_data;
   size_t i = 0, stop = data->m_count;
-  if ( !win || win->m_core )
-    return;
-  core = win->m_core;
-  if ( core->m_wid )
+  if ( !win )
+    win = (zxWINDOW*)mnew( sizeof( zxWINDOW ), NULL );
+  if ( win->m_wid )
   {
-    i = core->m_wid;
+    i = win->m_wid;
     if ( i < stop && ary[ i ] )
       return;
   }
@@ -32,9 +30,8 @@ ZXSYS_EXP void zxv_zxWINDOW__init(
     zxv.grow( data, i + 1, NULL );
     ary = (zxWINDOW**)data->m_data;
   }
-  if ( !win )
-    win = (zxWINDOW*)malloc( sizeof( zxWINDOW ) );
-  core->m_wid = i;
-  ary[ i ]    = win;
-  zxv._init( &win->m_kids, sizeof( zxWINDOW* ), (zxuc*)kids, count );
+  win->m_wid = i;
+  ary[ i ]   = win;
+  if ( kids && count )
+    zxv._init( &win->m_kids, sizeof( zxWINDOW* ), (zxuc*)kids, count );
 }

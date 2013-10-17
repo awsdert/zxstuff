@@ -24,7 +24,7 @@ ZXCORE void*
 ZXCORE void*
   mrenew(
     void*  dst,
-    size_t dstCount,
+    size_t count,
     size_t const Tsize,
     void*  const cpy,
     size_t setCount );

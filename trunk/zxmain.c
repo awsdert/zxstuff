@@ -4,16 +4,15 @@ zxWINDOW   zx_l_rootWindow = {0};
 zxVECTOR   zx_l_allWindows = {0};
 zxInstance zx_l_prevI = NULL, zx_l_thisI = NULL;
 
-ZXSYS_EXP int zxapp_main(
-  zxHandle   rootWH,
+ZXSYS_EXP zxsi zxapp_main(
+  zxHwnd     rootWH,
   zxInstance prevI,
   zxInstance thisI,
   zxTEXT     *args )
 {
   size_t i = 0, stop = zxWIN_COUNT;
   zxWINDOW *root = &zx_l_rootWindow;
-  root->m_core = (zxoWINDOW*)mnew( sizeof( zxoWINDOW ), NULL );
-  root->m_core->m_hdl = rootWH;
+  root->m_wh = rootWH;
   zx_l_prevI = prevI;
   zx_l_thisI = thisI;
   zxv._init( &zx_l_allWindows, sizeof( zxWINDOW* ), NULL, 0 );
@@ -39,18 +38,6 @@ ZXSYS_EXP int zxapp_main(
   return zxFreeWindows( 0 );
 }
 
-ZXSYS_EXP zxWINDOW* zxNewWindow( zxWINDOW *parent )
-{
-  zxWINDOW  *kid  = (zxWINDOW*)mnew( sizeof( zxWINDOW ), NULL );
-  if ( !parent )
-    parent = &zx_l_rootWindow;
-  kid->m_base = parent;
-  /* Modify from here */
-#if ZXMSW
-  zx_mswNewWindow( kid, 0, 0 );
-#endif
-}
-
 /* DO NOT MODIFY */
 
 ZXSYS_EXP zxVECTOR* zxv_zxWINDOW_allWindows( void )
@@ -62,9 +49,9 @@ ZXSYS_EXP zxWINDOW*  const zxGetRootWindow( void )
 {
   return &zx_l_rootWindow;
 }
-ZXSYS_EXP zxHandle   zxGetRootWH( void )
+ZXSYS_EXP zxHwnd     zxGetRootWH( void )
 {
-  return zx_l_rootWindow.m_core->m_hdl;
+  return zx_l_rootWindow.m_wh;
 }
 ZXSYS_EXP zxInstance zxGetPrevI( void )
 {

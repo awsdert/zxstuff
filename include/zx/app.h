@@ -16,7 +16,7 @@ typedef void*     zxInstance;
 #endif
 
 ZXSYS int
-  zxapp_main(
+  zxapp__main(
     zxHwnd     rootWH,
     zxInstance prevI,
     zxInstance thisI,
@@ -27,13 +27,14 @@ ZXSYS void zxapp_setTitle( zxTEXT const *txt );
 typedef struct zxapp_struct
 {
 #ifdef ZXCONSOLE
-  int (*_main)( char** args, char* );
+  int (*_main)( int argc, char *argv[] );
 #else
   int (*_main)(
     zxHwnd     rootWH,
-    zxInstance prevI,
     zxInstance thisI,
-    zxTEXT     *args );
+    zxInstance prevI,
+    zxch       *cmdl,
+    int        showAs );
 #endif
 } zxapp;
 

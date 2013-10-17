@@ -2,22 +2,26 @@
 ZXCORE_EXP zxVLI* zxc_zxVLI_opMul( zxVLI *src, zxVLI const *val )
 {
   size_t s = 0, pi = 0, I = 0;
-  zxuchr bit = zx_char_LastBit;
   zxVLI des = zxvli.def, tmp = des;
+  zxuc bit = zx_char_LastBit,
+    *SRC = (zxuc*)src->m_vector.m_data,
+    *VAL = (zxuc*)val->m_vector.m_data;
   if ( !src )
     return NULL;
   if ( !val )
   {
-    memset( src->m_vector.m_data, 0, src->m_vector.m_size );
+    memset( SRC, 0, src->m_vector.m_size );
     return src;
   }
-  des.m_vector.m_data = (zxuc*)mnew(   src->m_vector.m_size, NULL );
-  tmp.m_vector.m_data = (zxuc*)malloc( src->m_vector.m_size );
-  for ( pi = src->m_bits, s = pi - 1, I = val->m_lastByte; s != pi; --s, --pi )
+  des.m_vector.m_data = mnew( src->m_vector.m_size, NULL );
+  tmp.m_vector.m_data = malloc( src->m_vector.m_size );
+  for (
+    pi = src->m_bits, s = pi - 1, I = val->m_lastByte;
+    s != pi; --s, --pi )
   {
-    if ( val->m_vector.m_data[ I ] & bit )
+    if ( VAL[ I ] & bit )
     {
-      memcpy( tmp.m_vector.m_data, src->m_vector.m_data, src->m_vector.m_size );
+      mcpy( tmp.m_vector.m_data, SRC, src->m_vector.m_size );
       zxvli.opAdd( &des, zxvli.opMvl( &tmp, s ) );
     }
     bit >>= 1;
@@ -27,7 +31,7 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opMul( zxVLI *src, zxVLI const *val )
       --I;
     }
   }
-  memcpy( src->m_vector.m_data, des.m_vector.m_data, src->m_vector.m_size );
+  mcpy( SRC, des.m_vector.m_data, src->m_vector.m_size );
   free( des.m_vector.m_data );
   free( tmp.m_vector.m_data );
   return src;

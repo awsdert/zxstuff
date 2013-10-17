@@ -1,14 +1,14 @@
 #include <zx/window.h>
 #if ZXMSW
-zxuint zx_mswSetCaret( HWND hdl, int line, int pos )
+zxuint zx_mswSetCaret( HWND wh, int line, int pos )
 {
   RECT cRect = {0}, rect = {0};
   POINT pt;
   HDC  dc = NULL;
   TEXTMETRIC tm;
-  if ( !GetWindowRect( hdl, &rect ) )
+  if ( !GetWindowRect( wh, &rect ) )
     return 0u;
-  if ( !GetClientRect( hdl, &cRect ) )
+  if ( !GetClientRect( wh, &cRect ) )
     return 0u;
   pt.x = ( rect.right - rect.left ) - cRect.right;
   pt.y = ( rect.bottom - rect.top ) - cRect.bottom;

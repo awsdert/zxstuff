@@ -9,23 +9,17 @@ typedef struct zxTEXTBOX_struct
   zxTEXT   m_text;
   zxuint   m_pos;
 #if ZXMSW
-  HFONT m_font;
+  HFONT    m_font;
 #endif
-/* These are for Application development */
-  zxEvtCBR (*onChar)( struct zxTEXTBOX_struct* tbox, zxEVENT* event );
-  zxEvtCBR (*onKeyD)( struct zxTEXTBOX_struct* tbox, zxEVENT* event );
-  zxEvtCBR (*onKeyP)( struct zxTEXTBOX_struct* tbox, zxEVENT* event );
-  zxEvtCBR (*onKeyU)( struct zxTEXTBOX_struct* tbox, zxEVENT* event );
 } zxTEXTBOX;
 
 ZXSYS zxTEXTBOX* zxNewTEXTBOX( void );
 ZXSYS bool zx_TEXTBOX_DrawText( zxTEXTBOX *tbox, bool setCaret );
-ZXSYS zxEvtCBR zxTEXTBOX__OnFocus( zxWINDOW* win,  zxEVENT* event );
-ZXSYS zxEvtCBR zxTEXTBOX__OnBlur(  zxWINDOW* win,  zxEVENT* event );
-ZXSYS zxEvtCBR zxTEXTBOX__OnChar(  zxWINDOW* win,  zxEVENT* event );
-ZXSYS zxEvtCBR zxTEXTBOX__OnKeyD(  zxWINDOW* win,  zxEVENT* event );
-ZXSYS zxEvtCBR zxTEXTBOX__OnKeyP(  zxWINDOW* win,  zxEVENT* event );
-ZXSYS zxEvtCBR zxTEXTBOX__OnKeyU(  zxWINDOW* win,  zxEVENT* event );
+ZXSYS ZXEVENT( zxv_zxTEXTBOX_onChar  );
+ZXSYS ZXEVENT( zxv_zxTEXTBOX_onKeyD  );
+ZXSYS ZXEVENT( zxv_zxTEXTBOX_onKeyU  );
+ZXSYS ZXEVENT( zxv_zxTEXTBOX_onFocus );
+ZXSYS ZXEVENT( zxv_zxTEXTBOX_onBlur  );
 
 ZXC_SHUT
 

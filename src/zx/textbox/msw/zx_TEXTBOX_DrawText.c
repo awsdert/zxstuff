@@ -11,8 +11,8 @@ bool zx_TEXTBOX_DrawText( zxTEXTBOX *tbox, bool setCaret )
   HDC       hdc = GetDC( NULL );
   if ( !hdc )
     return false;
-  GetWindowRect( win->m_hdl, &rect );
-  GetClientRect( win->m_hdl, &cRect );
+  GetWindowRect( win->m_wh, &rect );
+  GetClientRect( win->m_wh, &cRect );
   pt.x = ( rect.right - rect.left ) - cRect.right;
   pt.y = ( rect.bottom - rect.top ) - cRect.bottom;
   rect.left   += pt.x;

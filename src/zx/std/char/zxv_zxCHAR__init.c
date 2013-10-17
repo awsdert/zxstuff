@@ -14,7 +14,7 @@ void zxv_zxCHAR__initW( zxCHAR *txt, wide const *src, size_t len )
   char *dst = NULL;
   if ( !len )
     len = zxw.len( src );
-  dst = (char*)mnewa( sizeof( char ), len, NULL );
+  dst = (char*)mnewa( sizeof( char ), NULL, len );
   for ( ; i < len; ++i )
     dst[ i ] = src[ i ] & UCHAR_MAX;
   zxv._init( &txt->m_data, sizeof( char ), (zxuc*)dst, len );

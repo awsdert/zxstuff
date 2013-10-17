@@ -1,5 +1,5 @@
 #include <zx/std/lib.h>
-ZXCORE_EXP ZXVP mdel( ZXVP ptr )
+ZXCORE_EXP void* mdel( void* ptr )
 {
   if ( ptr )
     free( ptr );

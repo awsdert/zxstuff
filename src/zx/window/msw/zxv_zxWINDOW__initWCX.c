@@ -6,7 +6,7 @@ ZXSYS_EXP void zxv_zxWINDOW__initWCX( zxWCX *wc )
   wc->hInstance     = zxGetThisI();
   wc->lpszMenuName  = NULL;
   wc->lpszClassName = NULL;
-  wc->lpfnWndProc   = zx_mswEvent;
+  wc->lpfnWndProc   = zxroot_onEvent;
   wc->cbClsExtra    = 0;
   wc->cbWndExtra    = 0;
   wc->cbSize        = sizeof(WNDCLASSEX);

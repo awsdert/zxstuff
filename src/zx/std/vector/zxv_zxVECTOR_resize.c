@@ -4,11 +4,8 @@ ZXCORE_EXP void zxv_zxVECTOR_resize(
   size_t   const setCount,
   zxuc     const *setNew )
 {
-  if ( !obj )
-  {
-    assert( !obj );
+  ZXASSERT( !obj )
     return;
-  }
   if ( setCount == obj->m_count ) return;
   if ( setCount < obj->m_count )
   {

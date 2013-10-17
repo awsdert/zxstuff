@@ -1,14 +1,20 @@
 #include <zx/vli.h>
 /* operator/= */
-ZXCORE_EXP zxVLI* zxc_zxVLI_opDiv( zxVLI *src, zxVLI const *val, zxVLI *remainder )
+ZXCORE_EXP zxVLI* zxc_zxVLI_opDiv(
+  zxVLI *src,
+  zxVLI const *val,
+  zxVLI *remainder )
 {
   size_t i = 0, pi = 0, I = 0, end = val->m_bits;
-  zxuchr bitl = 1u << (CHAR_BIT - 1), bit = bitl;
   zxVLI quo = *src, dst = zxvli.def, cpy = *src, rem = *src;
+  zxuc bitl = 1u << (CHAR_BIT - 1), bit = bitl,
+    *SRC = (zxuc*)src->m_vector.m_data,
+    *VAL = (zxuc*)val->m_vector.m_data, 
+    *REM, *DST, *QUO, *CPY;
   if ( remainder )
   {
     dst = *remainder;
-    memset( dst.m_vector.m_data, 0, dst.m_vector.m_size );
+    mset( dst.m_vector.m_data, 0, dst.m_vector.m_size );
   }
   if ( !src )
     return NULL;
@@ -17,7 +23,7 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opDiv( zxVLI *src, zxVLI const *val, zxVLI *remainde
   {
     if ( remainder )
       *remainder = dst;
-    memset( src->m_vector.m_data, 0, src->m_vector.m_size );
+    mset( SRC, 0, src->m_vector.m_size );
     return src;
   }
   dst = *src;
@@ -28,17 +34,18 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opDiv( zxVLI *src, zxVLI const *val, zxVLI *remainde
     *remainder = dst;
   }
   else
-    dst.m_vector.m_data = (zxuchr*)malloc( src->m_vector.m_size );
-  quo.m_vector.m_data = (zxuchr*)malloc( src->m_vector.m_size );
-  cpy.m_vector.m_data = (zxuchr*)malloc( src->m_vector.m_size );
-  rem.m_vector.m_data = (zxuchr*)malloc( src->m_vector.m_size );
+    dst.m_vector.m_data = (zxuc*)malloc( src->m_vector.m_size );
+  quo.m_vector.m_data = (zxuc*)malloc( src->m_vector.m_size );
+  cpy.m_vector.m_data = (zxuc*)malloc( src->m_vector.m_size );
+  rem.m_vector.m_data = (zxuc*)malloc( src->m_vector.m_size );
+  DST = (zxuc*)dst.m_vector.m_data;
+  QUO = (zxuc*)quo.m_vector.m_data;
+  CPY = (zxuc*)cpy.m_vector.m_data;
+  REM = (zxuc*)rem.m_vector.m_data;
   if ( src->m_bits < end )
     end = src->m_bits;
-  for ( I = 0; I < src->m_vector.m_size; ++I )
-  {
-    quo.m_vector.m_data[ I ] = 0u;
-    dst.m_vector.m_data[ I ] = 0u;
-  }
+  mset( QUO, 0, src->m_vector.m_size );
+  mset( DST, 0, src->m_vector.m_size );
   pi = src->m_bits;
   i  = pi - 1;
   I  = 0;
@@ -47,14 +54,14 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opDiv( zxVLI *src, zxVLI const *val, zxVLI *remainde
   {
     zxvli.opMvl( &quo, 1 );
     zxvli.opMvl( &dst, 1 );
-    rem.m_vector.m_data[ I ] |= bit;
-    if ( src->m_vector.m_data[ I ] & bit )
-      dst.m_vector.m_data[ 0 ] |= 1u;
+    REM[ I ] |= bit;
+    if ( SRC[ I ] & bit )
+      DST[ 0 ] |= 1u;
     if ( zxvli.cmpME( &dst, val ) )
     {
       zxvli.opSub( &dst, val );
-      quo.m_vector.m_data[ 0 ] |= 1u;
-      memcpy( cpy.m_vector.m_data, dst.m_vector.m_data, src->m_vector.m_size );
+      QUO[ 0 ] |= 1u;
+      mcpy( cpy.m_vector.m_data, dst.m_vector.m_data, src->m_vector.m_size );
       zxvli.opMvl( &cpy, i );
       zxvli.opXor( src, &rem );
       zxvli.opOr(  src, &cpy );
@@ -77,13 +84,13 @@ ZXCORE_EXP zxVLI* zxc_zxVLI_opDiv( zxVLI *src, zxVLI const *val, zxVLI *remainde
       multiplication
     */
   }
-  memcpy( src->m_vector.m_data, dst.m_vector.m_data, src->m_vector.m_size );
-  free( quo.m_vector.m_data );
+  mcpy( SRC, DST, src->m_vector.m_size );
+  free( QUO );
   /* ensure no there is not a memory leak */
   if ( !remainder )
-    free( dst.m_vector.m_data );
-  free( cpy.m_vector.m_data );
-  free( rem.m_vector.m_data );
+    free( DST );
+  free( CPY );
+  free( REM );
   return src;
 }
 /* operator/ */

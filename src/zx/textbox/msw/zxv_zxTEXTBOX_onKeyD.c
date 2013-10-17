@@ -1,12 +1,12 @@
 #include <zx/textbox.h>
-zxEvtCBR zxTEXTBOX__OnKeyD( zxWINDOW* win, zxEVENT* event )
+ZXSYS_EXP zxEvtCBR zxv_zxTEXTBOX_onKeyD( zxEVENT* event )
 {
-#if ZXMSW
-/* TODO: check for application's event handler */
+  zxWINDOW  *win  = zxwin.getWindow( event->m_wid );
   zxTEXTBOX *tbox = NULL;
   zxTEXT    *text = NULL;
+#if ZXMSW
   WORD vk = LOWORD( event->m_mswWP );
-  if ( win->m_winType != zxWIN_TEXTBOX )
+  if ( win->m_win != zxWIN_TEXTBOX )
     return zxDefWinEvt;
   tbox = (zxTEXTBOX*)win;
   text = &tbox->m_text;
@@ -24,7 +24,7 @@ zxEvtCBR zxTEXTBOX__OnKeyD( zxWINDOW* win, zxEVENT* event )
       ++tbox->m_pos;
     return zxDefWinEvt;
   case VK_TAB:
-    SetFocus( win->m_parent->m_hdl );
+    SetFocus( win->m_base->m_wh );
     return 0;
   default:
     return zxDefWinEvt;

@@ -1,11 +1,12 @@
 #include <zx/textbox.h>
-zxEvtCBR zxTEXTBOX__OnFocus( zxWINDOW* win, zxEVENT* event )
+ZXSYS_EXP zxEvtCBR zxv_zxTEXTBOX_onFocus( zxEVENT* event )
 {
-#if ZXMSW
+  zxWINDOW  *win  = zxwin.getWindow( event->m_wid );
   zxTEXTBOX *tbox = NULL;
+#if ZXMSW
   TEXTMETRIC tm;
   HDC dc = NULL;
-  if ( win->m_winType != zxWIN_TEXTBOX )
+  if ( win->m_win != zxWIN_TEXTBOX )
     return zxDefWinEvt;
   dc = GetDC( NULL );
   if ( !dc )
@@ -13,11 +14,9 @@ zxEvtCBR zxTEXTBOX__OnFocus( zxWINDOW* win, zxEVENT* event )
   tbox = (zxTEXTBOX*)win;
   GetTextMetrics( dc, &tm );
   ReleaseDC( NULL, dc );
-  CreateCaret( win->m_hdl, NULL, 1, tm.tmHeight );
+  CreateCaret( win->m_wh, NULL, 1, tm.tmHeight );
   zx_TEXTBOX_DrawText( tbox, true );
-  ShowCaret( win->m_hdl );
-  return zxDefWinEvt;
-#else
-  return zxDefWinEvt;
+  ShowCaret( win->m_wh );
 #endif
+  return zxDefWinEvt;
 }

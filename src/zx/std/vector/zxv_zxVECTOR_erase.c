@@ -1,39 +1,41 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxv_zxVECTOR_erase( zxVECTOR *obj, size_t first, size_t last )
+ZXCORE_EXP void zxv_zxVECTOR_erase( zxVECTOR *vec, size_t first, size_t last )
 {
   size_t i, s, d, f = 0, t, j;
-  if ( !obj ) return;
+  zxuc *VEC;
+  if ( !vec ) return;
+  VEC = (zxuc*)vec->m_data;
   d = first;
   if ( !d ) t = 0;
-  else t = d * obj->m_Tsize;
+  else t = d * vec->m_Tsize;
   if ( !last )
   {
     s = d + 1;
-    i = obj->m_count - 1;
-    f = t + obj->m_Tsize;
+    i = vec->m_count - 1;
+    f = t + vec->m_Tsize;
   }
-  else if ( last >= obj->m_count )
+  else if ( last >= vec->m_count )
   {
-    s = obj->m_count;
-    i = obj->m_count - (s - d);
+    s = vec->m_count;
+    i = vec->m_count - (s - d);
   }
   else
   {
     i = ++last - d;
     s = last;
-    i = obj->m_count - i;
-    f = s * obj->m_Tsize;
+    i = vec->m_count - i;
+    f = s * vec->m_Tsize;
   }
-  for ( ; s < obj->m_count; ++s, ++d )
+  for ( ; s < vec->m_count; ++s, ++d )
   {
-    for ( j = 0; j < obj->m_Tsize; ++j, ++f, ++t )
-      obj->m_data[ t ] = obj->m_data[ f ];
+    for ( j = 0; j < vec->m_Tsize; ++j, ++f, ++t )
+      VEC[ t ] = VEC[ f ];
   }
-  for ( ; d < obj->m_count; ++d )
+  for ( ; d < vec->m_count; ++d )
   {
-    for ( j = 0; j < obj->m_Tsize; ++j, ++t )
-      obj->m_data[ t ] = 0u;
+    for ( j = 0; j < vec->m_Tsize; ++j, ++t )
+      VEC[ t ] = 0u;
   }
-  obj->m_count = i;
-  obj->m_size  = i * obj->m_Tsize;
+  vec->m_count = i;
+  vec->m_size  = i * vec->m_Tsize;
 }

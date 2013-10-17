@@ -2,11 +2,8 @@
 ZXCORE_EXP void zxv_zxVECTOR_shrink( zxVECTOR* obj, size_t setCount )
 {
   size_t size = 0;
-  if ( !obj )
-  {
-    assert( !obj );
+  ZXASSERT( !obj )
     return;
-  }
   if ( !obj->m_data || !obj->m_Tsize || setCount >= obj->m_fullCount )
     return;
   if ( setCount )

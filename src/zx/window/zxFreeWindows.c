@@ -3,18 +3,16 @@ ZXSYS_EXP int zxFreeWindows( int returnCode )
 {
   zxVECTOR *data = zxwin.allWindows();
   size_t i = 0, stop = data->m_count;
-  zxWINDOW* win, **windows = (zxWINDOW**)data->m_data;
-  if ( windows && stop )
+  zxWINDOW* win, **ary = (zxWINDOW**)data->m_data;
+  if ( ary && stop )
   {
     for ( ; i < stop; ++i )
     {
-      win = windows[ i ];
+      win = ary[ i ];
       if ( win )
       {
-        if ( win->m_core )
-          free( win->m_core );
         free( win );
-        windows[ i ] = NULL;
+        ary[ i ] = NULL;
       }
     }
     zxv._kill( data );

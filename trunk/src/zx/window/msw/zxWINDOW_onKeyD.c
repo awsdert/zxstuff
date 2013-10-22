@@ -1,6 +1,6 @@
 #include <zx/window.h>
 #if ZXMSW
-zxEvtCBR zxv_zxWINDOW_onKeyD( zxEVENT* event )
+zxEvtCBR zxWINDOW_onKeyD( zxEVENT* event )
 {
   WORD vk = LOWORD( event->m_mswWP );
   zxWINDOW *win;

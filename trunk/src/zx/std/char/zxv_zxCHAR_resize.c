@@ -1,11 +1,9 @@
 #include <zx/std/char.h>
-ZXCORE_EXP void zxv_zxCHAR_resize( zxCHAR *txt, size_t const setLen, char const setNew )
+ZXV_RESIZE( zxCHAR, char, ZXCORE_EXP )
 {
-  if ( !txt )
-    return;
-  zxv.resize( &txt->m_data, setLen + 1, (zxuc*)&setNew );
-  --txt->m_data.m_count;
-  txt->m_data.m_size -= sizeof( char );
-  txt->m_text = (char*)txt->m_data.m_data;
-  txt->m_text[ 0 ] = 0;
+  ZXASSERT( !src ) return;
+  zxv.resize( &src->m_core, setCount + 1, (zxuc*)&setNew );
+  zxv.resize( &src->m_core, setCount, NULL );
+  src->m_data = (char*)src->m_core.m_data;
+  src->m_data[ setCount ] = 0;
 }

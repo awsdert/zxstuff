@@ -12,11 +12,9 @@ ZXC_OPEN
   { DATA, PTR, ISFIXED, sizeof( T ), \
   COUNT, COUNT, sizeof( T ) * COUNT, sizeof( T ) * COUNT }
 
-#define ZXV_DEC_1ST( NAME ) typedef struct zxv_##NAME##_struct
-
 /* TODO: finish defining ZXV_DEC_2ND macro */
 #define ZXV__DEC_2ND( NAME, T, T2, DLL ) \
-  DLL void   zxv_##NAME##__kill(         NAME         *obj ); \
+  ZXV__KILL(         NAME,     DLL ); \
   ZXV_SIZE(          NAME,     DLL ); \
   ZXV_MAX_SIZE(      NAME,     DLL ); \
   ZXV_RESIZE(        NAME, T,  DLL ); \
@@ -39,8 +37,7 @@ ZXC_OPEN
   ZXV_COPY(          NAME, T2, DLL ); \
   ZXV_AT(            NAME, T2, DLL ); \
   ZXV_ISEQUAL(       NAME,     DLL ); \
-  DLL NAME*  zxv_##NAME##_cpyEql(        NAME         *obj, \
-                                         NAME   const *src ); \
+  ZXV_CPYEQL(        NAME,     DLL ); \
   ZXV_OPADD(         NAME,     DLL ); \
   ZXV__OPMVL(        NAME,    static, \
     (*zxv_##NAME##_opMvl) ) = zxv_##NAME##_opAdd; \
@@ -48,16 +45,14 @@ ZXC_OPEN
   ZXV_CMPNE(         NAME,     DLL )
 
 #define ZXV_DEC_2ND( NAME, T, DLL ) \
-  DLL void   zxv_##NAME##__init(         NAME         *obj, \
-                                         T      const *src, \
-                                         size_t       srcCount ); \
-  ZXV__DEC_2ND( NAME, T, T, DLL )
+  ZXV__INIT(         NAME, T, DLL ); \
+  ZXV__DEC_2ND(   NAME, T, T, DLL )
 
 /* This is intended for namespaces / namespace replacements (struct) */
 /* TODO: finish defining ZXV_DEC_BODY macro */
 #define ZXV__DEC_BODY( NAME, T, T2 ) \
   NAME const def; \
-  void   (*_kill)(         NAME         *obj ); \
+  ZXV___KILL(         NAME,,      (*_kill)         ); \
   ZXV__SIZE(          NAME,,      (*size)          ); \
   ZXV__MAX_SIZE(      NAME,,      (*max_size)      ); \
   ZXV__RESIZE(        NAME, T,,   (*resize)        ); \
@@ -79,18 +74,15 @@ ZXC_OPEN
   ZXV__COPY(          NAME, T2,,  (*copy)          ); \
   ZXV__AT(            NAME, T2,,  (*at)            ); \
   ZXV__ISEQUAL(       NAME,,      (*isEqual)       ); \
-  NAME*   (*cpyEql)(       NAME         *obj, \
-                           NAME   const *src ); \
-  ZXV__OPADD(        NAME,,       (*opAdd)         ); \
-  ZXV__OPMVL(        NAME,,       (*opMvl)         ); \
-  ZXV__CMP(          NAME,,       (*cmpEQ)         ); \
-  ZXV__CMP(          NAME,,       (*cmpNE)         )
+  ZXV__CPYEQL(        NAME,,      (*cpyEql)        ); \
+  ZXV__OPADD(         NAME,,      (*opAdd)         ); \
+  ZXV__OPMVL(         NAME,,      (*opMvl)         ); \
+  ZXV__CMP(           NAME,,      (*cmpEQ)         ); \
+  ZXV__CMP(           NAME,,      (*cmpNE)         )
 
 #define ZXV_DEC_BODY( NAME, T ) \
-  void   (*_init)(    NAME *src, \
-                      T const *cpy, \
-                      size_t count ); \
-  ZXV__DEC_BODY( NAME, T, T )
+  ZXV___INIT(         NAME, T,,   (*_init)         ); \
+  ZXV__DEC_BODY(   NAME, T, T )
 
 /* We won't set def here, we'll let the developer do that */
 

@@ -1,4 +1,5 @@
 #include <zx/window.h>
+ZXV_DEF( zxEVENTS, zxEVTPTR, ZXSYS_EXP )
 #if ZXMSW
 LRESULT CALLBACK zxroot_onEvent(
   HWND   wh,

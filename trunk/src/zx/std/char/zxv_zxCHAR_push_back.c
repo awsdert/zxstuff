@@ -1,16 +1,20 @@
 #include <zx/std/char.h>
-ZXCORE_EXP bool zxv_zxCHAR_push_back( zxCHAR *txt, zxCHAR const *src )
+ZXV_PUSH_BACK( zxCHAR, ZXCORE_EXP )
 {
-  if ( !txt || !src )
+  size_t stop;
+  ZXASSERT( !src || !cpy )
     return false;
-  if ( !zxv.push_back( &txt->m_data, &src->m_data ) )
-    return false;
-  if ( txt->m_data.m_count == txt->m_data.m_fullCount )
+  if ( !zxv.push_back( &src->m_core, &cpy->m_core ) )
   {
-    zxv.grow( &txt->m_data, txt->m_data.m_count + 1, NULL );
-    --txt->m_data.m_count;
-    txt->m_data.m_size -= sizeof( char );
+    src->m_data = (char*)src->m_core.m_data;
+    return false;
   }
-  txt->m_text = (char*)txt->m_data.m_data;
+  stop = zxc.size( src );
+  if ( stop == zxc.max_size( src ) )
+  {
+    zxv.grow( &src->m_core, stop + 1, NULL );
+    zxv.grow( &src->m_core, stop, NULL );
+  }
+  src->m_data = (char*)src->m_core.m_data;
   return true;
 }

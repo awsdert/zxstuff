@@ -1,3 +1,4 @@
+#pragma once
 #include "c.h"
 
 #ifndef ZXVECTOR_OBJ_H
@@ -12,7 +13,7 @@ ZXC_OPEN
   name of the struct namespace he needs.
 */
 
-ZXV_DEC_1ST( zxVECTOR )
+typedef ZXSOBJ( zxVECTOR )
 {
   void*   m_data;
   void**  m_ptr;
@@ -25,16 +26,16 @@ ZXV_DEC_1ST( zxVECTOR )
 ZXCORE void   zxv_zxVECTOR__init(
   zxVECTOR       *src,
   size_t         Tsize,
-  zxuc     const *cpy,
+  void     const *cpy,
   size_t         count );
-ZXV__DEC_2ND( zxVECTOR, zxuc*, zxuc, ZXCORE );
+ZXV__DEC_2ND( zxVECTOR, zxuc*, void, ZXCORE );
 
 ZXNSO( v )
 {
   void (*_init)(
     zxVECTOR   *src, size_t Tsize,
     void const *cpy, size_t count );
-  ZXV__DEC_BODY( zxVECTOR, zxuc*, zxuc );
+  ZXV__DEC_BODY( zxVECTOR, zxuc*, void );
 } zxn_v;
 
 static const zxn_v zxv = { ZXV_DEF_BODY( zxVECTOR, {0} ) };

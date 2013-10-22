@@ -1,5 +1,5 @@
 #include <zx/window.h>
-ZXSYS_EXP zxHwnd zxv_zxWINDOW_getHandle( size_t wid )
+ZXSYS_EXP zxHwnd zxWINDOW_getHandle( size_t wid )
 {
   zxWINDOW *win = zxwin.getWindow(wid);
   if ( win )

@@ -1,8 +1,8 @@
 #include <zx/std/char.h>
-ZXCORE_EXP void zxv_zxCHAR__kill( zxCHAR *txt )
+ZXCORE_EXP void zxv_zxCHAR__kill( zxCHAR *src )
 {
-  if ( !txt )
+  if ( !src )
     return;
-  zxv._kill( &txt->m_data );
-  txt->m_text = NULL;
+  zxv._kill( &src->m_core );
+  src->m_data = NULL;
 }

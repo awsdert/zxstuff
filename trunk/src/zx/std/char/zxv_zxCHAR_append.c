@@ -1,10 +1,10 @@
 #include <zx/std/char.h>
-ZXCORE_EXP void zxv_zxCHAR_append( zxCHAR *txt, zxCHAR const *src, size_t pos )
+ZXV_APPEND( zxCHAR, ZXCORE_EXP )
 {
-  if ( !txt )
+  if ( !src || !cpy || !cpy->m_core.m_data )
     return;
-  zxv.append( &txt->m_data, &src->m_data, pos );
-  zxv.grow( &txt->m_data, txt->m_data.m_count + 1, NULL );
-  --txt->m_data.m_count;
-  txt->m_data.m_size -= sizeof( char );
+  --src->m_core.m_count;
+  zxv.append( &src->m_core, &cpy->m_core, pos );
+  src->m_data = (char*)src->m_core.m_data;
+  src->m_data[ src->m_core.m_count - 1 ] = 0u;
 }

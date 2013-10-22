@@ -45,9 +45,9 @@ public:
   zxWide( wide const *text, size_t len = 0 )
     { zxw._init( this, text, len ); }
   zxWide( zxWIDE const *text )
-    { zxw._init( this, text->m_text, text->m_data.m_count ); }
+    { zxw._init( this, text->m_data, text->m_core.m_count ); }
   zxWide( zxWide const &text )
-    { zxw._init( this, text.m_text, text.m_data.m_count ); }
+    { zxw._init( this, text.m_data, text.m_core.m_count ); }
   ~zxWide( void )
     { zxw._kill( this ); }
   size_t size( void )

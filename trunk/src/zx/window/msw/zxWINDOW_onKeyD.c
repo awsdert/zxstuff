@@ -10,7 +10,7 @@ zxEvtCBR zxv_zxWINDOW_onKeyD( zxEVENT* event )
   if ( !event->m_ptrType && event->m_ptr )
   {
     win  = (zxWINDOW*)event->m_ptr;
-    stop = win->m_events.m_data.m_count;
+    stop = zxevt.size( &win->m_events );
     switch ( vk )
     {
     case VK_ESCAPE:
@@ -20,14 +20,14 @@ zxEvtCBR zxv_zxWINDOW_onKeyD( zxEVENT* event )
   #if 1
       if ( win->m_win == zxWIN_NULL )
       {
-        if ( vk == VK_TAB )
-          SetFocus( (*zxwin.at( win, 0 ))->m_wh );
+        if ( vk == VK_TAB && zxv_size.size( &win->m_kids ) )
+          SetFocus( (*zx_win.at( zxwin.allWindows(), win->m_kids.m_data[ 0 ] ))->m_wh );
       }
-      else if ( win->m_events.m_evts )
+      else if ( win->m_events.m_data )
       {
         for ( ; i < stop; ++i )
         {
-          ptr = win->m_events.m_evts[ i ];
+          ptr = win->m_events.m_data[ i ];
           if ( ptr.type == zxEVT_KEYD )
              return ptr.event( event );
         }

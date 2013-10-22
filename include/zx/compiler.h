@@ -2,6 +2,8 @@
 #ifndef ZX_COMPILER_H
 #define ZX_COMPILER_H
 
+#define ZXNSO( NAME ) typedef struct zxn_##NAME##_struct
+
 #if defined( _DLL ) || defined( _WINDLL )
 #define ZXDLL 1
 #else

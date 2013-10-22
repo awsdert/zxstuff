@@ -32,8 +32,8 @@ ZXCORE void*
   mdel( void* ptr );
 ZXCORE void
   mcpy(
-    void*  dst,
-    void*  const cpy,
+    void       *dst,
+    void const *cpy,
     size_t const size );
 ZXCORE void
   mset(

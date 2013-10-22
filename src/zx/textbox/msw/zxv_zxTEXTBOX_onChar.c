@@ -32,7 +32,7 @@ ZXSYS_EXP zxEvtCBR zxv_zxTEXTBOX_onChar( zxEVENT* event )
     else
       return zxDefWinEvt;
   }
-  if ( !zx_TEXTBOX_DrawText( tbox, true ) )
+  if ( !zxtbox._drawText( tbox, true ) )
     return 3;
   return 0;
 #else

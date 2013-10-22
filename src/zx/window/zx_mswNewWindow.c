@@ -1,14 +1,14 @@
 #include <zx/window.h>
 ZXSYS_EXP zxsi zx_mswNewWindow( zxWINDOW *win )
 {
-  zxWINDOW  *base = win->m_base;
+  zxWINDOW  *base = zxwin.getWindow( win->m_base );
   zxTEXT    *text = &win->m_title;
   zxHwnd    baseWH = NULL;
 #if ZXMSW
 #if 1
   win->m_style |= CS_VREDRAW | CS_HREDRAW;
 #endif
-  if ( base )
+  if ( base && base != win )
   {
     win->m_style |= WS_CHILD;
     baseWH = base->m_wh;

@@ -1,11 +1,9 @@
 #include <zx/std/wide.h>
-ZXCORE_EXP void zxv_zxWIDE_grow( zxWIDE *obj, size_t const setCount, wide const setNew )
+ZXV_GROW( zxWIDE, wide, ZXCORE_EXP )
 {
-  if ( !obj )
-    return;
-  --obj->m_data.m_count;
-  zxv.grow( &obj->m_data, setCount, (zxuc*)&setNew );
-  obj->m_text = (wide*)obj->m_data.m_data;
-  obj->m_text[ obj->m_data.m_count - 1 ] = 0u;
+  ZXASSERT( !src ) return;
+  zxv.grow( &src->m_core, setCount + 1, (zxuc*)&setNew );
+  zxv.grow( &src->m_core, setCount, NULL );
+  src->m_data = (wide*)src->m_core.m_data;
 }
 

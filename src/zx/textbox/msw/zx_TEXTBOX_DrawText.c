@@ -1,8 +1,8 @@
 #include <zx/textbox.h>
 #if ZXMSW
-bool zx_TEXTBOX_DrawText( zxTEXTBOX *tbox, bool setCaret )
+bool zxTEXTBOX__drawText( zxTEXTBOX *tbox, bool setCaret )
 {
-  zxWINDOW *win = &tbox->m_win;
+  zxWINDOW *win = tbox->m_win;
   zxTEXT  *text = &tbox->m_text;
   RECT    cRect = {0},
            rect = {0};

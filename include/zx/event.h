@@ -1,3 +1,4 @@
+#pragma once
 #include "app.h"
 
 #ifndef ZX_EVENT_H
@@ -81,11 +82,32 @@ typedef struct zxEVTPTR_struct
   zxEvtPtr event;
 } zxEVTPTR;
 
-typedef struct zxEVENTS_struct
+ZXV_DEC( zxEVENTS, zxEVTPTR );
+
+ZXV_DEC_2ND( zxEVENTS, zxEVTPTR, ZXSYS );
+
+/*
+  These are not meant to be used in regular code;
+  Create functions for the object holding a
+  zxEVENTS object so that it may call these.
+*/
+
+ZXSYS bool zxEVENTS_addEvent( zxEVENTS* events, zxEVTPTR event );
+ZXSYS void zxEVENTS_remEvent( zxEVENTS* events, zxEVTPTR event );
+
+ZXNSO( evt )
 {
-  zxVECTOR  m_data;
-  zxEVTPTR* m_evts;
-} zxEVENTS;
+  ZXV_DEC_BODY( zxEVENTS, zxEVTPTR );
+  bool (*addEvent)( zxEVENTS *events, zxEVTPTR event );
+  void (*remEvent)( zxEVENTS *events, zxEVTPTR event );
+} zxn_evt;
+
+static zxn_evt const zxevt = 
+{
+  ZXV_DEF_BODY( zxEVENTS, {0} ),
+  zxEVENTS_addEvent,
+  zxEVENTS_remEvent
+};
 
 ZXSYS ZXEVENT( zxroot_onIdle  );
 ZXSYS ZXEVENT( zxroot_onInit  );
@@ -124,6 +146,7 @@ ZXSYS ZXEVENT( zxroot_onOpen );
 ZXSYS ZXEVENT( zxroot_onShut );
 ZXSYS ZXEVENT( zxroot_onQuit );
 
+static zxEVENTS zxevts = {0};
 static zxEvtPtr zxroot_events[ zxEVT_COUNT ] =
 {
   zxroot_onIdle,
@@ -163,14 +186,5 @@ static zxEvtPtr zxroot_events[ zxEVT_COUNT ] =
   zxroot_onShut,
   zxroot_onQuit
 };
-
-/*
-  These are not meant to be used in regular code;
-  Create functions for the object holding a
-  zxEVENTS object so that it may call these.
-*/
-
-ZXSYS bool zxAddEvent( zxEVENTS* events, zxEVTPTR event );
-ZXSYS void zxRemEvent( zxEVENTS* events, zxEVTPTR event );
 
 #endif

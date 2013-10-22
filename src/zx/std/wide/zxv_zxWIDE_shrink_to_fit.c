@@ -1,7 +1,6 @@
 #include <zx/std/wide.h>
-ZXCORE_EXP void zxv_zxWIDE_shrink_to_fit( zxWIDE *txt )
+ZXV_SHRINK_TO_FIT( zxWIDE, ZXCORE_EXP )
 {
-  if ( !txt )
-    return;
-  zxv.shrink_to_fit( &txt->m_data );
+  ZXASSERT( !src ) return;
+  zxv.shrink_to_fit( &src->m_core );
 }

@@ -1,16 +1,12 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxv_zxVECTOR_resize(
-  zxVECTOR       *obj,
-  size_t   const setCount,
-  zxuc     const *setNew )
+ZXV_RESIZE( zxVECTOR, zxuc*, ZXCORE_EXP )
 {
-  ZXASSERT( !obj )
-    return;
-  if ( setCount == obj->m_count ) return;
-  if ( setCount < obj->m_count )
+  ZXASSERT( !src ) return;
+  if ( setCount == src->m_count ) return;
+  if ( setCount < src->m_count )
   {
-    zxv.erase( obj, setCount, obj->m_count );
+    zxv.erase( src, setCount, src->m_count );
     return;
   }
-  zxv.grow( obj, setCount, setNew );
+  zxv.grow( src, setCount, setNew );
 }

@@ -9,10 +9,10 @@ zxEvtCBR zxv_zxWINDOW_onChar( zxEVENT* event )
   if ( !event->m_ptrType && event->m_ptr )
   {
     win = (zxWINDOW*)event->m_ptr;
-    stop = win->m_events.m_data.m_count;
+    stop = zxevt.size( &win->m_events );
     for ( ; i < stop; ++i )
     {
-      ptr = win->m_events.m_evts[ i ];
+      ptr = win->m_events.m_data[ i ];
       if ( ptr.type == zxEVT_CHAR )
         cbr = ptr.event( event );
       if ( cbr != 0 )

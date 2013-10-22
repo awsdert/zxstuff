@@ -1,5 +1,14 @@
-#ifndef ZXV_FUN_H
-#define ZXV_FUN_H
+#pragma once
+#ifndef ZXV_DEC_FUN_H
+#define ZXV_DEC_FUN_H
+
+#define ZXSOBJ( NAME ) struct NAME##_struct
+#define ZXV_DEC( NAME, T ) \
+  typedef ZXSOBJ( NAME ) \
+  { \
+    zxVECTOR m_core; \
+    T       *m_data; \
+  } NAME
 
 #define ZXV__SIZE(          NAME,    DLL, FUN ) DLL size_t \
   FUN##( NAME const *src )
@@ -53,7 +62,7 @@
   FUN##( NAME       *src )
 
 #define ZXV_SHRINK_TO_FIT( NAME,    DLL ) \
-  ZXV_SHRINK_TO_FIT( NAME, DLL, zxv_##NAME##_shrink_to_fit )
+  ZXV__SHRINK_TO_FIT( NAME, DLL, zxv_##NAME##_shrink_to_fit )
 
 #define ZXV__ASSIGN(        NAME, T, DLL, FUN ) DLL void \
   FUN##( NAME       *src, size_t setCount, T const setNew )
@@ -77,19 +86,56 @@
   FUN##( NAME       *src )
 
 #define ZXV_POP_BACK( NAME,    DLL ) \
-  ZXV_SHRINK_TO_FIT( NAME, DLL, zxv_##NAME##_pop_back )
+  ZXV__POP_BACK( NAME, DLL, zxv_##NAME##_pop_back )
 
 #define ZXV__INSERT( NAME, DLL, FUN ) DLL void \
   FUN##( NAME *src, NAME const *cpy, size_t pos )
 
 #define ZXV_INSERT( NAME, DLL ) \
-  ZXV__APPEND( NAME, DLL, zxv_##NAME##_insert )
+  ZXV__INSERT( NAME, DLL, zxv_##NAME##_insert )
+
+#define ZXV__ERASE( NAME, DLL, FUN ) DLL void \
+  FUN##( NAME *src, size_t first, size_t last )
+
+#define ZXV_ERASE( NAME, DLL ) \
+  ZXV__ERASE( NAME, DLL, zxv_##NAME##_erase )
+
+#define ZXV__SWAP( NAME, DLL, FUN ) DLL void \
+  FUN##( NAME *src, NAME *dst )
+
+#define ZXV_SWAP( NAME, DLL ) \
+  ZXV__SWAP( NAME, DLL, zxv_##NAME##_swap )
+
+#define ZXV__CLEAR( NAME, DLL, FUN ) DLL void \
+  FUN##( NAME *src )
+
+#define ZXV_CLEAR( NAME, DLL ) \
+  ZXV__CLEAR( NAME, DLL, zxv_##NAME##_clear )
+
+#define ZXV__REVERSE( NAME, DLL, FUN ) DLL void \
+  FUN##( NAME *src )
+
+#define ZXV_REVERSE( NAME, DLL ) \
+  ZXV__CLEAR( NAME, DLL, zxv_##NAME##_reverse )
+
+#define ZXV__COPY( NAME, T, DLL, FUN ) DLL size_t \
+  FUN##( NAME const *src, T *dst, \
+    size_t const count, size_t const from )
+
+#define ZXV_COPY( NAME, T, DLL ) \
+  ZXV__COPY( NAME, T, DLL, zxv_##NAME##_copy )
 
 #define ZXV__AT(            NAME, T, DLL, FUN ) DLL T* \
   FUN##( NAME const *src, size_t i )
 
 #define ZXV_AT( NAME, T, DLL ) \
   ZXV__AT( NAME, T, DLL, zxv_##NAME##_at )
+
+#define ZXV__ISEQUAL( NAME, DLL, FUN ) DLL bool \
+  FUN##( NAME const *src, NAME const *cmp, size_t *I )
+
+#define ZXV_ISEQUAL( NAME, DLL ) \
+  ZXV__ISEQUAL( NAME, DLL, zxv_##NAME##_isEqual )
 
 #define ZXV__OPADD( NAME, DLL, FUN ) DLL NAME* \
   FUN##( NAME *src, NAME const *cpy )
@@ -102,5 +148,14 @@
 
 #define ZXV_OPMVL( NAME, DLL ) \
   ZXV__OPMVL( NAME, DLL, zxv_##NAME##_opMvl )
+
+#define ZXV__CMP( NAME, DLL, FUN ) DLL bool \
+  FUN##( NAME const *src, NAME const *cmp )
+
+#define ZXV_CMPEQ( NAME, DLL ) \
+  ZXV__CMP( NAME, DLL, zxv_##NAME##_cmpEQ )
+
+#define ZXV_CMPNE( NAME, DLL ) \
+  ZXV__CMP( NAME, DLL, zxv_##NAME##_cmpNE )
 
 #endif

@@ -6,11 +6,7 @@ ZXC_OPEN
 
 #define ZX_CHAR( m_txt ) m_txt
 
-ZXV_DEC_1ST( zxCHAR )
-{
-  zxVECTOR m_data;
-  char*    m_text;
-} zxCHAR;
+ZXV_DEC( zxCHAR, char );
 
 ZXV_DEC_2ND( zxCHAR, char, ZXCORE );
 ZXCORE size_t zxv_zxCHAR_len( char const *text );
@@ -49,9 +45,9 @@ public:
   zxChar( wide const *text, size_t len = 0 )
     { zxc._initW( this, text, len ); }
   zxChar( zxCHAR const *text )
-    { zxc._init( this, text->m_text, text->m_data.m_count ); }
+    { zxc._init( this, text->m_data, text->m_core.m_count ); }
   zxChar( zxChar const &text )
-    { zxc._init( this, text.m_text, text.m_data.m_count ); }
+    { zxc._init( this, text.m_data, text.m_core.m_count ); }
   ~zxChar( void )
     { zxc._kill( this ); }
   size_t size( void )

@@ -38,7 +38,7 @@ ZXSYS_EXP zxsi zx_mswNewWindow( zxWINDOW *win )
     if ( !zxwin.mswATOMX[ win->m_win ] )
       return 1;
     win->m_wh = CreateWindowEx( win->m_stylex,
-      win->m_wcx->lpszClassName, text->m_text, win->m_style,
+      win->m_wcx->lpszClassName, text->m_data, win->m_style,
       win->m_x, win->m_y, win->m_w, win->m_h,
       baseWH, (HMENU)win->m_wid,
       win->m_wcx->hInstance, NULL );
@@ -67,7 +67,7 @@ ZXSYS_EXP zxsi zx_mswNewWindow( zxWINDOW *win )
     if ( !zxwin.mswATOM[ win->m_win ] )
       return 1;
     win->m_wh = CreateWindow(
-      win->m_wc->lpszClassName, text->m_text, win->m_style,
+      win->m_wc->lpszClassName, text->m_data, win->m_style,
       win->m_x, win->m_y, win->m_w, win->m_h,
       baseWH, (HMENU)win->m_wid,
       win->m_wc->hInstance, NULL );

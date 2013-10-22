@@ -1,22 +1,22 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxv_zxVECTOR_grow( zxVECTOR *obj, size_t setCount, zxuc const *setNew )
+ZXV_GROW( zxVECTOR, zxuc*, ZXCORE_EXP )
 {
   size_t d, t, j, size;
   zxuc *des;
-  ZXASSERT( !obj )
+  ZXASSERT( !src )
     return;
-  if ( obj->m_isFixed || setCount <= obj->m_count )
+  if ( src->m_isFixed || setCount <= src->m_count )
     return;
-  size = setCount++ * obj->m_Tsize;
-  obj->m_data = realloc( obj->m_data, size );
-  des = (zxuc*)obj->m_data;
-  d = obj->m_count;
-  t = obj->m_size;
+  size = setCount++ * src->m_Tsize;
+  src->m_data = realloc( src->m_data, size );
+  des = (zxuc*)src->m_data;
+  d = src->m_count;
+  t = src->m_size;
   if ( setNew )
   {
     for ( ; d < setCount; ++d )
     {
-      for ( j = 0; j < obj->m_Tsize; ++j )
+      for ( j = 0; j < src->m_Tsize; ++j )
         des[ t ] = setNew[ j ];
     }
   }
@@ -24,10 +24,10 @@ ZXCORE_EXP void zxv_zxVECTOR_grow( zxVECTOR *obj, size_t setCount, zxuc const *s
   {
     for ( ; d < setCount; ++d )
     {
-      for ( j = 0; j < obj->m_Tsize; ++j )
+      for ( j = 0; j < src->m_Tsize; ++j )
         des[ t ] = 0u;
     }
   }
-  if ( obj->m_ptr )
-    *obj->m_ptr = obj->m_data;
+  if ( src->m_ptr )
+    *src->m_ptr = src->m_data;
 }

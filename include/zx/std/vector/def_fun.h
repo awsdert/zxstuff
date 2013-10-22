@@ -3,6 +3,21 @@
 #ifndef ZXV_DEF_FUN_H
 #define ZXV_DEF_FUN_H
 
+#define ZXV_DEF__INIT( NAME, T, EXP ) \
+  ZXV__INIT( NAME, T, EXP ) \
+  { \
+    ZXASSERT( !src ) return; \
+    zxv._init( &src->m_core, sizeof( T ), cpy, count ); \
+    src->m_data = (T*)src->m_core.m_data; \
+  }
+
+#define ZXV_DEF__KILL( NAME, EXP ) \
+  ZXV__KILL( NAME, EXP ) \
+  { \
+    if ( !src ) return; \
+    zxv._kill( src ); \
+  }
+
 #define ZXV_DEF_SIZE( NAME, EXP ) \
   ZXV_SIZE( NAME, EXP ) \
   { \
@@ -146,11 +161,55 @@
   { \
     ZXASSERT( !src ) return NULL; \
     if ( zxv.at( &src->m_core, i ) ) \
-      return src->m_data[ i ]; \
+      return &src->m_data[ i ]; \
     return NULL; \
   }
 
+#define ZXV_DEF_ISEQUAL( NAME, EXP ) \
+  ZXV_ISEQUAL( NAME, EXP ) \
+  { \
+    if ( src == cmp ) return true; \
+    ZXASSERT( !src || !cmp ) return false; \
+    return zxv.isEqual( &src->m_core, &cmp->m_core, I ); \
+  }
+
+#define ZXV_DEF_CPYEQL( NAME, T, EXP ) \
+  ZXV_CPYEQL( NAME, EXP ) \
+  { \
+    ZXASSERT( !src | !cpy ) return src; \
+    zxv.cpyEql( &src->m_core, &cpy->m_core ); \
+    src->m_data = (T*)src->m_core.m_data; \
+    return src; \
+  }
+
+#define ZXV_DEF_OPADD( NAME, T, EXP ) \
+  ZXV_OPADD( NAME, EXP ) \
+  { \
+    ZXASSERT( !src || !cpy ) return src; \
+    zxv.opAdd( &src->m_core, &cpy->m_core ); \
+    src->m_data = (T*)src->m_core.m_data; \
+    return src; \
+  }
+
+#define ZXV_DEF_CMPEQ( NAME, EXP ) \
+  ZXV_CMPEQ( NAME, EXP ) \
+  { \
+    if ( src == cmp ) return true; \
+    ZXASSERT( !src || !cmp ) return false; \
+    return zxv.isEqual( &src->m_core, &cmp->m_core, NULL ); \
+  }
+
+#define ZXV_DEF_CMPNE( NAME, EXP ) \
+  ZXV_CMPNE( NAME, EXP ) \
+  { \
+    if ( src == cmp ) return false; \
+    ZXASSERT( !src || !cmp ) return true; \
+    return !zxv.isEqual( &src->m_core, &cmp->m_core, NULL ); \
+  }
+
 #define ZXV_DEF(         NAME, T, EXP ) \
+  ZXV_DEF__INIT(         NAME, T, EXP ) \
+  ZXV_DEF__KILL(         NAME,    EXP ) \
   ZXV_DEF_SIZE(          NAME,    EXP ) \
   ZXV_DEF_MAX_SIZE(      NAME,    EXP ) \
   ZXV_DEF_RESIZE(        NAME, T, EXP ) \
@@ -169,6 +228,11 @@
   ZXV_DEF_CLEAR(         NAME,    EXP ) \
   ZXV_DEF_REVERSE(       NAME,    EXP ) \
   ZXV_DEF_COPY(          NAME, T, EXP ) \
-  ZXV_DEF_AT(            NAME, T, EXP )
+  ZXV_DEF_AT(            NAME, T, EXP ) \
+  ZXV_DEF_ISEQUAL(       NAME,    EXP ) \
+  ZXV_DEF_CPYEQL(        NAME, T, EXP ) \
+  ZXV_DEF_OPADD(         NAME, T, EXP ) \
+  ZXV_DEF_CMPEQ(         NAME,    EXP ) \
+  ZXV_DEF_CMPNE(         NAME,    EXP )
 
 #endif

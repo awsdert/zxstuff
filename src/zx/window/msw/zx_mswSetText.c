@@ -25,7 +25,7 @@ ZXSYS_EXP zxui zx_mswSetText(
   SetCaretPos( ( pos * tm.tmAveCharWidth ) - ( pt.x >> 1 ),
     ( line * tm.tmHeight ) + ( pt.y >> 1 ) );
   FillRect( dc, &rect, bg );
-  DrawText( dc, text->m_text, text->m_data.m_count, &rect,
+  DrawText( dc, text->m_data, zxstr.size( text ), &rect,
     DT_LEFT | DT_SINGLELINE | DT_END_ELLIPSIS | DT_VCENTER );
   ReleaseDC( NULL, dc );
   return 1u;

@@ -1,6 +1,6 @@
 #include <zx/window.h>
 #if ZXMSW
-zxEvtCBR zxv_zxWINDOW_onChar( zxEVENT* event )
+zxEvtCBR zxWINDOW_onChar( zxEVENT* event )
 {
   zxWINDOW* win;
   size_t i = 0, stop = 0;

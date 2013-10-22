@@ -1,10 +1,9 @@
 #include <zx/std/char.h>
-ZXCORE_EXP void zxv_zxCHAR_insert( zxCHAR *txt, zxCHAR const *src, size_t pos )
+ZXV_INSERT( zxCHAR, ZXCORE_EXP )
 {
-  if ( !txt )
+  ZXASSERT( !src || !cpy )
     return;
-  zxv.insert( &txt->m_data, &src->m_data, pos );
-  zxv.grow( &txt->m_data, txt->m_data.m_count + 1, NULL );
-  --txt->m_data.m_count;
-  txt->m_data.m_size -= sizeof( char );
+  zxv.insert( &src->m_core, &cpy->m_core, pos );
+  zxv.grow( &src->m_core, zxc.size( src ) - 1, NULL );
+  src->m_data = (char*)src->m_core.m_data;
 }

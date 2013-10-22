@@ -1,11 +1,10 @@
 #include <zx/std/char.h>
-ZXCORE_EXP void zxv_zxCHAR_reserve( zxCHAR *txt, size_t minSize )
+ZXV_RESERVE( zxCHAR, ZXCORE_EXP )
 {
-  if ( !txt )
-    return;
+  ZXASSERT( !src ) return;
   minSize += sizeof( char );
-  zxv.reserve( &txt->m_data, minSize );
-  --txt->m_data.m_count;
-  txt->m_data.m_size -= sizeof( char );
-  txt->m_text = (char*)txt->m_data.m_data;
+  zxv.reserve( &src->m_core, minSize );
+  --src->m_core.m_count;
+  src->m_core.m_size -= sizeof( char );
+  src->m_data = (char*)src->m_core.m_data;
 }

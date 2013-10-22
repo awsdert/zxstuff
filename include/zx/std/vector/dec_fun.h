@@ -10,6 +10,15 @@
     T       *m_data; \
   } NAME
 
+#define ZXV___INIT( NAME, T, DLL, FUN ) DLL void \
+  FUN##( NAME *src, T const *cpy, size_t count )
+
+#define ZXV__INIT( NAME, T, DLL ) \
+  ZXV___INIT( NAME, T, DLL, zxv_##NAME##__init )
+
+#define ZXV___KILL( NAME, DLL, FUN ) DLL void FUN##( NAME *src )
+#define ZXV__KILL( NAME, DLL ) ZXV___KILL( NAME, DLL, zxv_##NAME##__kill )
+
 #define ZXV__SIZE(          NAME,    DLL, FUN ) DLL size_t \
   FUN##( NAME const *src )
 
@@ -136,6 +145,12 @@
 
 #define ZXV_ISEQUAL( NAME, DLL ) \
   ZXV__ISEQUAL( NAME, DLL, zxv_##NAME##_isEqual )
+
+#define ZXV__CPYEQL( NAME, DLL, FUN ) DLL NAME* \
+  FUN##( NAME *src, NAME const *cpy )
+
+#define ZXV_CPYEQL( NAME, DLL ) \
+  ZXV__CPYEQL( NAME, DLL, zxv_##NAME##_cpyEql )
 
 #define ZXV__OPADD( NAME, DLL, FUN ) DLL NAME* \
   FUN##( NAME *src, NAME const *cpy )

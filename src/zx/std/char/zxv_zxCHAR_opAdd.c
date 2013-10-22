@@ -1,15 +1,15 @@
 #include <zx/std/char.h>
-ZXCORE_EXP zxCHAR* zxv_zxCHAR_opAdd( zxCHAR *txt, zxCHAR const *src )
+ZXV_OPADD( zxCHAR, ZXCORE_EXP )
 {
-  if ( !txt || src )
-    return txt;
-  zxv.opAdd( &txt->m_data, &src->m_data );
-  if ( txt->m_data.m_count == txt->m_data.m_fullCount )
+  size_t stop;
+  ZXASSERT( !src || !cpy ) return src;
+  zxv.opAdd( &src->m_core, &cpy->m_core );
+  stop = zxc.size( src );
+  if ( stop == src->m_core.m_fullCount )
   {
-    zxv.grow( &txt->m_data, txt->m_data.m_count + 1, NULL );
-    --txt->m_data.m_count;
-    txt->m_data.m_size -= sizeof( char );
+    zxv.grow( &src->m_core, stop + 1, NULL );
+    zxv.grow( &src->m_core, stop, NULL );
   }
-  txt->m_text = (char*)txt->m_data.m_data;
-  return txt;
+  src->m_data = (char*)src->m_core.m_data;
+  return src;
 }

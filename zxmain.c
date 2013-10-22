@@ -3,7 +3,7 @@
 ZXV_DEF( zxWINDOWS, zxWINDOW*, ZXSYS_EXP )
 
 zxWINDOW   zx_l_rootWindow = {0};
-zxVECTOR   zx_l_allWindows = {0};
+zxWINDOWS  zx_l_allWindows = {0};
 zxInstance zx_l_prevI = NULL, zx_l_thisI = NULL;
 
 ZXSYS_EXP zxsi zxapp_main(
@@ -42,7 +42,7 @@ ZXSYS_EXP zxsi zxapp_main(
 
 /* DO NOT MODIFY */
 
-ZXSYS_EXP zxVECTOR* zxv_zxWINDOW_allWindows( void )
+ZXSYS_EXP zxWINDOWS* zxWINDOW_allWindows( void )
 {
   return &zx_l_allWindows;
 }

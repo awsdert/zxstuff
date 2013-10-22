@@ -1,5 +1,5 @@
 #include <zx/textbox.h>
-ZXSYS_EXP zxEvtCBR zxv_zxTEXTBOX_onFocus( zxEVENT* event )
+ZXSYS_EXP zxEvtCBR zxTEXTBOX_onFocus( zxEVENT* event )
 {
   zxWINDOW  *win  = zxwin.getWindow( event->m_wid );
   zxTEXTBOX *tbox = NULL;

@@ -3,7 +3,7 @@ ZXCORE_EXP zxWIDE* zxv_zxWIDE_cpyEql( zxWIDE *txt, zxWIDE const *src )
 {
   if ( !txt || !src )
     return txt;
-  zxv.cpyEql( &txt->m_data, &src->m_data );
-  txt->m_text = (wide*)txt->m_data.m_data;
+  zxv.cpyEql( &txt->m_core, &src->m_core );
+  txt->m_data = (wide*)txt->m_core.m_data;
   return txt;
 }

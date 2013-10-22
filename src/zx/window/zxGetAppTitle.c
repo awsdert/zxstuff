@@ -7,5 +7,5 @@ ZXSYS_EXP void zxSetAppTitle( zxTEXT const *txt )
   zxstr._kill( &zx_l_appTitle );
   if ( !txt )
     return;
-  zxstr._init( &zx_l_appTitle, txt->m_text, txt->m_data.m_count );
+  zxstr._init( &zx_l_appTitle, txt->m_data, zxstr.size( txt ) );
 }

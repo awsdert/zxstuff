@@ -27,10 +27,10 @@ bool zxTEXTBOX__drawText( zxTEXTBOX *tbox, bool setCaret )
     FillRect( hdc, &rect, win->m_wc->hbrBackground  );
   else
     FillRect( hdc, &rect, win->m_wcx->hbrBackground );
-  /* TODO: zx__TEXTBOX_DrawText(): provide selection support */
+  /* TODO: zxTEXTBOX__drawText(): provide selection support */
   ExtTextOut(
     hdc, rect.left, rect.top, ETO_CLIPPED, &rect,
-    text->m_text, zxstr.size( text ), NULL );
+    text->m_data, zxstr.size( text ), NULL );
   ReleaseDC( NULL, hdc );
   return true;
 }

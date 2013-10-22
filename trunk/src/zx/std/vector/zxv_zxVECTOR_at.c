@@ -1,7 +1,7 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP zxuc* zxv_zxVECTOR_at( zxVECTOR const *obj, size_t const i )
+ZXV_AT( zxVECTOR, zxuc, ZXCORE_EXP )
 {
-  ZXASSERT( !obj || !obj->m_data || i >= obj->m_count )
+  ZXASSERT( !src || !src->m_data || i >= src->m_count )
     return NULL;
-  return &((zxuc*)obj->m_data)[ i * obj->m_Tsize ];
+  return &((zxuc*)src->m_data)[ i * src->m_Tsize ];
 }

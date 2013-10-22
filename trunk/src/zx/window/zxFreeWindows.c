@@ -1,21 +1,25 @@
 #include <zx/window.h>
 ZXSYS_EXP int zxFreeWindows( int returnCode )
 {
-  zxVECTOR *data = zxwin.allWindows();
-  size_t i = 0, stop = data->m_count;
-  zxWINDOW* win, **ary = (zxWINDOW**)data->m_data;
-  if ( ary && stop )
+  zxWINDOWS *all = zxwin.allWindows();
+  size_t i = 0, stop = zx_win.size( all );
+  zxWINDOW* win;
+  if ( all && stop )
   {
     for ( ; i < stop; ++i )
     {
-      win = ary[ i ];
+      win = all->m_data[ i ];
       if ( win )
       {
+        if ( win->opDelWinObj )
+          win->opDelWinObj( win->m_winObj );
+        if ( win->opDelUsrObj )
+          win->opDelUsrObj( win->m_usrObj );
         free( win );
-        ary[ i ] = NULL;
+        all->m_data[ i ] = NULL;
       }
     }
-    zxv._kill( data );
+    zx_win._kill( all );
   }
   return returnCode;
 }

@@ -1,11 +1,10 @@
 #include <zx/std/wide.h>
-ZXCORE_EXP void zxv_zxWIDE_insert( zxWIDE *obj, zxWIDE const *src, size_t pos )
+ZXV_INSERT( zxWIDE, ZXCORE_EXP )
 {
-  if ( !obj || !src || !src->m_data.m_data )
+  ZXASSERT( !src || !cpy )
     return;
-  --obj->m_data.m_count;
-  zxv.insert( &obj->m_data, &src->m_data, pos );
-  obj->m_text = (wide*)obj->m_data.m_data;
-  obj->m_text[ obj->m_data.m_count - 1 ] = 0u;
+  zxv.insert( &src->m_core, &cpy->m_core, pos );
+  zxv.grow( &src->m_core, zxw.size( src ) - 1, NULL );
+  src->m_data = (wide*)src->m_core.m_data;
 }
 

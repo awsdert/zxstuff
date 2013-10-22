@@ -6,19 +6,15 @@ ZXC_OPEN
 
 #define ZX_WIDE( m_txt ) L##m_txt
 
-ZXV_DEC_1ST( zxWIDE )
-{
-  zxVECTOR m_data;
-  wide*    m_text;
-} zxWIDE;
-
+ZXV_DEC( zxWIDE, wide );
 ZXV_DEC_2ND( zxWIDE, wide, ZXCORE );
+
 ZXCORE size_t zxv_zxWIDE_len(    wide const *text );
 ZXCORE void   zxv_zxWIDE__initC( zxWIDE       *dst,
                                  char   const *text,
                                  size_t       len );
 
-typedef struct zxn_w_struct
+ZXNSO( w )
 {
   ZXV_DEC_BODY( zxWIDE, wide );
   size_t (*len)( wide const *text );
@@ -27,9 +23,9 @@ typedef struct zxn_w_struct
   void   (*_initW)( zxWIDE *dst, wide const *text, size_t len );
 } zxn_w;
 
-static zxn_w const zxw = {
-  {0},
-  ZXV_DEF_BODY( zxWIDE ),
+static zxn_w const zxw =
+{
+  ZXV_DEF_BODY( zxWIDE, {0} ),
   zxv_zxWIDE_len,
   zxv_zxWIDE__initC,
   zxv_zxWIDE__init

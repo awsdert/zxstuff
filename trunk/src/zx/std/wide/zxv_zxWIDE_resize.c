@@ -1,11 +1,9 @@
 #include <zx/std/wide.h>
-ZXCORE_EXP void zxv_zxWIDE_resize( zxWIDE *txt, size_t const setLen, wide const setNew )
+ZXV_RESIZE( zxWIDE, wide, ZXCORE_EXP )
 {
-  if ( !txt )
-    return;
-  zxv.resize( &txt->m_data, setLen + 1, (zxuc*)&setNew );
-  --txt->m_data.m_count;
-  txt->m_data.m_size -= sizeof( wide );
-  txt->m_text = (wide*)txt->m_data.m_data;
-  txt->m_text[ 0 ] = 0;
+  ZXASSERT( !src ) return;
+  zxv.resize( &src->m_core, setCount + 1, (zxuc*)&setNew );
+  zxv.resize( &src->m_core, setCount, NULL );
+  src->m_data = (wide*)src->m_core.m_data;
+  src->m_data[ setCount ] = 0;
 }

@@ -1,5 +1,7 @@
 #include <zx/window.h>
 
+ZXV_DEF( zxWINDOWS, zxWINDOW*, ZXSYS_EXP )
+
 zxWINDOW   zx_l_rootWindow = {0};
 zxVECTOR   zx_l_allWindows = {0};
 zxInstance zx_l_prevI = NULL, zx_l_thisI = NULL;

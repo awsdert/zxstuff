@@ -1,7 +1,7 @@
 #include <zx/textbox.h>
 ZXSYS_EXP zxEvtCBR zxv_zxTEXTBOX_onKeyD( zxEVENT* event )
 {
-  zxWINDOW  *win  = zxwin.getWindow( event->m_wid );
+  zxWINDOW  *win  = zxwin.getWindow( event->m_wid ), *base;
   zxTEXTBOX *tbox = NULL;
   zxTEXT    *text = NULL;
 #if ZXMSW
@@ -24,12 +24,14 @@ ZXSYS_EXP zxEvtCBR zxv_zxTEXTBOX_onKeyD( zxEVENT* event )
       ++tbox->m_pos;
     return zxDefWinEvt;
   case VK_TAB:
-    SetFocus( win->m_base->m_wh );
+    base = zxwin.getWindow( win->m_base );
+    if ( base )
+      SetFocus( base->m_wh );
     return 0;
   default:
     return zxDefWinEvt;
   }
-  if ( !zx_TEXTBOX_DrawText( tbox, true ) )
+  if ( !zxtbox._drawText( tbox, true ) )
     return 3;
 #endif
   return 0;

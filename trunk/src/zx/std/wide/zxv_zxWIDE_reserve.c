@@ -1,11 +1,10 @@
 #include <zx/std/wide.h>
-ZXCORE_EXP void zxv_zxWIDE_reserve( zxWIDE *txt, size_t minSize )
+ZXV_RESERVE( zxWIDE, ZXCORE_EXP )
 {
-  if ( !txt )
-    return;
-  minSize += sizeof( char );
-  zxv.reserve( &txt->m_data, minSize );
-  --txt->m_data.m_count;
-  txt->m_data.m_size -= sizeof( wide );
-  txt->m_text = (wide*)txt->m_data.m_data;
+  ZXASSERT( !src ) return;
+  minSize += sizeof( wide );
+  zxv.reserve( &src->m_core, minSize );
+  --src->m_core.m_count;
+  src->m_core.m_size -= sizeof( wide );
+  src->m_data = (wide*)src->m_core.m_data;
 }

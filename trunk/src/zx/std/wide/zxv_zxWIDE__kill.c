@@ -1,8 +1,8 @@
 #include <zx/std/wide.h>
-ZXCORE_EXP void zxv_zxWIDE__kill( zxWIDE *txt )
+ZXCORE_EXP void zxv_zxWIDE__kill( zxWIDE *src )
 {
-  if ( !txt )
+  if ( !src )
     return;
-  zxv._kill( &txt->m_data );
-  txt->m_text = NULL;
+  zxv._kill( &src->m_core );
+  src->m_data = NULL;
 }

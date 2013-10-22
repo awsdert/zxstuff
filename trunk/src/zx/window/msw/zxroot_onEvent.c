@@ -8,6 +8,7 @@ LRESULT CALLBACK zxroot_onEvent(
 {
   zxWINDOW *win = zxwin.byHandle( wh );
   zxEVENT  event;
+  zxEVENTS *evts;
   zxEVTPTR ptr;
   zxEvtCBR cbr = 0;
   size_t i = 0, stop;
@@ -42,18 +43,30 @@ LRESULT CALLBACK zxroot_onEvent(
   event.m_wid = win->m_wid;
   if ( event.m_evt < zxEVT_COUNT )
   {
-    stop = win->m_events.m_data.m_count;
+    evts = &win->m_events;
+    stop = zxevt.size( evts );
     for ( ; i < stop; ++i )
     {
-      ptr = win->m_events.m_evts[ i ];
+      ptr = evts->m_data[ i ];
       if ( ptr.type == event.m_evt )
         cbr = ptr.event( &event );
       if ( cbr != 0 )
         return cbr;
       if ( event.m_stopEvent )
-        return DefWindowProc( wh, msg, wp, lp );
+        return 0;
     }
-    return win->m_defEvts[ event.m_evt ]( &event );
+    evts = &zxevts;
+    stop = zxevt.size( evts );
+    for ( ; i < stop; ++i )
+    {
+      ptr = evts->m_data[ i ];
+      if ( ptr.type == event.m_evt )
+        cbr = ptr.event( &event );
+      if ( cbr != 0 )
+        return cbr;
+      if ( event.m_stopEvent )
+        return 0;
+    }
   }
   return DefWindowProc( wh, msg, wp, lp );
 }

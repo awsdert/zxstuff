@@ -1,8 +1,8 @@
 #include <zx/std/lib.h>
-ZXCORE_EXP void mcpy( void* dst, void* const src, size_t const size )
+ZXCORE_EXP void mcpy( void* dst, void const *cpy, size_t const size )
 {
   size_t i = 0;
-  zxuc *d = (zxuc*)dst, *s = (zxuc*)src;
+  zxuc *d = (zxuc*)dst, *c = (zxuc*)cpy;
   for ( ; i < size; ++i )
-    d[ i ] = s[ i ];
+    d[ i ] = c[ i ];
 }

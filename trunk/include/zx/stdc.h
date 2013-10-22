@@ -2,12 +2,10 @@
 #ifndef ZX_STDC_H
 #define ZX_STDC_H
 
-#if defined(__STDC__) || defined( _MSC_EXTENSIONS )
 #ifdef __STDC_VERSION__
 #define ZXSTDC __STDC_VERSION__
-#else
+#elif defined(__STDC__) || defined( _MSC_EXTENSIONS )
 #define ZXSTDC 198901L
-#endif
 #else
 #define ZXSTDC 0
 #endif

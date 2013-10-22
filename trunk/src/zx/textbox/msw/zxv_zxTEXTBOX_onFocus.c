@@ -15,7 +15,7 @@ ZXSYS_EXP zxEvtCBR zxv_zxTEXTBOX_onFocus( zxEVENT* event )
   GetTextMetrics( dc, &tm );
   ReleaseDC( NULL, dc );
   CreateCaret( win->m_wh, NULL, 1, tm.tmHeight );
-  zx_TEXTBOX_DrawText( tbox, true );
+  zxtbox._drawText( tbox, true );
   ShowCaret( win->m_wh );
 #endif
   return zxDefWinEvt;

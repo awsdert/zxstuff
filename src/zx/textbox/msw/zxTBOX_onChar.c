@@ -1,16 +1,16 @@
-#include <zx/textbox.h>
-ZXSYS_EXP zxEvtCBR zxTEXTBOX_onChar( zxEVENT* event )
+#include <zx/tbox.h>
+ZXSYS_EXP zxEvtCBR zxTBOX_onChar( zxEVENT* event )
 {
   zxWINDOW  *win  = zxwin.getWindow( event->m_wid );
-  zxTEXTBOX *tbox = NULL;
+  zxTBOX *tbox = NULL;
   zxTEXT    *text = NULL, ins = zxstr.def;
 #if ZXMSW
 #if 1
   WORD vk = LOWORD( event->m_mswWP );
 #endif
-  if ( win->m_win != zxWIN_TEXTBOX )
+  if ( win->m_win != zxWIN_TBOX )
     return zxDefWinEvt;
-  tbox = (zxTEXTBOX*)win;
+  tbox = (zxTBOX*)win;
   text = &tbox->m_text;
 #if 1
   switch ( vk )

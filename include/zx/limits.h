@@ -1,3 +1,4 @@
+#pragma once
 #include "limits/all.h"
 #include "limits/char.h"
 #include "limits/short.h"

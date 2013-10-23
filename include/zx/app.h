@@ -1,3 +1,4 @@
+#pragma once
 #include "std/text.h"
 
 #ifndef ZX_APP_H

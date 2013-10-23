@@ -1,7 +1,7 @@
 #include <zx/window.h>
 ZXV_DEF( zxEVENTS, zxEVTPTR, ZXSYS_EXP )
 #if ZXMSW
-LRESULT CALLBACK zxroot_onEvent(
+LRESULT CALLBACK zxEVENT_onEvent(
   HWND   wh,
   UINT   msg,
   WPARAM wp,

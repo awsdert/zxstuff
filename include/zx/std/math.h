@@ -1,3 +1,4 @@
+#pragma once
 #include "int.h"
 #ifndef ZXMATH_H
 #define ZXMATH_H

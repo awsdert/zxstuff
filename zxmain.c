@@ -17,8 +17,8 @@ ZXSYS_EXP zxsi zxapp_main(
   root->m_wh = rootWH;
   zx_l_prevI = prevI;
   zx_l_thisI = thisI;
-  zxv._init( &zx_l_allWindows, sizeof( zxWINDOW* ), NULL, 0 );
-  zxv.grow(  &zx_l_allWindows, 1, (zxuc*)&zx_l_rootWindow );
+  zx_win._init( &zx_l_allWindows, NULL, 0 );
+  zx_win.grow(  &zx_l_allWindows, 1, &zx_l_rootWindow );
   for ( ; i < stop; ++i )
   {
     zxwin._initWC(  &zxwin.WC[  i ] );
@@ -31,7 +31,7 @@ ZXSYS_EXP zxsi zxapp_main(
   i = zxWIN_FRAME;
   zxwin.WC[  i ].lpszClassName = ZXT("ZXFRAME");
   zxwin.WCX[ i ].lpszClassName = ZXT("ZXFRAME");
-  i = zxWIN_TEXTBOX;
+  i = zxWIN_TBOX;
   zxwin.WC[  i ].lpszClassName = ZXT("EDIT");
   zxwin.WC[  i ].hbrBackground = (HBRUSH)(COLOR_WINDOWFRAME);
   zxwin.WCX[ i ].lpszClassName = ZXT("EDIT");

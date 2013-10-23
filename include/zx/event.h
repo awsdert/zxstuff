@@ -9,12 +9,12 @@
   event->m_wh, event->m_mswMsg, event->m_mswWP, event->m_mswLP )
 #define zxEvtCBR    LRESULT
 ZXSYS zxEvtCBR CALLBACK
-  zxroot_onEvent( zxHwnd wh, UINT msg, WPARAM wp, LPARAM lp );
+  zxEVENT_onEvent( zxHwnd wh, UINT msg, WPARAM wp, LPARAM lp );
 #else
 #define zxDefWinEvt 0
 #define zxEvtCBR    zxsl
 ZXSYS zxEvtCBR __stdcall
-  zxroot_onEvent( zxHwnd wh, zxul msg, zxul *wp, zxul *lp );
+  zxEVENT_onEvent( zxHwnd wh, zxul msg, zxul *wp, zxul *lp );
 #endif
 
 typedef enum zxEVT_enum
@@ -88,15 +88,55 @@ ZXV_DEC_2ND( zxEVENTS, zxEVTPTR, ZXSYS );
 
 /*
   These are not meant to be used in regular code;
-  Create functions for the object holding a
-  zxEVENTS object so that it may call these.
+  Create functions for the object holding an
+  events object so that it may call these.
 */
 
 ZXSYS bool zxEVENTS_addEvent( zxEVENTS* events, zxEVTPTR event );
 ZXSYS void zxEVENTS_remEvent( zxEVENTS* events, zxEVTPTR event );
 
+ZXSYS ZXEVENT( zxEVENT_onIdle  );
+ZXSYS ZXEVENT( zxEVENT_onInit  );
+ZXSYS ZXEVENT( zxEVENT_onKill  );
+ZXSYS ZXEVENT( zxEVENT_onChar  );
+ZXSYS ZXEVENT( zxEVENT_onKeyD  );
+ZXSYS ZXEVENT( zxEVENT_onKeyU  );
+ZXSYS ZXEVENT( zxEVENT_onCurMV );
+ZXSYS ZXEVENT( zxEVENT_onCurLD );
+ZXSYS ZXEVENT( zxEVENT_onCurMD );
+ZXSYS ZXEVENT( zxEVENT_onCurRD );
+ZXSYS ZXEVENT( zxEVENT_onCurBD );
+ZXSYS ZXEVENT( zxEVENT_onCurLU );
+ZXSYS ZXEVENT( zxEVENT_onCurMU );
+ZXSYS ZXEVENT( zxEVENT_onCurRU );
+ZXSYS ZXEVENT( zxEVENT_onCurBU );
+ZXSYS ZXEVENT( zxEVENT_onCurWH );
+ZXSYS ZXEVENT( zxEVENT_onFocus );
+ZXSYS ZXEVENT( zxEVENT_onBlur  );
+ZXSYS ZXEVENT( zxEVENT_onShow  );
+ZXSYS ZXEVENT( zxEVENT_onHide  );
+ZXSYS ZXEVENT( zxEVENT_onMax   );
+ZXSYS ZXEVENT( zxEVENT_onMin   );
+ZXSYS ZXEVENT( zxEVENT_onRes   );
+ZXSYS ZXEVENT( zxEVENT_onShowAct );
+ZXSYS ZXEVENT( zxEVENT_onHideAct );
+ZXSYS ZXEVENT( zxEVENT_onMaxAct  );
+ZXSYS ZXEVENT( zxEVENT_onMinAct  );
+ZXSYS ZXEVENT( zxEVENT_onResAct  );
+ZXSYS ZXEVENT( zxEVENT_onShowNoa );
+ZXSYS ZXEVENT( zxEVENT_onHideNoa );
+ZXSYS ZXEVENT( zxEVENT_onMaxNoa  );
+ZXSYS ZXEVENT( zxEVENT_onMinNoa  );
+ZXSYS ZXEVENT( zxEVENT_onResNoa  );
+ZXSYS ZXEVENT( zxEVENT_onOpen );
+ZXSYS ZXEVENT( zxEVENT_onShut );
+ZXSYS ZXEVENT( zxEVENT_onQuit );
+
+static zxEVENTS zxevts = {0};
+
 ZXNSO( evt )
 {
+  zxEvtPtr const events[ zxEVT_COUNT ];
   ZXV_DEC_BODY( zxEVENTS, zxEVTPTR );
   bool (*addEvent)( zxEVENTS *events, zxEVTPTR event );
   void (*remEvent)( zxEVENTS *events, zxEVTPTR event );
@@ -104,87 +144,47 @@ ZXNSO( evt )
 
 static zxn_evt const zxevt = 
 {
+  {
+    zxEVENT_onIdle,
+    zxEVENT_onInit,
+    zxEVENT_onKill,
+    zxEVENT_onChar,
+    zxEVENT_onKeyD,
+    zxEVENT_onKeyU,
+    zxEVENT_onCurMV,
+    zxEVENT_onCurLD,
+    zxEVENT_onCurMD,
+    zxEVENT_onCurRD,
+    zxEVENT_onCurBD,
+    zxEVENT_onCurLU,
+    zxEVENT_onCurMU,
+    zxEVENT_onCurRU,
+    zxEVENT_onCurBU,
+    zxEVENT_onCurWH,
+    zxEVENT_onFocus,
+    zxEVENT_onBlur,
+    zxEVENT_onShow,
+    zxEVENT_onHide,
+    zxEVENT_onMax,
+    zxEVENT_onMin,
+    zxEVENT_onRes,
+    zxEVENT_onShowAct,
+    zxEVENT_onHideAct,
+    zxEVENT_onMaxAct,
+    zxEVENT_onMinAct,
+    zxEVENT_onResAct,
+    zxEVENT_onShowNoa,
+    zxEVENT_onHideNoa,
+    zxEVENT_onMaxNoa,
+    zxEVENT_onMinNoa,
+    zxEVENT_onResNoa,
+    zxEVENT_onOpen,
+    zxEVENT_onShut,
+    zxEVENT_onQuit
+  },
   ZXV_DEF_BODY( zxEVENTS, {0} ),
   zxEVENTS_addEvent,
   zxEVENTS_remEvent
-};
-
-ZXSYS ZXEVENT( zxroot_onIdle  );
-ZXSYS ZXEVENT( zxroot_onInit  );
-ZXSYS ZXEVENT( zxroot_onKill  );
-ZXSYS ZXEVENT( zxroot_onChar  );
-ZXSYS ZXEVENT( zxroot_onKeyD  );
-ZXSYS ZXEVENT( zxroot_onKeyU  );
-ZXSYS ZXEVENT( zxroot_onCurMV );
-ZXSYS ZXEVENT( zxroot_onCurLD );
-ZXSYS ZXEVENT( zxroot_onCurMD );
-ZXSYS ZXEVENT( zxroot_onCurRD );
-ZXSYS ZXEVENT( zxroot_onCurBD );
-ZXSYS ZXEVENT( zxroot_onCurLU );
-ZXSYS ZXEVENT( zxroot_onCurMU );
-ZXSYS ZXEVENT( zxroot_onCurRU );
-ZXSYS ZXEVENT( zxroot_onCurBU );
-ZXSYS ZXEVENT( zxroot_onCurWH );
-ZXSYS ZXEVENT( zxroot_onFocus );
-ZXSYS ZXEVENT( zxroot_onBlur  );
-ZXSYS ZXEVENT( zxroot_onShow  );
-ZXSYS ZXEVENT( zxroot_onHide  );
-ZXSYS ZXEVENT( zxroot_onMax   );
-ZXSYS ZXEVENT( zxroot_onMin   );
-ZXSYS ZXEVENT( zxroot_onRes   );
-ZXSYS ZXEVENT( zxroot_onShowAct );
-ZXSYS ZXEVENT( zxroot_onHideAct );
-ZXSYS ZXEVENT( zxroot_onMaxAct  );
-ZXSYS ZXEVENT( zxroot_onMinAct  );
-ZXSYS ZXEVENT( zxroot_onResAct  );
-ZXSYS ZXEVENT( zxroot_onShowNoa );
-ZXSYS ZXEVENT( zxroot_onHideNoa );
-ZXSYS ZXEVENT( zxroot_onMaxNoa  );
-ZXSYS ZXEVENT( zxroot_onMinNoa  );
-ZXSYS ZXEVENT( zxroot_onResNoa  );
-ZXSYS ZXEVENT( zxroot_onOpen );
-ZXSYS ZXEVENT( zxroot_onShut );
-ZXSYS ZXEVENT( zxroot_onQuit );
-
-static zxEVENTS zxevts = {0};
-static zxEvtPtr zxroot_events[ zxEVT_COUNT ] =
-{
-  zxroot_onIdle,
-  zxroot_onInit,
-  zxroot_onKill,
-  zxroot_onChar,
-  zxroot_onKeyD,
-  zxroot_onKeyU,
-  zxroot_onCurMV,
-  zxroot_onCurLD,
-  zxroot_onCurMD,
-  zxroot_onCurRD,
-  zxroot_onCurBD,
-  zxroot_onCurLU,
-  zxroot_onCurMU,
-  zxroot_onCurRU,
-  zxroot_onCurBU,
-  zxroot_onCurWH,
-  zxroot_onFocus,
-  zxroot_onBlur,
-  zxroot_onShow,
-  zxroot_onHide,
-  zxroot_onMax,
-  zxroot_onMin,
-  zxroot_onRes,
-  zxroot_onShowAct,
-  zxroot_onHideAct,
-  zxroot_onMaxAct,
-  zxroot_onMinAct,
-  zxroot_onResAct,
-  zxroot_onShowNoa,
-  zxroot_onHideNoa,
-  zxroot_onMaxNoa,
-  zxroot_onMinNoa,
-  zxroot_onResNoa,
-  zxroot_onOpen,
-  zxroot_onShut,
-  zxroot_onQuit
 };
 
 #endif

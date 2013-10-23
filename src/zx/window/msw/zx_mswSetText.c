@@ -1,4 +1,4 @@
-#include <zx/textbox.h>
+#include <zx/tbox.h>
 #if ZXMSW
 ZXSYS_EXP zxui zx_mswSetText(
   HWND wh,

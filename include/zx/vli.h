@@ -1,3 +1,4 @@
+#pragma once
 #include "std/math.h"
 #include "std/text.h"
 #include "endian.h"

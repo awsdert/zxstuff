@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ZXARCH_H
 #define ZXARCH_H
 

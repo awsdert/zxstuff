@@ -13,7 +13,7 @@ ZXSYS_EXP zxWINDOW* zxWINDOW_opDel( zxWINDOW* win )
       zxwin.opDel( all->m_data[ win->m_kids.m_data[ i ] ] );
   }
   zxv_size._kill( &win->m_kids );
-  if ( win->m_free )
+  if ( !win->m_class )
   {
     free( win );
     win = NULL;

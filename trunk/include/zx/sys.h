@@ -1,3 +1,4 @@
+#pragma once
 #include "compiler.h"
 #include "std/arch.h"
 #ifndef ZXSYS_H

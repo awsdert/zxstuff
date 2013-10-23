@@ -14,7 +14,7 @@ typedef struct zxWINDOW_struct
 {
   size_t    m_base;
   zxvSIZE   m_kids;
-  bool      m_free;
+  bool      m_class;
   void     *m_winObj, *m_usrObj;
   size_t    m_wid;
   zxWIN     m_win;
@@ -39,6 +39,7 @@ ZXSYS void       zxWINDOW__initWC(    zxWC     *wc  );
 ZXSYS void       zxWINDOW__initWCX(   zxWCX    *wcx );
 ZXSYS zxHwnd     zxWINDOW_getHandle(  size_t    wid );
 ZXSYS zxWINDOW*  zxWINDOW_getWindow(  size_t    wid );
+ZXSYS bool       zxWINDOW_isKnown(    zxWINDOW* win );
 ZXSYS zxWINDOWS* zxWINDOW_allWindows( void );
 ZXSYS zxWINDOW*  zxWINDOW_newWindow( zxWINDOW* win );
 ZXSYS zxWINDOW*  zxWINDOW_delWindow( zxWINDOW* win );
@@ -93,6 +94,7 @@ ZXNSO( win )
   void       (*_initWCX)(   zxWCX    *wcx );
   zxHwnd     (*getHandle)(  size_t    wid );
   zxWINDOW*  (*getWindow)(  size_t    wid );
+  bool       (*isKnown)(    zxWINDOW* win );
   zxWINDOWS* (*allWindows)( void );
   zxWINDOW*  (*byHandle)(   zxHwnd    wh );
   void       (*setBase)(    zxWINDOW *win, zxWINDOW *base );
@@ -127,6 +129,7 @@ static zxn_win zxwin =
   zxWINDOW__initWCX,
   zxWINDOW_getHandle,
   zxWINDOW_getWindow,
+  zxWINDOW_isKnown,
   zxWINDOW_allWindows,
   zxWINDOW_byHandle,
   zxWINDOW_setBase,

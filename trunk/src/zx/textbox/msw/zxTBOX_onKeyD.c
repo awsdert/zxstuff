@@ -1,14 +1,14 @@
-#include <zx/textbox.h>
-ZXSYS_EXP zxEvtCBR zxTEXTBOX_onKeyD( zxEVENT* event )
+#include <zx/tbox.h>
+ZXSYS_EXP zxEvtCBR zxTBOX_onKeyD( zxEVENT* event )
 {
   zxWINDOW  *win  = zxwin.getWindow( event->m_wid ), *base;
-  zxTEXTBOX *tbox = NULL;
+  zxTBOX *tbox = NULL;
   zxTEXT    *text = NULL;
 #if ZXMSW
   WORD vk = LOWORD( event->m_mswWP );
-  if ( win->m_win != zxWIN_TEXTBOX )
+  if ( win->m_win != zxWIN_TBOX )
     return zxDefWinEvt;
-  tbox = (zxTEXTBOX*)win;
+  tbox = (zxTBOX*)win;
   text = &tbox->m_text;
   switch ( vk )
   {

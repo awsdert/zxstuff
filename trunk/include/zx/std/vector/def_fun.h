@@ -15,7 +15,8 @@
   ZXV__KILL( NAME, EXP ) \
   { \
     if ( !src ) return; \
-    zxv._kill( src ); \
+    zxv._kill( &src->m_core ); \
+    src->m_data = NULL; \
   }
 
 #define ZXV_DEF_SIZE( NAME, EXP ) \

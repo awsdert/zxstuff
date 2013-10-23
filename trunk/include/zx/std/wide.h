@@ -1,3 +1,4 @@
+#pragma once
 #include "_text.h"
 
 #ifndef ZXWIDE_H

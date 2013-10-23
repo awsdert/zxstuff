@@ -1,3 +1,4 @@
+#pragma once
 #include "std/int.h"
 #include "std/file.h"
 #include "std/io.h"

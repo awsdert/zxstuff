@@ -1,3 +1,4 @@
+#pragma once
 #include "stdc.h"
 #ifndef ZX_COMPILER_H
 #define ZX_COMPILER_H

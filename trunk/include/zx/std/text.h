@@ -1,3 +1,4 @@
+#pragma once
 #include "char.h"
 #include "wide.h"
 

@@ -1,6 +1,6 @@
-#include <zx/textbox.h>
+#include <zx/tbox.h>
 #if ZXMSW
-bool zxTEXTBOX__drawText( zxTEXTBOX *tbox, bool setCaret )
+bool zxTBOX__drawText( zxTBOX *tbox, bool setCaret )
 {
   zxWINDOW *win = tbox->m_win;
   zxTEXT  *text = &tbox->m_text;
@@ -27,7 +27,7 @@ bool zxTEXTBOX__drawText( zxTEXTBOX *tbox, bool setCaret )
     FillRect( hdc, &rect, win->m_wc->hbrBackground  );
   else
     FillRect( hdc, &rect, win->m_wcx->hbrBackground );
-  /* TODO: zxTEXTBOX__drawText(): provide selection support */
+  /* TODO: zxTBOX__drawText(): provide selection support */
   ExtTextOut(
     hdc, rect.left, rect.top, ETO_CLIPPED, &rect,
     text->m_data, zxstr.size( text ), NULL );

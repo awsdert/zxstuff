@@ -1,3 +1,4 @@
+#pragma once
 #include "std/text.h"
 #if ZXMSW
 #include <tlhelp32.h>

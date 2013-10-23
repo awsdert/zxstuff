@@ -10,14 +10,8 @@ typedef enum zxWIN_enum
 {
   zxWIN_NULL = 0u,
   zxWIN_FRAME,
-  zxWIN_TEXTBOX,
+  zxWIN_TBOX,
   zxWIN_COUNT
-#if ZXCPP
-  ,zxWIN_CPP_NULL,
-  zxWIN_CPP_FRAME,
-  zxWIN_CPP_TEXTBOX,
-  zxWIN_CPP_COUNT
-#endif
 } zxWIN;
 
 #if ZXALL

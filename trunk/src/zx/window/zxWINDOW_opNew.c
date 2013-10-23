@@ -6,7 +6,6 @@ ZXSYS_EXP zxWINDOW* zxWINDOW_opNew( zxWINDOW* win )
   if ( !win )
   {
     win = (zxWINDOW*)mnew( sizeof( zxWINDOW ), NULL );
-    win->m_free = true;
     for ( ; i < stop; ++i )
     {
       if ( !all->m_data[ i ] )

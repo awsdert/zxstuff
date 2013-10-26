@@ -84,11 +84,12 @@ ZXSYS void zx_FreeWC( void );
 ZXNSO( win )
 {
   zxWINDOW  def;
-  zxWC      WC[  zxWIN_COUNT ];
-  zxWCX     WCX[ zxWIN_COUNT ];
+  zxWC      WC[  zxWIN_COUNT ], defWC;
+  zxWCX     WCX[ zxWIN_COUNT ], defWCX;
 #if ZXMSW
   ATOM      mswATOM[  zxWIN_COUNT ];
   ATOM      mswATOMX[ zxWIN_COUNT ];
+  zxsi       (*mswOpNew)(  zxWINDOW  *win );
 #endif
   void       (*_initWC)(    zxWC     *wc  );
   void       (*_initWCX)(   zxWCX    *wcx );
@@ -121,9 +122,10 @@ static zxn__win const zx_win =
 
 static zxn_win zxwin =
 {
-  {0}, {0}, {0},
+  {0}, {0}, {0}, {0}, {0},
 #if ZXMSW
   {0}, {0},
+  zxWINDOW_mswOpNew,
 #endif
   zxWINDOW__initWC,
   zxWINDOW__initWCX,

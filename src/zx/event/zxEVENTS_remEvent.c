@@ -5,7 +5,7 @@ ZXSYS_EXP void zxEVENTS_remEvent( zxEVENTS *src, zxEVTPTR ptr )
   ZXASSERT( !src ) return;
   for ( ; i < stop; ++i )
   {
-    if ( src->m_data[ i ].event == ptr.event )
+    if ( src->m_data[ i ].proc == ptr.proc )
     {
       zxevt.erase( src, i, i );
       return;

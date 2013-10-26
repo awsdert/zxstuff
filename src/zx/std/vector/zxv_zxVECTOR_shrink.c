@@ -1,23 +1,25 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxv_zxVECTOR_shrink( zxVECTOR* obj, size_t setCount )
+ZXV_SHRINK( zxVECTOR, ZXCORE_EXP )
 {
   size_t size = 0;
-  ZXASSERT( !obj )
+  ZXASSERT( !src )
     return;
-  if ( !obj->m_data || !obj->m_Tsize || setCount >= obj->m_fullCount )
+  if ( src->m_isFixed || !src->m_data || !src->m_Tsize || setCount >= src->m_count )
     return;
   if ( setCount )
   {
-    size = setCount * obj->m_Tsize;
-    obj->m_data = (zxuchr*)realloc( obj->m_data, size );
+    size = setCount * src->m_Tsize;
+    src->m_data = realloc( src->m_data, size );
   }
   else
   {
-    free( obj->m_data );
-    obj->m_data = NULL;
+    free( src->m_data );
+    src->m_data = NULL;
   }
-  obj->m_size      = size;
-  obj->m_fullSize  = size;
-  obj->m_count     = setCount;
-  obj->m_fullCount = setCount;
+  if ( src->m_ptr )
+    *src->m_ptr = src->m_data;
+  src->m_size      = size;
+  src->m_fullSize  = size;
+  src->m_count     = setCount;
+  src->m_fullCount = setCount;
 }

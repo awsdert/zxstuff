@@ -2,28 +2,33 @@
 
 ZXV_DEF( zxWINDOWS, zxWINDOW*, ZXSYS_EXP )
 
-zxWINDOW   zx_l_rootWindow = {0};
-zxWINDOWS  zx_l_allWindows = {0};
-zxInstance zx_l_prevI = NULL, zx_l_thisI = NULL;
+static zxWINDOWS  zx_l_allWindows = {0};
+static zxInstance zx_l_prevI = NULL, zx_l_thisI = NULL;
 
-ZXSYS_EXP zxsi zxapp_main(
-  zxHwnd     rootWH,
-  zxInstance prevI,
+ZXSYS_EXP zxsi zxapp__main(
   zxInstance thisI,
-  zxTEXT     *args )
+  zxInstance prevI,
+  LPSTR      args,
+  int        showAs )
 {
+#if !ZXALL
+#if ZXMSW
+  MSG    msg = {0};
+  HACCEL  acc = NULL;
+#endif
   size_t i = 0, stop = zxWIN_COUNT;
-  zxWINDOW *root = &zx_l_rootWindow;
-  root->m_wh = rootWH;
+  zxWINDOW *root = NULL;
+  zxWINDOWS *all = &zx_l_allWindows;
   zx_l_prevI = prevI;
   zx_l_thisI = thisI;
-  zx_win._init( &zx_l_allWindows, NULL, 0 );
-  zx_win.grow(  &zx_l_allWindows, 1, &zx_l_rootWindow );
+  zx_win._init( all, NULL, 0 );
+  root = zxwin.opNew( NULL );
   for ( ; i < stop; ++i )
   {
     zxwin._initWC(  &zxwin.WC[  i ] );
     zxwin._initWCX( &zxwin.WCX[ i ] );
   }
+#endif
 #if ZXMSW
   i = zxWIN_NULL;
   zxwin.WC[  i ].lpszClassName = ZXT("ZXWINDOW");
@@ -36,8 +41,27 @@ ZXSYS_EXP zxsi zxapp_main(
   zxwin.WC[  i ].hbrBackground = (HBRUSH)(COLOR_WINDOWFRAME);
   zxwin.WCX[ i ].lpszClassName = ZXT("EDIT");
   zxwin.WCX[ i ].hbrBackground = (HBRUSH)(COLOR_WINDOWFRAME);
-#endif
+  root->m_wc = (zxWC*)mnew( sizeof( zxWC ), NULL );
+  *root->m_wc = zxwin.WC[ zxWIN_NULL ];
+  root->m_style = WS_OVERLAPPEDWINDOW;
+  root->m_h     = 640;
+  root->m_w     = 480;
+  zxstr._initC( &root->m_title, "Tester", 0 );
+  zxwin.mswOpNew( root );
+  ShowWindow( root->m_wh, showAs );
+  while (GetMessage(&msg, NULL, 0, 0))
+	{
+		if (!TranslateAccelerator(msg.hwnd, acc, &msg))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+	}
+
+	return zxFreeWindows( (int)msg.wParam );
+#else
   return zxFreeWindows( 0 );
+#endif
 }
 
 /* DO NOT MODIFY */
@@ -49,11 +73,11 @@ ZXSYS_EXP zxWINDOWS* zxWINDOW_allWindows( void )
 
 ZXSYS_EXP zxWINDOW*  const zxGetRootWindow( void )
 {
-  return &zx_l_rootWindow;
+  return zxwin.getWindow( 0 );
 }
 ZXSYS_EXP zxHwnd     zxGetRootWH( void )
 {
-  return zx_l_rootWindow.m_wh;
+  return zxwin.getWindow( 0 )->m_wh;
 }
 ZXSYS_EXP zxInstance zxGetPrevI( void )
 {

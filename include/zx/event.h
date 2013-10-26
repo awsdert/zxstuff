@@ -8,12 +8,14 @@
 #define zxDefWinEvt DefWindowProc( \
   event->m_wh, event->m_mswMsg, event->m_mswWP, event->m_mswLP )
 #define zxEvtCBR    LRESULT
-ZXSYS zxEvtCBR CALLBACK
+#define zxCBack     CALLBACK
+ZXSYS zxEvtCBR zxCBack
   zxEVENT_onEvent( zxHwnd wh, UINT msg, WPARAM wp, LPARAM lp );
 #else
 #define zxDefWinEvt 0
 #define zxEvtCBR    zxsl
-ZXSYS zxEvtCBR __stdcall
+#define zxCBack     __stdcall
+ZXSYS zxEvtCBR zxCBack
   zxEVENT_onEvent( zxHwnd wh, zxul msg, zxul *wp, zxul *lp );
 #endif
 
@@ -79,7 +81,7 @@ typedef ZXEVENT( (*zxEvtPtr) );
 typedef struct zxEVTPTR_struct
 {
   zxEVT    type;
-  zxEvtPtr event;
+  zxEvtPtr proc;
 } zxEVTPTR;
 
 ZXV_DEC( zxEVENTS, zxEVTPTR );
@@ -140,6 +142,11 @@ ZXNSO( evt )
   ZXV_DEC_BODY( zxEVENTS, zxEVTPTR );
   bool (*addEvent)( zxEVENTS *events, zxEVTPTR event );
   void (*remEvent)( zxEVENTS *events, zxEVTPTR event );
+#if ZXMSW
+  zxEvtCBR (zxCBack *onEvent)( zxHwnd wh, UINT msg, WPARAM wp, LPARAM lp );
+#else
+  zxEvtCBR (zxCBack *onEvent)( zxHwnd wh, zxul msg, zxul* wp, zxul* lp );
+#endif
 } zxn_evt;
 
 static zxn_evt const zxevt = 
@@ -184,7 +191,8 @@ static zxn_evt const zxevt =
   },
   ZXV_DEF_BODY( zxEVENTS, {0} ),
   zxEVENTS_addEvent,
-  zxEVENTS_remEvent
+  zxEVENTS_remEvent,
+  zxEVENT_onEvent
 };
 
 #endif

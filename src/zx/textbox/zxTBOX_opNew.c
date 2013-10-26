@@ -17,8 +17,8 @@ ZXSYS_EXP zxTBOX* zxTBOX_opNew( zxWINDOW *win )
 #endif
   for ( ; i < zxEVT_COUNT; ++i )
   {
-    ptr.event = zxtbox.events[ i ];
-    if ( ptr.event )
+    ptr.proc = zxtbox.events[ i ];
+    if ( ptr.proc )
     {
       ptr.type = i;
       zxevt.addEvent( evts, ptr );

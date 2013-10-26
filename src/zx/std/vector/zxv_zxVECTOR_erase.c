@@ -1,41 +1,32 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxv_zxVECTOR_erase( zxVECTOR *vec, size_t first, size_t last )
+ZXV_ERASE( zxVECTOR, ZXCORE_EXP )
 {
-  size_t i, s, d, f = 0, t, j;
-  zxuc *VEC;
-  if ( !vec ) return;
-  VEC = (zxuc*)vec->m_data;
-  d = first;
-  if ( !d ) t = 0;
-  else t = d * vec->m_Tsize;
+  size_t i = first, s, f, t;
+  zxuc *SRC;
+  ZXASSERT( !src ) return;
+  SRC = (zxuc*)src->m_data;
+  if ( !i ) t = 0;
+  else t = i * src->m_Tsize;
   if ( !last )
   {
-    s = d + 1;
-    i = vec->m_count - 1;
-    f = t + vec->m_Tsize;
+    s = i + 1;
+    f = t + src->m_Tsize;
   }
-  else if ( last >= vec->m_count )
+  else if ( last >= src->m_count )
   {
-    s = vec->m_count;
-    i = vec->m_count - (s - d);
+    s = src->m_count;
+    f = src->m_size;
   }
   else
   {
-    i = ++last - d;
     s = last;
-    i = vec->m_count - i;
-    f = s * vec->m_Tsize;
+    f = s * src->m_Tsize;
   }
-  for ( ; s < vec->m_count; ++s, ++d )
-  {
-    for ( j = 0; j < vec->m_Tsize; ++j, ++f, ++t )
-      VEC[ t ] = VEC[ f ];
-  }
-  for ( ; d < vec->m_count; ++d )
-  {
-    for ( j = 0; j < vec->m_Tsize; ++j, ++t )
-      VEC[ t ] = 0u;
-  }
-  vec->m_count = i;
-  vec->m_size  = i * vec->m_Tsize;
+  last = s;
+  for ( ; s < src->m_count; ++s, ++i, t += src->m_Tsize, f += src->m_Tsize )
+    mcpy( &SRC[ t ], &SRC[ f ], src->m_Tsize );
+  for ( ; i < src->m_count; ++i, t += src->m_Tsize )
+    mset( &SRC[ t ], 0, src->m_Tsize );
+  src->m_count = last;
+  src->m_size  = last * src->m_Tsize;
 }

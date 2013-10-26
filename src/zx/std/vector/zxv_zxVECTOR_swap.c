@@ -1,26 +1,25 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxv_zxVECTOR_swap( zxVECTOR *obj, zxVECTOR *src )
+ZXV_SWAP( zxVECTOR, ZXCORE_EXP )
 {
-  size_t Tsize, count, fullCount, size, fullSize;
-  zxuc *data;
-  if ( !obj )
-    return;
-  if ( !src )
+  zxVECTOR tmp;
+  void **srcPtr, **dstPtr;
+  ZXASSERT( src || dst )
   {
-    zxv.clear( obj );
+    if ( src )
+      zxv.clear( src );
+    if ( dst )
+      zxv.clear( dst );
     return;
   }
-  Tsize = obj->m_Tsize;
-  count = obj->m_count;
-  fullCount = obj->m_fullCount;
-  size  = obj->m_size;
-  fullSize  = obj->m_fullSize;
-  data  = obj->m_data;
-  *obj = *src;
-  src->m_count = count;
-  src->m_data  = data;
-  src->m_fullCount = fullCount;
-  src->m_fullSize  = fullSize;
-  src->m_size  = size;
-  src->m_Tsize = Tsize;
+  tmp = *dst;
+  dstPtr = dst->m_ptr;
+  srcPtr = src->m_ptr;
+  *dst = *src;
+  *src = tmp;
+  dst->m_ptr = dstPtr;
+  src->m_ptr = srcPtr;
+  if ( dstPtr )
+    *dstPtr = dst->m_data;
+  if ( srcPtr )
+    *srcPtr = src->m_data;
 }

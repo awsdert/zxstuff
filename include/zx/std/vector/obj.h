@@ -28,14 +28,14 @@ ZXCORE void   zxv_zxVECTOR__init(
   size_t         Tsize,
   void     const *cpy,
   size_t         count );
-ZXV__DEC_2ND( zxVECTOR, zxuc*, void, ZXCORE );
+ZXV__DEC_2ND( zxVECTOR, void*, void, ZXCORE );
 
 ZXNSO( v )
 {
   void (*_init)(
     zxVECTOR   *src, size_t Tsize,
     void const *cpy, size_t count );
-  ZXV__DEC_BODY( zxVECTOR, zxuc*, void );
+  ZXV__DEC_BODY( zxVECTOR, void*, void );
 } zxn_v;
 
 static const zxn_v zxv = { ZXV_DEF_BODY( zxVECTOR, {0} ) };

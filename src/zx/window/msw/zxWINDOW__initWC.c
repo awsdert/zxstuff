@@ -1,16 +1,13 @@
 #include <zx/window.h>
 ZXSYS_EXP void zxWINDOW__initWC( zxWC *wc )
 {
+ *wc = zxwin.defWC;
 #if ZXMSW
-  wc->style         = 0u;
   wc->hInstance     = zxGetThisI();
-  wc->lpszMenuName  = NULL;
-  wc->lpszClassName = NULL;
-  wc->lpfnWndProc   = zxEVENT_onEvent;
-  wc->cbClsExtra    = 0;
-  wc->cbWndExtra    = 0;
   wc->hbrBackground = (HBRUSH)(COLOR_BACKGROUND);
+  wc->lpfnWndProc   = zxevt.onEvent;
+#if 0
   wc->hCursor       = LoadCursor(NULL, IDC_ARROW);
-  wc->hIcon         = NULL;
+#endif
 #endif
 }

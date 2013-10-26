@@ -1,7 +1,7 @@
 #include <zx/window.h>
 ZXV_DEF( zxEVENTS, zxEVTPTR, ZXSYS_EXP )
 #if ZXMSW
-LRESULT CALLBACK zxEVENT_onEvent(
+ZXSYS_EXP zxEvtCBR zxCBack zxEVENT_onEvent(
   HWND   wh,
   UINT   msg,
   WPARAM wp,
@@ -19,6 +19,8 @@ LRESULT CALLBACK zxEVENT_onEvent(
   event.m_mswLP   = lp;
   if ( !win )
     win = zxwin.getWindow( 0 );
+  if ( !win )
+    return DefWindowProc( wh, msg, wp, lp );
   switch( msg )
   {
   case WM_LBUTTONUP: event.m_evt = zxEVT_CURLU;
@@ -34,10 +36,11 @@ LRESULT CALLBACK zxEVENT_onEvent(
   case WM_CHAR:      event.m_evt = zxEVT_CHAR;  break;
   case WM_KEYDOWN:   event.m_evt = zxEVT_KEYD;  break;
   case WM_DESTROY:
+    event.m_evt = zxEVT_SHUT;
     PostQuitMessage(0);
     break;
   case WM_QUIT:      event.m_evt = zxEVT_QUIT;
-    zxFreeWindows(0);
+    zxFreeWindows(0); break;
   default:
     event.m_evt = zxEVT_COUNT;
   }
@@ -50,7 +53,7 @@ LRESULT CALLBACK zxEVENT_onEvent(
     {
       ptr = evts->m_data[ i ];
       if ( ptr.type == event.m_evt )
-        cbr = ptr.event( &event );
+        cbr = ptr.proc( &event );
       if ( cbr != 0 )
         return cbr;
       if ( event.m_stopEvent )
@@ -62,7 +65,7 @@ LRESULT CALLBACK zxEVENT_onEvent(
     {
       ptr = evts->m_data[ i ];
       if ( ptr.type == event.m_evt )
-        cbr = ptr.event( &event );
+        cbr = ptr.proc( &event );
       if ( cbr != 0 )
         return cbr;
       if ( event.m_stopEvent )
@@ -71,4 +74,8 @@ LRESULT CALLBACK zxEVENT_onEvent(
   }
   return DefWindowProc( wh, msg, wp, lp );
 }
+#else
+ZXSYS_EXP zxEvtCBR zxCBack
+  zxEVENT_onEvent( zxHwnd wh, zxul msg, zxul *wp, zxul *lp )
+  { return 0; }
 #endif

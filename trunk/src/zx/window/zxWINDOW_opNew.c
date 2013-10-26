@@ -19,7 +19,7 @@ ZXSYS_EXP zxWINDOW* zxWINDOW_opNew( zxWINDOW* win )
     if ( i >= stop || ( all->m_data[ i ] && all->m_data[ i ] != win ) )
       i = stop;
   }
-  if ( i == stop )
+  if ( i >= stop )
     zx_win.grow( all, i + 1, NULL );
   win->m_wid       = i;
   all->m_data[ i ] = win;

@@ -7,7 +7,7 @@ ZXSYS_EXP bool zxEVENTS_addEvent( zxEVENTS* src, zxEVTPTR ptr )
   for ( ; i < stop; ++i )
   {
     evt = src->m_data[ i ];
-    if ( evt.event == ptr.event )
+    if ( evt.proc == ptr.proc )
       return true;
   }
   zxevt.grow( src, stop + 1, ptr );

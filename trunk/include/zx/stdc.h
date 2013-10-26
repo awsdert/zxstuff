@@ -33,7 +33,8 @@
 #error Your compiler is too old
 #endif
 
-#if defined( __DEBUG ) || defined( _DEBUG ) || defined( DEBUG )
+#if defined( __DEBUG ) || defined( _DEBUG ) || defined( DEBUG ) || \
+    defined( NDEBUG  )
 #define ZXDBG 1
 #else
 #define ZXDBG 0

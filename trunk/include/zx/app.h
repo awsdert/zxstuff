@@ -16,28 +16,36 @@ typedef void*     zxHwnd;
 typedef void*     zxInstance;
 #endif
 
+#ifdef ZXCONSOLE
+ZXSYS int zxapp__main( int argc, zxch *argv[] );
+#else
 ZXSYS int
   zxapp__main(
-    zxHwnd     rootWH,
     zxInstance prevI,
     zxInstance thisI,
-    zxTEXT     *args );
+    LPSTR      cmdl,
+    int        showAs );
+#endif
 ZXSYS zxTEXT const* zxapp_getTitle( void );
 ZXSYS void zxapp_setTitle( zxTEXT const *txt );
 
-typedef struct zxapp_struct
+typedef struct zxn_app_struct
 {
 #ifdef ZXCONSOLE
-  int (*_main)( int argc, char *argv[] );
+  int (*_main)( int argc, zxch *argv[] );
 #else
   int (*_main)(
-    zxHwnd     rootWH,
     zxInstance thisI,
     zxInstance prevI,
-    zxch       *cmdl,
+    LPSTR      cmdl,
     int        showAs );
 #endif
-} zxapp;
+} zxn_app;
+
+static zxn_app zxapp =
+{
+  zxapp__main
+};
 
 ZXC_SHUT
 

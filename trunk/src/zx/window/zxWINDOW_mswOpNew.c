@@ -1,10 +1,10 @@
 #include <zx/window.h>
-ZXSYS_EXP zxsi zx_mswNewWindow( zxWINDOW *win )
+#if ZXMSW
+ZXSYS_EXP zxsi zxWINDOW_mswOpNew( zxWINDOW *win )
 {
   zxWINDOW  *base = zxwin.getWindow( win->m_base );
   zxTEXT    *text = &win->m_title;
   zxHwnd    baseWH = NULL;
-#if ZXMSW
 #if 1
   win->m_style |= CS_VREDRAW | CS_HREDRAW;
 #endif
@@ -74,6 +74,6 @@ ZXSYS_EXP zxsi zx_mswNewWindow( zxWINDOW *win )
   }
   if ( !win->m_wh )
     return 2;
-#endif
   return 0;
 }
+#endif

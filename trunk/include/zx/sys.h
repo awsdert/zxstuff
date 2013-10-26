@@ -8,22 +8,23 @@ ZXC_OPEN
 #define ZXMSW 0
 #define ZXALL 0
 
-#if defined( ZX_MSW )
-
-#undef ZXMSW
 #if   defined( __WIN64 ) || defined( _WIN64 ) || defined( WIN64 )
+#undef ZXMSW
 #define ZXMSW 64
 #elif defined( __WIN32 ) || defined( _WIN32 ) || defined( WIN32 )
+#undef ZXMSW
 #define ZXMSW 32
-#else
+#elif defined( __WINDOWS ) || defined( _WINDOWS ) || defined( WINDOWS )
+#undef ZXMSW
 #define ZXMSW 16
-#endif
-
 #else
 #undef  ZXALL
-#define ZXALL 1
+#define ZXALL 32
 #endif
 
+#if defined( __CONSOLE ) || defined( _CONSOLE ) || defined( CONSOLE )
+#define ZXCONSOLE
+#endif
 
 #if ZXMSW
 
@@ -39,7 +40,7 @@ ZXC_OPEN
 #if ZXCPP
 #define NULL 0
 #else
-#define NULL (ZXVP)0
+#define NULL (void*)0
 #endif
 #endif
 

@@ -23,7 +23,7 @@ typedef ZXSOBJ( zxVECTOR )
   size_t  m_size,  m_fullSize;
 } zxVECTOR;
 
-ZXCORE void   zxv_zxVECTOR__init(
+ZXCORE void   zxVECTOR__init(
   zxVECTOR       *src,
   size_t         Tsize,
   void     const *cpy,

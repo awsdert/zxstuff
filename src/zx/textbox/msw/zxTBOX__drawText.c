@@ -23,15 +23,20 @@ bool zxTBOX__drawText( zxTBOX *tbox, bool setCaret )
   if ( setCaret )
     SetCaretPos( ( tbox->m_pos * tm.tmAveCharWidth ) -
       ( pt.x >> 1 ), ( pt.y >> 1 ) );
-  if ( win->m_wc )
-    FillRect( hdc, &rect, win->m_wc->hbrBackground  );
-  else
-    FillRect( hdc, &rect, win->m_wcx->hbrBackground );
+  FillRect( hdc, &rect, win->m_wcx->hbrBackground );
   /* TODO: zxTBOX__drawText(): provide selection support */
   ExtTextOut(
     hdc, rect.left, rect.top, ETO_CLIPPED, &rect,
     text->m_data, zxstr.size( text ), NULL );
   ReleaseDC( NULL, hdc );
+  return true;
+}
+bool zxTBOX__setCaret( zxTBOX *tbox )
+{
+  DWORD fc = tbox->m_pos, lc = tbox->m_pos;
+  HWND  wh = tbox->m_win->m_wh;
+  if ( !SendMessage( wh, WM_SETTEXT, 0, (LPARAM)tbox->m_text.m_data ) ||
+    !SendMessage( wh, EM_SETSEL, (WPARAM)fc, (LPARAM)lc ) ) return false;
   return true;
 }
 #endif

@@ -6,6 +6,7 @@ ZXSYS_EXP zxEvtCBR zxTBOX_onKeyD( zxEVENT* event )
   zxTEXT    *text = NULL;
 #if ZXMSW
   WORD vk = LOWORD( event->m_mswWP );
+  event->m_stopEvent = true;
   if ( win->m_win != zxWIN_TBOX )
     return zxDefWinEvt;
   tbox = (zxTBOX*)win;
@@ -31,8 +32,10 @@ ZXSYS_EXP zxEvtCBR zxTBOX_onKeyD( zxEVENT* event )
   default:
     return zxDefWinEvt;
   }
-  if ( !zxtbox._drawText( tbox, true ) )
+  if ( !zxtbox._setCaret( tbox ) )
     return 3;
+#else
+  event->m_stopEvent = true;
 #endif
   return 0;
 }

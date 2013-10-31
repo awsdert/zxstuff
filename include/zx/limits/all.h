@@ -1,3 +1,4 @@
+#pragma once
 #include "../dll.h"
 
 #if ZXCPP
@@ -11,16 +12,10 @@
 #ifndef ZXLIMITS_ALL_H
 #define ZXLIMITS_ALL_H
 
-ZXC_OPEN
+#define ZX__MB( UV, M ) (((UV)&(ZXB1U<<(CHAR_BIT*(M))))!=0U)
+#define ZX_MB1( UV, M ) ZX__MB( UV, M ) + ZX__MB( UV, M + 1 )
+#define ZX_MB2( UV, M ) ZX_MB1( UV, M ) + ZX_MB1( UV, M + 2 )
+#define ZX_MB( UV ) ( ZX_MB2( UV, 0 ) + ZX_MB2( UV, 4 ) ) * CHAR_BIT
+#define ZX_LB( V ) (ZXB1U << ((V) - 1))
 
-#define ZX__MB(  V, B )(((V) & ( ZXB1U << (B))) != 0)
-#define ZX_MB1(  V, B )  ZX__MB(  V, B ) + ZX__MB(  V, B + 1 )
-#define ZX_MB2(  V, B )  ZX_MB1(  V, B ) + ZX_MB1(  V, B + 2 )
-#define ZX_MB4(  V, B )  ZX_MB2(  V, B ) + ZX_MB2(  V, B + 4 )
-#define ZX_MB8(  V, B )  ZX_MB4(  V, B ) + ZX_MB4(  V, B + 8 )
-#define ZX_MB16( V, B )  ZX_MB8(  V, B ) + ZX_MB8(  V, B + 16 )
-#define ZX_MB(   V )   ( ZX_MB16( V, 0 ) + ZX_MB16( V, 32 ) )
-#define ZX_LB( V ) (ZXB1U << ( V - 1 ))
-
-ZXC_SHUT
 #endif

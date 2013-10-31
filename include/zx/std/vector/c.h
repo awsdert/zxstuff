@@ -14,6 +14,7 @@ ZXC_OPEN
 
 /* TODO: finish defining ZXV_DEC_2ND macro */
 #define ZXV__DEC_2ND( NAME, T, T2, DLL ) \
+  ZXV__INITCPY(      NAME,     DLL ); \
   ZXV__KILL(         NAME,     DLL ); \
   ZXV_SIZE(          NAME,     DLL ); \
   ZXV_MAX_SIZE(      NAME,     DLL ); \
@@ -25,7 +26,7 @@ ZXC_OPEN
   ZXV_SHRINK(        NAME,     DLL ); \
   ZXV_SHRINK_TO_FIT( NAME,     DLL ); \
   ZXV__ASSIGN(       NAME, T, static, \
-    (*zxv_##NAME##_assign) ) = zxv_##NAME##_resize; \
+    (*NAME##_assign) ) = NAME##_resize; \
   ZXV_APPEND(        NAME,     DLL ); \
   ZXV_PUSH_BACK(     NAME,     DLL ); \
   ZXV_POP_BACK(      NAME,     DLL ); \
@@ -40,7 +41,7 @@ ZXC_OPEN
   ZXV_CPYEQL(        NAME,     DLL ); \
   ZXV_OPADD(         NAME,     DLL ); \
   ZXV__OPMVL(        NAME,    static, \
-    (*zxv_##NAME##_opMvl) ) = zxv_##NAME##_opAdd; \
+    (*NAME##_opMvl) ) = NAME##_opAdd; \
   ZXV_CMPEQ(         NAME,     DLL ); \
   ZXV_CMPNE(         NAME,     DLL )
 
@@ -52,6 +53,7 @@ ZXC_OPEN
 /* TODO: finish defining ZXV_DEC_BODY macro */
 #define ZXV__DEC_BODY( NAME, T, T2 ) \
   NAME const def; \
+  ZXV___INITCPY(      NAME,,      (*_initCpy)      ); \
   ZXV___KILL(         NAME,,      (*_kill)         ); \
   ZXV__SIZE(          NAME,,      (*size)          ); \
   ZXV__MAX_SIZE(      NAME,,      (*max_size)      ); \
@@ -87,34 +89,35 @@ ZXC_OPEN
 /* We won't set def here, we'll let the developer do that */
 
 #define ZXV_DEF_BODY( NAME, DEFAULT ) \
-  zxv_##NAME##__init, DEFAULT, \
-  zxv_##NAME##__kill, \
-  zxv_##NAME##_size, \
-  zxv_##NAME##_max_size, \
-  zxv_##NAME##_resize, \
-  zxv_##NAME##_capacity, \
-  zxv_##NAME##_empty, \
-  zxv_##NAME##_reserve, \
-  zxv_##NAME##_grow, \
-  zxv_##NAME##_shrink, \
-  zxv_##NAME##_shrink_to_fit, \
-  zxv_##NAME##_resize, \
-  zxv_##NAME##_append, \
-  zxv_##NAME##_push_back, \
-  zxv_##NAME##_pop_back, \
-  zxv_##NAME##_insert, \
-  zxv_##NAME##_erase, \
-  zxv_##NAME##_swap, \
-  zxv_##NAME##_clear, \
-  zxv_##NAME##_reverse, \
-  zxv_##NAME##_copy, \
-  zxv_##NAME##_at, \
-  zxv_##NAME##_isEqual, \
-  zxv_##NAME##_cpyEql, \
-  zxv_##NAME##_opAdd, \
-  zxv_##NAME##_opAdd, \
-  zxv_##NAME##_cmpEQ, \
-  zxv_##NAME##_cmpNE
+  NAME##__init, DEFAULT, \
+  NAME##__initCpy, \
+  NAME##__kill, \
+  NAME##_size, \
+  NAME##_max_size, \
+  NAME##_resize, \
+  NAME##_capacity, \
+  NAME##_empty, \
+  NAME##_reserve, \
+  NAME##_grow, \
+  NAME##_shrink, \
+  NAME##_shrink_to_fit, \
+  NAME##_resize, \
+  NAME##_append, \
+  NAME##_push_back, \
+  NAME##_pop_back, \
+  NAME##_insert, \
+  NAME##_erase, \
+  NAME##_swap, \
+  NAME##_clear, \
+  NAME##_reverse, \
+  NAME##_copy, \
+  NAME##_at, \
+  NAME##_isEqual, \
+  NAME##_cpyEql, \
+  NAME##_opAdd, \
+  NAME##_opAdd, \
+  NAME##_cmpEQ, \
+  NAME##_cmpNE
 /**/
 
 

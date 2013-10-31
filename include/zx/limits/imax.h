@@ -1,3 +1,4 @@
+#pragma once
 #include "ill.h"
 #include "int.h"
 #ifndef ZXIMAX
@@ -16,6 +17,8 @@
 #define ZXIMAX_MIN  ZXINT_MIN
 #endif
 
-static unsigned ZXIMAX ZXUNUSED( zxLastImaxBit ) = ZX_LB( ZXIMAX_BITS );
+typedef          ZXIMAX zxim;
+typedef   signed ZXIMAX zxsm;
+typedef unsigned ZXIMAX zxum;
 
 #endif

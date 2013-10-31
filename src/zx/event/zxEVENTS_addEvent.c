@@ -10,6 +10,6 @@ ZXSYS_EXP bool zxEVENTS_addEvent( zxEVENTS* src, zxEVTPTR ptr )
     if ( evt.proc == ptr.proc )
       return true;
   }
-  zxevt.grow( src, stop + 1, ptr );
-  return ( stop == zxevt.size( src ) );
+  zxv.grow( &src->m_core, stop + 1, &ptr );
+  return ( stop != zxevt.size( src ) );
 }

@@ -10,24 +10,25 @@
 #include "limits/bool.h"
 #include "std/arch.h"
 
-#ifndef ZXLIMITS_H
-#define ZXLIMITS_H
+#ifndef ZX_LIMITS_H
+#define ZX_LIMITS_H
 
-static          int     const zxCHAR_BITS  = ZXCHAR_BITS;
-static unsigned char    const zxCHAR_LAST  = ZXLL( 1u ) << ( ZXCHAR_BITS - 1 );
-static          int     const zxSHORT_BITS = ZXSHRT_BITS;
-static unsigned short   const zxSHORT_LAST = ZXLL( 1u ) << ( ZXSHRT_BITS - 1 );
-static          int     const zxLONG_BITS  = ZXLONG_BITS;
-static unsigned long    const zxLONG_LAST  = ZXLL( 1u ) << ( ZXLONG_BITS - 1 );
-static          int     const zxINT_BITS   = ZXINT_BITS;
-static unsigned int     const zxINT_LAST   = ZXLL( 1u ) << ( ZXINT_BITS  - 1 );
-static          int     const zxIMAX_BITS  = ZXIMAX_BITS;
-static unsigned ZXIMAX  const zxIMAX_LAST  = ZXLL( 1u ) << ( ZXIMAX_BITS - 1 );
-static          int     const zxSIZE_BITS  = ZXSIZE_BITS;
-static          size_t  const zxSIZE_LAST  = ZXLL( 1u ) << ( ZXSIZE_BITS - 1 );
+
+static zxui   const zxuc_bits   = CHAR_BIT;
+static zxuc   const zxuc_last   = ZX_LB( CHAR_BIT );
+static zxui   const zxus_bits   = ZXSHRT_BITS;
+static zxus   const zxus_last   = ZX_LB( ZXSHRT_BITS );
+static zxui   const zxul_bits   = ZXLONG_BITS;
+static zxul   const zxul_last   = ZX_LB( ZXLONG_BITS );
+static zxui   const zxui_bits   = ZXINT_BITS;
+static zxui   const zxui_last   = ZX_LB( ZXINT_BITS );
+static zxui   const zxum_bits   = ZXIMAX_BITS;
+static zxum   const zxum_last   = ZX_LB( ZXIMAX_BITS );
+static zxui   const zxsize_bits = ZXSIZE_BITS;
+static size_t const zxsize_last = ZX_LB( ZXSIZE_BITS );
 #ifdef ZXUILL_MAX
-static          int     const zxILL_BITS   = ZXILL_BITS;
-static unsigned ZXIMAX  const zxILL_LAST   = ZXLL( 1u ) << ( ZXILL_BITS  - 1 );
+static zxui   const zxull_bits  = ZXILL_BITS;
+static zxull  const zxull_last  = ZX_LB( ZXILL_BITS );
 #endif
 
 #endif

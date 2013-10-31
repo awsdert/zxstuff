@@ -5,35 +5,18 @@
 
 #define ZXNSO( NAME ) typedef struct zxn_##NAME##_struct
 
-#if defined( _DLL ) || defined( _WINDLL )
-#define ZXDLL 1
-#else
-#define ZXDLL 0
-#endif
-
-#ifdef _MSC_VER
-#define ZX_MSC_VER _MSC_VER
-#else
-#define ZX_MSC_VER 0
-#endif
-
-#ifdef __attribute__
-#define ZX_GNU_VER __VERSION__
+#if ZX_GCC || ZX_GPP
 #define ZXATTR( ATTR ) __attribute__((ATTR))
 #else
-#define ZX_GNU_VER 0
 #define ZXATTR( ATTR )
 #endif
 
-#if ZX_MSC_VER
+#if ZX_MSC
 #define ZXMSG( m_txt ) message( m_txt )
-#define ZX_OTHER_VER 0
-#elif ZX_GNU_VER
+#elif ZX_GCC || ZX_GPP
 #define ZXMSG( m_txt ) message m_txt
-#define ZX_OTHER_VER 0
 #else
 #define ZXMSG( m_txt ) m_txt
-#define ZX_OTHER_VER 1
 #endif
 
 #define ZXUNUSED  ZXATTR( __unused__     )
@@ -42,14 +25,20 @@
 #define ZXDEPREC  ZXATTR( __deprecated__ )
 #define ZXNOTHROW ZXATTR( __nothrow__    )
 
-#if ZXCPP || ZXC >= 199900L || defined( ZXPREC_GNU )
+#if ZX_MSC >= 800
+#define ZXLL( VAL ) VAL##I64
+#define ZXILL __int64
+#define ZXB1  1I64
+#define ZXB1U 1I64
+#elif ZXCPP || ZXSTDC >= 199900L || ZX_GCC || ZX_GPP
 #define ZXILL long long
 #define ZXLL( VAL ) VAL##LL
-#elif ZX_MSC_VER >= 800
-#define ZXLL( VAL ) VAL##i64
-#define ZXILL __int64
+#define ZXB1  1LL
+#define ZXB1U 1ULL
 #else
 #define ZXLL( VAL ) VAL
+#define ZXB1  1
+#define ZXB1U 1U
 #endif
 
 #ifdef ZXILL
@@ -57,8 +46,5 @@ typedef          ZXILL zxill;
 typedef unsigned ZXILL zxull;
 typedef   signed ZXILL zxsll;
 #endif
-
-#define ZXB1  ZXLL( 1 )
-#define ZXB1U ZXLL( 1U )
 
 #endif

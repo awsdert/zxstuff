@@ -16,18 +16,18 @@ ZXC_OPEN
 ZXCORE void*
   mnew(
     size_t const Tsize,
-    void*  const cpy );
+    void   const *cpy );
 ZXCORE void*
   mnewa(
     size_t const Tsize,
-    void*  const cpy,
+    void   const *cpy,
     size_t setCount );
 ZXCORE void*
   mrenew(
-    void*  dst,
+    void         *dst,
     size_t count,
-    size_t const Tsize,
-    void*  const cpy,
+    size_t const  Tsize,
+    void   const *cpy,
     size_t setCount );
 ZXCORE void*
   mdel( void* ptr );

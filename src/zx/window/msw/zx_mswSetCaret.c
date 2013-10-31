@@ -1,6 +1,6 @@
 #include <zx/window.h>
 #if ZXMSW
-zxuint zx_mswSetCaret( HWND wh, int line, int pos )
+zxui zx_mswSetCaret( HWND wh, int line, int pos )
 {
   RECT cRect = {0}, rect = {0};
   POINT pt;

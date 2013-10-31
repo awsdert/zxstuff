@@ -9,22 +9,10 @@
 #ifndef ZXSTD_INT_H
 #define ZXSTD_INT_H
 
-typedef   signed char   zxschr;
-typedef unsigned char   zxuchr;
-typedef   signed short  zxssht;
-typedef unsigned short  zxusht;
-typedef   signed long   zxslng;
-typedef unsigned long   zxulng;
 #ifdef ZXILL
-typedef          ZXILL  zxill;
-typedef   signed ZXILL  zxsill;
-typedef unsigned ZXILL  zxuill;
+
 #endif
-typedef   signed int    zxsint;
-typedef unsigned int    zxuint;
-typedef          ZXIMAX zximax;
-typedef   signed ZXIMAX zxsmax;
-typedef unsigned ZXIMAX zxumax;
+
 
 #if ZXCHAR_BITS == 8
 #define ZXI8 char

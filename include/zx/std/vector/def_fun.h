@@ -8,8 +8,17 @@
   { \
     ZXASSERT( !src ) return; \
     zxv._init( &src->m_core, sizeof( T ), cpy, count ); \
+    src->m_core.m_ptr = (void**)&( src->m_data ); \
     src->m_data = (T*)src->m_core.m_data; \
-    src->m_core.m_ptr = (void**)&( (*src).m_data ); \
+  }
+
+#define ZXV_DEF__INITCPY( NAME, T, EXP ) \
+  ZXV__INITCPY( NAME, EXP ) \
+  { \
+    ZXASSERT( !src || !cpy ) return; \
+    zxv._initCpy( &src->m_core, &cpy->m_core ); \
+    src->m_core.m_ptr = (void**)&( src->m_data ); \
+    src->m_data = (T*)src->m_core.m_data; \
   }
 
 #define ZXV_DEF__KILL( NAME, EXP ) \
@@ -37,7 +46,7 @@
   ZXV_RESIZE( NAME, T, EXP ) \
   { \
     ZXASSERT( !src ) return; \
-    zxv.resize( &src->m_core, setCount, (zxuc*)&setNew ); \
+    zxv.resize( &src->m_core, setCount, (void*)&setNew ); \
   }
 
 #define ZXV_DEF_CAPACITY( NAME, EXP ) \
@@ -65,7 +74,7 @@
   ZXV_GROW( NAME, T, EXP ) \
   { \
     ZXASSERT( !src ) return; \
-    zxv.grow( &src->m_core, setCount, (zxuc*)&setNew ); \
+    zxv.grow( &src->m_core, setCount, (void*)&setNew ); \
   }
 
 #define ZXV_DEF_SHRINK( NAME, EXP ) \
@@ -199,6 +208,7 @@
 
 #define ZXV_DEF(         NAME, T, EXP ) \
   ZXV_DEF__INIT(         NAME, T, EXP ) \
+  ZXV_DEF__INITCPY(      NAME, T, EXP ) \
   ZXV_DEF__KILL(         NAME,    EXP ) \
   ZXV_DEF_SIZE(          NAME,    EXP ) \
   ZXV_DEF_MAX_SIZE(      NAME,    EXP ) \

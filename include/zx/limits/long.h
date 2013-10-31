@@ -1,3 +1,4 @@
+#pragma once
 #include "short.h"
 #ifndef ZXLONG_BITS
 

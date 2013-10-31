@@ -5,9 +5,8 @@ ZXSYS_EXP zxEvtCBR zxTBOX_onChar( zxEVENT* event )
   zxTBOX *tbox = NULL;
   zxTEXT    *text = NULL, ins = zxstr.def;
 #if ZXMSW
-#if 1
   WORD vk = LOWORD( event->m_mswWP );
-#endif
+  event->m_stopEvent = true;
   if ( win->m_win != zxWIN_TBOX )
     return zxDefWinEvt;
   tbox = (zxTBOX*)win;
@@ -23,16 +22,14 @@ ZXSYS_EXP zxEvtCBR zxTBOX_onChar( zxEVENT* event )
     }
     break;
   default:
-    if ( vk < UCHAR_MAX && zxstr.size( text ) < 5u )
+    if ( vk < UCHAR_MAX )
     {
       zxstr.grow( &ins, 1, vk & UCHAR_MAX );
       zxstr.insert( text, &ins, tbox->m_pos + 1 );
       ++tbox->m_pos;
     }
-    else
-      return zxDefWinEvt;
   }
-  if ( !zxtbox._drawText( tbox, true ) )
+  if ( !zxtbox._setCaret( tbox ) )
     return 3;
   return 0;
 #else
@@ -42,7 +39,7 @@ ZXSYS_EXP zxEvtCBR zxTBOX_onChar( zxEVENT* event )
   text->m_full = zxstr.Grow( &text->.m_text, text->m_full, text->m_len );
   if ( tbox->m_text.m_text )
     GetWindowText( win->m_wh, text->m_text, text->m_len );
-#endif
-#endif
   return zxDefWinEvt;
+#endif
+#endif
 }

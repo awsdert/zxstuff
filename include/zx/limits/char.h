@@ -1,3 +1,4 @@
+#pragma once
 #include "all.h"
 #ifndef ZXCHAR_BITS
 
@@ -7,7 +8,5 @@
 #define ZXSCHAR_MIN SCHAR_MIN
 #define ZXCHAR_MAX  CHAR_MAX
 #define ZXCHAR_MIN  CHAR_MIN
-
-static zxuc ZXUNUSED( zxLastCharBit ) = ZX_LB( CHAR_BIT );
 
 #endif

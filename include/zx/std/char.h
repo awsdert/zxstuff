@@ -10,8 +10,8 @@ ZXC_OPEN
 ZXV_DEC( zxCHAR, char );
 
 ZXV_DEC_2ND( zxCHAR, char, ZXCORE );
-ZXCORE size_t zxv_zxCHAR_len( char const *text );
-ZXCORE void   zxv_zxCHAR__initW( zxCHAR       *dst,
+ZXCORE size_t zxCHAR_len( char const *text );
+ZXCORE void   zxCHAR__initW( zxCHAR       *dst,
                                  wide   const *text,
                                  size_t       len );
 
@@ -27,9 +27,9 @@ ZXNSO( c )
 static zxn_c const zxc =
 {
   ZXV_DEF_BODY( zxCHAR, {0} ),
-  zxv_zxCHAR_len,
-  zxv_zxCHAR__init,
-  zxv_zxCHAR__initW
+  zxCHAR_len,
+  zxCHAR__init,
+  zxCHAR__initW
 };
 
 ZXC_SHUT

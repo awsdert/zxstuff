@@ -1,3 +1,4 @@
+#pragma once
 #include "char.h"
 #ifndef ZXSHRT_BITS
 

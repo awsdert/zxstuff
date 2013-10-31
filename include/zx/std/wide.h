@@ -10,8 +10,8 @@ ZXC_OPEN
 ZXV_DEC( zxWIDE, wide );
 ZXV_DEC_2ND( zxWIDE, wide, ZXCORE );
 
-ZXCORE size_t zxv_zxWIDE_len(    wide const *text );
-ZXCORE void   zxv_zxWIDE__initC( zxWIDE       *dst,
+ZXCORE size_t zxWIDE_len(    wide const *text );
+ZXCORE void   zxWIDE__initC( zxWIDE       *dst,
                                  char   const *text,
                                  size_t       len );
 
@@ -27,9 +27,9 @@ ZXNSO( w )
 static zxn_w const zxw =
 {
   ZXV_DEF_BODY( zxWIDE, {0} ),
-  zxv_zxWIDE_len,
-  zxv_zxWIDE__initC,
-  zxv_zxWIDE__init
+  zxWIDE_len,
+  zxWIDE__initC,
+  zxWIDE__init
 };
 
 ZXC_SHUT

@@ -8,7 +8,7 @@ ZXC_OPEN
 static char    const zx___cBase[] =  "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 static wchar_t const zx___wBase[] = L"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 static zxuc    const zx___baseLen = 62;
-static zxumax ZXUNUSED( zx___baseMax[] ) =
+static zxum ZXUNUSED( zx___baseMax[] ) =
 {
   0u, 0u, ZXUIMAX_MAX,
   ZX___BASEMAX( 3 ),  ZX___BASEMAX( 4 ),  ZX___BASEMAX( 5 ),

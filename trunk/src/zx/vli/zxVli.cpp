@@ -3,17 +3,17 @@
 zxVli::zxVli( void )
 {
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = sizeof( char );
+  m_core.m_Tsize = sizeof( char );
 }
 zxVli::zxVli( char val )
 {
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = sizeof( char );
+  m_core.m_Tsize = sizeof( char );
   if ( val >= '0' && val <= '9' )
     val -= '0';
   else
     val = 0u;
-  zxv.grow( &m_vector, 1, (zxuc*)&val );
+  zxv.grow( &m_core, 1, (zxuc*)&val );
   m_bits          = CHAR_BIT;
   m_lastBit       = zxCHAR_LAST;
   m_lastByte      = 0;
@@ -22,8 +22,8 @@ zxVli::zxVli( char val )
 zxVli::zxVli( zxuc const val )
 {
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = sizeof( char );
-  zxv.grow( &m_vector, 1, &val );
+  m_core.m_Tsize = sizeof( char );
+  zxv.grow( &m_core, 1, &val );
   m_bits          = CHAR_BIT;
   m_lastBit       = zxCHAR_LAST;
   m_lastByte      = 0;
@@ -32,8 +32,8 @@ zxVli::zxVli( zxuc const val )
 zxVli::zxVli( zxsc const val )
 {
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = sizeof( char );
-  zxv.grow( &m_vector, 1, (zxuc*)&val );
+  m_core.m_Tsize = sizeof( char );
+  zxv.grow( &m_core, 1, (zxuc*)&val );
   m_bits          = CHAR_BIT;
   m_lastBit       = zxCHAR_LAST;
   m_lastByte      = 0;
@@ -52,11 +52,11 @@ zxVli::zxVli( zxus const val )
     ++src.m_count;
   src.m_fullCount = src.m_count;
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = src.m_Tsize;
-  zxv.push_back( &m_vector, &src );
+  m_core.m_Tsize = src.m_Tsize;
+  zxv.push_back( &m_core, &src );
   m_bits          = zxSHORT_BITS;
   m_lastBit       = zxSHORT_LAST >> (( src.m_size - 1 ) * CHAR_BIT );
-  m_lastByte      = m_vector.m_count - 1;
+  m_lastByte      = m_core.m_count - 1;
   m_isSigned      = false;
 }
 zxVli::zxVli( zxss const val )
@@ -72,8 +72,8 @@ zxVli::zxVli( zxss const val )
     ++src.m_count;
   src.m_fullCount = src.m_count;
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = src.m_Tsize;
-  zxv.push_back( &m_vector, &src );
+  m_core.m_Tsize = src.m_Tsize;
+  zxv.push_back( &m_core, &src );
   m_bits          = zxSHORT_BITS;
   m_lastBit       = zxSHORT_LAST >> (( src.m_size - 1 ) * CHAR_BIT );
   m_isSigned      = true;
@@ -91,11 +91,11 @@ zxVli::zxVli( zxul const val )
     ++src.m_count;
   src.m_fullCount = src.m_count;
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = src.m_Tsize;
-  zxv.push_back( &m_vector, &src );
+  m_core.m_Tsize = src.m_Tsize;
+  zxv.push_back( &m_core, &src );
   m_bits          = zxLONG_BITS;
   m_lastBit       = ( zxLONG_LAST >> (( src.m_size - 1 ) * CHAR_BIT ) ) & UCHAR_MAX;
-  m_lastByte      = m_vector.m_count - 1;
+  m_lastByte      = m_core.m_count - 1;
   m_isSigned      = false;
 }
 zxVli::zxVli( zxsl const val )
@@ -111,11 +111,11 @@ zxVli::zxVli( zxsl const val )
     ++src.m_count;
   src.m_fullCount = src.m_count;
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = src.m_Tsize;
-  zxv.push_back( &m_vector, &src );
+  m_core.m_Tsize = src.m_Tsize;
+  zxv.push_back( &m_core, &src );
   m_bits          = zxLONG_BITS;
   m_lastBit       = ( zxLONG_LAST >> (( src.m_size - 1 ) * CHAR_BIT ) ) & UCHAR_MAX;
-  m_lastByte      = m_vector.m_count - 1;
+  m_lastByte      = m_core.m_count - 1;
   m_isSigned      = true;
 }
 zxVli::zxVli( zxui const val )
@@ -131,11 +131,11 @@ zxVli::zxVli( zxui const val )
     ++src.m_count;
   src.m_fullCount = src.m_count;
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = src.m_Tsize;
-  zxv.push_back( &m_vector, &src );
+  m_core.m_Tsize = src.m_Tsize;
+  zxv.push_back( &m_core, &src );
   m_bits          = zxINT_BITS;
   m_lastBit       = zxINT_LAST >> (( src.m_size - 1 ) * CHAR_BIT );
-  m_lastByte      = m_vector.m_count - 1;
+  m_lastByte      = m_core.m_count - 1;
   m_isSigned      = false;
 }
 zxVli::zxVli( zxsi const val )
@@ -151,11 +151,11 @@ zxVli::zxVli( zxsi const val )
     ++src.m_count;
   src.m_fullCount = src.m_count;
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = src.m_Tsize;
-  zxv.push_back( &m_vector, &src );
+  m_core.m_Tsize = src.m_Tsize;
+  zxv.push_back( &m_core, &src );
   m_bits          = zxINT_BITS;
   m_lastBit       = zxINT_LAST >> (( src.m_size - 1 ) * CHAR_BIT );
-  m_lastByte      = m_vector.m_count - 1;
+  m_lastByte      = m_core.m_count - 1;
   m_isSigned      = true;
 }
 #ifdef ZXILL
@@ -172,11 +172,11 @@ zxVli::zxVli( zxull const val )
     ++src.m_count;
   src.m_fullCount = src.m_count;
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = src.m_Tsize;
-  zxv.push_back( &m_vector, &src );
+  m_core.m_Tsize = src.m_Tsize;
+  zxv.push_back( &m_core, &src );
   m_bits          = zxILL_BITS;
   m_lastBit       = ( zxILL_LAST >> (( src.m_size - 1 ) * CHAR_BIT ) ) & UCHAR_MAX;
-  m_lastByte      = m_vector.m_count - 1;
+  m_lastByte      = m_core.m_count - 1;
   m_isSigned      = false;
 }
 zxVli::zxVli( zxsll const val )
@@ -192,18 +192,18 @@ zxVli::zxVli( zxsll const val )
     ++src.m_count;
   src.m_fullCount = src.m_count;
   *(zxVLI*)this = zxvli.def;
-  m_vector.m_Tsize = src.m_Tsize;
-  zxv.push_back( &m_vector, &src );
+  m_core.m_Tsize = src.m_Tsize;
+  zxv.push_back( &m_core, &src );
   m_bits          = zxILL_BITS;
   m_lastBit       = ( zxILL_LAST >> (( src.m_size - 1 ) * CHAR_BIT ) ) & UCHAR_MAX;
-  m_lastByte      = m_vector.m_count - 1;
+  m_lastByte      = m_core.m_count - 1;
   m_isSigned      = true;
 }
 #endif
 zxVli::zxVli( zxVli const &val )
 {
   *(zxVLI*)this = zxvli.def;
-  zxv.push_back( &m_vector, &val.m_vector );
+  zxv.push_back( &m_core, &val.m_core );
   m_bits     = val.m_bits;
   m_lastBit  = val.m_lastBit;
   m_lastByte = val.m_lastByte;

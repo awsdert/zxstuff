@@ -12,20 +12,19 @@
 */
 template< class T > class zxVector : public zxVECTOR
 {
+public:
   zxVector( void )
-  {
-    *this = zxv.def;
-    m_Tsize = sizeof( T );
-  }
+    { zxv._init( this, sizeof( T ), NULL, 0 ); }
   zxVector( zxVector< T > const &src )
   {
+    zxv._init( this, sizeof( T ), 
     *this = zxv.def;
     m_Tsize     = src.m_Tsize;
     m_count     = src.m_count;
     m_fullCount = src.m_fullCount;
     m_size      = src.m_size;
     m_fullSize  = src.m_fullSize;
-    m_data = (zxuchr*)malloc( m_fullSize );
+    m_data = (zxuc*)malloc( m_fullSize );
     memcpy( m_data, src.m_data, m_fullSize );
   }
   ~zxVector( void )
@@ -60,7 +59,7 @@ template< class T > class zxVector : public zxVECTOR
   virtual void   grow(     size_t const setCount )
                             { zxv.grow( this, setCount, NULL ); }
   virtual void   grow(     size_t const setCount,   T      const setNew )
-                            { zxv.grow( this, setCount, (zxuchr*)&setNew ); }
+                            { zxv.grow( this, setCount, (zxuc*)&setNew ); }
   virtual void   shrink(   size_t const setCount )
                             { zxv.shrink( this, setCount ); }
   virtual void   shrink_to_fit( void )
@@ -87,7 +86,7 @@ template< class T > class zxVector : public zxVECTOR
   virtual void
     push_back( T const node )
     {
-      zxv.push_back( this, (zxuchr*)&node );
+      zxv.push_back( this, (zxuc*)&node );
     }
   virtual void
     insert( zxVector< T > const src,

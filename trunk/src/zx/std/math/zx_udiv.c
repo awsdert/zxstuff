@@ -28,15 +28,15 @@ size_t zxc_size_udiv( size_t src, size_t val, size_t *remainder ) { \
     *remainder = quo;
   return des;
 }
-ZXCORE_EXP zxsmax zx_imax_sdiv(  zxsmax src, zxsmax value, zxsmax *remainder )
+ZXCORE_EXP zxsm zx_imax_sdiv(  zxsm src, zxsm value, zxsm *remainder )
 {
-  zxsmax rem = 0;
+  zxsm rem = 0;
   bool sneg = ( src < 0 ), vneg = ( value < 0 );
   if ( sneg )
     src = ~( src );
   if ( vneg )
     value = ~value;
-  src = (zxsmax)zx_imax_udiv( (zxumax)src, (zxumax)value, (zxumax*)remainder );
+  src = (zxsm)zx_imax_udiv( (zxum)src, (zxum)value, (zxum*)remainder );
   if ( sneg )
   {
     rem = ~rem;

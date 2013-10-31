@@ -2,11 +2,10 @@
 ZXSYS_EXP zxTBOX* zxTBOX_opNew( zxWINDOW *win )
 {
   zxTBOX   *tbox = (zxTBOX*)mnew( sizeof( zxTBOX ), NULL );
-  zxEVENTS *evts;
+  zxEVENTS *evts = zxevt.getDefEvents();
   zxEVTPTR ptr;
   size_t i = 0;
   win   = zxwin.opNew( win );
-  evts  = &win->m_events;
   tbox->m_win   = win;
   win->m_win    = zxWIN_TBOX;
   win->m_winObj = tbox;
@@ -20,7 +19,7 @@ ZXSYS_EXP zxTBOX* zxTBOX_opNew( zxWINDOW *win )
     ptr.proc = zxtbox.events[ i ];
     if ( ptr.proc )
     {
-      ptr.type = i;
+      ptr.type = (zxEVT)i;
       zxevt.addEvent( evts, ptr );
     }
   }

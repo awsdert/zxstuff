@@ -7,14 +7,14 @@
 #if ZXMSW
 #define zxDefWinEvt DefWindowProc( \
   event->m_wh, event->m_mswMsg, event->m_mswWP, event->m_mswLP )
-#define zxEvtCBR    LRESULT
-#define zxCBack     CALLBACK
+typedef LRESULT zxEvtCBR;
+#define zxCBack CALLBACK
 ZXSYS zxEvtCBR zxCBack
   zxEVENT_onEvent( zxHwnd wh, UINT msg, WPARAM wp, LPARAM lp );
 #else
 #define zxDefWinEvt 0
-#define zxEvtCBR    zxsl
-#define zxCBack     __stdcall
+typedef zxsl    zxEvtCBR;
+#define zxCBack __stdcall
 ZXSYS zxEvtCBR zxCBack
   zxEVENT_onEvent( zxHwnd wh, zxul msg, zxul *wp, zxul *lp );
 #endif
@@ -24,6 +24,7 @@ typedef enum zxEVT_enum
   zxEVT_IDLE = 0u,
   zxEVT_INIT,
   zxEVT_KILL,
+  zxEVT_CMD,
   zxEVT_CHAR,
   zxEVT_KEYU,
   zxEVT_KEYD,
@@ -96,10 +97,12 @@ ZXV_DEC_2ND( zxEVENTS, zxEVTPTR, ZXSYS );
 
 ZXSYS bool zxEVENTS_addEvent( zxEVENTS* events, zxEVTPTR event );
 ZXSYS void zxEVENTS_remEvent( zxEVENTS* events, zxEVTPTR event );
+ZXSYS zxEVENTS* zxEVENTS_getDefEvents( void );
 
 ZXSYS ZXEVENT( zxEVENT_onIdle  );
 ZXSYS ZXEVENT( zxEVENT_onInit  );
 ZXSYS ZXEVENT( zxEVENT_onKill  );
+ZXSYS ZXEVENT( zxEVENT_onCmd   );
 ZXSYS ZXEVENT( zxEVENT_onChar  );
 ZXSYS ZXEVENT( zxEVENT_onKeyD  );
 ZXSYS ZXEVENT( zxEVENT_onKeyU  );
@@ -134,14 +137,13 @@ ZXSYS ZXEVENT( zxEVENT_onOpen );
 ZXSYS ZXEVENT( zxEVENT_onShut );
 ZXSYS ZXEVENT( zxEVENT_onQuit );
 
-static zxEVENTS zxevts = {0};
-
 ZXNSO( evt )
 {
   zxEvtPtr const events[ zxEVT_COUNT ];
   ZXV_DEC_BODY( zxEVENTS, zxEVTPTR );
   bool (*addEvent)( zxEVENTS *events, zxEVTPTR event );
   void (*remEvent)( zxEVENTS *events, zxEVTPTR event );
+  zxEVENTS* (*getDefEvents)( void );
 #if ZXMSW
   zxEvtCBR (zxCBack *onEvent)( zxHwnd wh, UINT msg, WPARAM wp, LPARAM lp );
 #else
@@ -155,6 +157,7 @@ static zxn_evt const zxevt =
     zxEVENT_onIdle,
     zxEVENT_onInit,
     zxEVENT_onKill,
+    zxEVENT_onCmd,
     zxEVENT_onChar,
     zxEVENT_onKeyD,
     zxEVENT_onKeyU,
@@ -192,6 +195,7 @@ static zxn_evt const zxevt =
   ZXV_DEF_BODY( zxEVENTS, {0} ),
   zxEVENTS_addEvent,
   zxEVENTS_remEvent,
+  zxEVENTS_getDefEvents,
   zxEVENT_onEvent
 };
 

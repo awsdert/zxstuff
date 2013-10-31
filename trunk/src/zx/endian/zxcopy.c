@@ -1,15 +1,15 @@
 #include <zx/endian.h>
-ZXCORE_EXP zxuchr* zxcopy(
+ZXCORE_EXP zxuc* zxcopy(
 	zxuc* src, size_t ssize, zxEndian sen,
 	zxuc* des, size_t dsize, zxEndian den )
 {
 	size_t i = 0, t,
     end = ssize;
-	zxuchr *tmp = NULL, val = 0u;
+	zxuc *tmp = NULL, val = 0u;
   if ( !dsize )
     return des;
   if ( !des )
-    des = (zxuchr*)malloc( dsize );
+    des = (zxuc*)malloc( dsize );
   if ( !src || !ssize )
   {
     for ( ; i < dsize; ++i )
@@ -24,7 +24,7 @@ ZXCORE_EXP zxuchr* zxcopy(
       return des;
     for ( ; i < end; ++i )
       des[ i ] = src[ i ];
-    if ( (zxschr)( src[ ssize - 1 ] ) < 0 )
+    if ( (zxsc)( src[ ssize - 1 ] ) < 0 )
       val = UCHAR_MAX;
     for ( ; i < dsize; ++i )
       des[ i ] = val;

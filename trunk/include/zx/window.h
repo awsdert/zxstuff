@@ -23,7 +23,6 @@ typedef struct zxWINDOW_struct
   zxsi      m_x, m_y, m_w, m_h;
   zxTEXT    m_title;
   /* System Specfic */
-  zxWC     *m_wc;
   zxWCX    *m_wcx;
   zxHwnd    m_wh;
   zxEVENTS  m_events;

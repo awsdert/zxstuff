@@ -1,75 +1,75 @@
 #include <zx/vli.h>
-ZXCORE_EXP zxusht   zxGetUSht(    zxuchr* src, size_t size )
+ZXCORE_EXP zxus   zxGetUSht(    zxuc* src, size_t size )
 {
-  zxusht val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( short ), zxIntEndian() );
+  zxus val = 0;
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( short ), zxIntEndian() );
   return val;
 }
-ZXCORE_EXP zxssht   zxGetSSht(    zxuchr* src, size_t size )
+ZXCORE_EXP zxss   zxGetSSht(    zxuc* src, size_t size )
 {
-  zxssht val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( short ), zxIntEndian() );
+  zxss val = 0;
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( short ), zxIntEndian() );
   return val;
 }
-ZXCORE_EXP zxulng   zxGetULng(    zxuchr* src, size_t size )
+ZXCORE_EXP zxul   zxGetULng(    zxuc* src, size_t size )
 {
-  zxulng val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( long ), zxIntEndian() );
+  zxul val = 0;
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( long ), zxIntEndian() );
   return val;
 }
-ZXCORE_EXP zxslng   zxGetSLng(    zxuchr* src, size_t size )
+ZXCORE_EXP zxsl   zxGetSLng(    zxuc* src, size_t size )
 {
-  zxslng val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( long ), zxIntEndian() );
+  zxsl val = 0;
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( long ), zxIntEndian() );
   return val;
 }
-ZXCORE_EXP zxuint   zxGetUInt(    zxuchr* src, size_t size )
+ZXCORE_EXP zxui   zxGetUInt(    zxuc* src, size_t size )
 {
-  zxuint val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( int ), zxIntEndian() );
+  zxui val = 0;
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( int ), zxIntEndian() );
   return val;
 }
-ZXCORE_EXP zxsint   zxGetSInt(    zxuchr* src, size_t size )
+ZXCORE_EXP zxsi   zxGetSInt(    zxuc* src, size_t size )
 {
-  zxsint val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( int ), zxIntEndian() );
+  zxsi val = 0;
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( int ), zxIntEndian() );
   return val;
 }
 #ifdef ZXILL
-ZXCORE_EXP zxuill   zxGetUIll(    zxuchr* src, size_t size )
+ZXCORE_EXP zxull   zxGetUIll(    zxuc* src, size_t size )
 {
-  zxuill val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( ZXILL ), zxIntEndian() );
+  zxull val = 0;
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( ZXILL ), zxIntEndian() );
   return val;
 }
-ZXCORE_EXP zxsill   zxGetSIll(    zxuchr* src, size_t size )
+ZXCORE_EXP zxsll   zxGetSIll(    zxuc* src, size_t size )
 {
-  zxsill val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( ZXILL ), zxIntEndian() );
+  zxsll val = 0;
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( ZXILL ), zxIntEndian() );
   return val;
 }
 #endif
-ZXCORE_EXP zxumax   zxGetUMax(    zxuchr* src, size_t size )
+ZXCORE_EXP zxum   zxGetUMax(    zxuc* src, size_t size )
 {
-  zxumax val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( ZXIMAX ), zxIntEndian() );
+  zxum val = 0;
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( ZXIMAX ), zxIntEndian() );
   return val;
 }
-ZXCORE_EXP zxsmax   zxGetSMax(    zxuchr* src, size_t size )
+ZXCORE_EXP zxsm   zxGetSMax(    zxuc* src, size_t size )
 {
-  zxsmax val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( ZXIMAX ), zxIntEndian() );
+  zxsm val = 0;
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( ZXIMAX ), zxIntEndian() );
   return val;
 }
-ZXCORE_EXP size_t   zxGetSize_t(  zxuchr* src, size_t size )
+ZXCORE_EXP size_t   zxGetSize_t(  zxuc* src, size_t size )
 {
   size_t val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( size_t ), zxIntEndian() );
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( size_t ), zxIntEndian() );
   return val;
 }
-ZXCORE_EXP ssize_t  zxGetSSize_t( zxuchr* src, size_t size )
+ZXCORE_EXP ssize_t  zxGetSSize_t( zxuc* src, size_t size )
 {
   ssize_t val = 0;
-  zxcopy( src, size, zxENDIAN_BIG, (zxuchr*)&val, sizeof( size_t ), zxIntEndian() );
+  zxcopy( src, size, zxENDIAN_BIG, (zxuc*)&val, sizeof( size_t ), zxIntEndian() );
   return val;
 }

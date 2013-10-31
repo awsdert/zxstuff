@@ -1,3 +1,4 @@
+#pragma once
 #include "zxCore.h"
 #ifndef zxOutput_h
 #define zxOutput_h

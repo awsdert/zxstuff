@@ -29,7 +29,7 @@ typedef struct zxPROC_struct
   zxPH   m_ph;
   zxTEXT m_name;
 } zxPROC;
-typedef struct zx___PID_struct { zxPID pid; zxuint err; zxuint done; } zx___PID;
+typedef struct zx___PID_struct { zxPID pid; zxui err; zxui done; } zx___PID;
 ZXSYS BOOL ZXCB zx___enumWindowsIsVisible( HWND hw, LPARAM lp );
 ZXSYS bool zxo_zxPROC__init(     zxPROC *proc, zxTEXT const *name );
 ZXSYS void zxo_zxPROC__kill(     zxPROC *proc );

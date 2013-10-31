@@ -7,11 +7,12 @@ ZXSYS_EXP zxEvtCBR zxCBack zxEVENT_onEvent(
   WPARAM wp,
   LPARAM lp )
 {
-  zxWINDOW *win = zxwin.byHandle( wh );
-  zxEVENT  event;
-  zxEVENTS *evts;
-  zxEVTPTR ptr;
-  zxEvtCBR cbr = 0;
+  zxWINDOW  *win = zxwin.byHandle( wh );
+  /*PAINTSTRUCT ps = {0}; */
+  zxEVENT  event = {0};
+  zxEVENTS *evts = NULL;
+  zxEVTPTR   ptr = {zxEVT_IDLE};
+  zxEvtCBR   cbr = 0;
   size_t i = 0, stop;
   event.m_wh      = wh;
   event.m_mswMsg  = msg;
@@ -23,26 +24,35 @@ ZXSYS_EXP zxEvtCBR zxCBack zxEVENT_onEvent(
     return DefWindowProc( wh, msg, wp, lp );
   switch( msg )
   {
-  case WM_LBUTTONUP: event.m_evt = zxEVT_CURLU;
-    SetFocus( wh );
-    return 0;
+  case WM_PAINT: event.m_evt = zxEVT_COUNT;
+    /*
+    BeginPaint( wh, &ps);
+    EndPaint(   wh, &ps);
+    */
+    break;
 #if 1
   case WM_SETFOCUS:  event.m_evt = zxEVT_FOCUS; break;
-  case WM_KILLFOCUS: event.m_evt = zxEVT_BLUR;
-    HideCaret( wh );
-    DestroyCaret();
-    return DefWindowProc( wh, msg, wp, lp );
 #endif
+#if 0
+  case WM_KILLFOCUS: event.m_evt = zxEVT_BLUR;  break;
+#endif
+#if 1
   case WM_CHAR:      event.m_evt = zxEVT_CHAR;  break;
   case WM_KEYDOWN:   event.m_evt = zxEVT_KEYD;  break;
-  case WM_DESTROY:
-    event.m_evt = zxEVT_SHUT;
-    PostQuitMessage(0);
+#endif
+#if 0
+  case WM_LBUTTONUP: event.m_evt = zxEVT_CURLU; break;
+  case WM_KEYUP:     event.m_evt = zxEVT_KEYU;  break;
+  case WM_CREATE:    event.m_evt = zxEVT_OPEN;  break;
+#endif
+  case WM_DESTROY:   event.m_evt = zxEVT_COUNT;
+    if ( !win->m_wid )
+      PostQuitMessage(0);
     break;
   case WM_QUIT:      event.m_evt = zxEVT_QUIT;
-    zxFreeWindows(0); break;
-  default:
-    event.m_evt = zxEVT_COUNT;
+    zxFreeWindows(0);
+    break;
+  default:           event.m_evt = zxEVT_COUNT;
   }
   event.m_wid = win->m_wid;
   if ( event.m_evt < zxEVT_COUNT )
@@ -59,9 +69,9 @@ ZXSYS_EXP zxEvtCBR zxCBack zxEVENT_onEvent(
       if ( event.m_stopEvent )
         return 0;
     }
-    evts = &zxevts;
+    evts = zxevt.getDefEvents();
     stop = zxevt.size( evts );
-    for ( ; i < stop; ++i )
+    for ( i = stop - 1; i < stop; --i, --stop )
     {
       ptr = evts->m_data[ i ];
       if ( ptr.type == event.m_evt )
@@ -71,6 +81,7 @@ ZXSYS_EXP zxEvtCBR zxCBack zxEVENT_onEvent(
       if ( event.m_stopEvent )
         return 0;
     }
+    return 0;
   }
   return DefWindowProc( wh, msg, wp, lp );
 }

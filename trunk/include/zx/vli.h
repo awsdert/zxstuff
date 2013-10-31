@@ -11,136 +11,181 @@ ZXC_OPEN
 
 typedef struct zxVLI_struct
 {
-  zxVECTOR m_vector;
-  size_t m_lastByte;
-  size_t m_bits;
-  zxuchr m_lastBit;
-  bool   m_isSigned;
+  zxVECTOR m_core;
+  zxuc    *m_data;
+  size_t   m_lastByte;
+  size_t   m_bits;
+  zxuc     m_lastBit;
+  bool     m_isSigned;
 } zxVLI;
 /* Behaves as constructor would and assumes object has not been used already */
-ZXCORE void zxcInit_zxVLI( zxVLI *obj );
-ZXCORE void zxcKill_zxVLI( zxVLI *obj );
-/* Will only grow object */
-ZXCORE void   zxc_zxVLI_grow( zxVLI* obj, size_t newSize );
-ZXCORE void   zxc_zxVLI_growb( zxVLI* obj, size_t newBits );
+ZXCORE void   zxVLI__init(  zxVLI *src, zxsm value );
+ZXCORE void   zxVLI__initU( zxVLI *src, zxum value );
+ZXV__INITCPY( zxVLI, ZXCORE );
+ZXV__KILL(    zxVLI, ZXCORE );
+/* Sizing */
+ZXV_SIZE( zxVLI, ZXCORE );
+ZXV__SIZE( zxVLI, ZXCORE, zxVLI_bits );
+ZXV_MAX_SIZE( zxVLI, ZXCORE );
+ZXV__MAX_SIZE( zxVLI, ZXCORE, zxVLI_max_bits );
+ZXCORE void   zxVLI_resize(  zxVLI *src, size_t setSize );
+ZXCORE void   zxVLI_resizeb( zxVLI *src, size_t setSize );
+ZXV_EMPTY(    zxVLI, ZXCORE );
+ZXV_RESERVE(  zxVLI, ZXCORE );
+ZXCORE void   zxVLI_grow(    zxVLI *src, size_t setSize );
+ZXCORE void   zxVLI_growb(   zxVLI *src, size_t setBits );
+ZXCORE void   zxVLI_shrink(  zxVLI *src, size_t setSize );
+ZXCORE void   zxVLI_shrinkb( zxVLI *src, size_t setSize );
+ZXV_SHRINK_TO_FIT( zxVLI,       ZXCORE );
+ZXV_ERASE(         zxVLI,       ZXCORE );
+ZXCORE void zxVLI_eraseb( zxVLI *src,
+  size_t firstBit, size_t lastBit );
+ZXV_SWAP(          zxVLI,       ZXCORE );
+ZXV_CLEAR(         zxVLI,       ZXCORE );
+ZXV_COPY(          zxVLI, zxuc, ZXCORE );
+ZXV_REVERSE(       zxVLI,       ZXCORE );
+ZXV_AT(            zxVLI, zxuc, ZXCORE );
 /* Returns src */
-ZXCORE zxVLI* zxc_zxVLI_opEql(   zxVLI       *src, zxVLI  const *val  );
-ZXCORE zxVLI* zxc_zxVLI_opAdd(   zxVLI       *src, zxVLI  const *val  );
-ZXCORE zxVLI* zxc_zxVLI_opAnd(   zxVLI       *src, zxVLI  const *val  );
-ZXCORE zxVLI* zxc_zxVLI_opDiv(   zxVLI       *src, zxVLI  const *val, zxVLI *remainder  );
-ZXCORE zxVLI* zxc_zxVLI_opMul(   zxVLI       *src, zxVLI  const *val  );
-ZXCORE zxVLI* zxc_zxVLI_opMvl(   zxVLI       *src, size_t        bits );
-ZXCORE zxVLI* zxc_zxVLI_opMvr(   zxVLI       *src, size_t        bits );
-ZXCORE zxVLI* zxc_zxVLI_opNot(   zxVLI       *src  );
-ZXCORE zxVLI* zxc_zxVLI_opOr(    zxVLI       *src, zxVLI  const *val  );
-ZXCORE zxVLI* zxc_zxVLI_opSub(   zxVLI       *src, zxVLI  const *val  );
-ZXCORE zxVLI* zxc_zxVLI_opXor(   zxVLI       *src, zxVLI  const *val  );
-/* returns dst */
-ZXCORE zxVLI* zxc_zxVLI_cpyEql(  zxVLI       *dst, zxVLI  const *src  );
-ZXCORE zxVLI* zxc_zxVLI_cpyAdd(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
-ZXCORE zxVLI* zxc_zxVLI_cpyAnd(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
-ZXCORE zxVLI* zxc_zxVLI_cpyDiv(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val, zxVLI *remainder  );
-ZXCORE zxVLI* zxc_zxVLI_cpyMul(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
-ZXCORE zxVLI* zxc_zxVLI_cpyMvl(  zxVLI       *dst, zxVLI  const *src, size_t        bits );
-ZXCORE zxVLI* zxc_zxVLI_cpyMvr(  zxVLI       *dst, zxVLI  const *src, size_t        bits );
-ZXCORE zxVLI* zxc_zxVLI_cpyNot(  zxVLI       *dst, zxVLI  const *src  );
-ZXCORE zxVLI* zxc_zxVLI_cpyOr(   zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
-ZXCORE zxVLI* zxc_zxVLI_cpySub(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
-ZXCORE zxVLI* zxc_zxVLI_cpyXor(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_opEql(   zxVLI *src, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_opAdd(   zxVLI *src, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_opAnd(   zxVLI *src, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_opDiv(   zxVLI *src, zxVLI  const *val, zxVLI *remainder  );
+ZXCORE zxVLI* zxVLI_opMul(   zxVLI *src, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_opMvl(   zxVLI *src, size_t        bits );
+ZXCORE zxVLI* zxVLI_opMvr(   zxVLI *src, size_t        bits );
+ZXCORE zxVLI* zxVLI_opNot(   zxVLI *src  );
+ZXCORE zxVLI* zxVLI_opOr(    zxVLI *src, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_opSub(   zxVLI *src, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_opXor(   zxVLI *src, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_cpyEql(  zxVLI *src, zxVLI  const *cpy  );
+ZXCORE zxVLI* zxVLI_cpyAdd(  zxVLI *src, zxVLI  const *cpy, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_cpyAnd(  zxVLI *src, zxVLI  const *cpy, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_cpyDiv(  zxVLI *src, zxVLI  const *cpy, zxVLI  const *val, zxVLI *remainder  );
+ZXCORE zxVLI* zxVLI_cpyMul(  zxVLI *src, zxVLI  const *cpy, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_cpyMvl(  zxVLI *src, zxVLI  const *cpy, size_t        bits );
+ZXCORE zxVLI* zxVLI_cpyMvr(  zxVLI *src, zxVLI  const *cpy, size_t        bits );
+ZXCORE zxVLI* zxVLI_cpyNot(  zxVLI *src, zxVLI  const *cpy  );
+ZXCORE zxVLI* zxVLI_cpyOr(   zxVLI *src, zxVLI  const *cpy, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_cpySub(  zxVLI *src, zxVLI  const *cpy, zxVLI  const *val  );
+ZXCORE zxVLI* zxVLI_cpyXor(  zxVLI *src, zxVLI  const *cpy, zxVLI  const *val  );
+/* Returns the max for the last byte if not zero */
+ZXCORE zxuc zxVLI_isNeg( zxVLI const *src );
+ZXV_ISEQUAL( zxVLI, ZXCORE );
+ZXV_CMPEQ( zxVLI, ZXCORE );
+ZXV_CMPNE( zxVLI, ZXCORE );
+ZXV__CMP( zxVLI, ZXCORE, zxVLI_cmpMT );
+ZXV__CMP( zxVLI, ZXCORE, zxVLI_cmpME );
+ZXV__CMP( zxVLI, ZXCORE, zxVLI_cmpLT );
+ZXV__CMP( zxVLI, ZXCORE, zxVLI_cmpLE );
 
-ZXCORE bool   zxc_zxVLI_isEqual( zxVLI const *src, zxVLI  const *val, size_t       *I    );
-ZXCORE bool   zxc_zxVLI_cmpEQ(   zxVLI const *src, zxVLI  const *val  );
-ZXCORE bool   zxc_zxVLI_cmpNE(   zxVLI const *src, zxVLI  const *val  );
-ZXCORE bool   zxc_zxVLI_cmpMT(   zxVLI const *src, zxVLI  const *val  );
-ZXCORE bool   zxc_zxVLI_cmpME(   zxVLI const *src, zxVLI  const *val  );
-ZXCORE bool   zxc_zxVLI_cmpLT(   zxVLI const *src, zxVLI  const *val  );
-ZXCORE bool   zxc_zxVLI_cmpLE(   zxVLI const *src, zxVLI  const *val  );
-
-ZXCORE zxusht   zxGetUSht(    zxuchr* src, size_t size );
-ZXCORE zxssht   zxGetSSht(    zxuchr* src, size_t size );
-ZXCORE zxulng   zxGetULng(    zxuchr* src, size_t size );
-ZXCORE zxslng   zxGetSLng(    zxuchr* src, size_t size );
-ZXCORE zxuint   zxGetUInt(    zxuchr* src, size_t size );
-ZXCORE zxsint   zxGetSInt(    zxuchr* src, size_t size );
+ZXCORE zxus   zxGetUSht(    zxuc* src, size_t size );
+ZXCORE zxss   zxGetSSht(    zxuc* src, size_t size );
+ZXCORE zxul   zxGetULng(    zxuc* src, size_t size );
+ZXCORE zxsl   zxGetSLng(    zxuc* src, size_t size );
+ZXCORE zxui   zxGetUInt(    zxuc* src, size_t size );
+ZXCORE zxsi   zxGetSInt(    zxuc* src, size_t size );
 #ifdef ZXILL
-ZXCORE zxuill   zxGetUIll(    zxuchr* src, size_t size );
-ZXCORE zxsill   zxGetSIll(    zxuchr* src, size_t size );
+ZXCORE zxull   zxGetUIll(    zxuc* src, size_t size );
+ZXCORE zxsll   zxGetSIll(    zxuc* src, size_t size );
 #endif
-ZXCORE zxumax   zxGetUMax(    zxuchr* src, size_t size );
-ZXCORE zxsmax   zxGetSMax(    zxuchr* src, size_t size );
-ZXCORE size_t   zxGetSize_t(  zxuchr* src, size_t size );
-ZXCORE ssize_t  zxGetSSize_t( zxuchr* src, size_t size );
+ZXCORE zxum   zxGetUMax(    zxuc* src, size_t size );
+ZXCORE zxsm   zxGetSMax(    zxuc* src, size_t size );
+ZXCORE size_t   zxGetSize_t(  zxuc* src, size_t size );
+ZXCORE ssize_t  zxGetSSize_t( zxuc* src, size_t size );
 
 typedef struct zx___vli
 {
-  const zxVLI def;
-  /* All return obj */
-  void   (*construct)( zxVLI *obj );
-  void   (*destruct)(  zxVLI *obj );
-  zxVLI* (*opAdd)(   zxVLI       *src, zxVLI  const *val  );
-  zxVLI* (*opAnd)(   zxVLI       *src, zxVLI  const *val  );
-  zxVLI* (*opDiv)(   zxVLI       *src, zxVLI  const *val, zxVLI *remainder  );
-  zxVLI* (*opMul)(   zxVLI       *src, zxVLI  const *val  );
-  zxVLI* (*opMvl)(   zxVLI       *src, size_t        bits );
-  zxVLI* (*opMvr)(   zxVLI       *src, size_t        bits );
-  zxVLI* (*opNot)(   zxVLI       *src );
-  zxVLI* (*opOr)(    zxVLI       *src, zxVLI  const *val  );
-  zxVLI* (*opSub)(   zxVLI       *src, zxVLI  const *val  );
-  zxVLI* (*opXor)(   zxVLI       *src, zxVLI  const *val  );
-  zxVLI* (*cpyEql)(  zxVLI       *dst, zxVLI  const *src  );
-  zxVLI* (*cpyAdd)(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
-  zxVLI* (*cpyAnd)(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
-  zxVLI* (*cpyDiv)(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val, zxVLI *remainder  );
-  zxVLI* (*cpyMul)(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
-  zxVLI* (*cpyMvl)(  zxVLI       *dst, zxVLI  const *src, size_t        bits );
-  zxVLI* (*cpyMvr)(  zxVLI       *dst, zxVLI  const *src, size_t        bits );
-  zxVLI* (*cpyNot)(  zxVLI       *dst, zxVLI  const *src );
-  zxVLI* (*cpyOr)(   zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
-  zxVLI* (*cpySub)(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
-  zxVLI* (*cpyXor)(  zxVLI       *dst, zxVLI  const *src, zxVLI  const *val  );
+  void (*_init)(  zxVLI *src, zxim value );
+  void (*_initU)( zxVLI *src, zxum value );
+  zxVLI const def;
+  ZXV___INITCPY(      zxVLI,,       (*_initCpy)      );
+  ZXV___KILL(         zxVLI,,       (*_kill)         );
+  ZXV__SIZE(          zxVLI,,       (*size)          );
+  ZXV__SIZE(          zxVLI,,       (*bits)          );
+  ZXV__MAX_SIZE(      zxVLI,,       (*max_size)      );
+  ZXV__MAX_SIZE(      zxVLI,,       (*max_bits)      );
+  void (*resize)(     zxVLI *src, size_t setSize );
+  void (*resizeb)(    zxVLI *src, size_t setBits );
+  ZXV__EMPTY(         zxVLI,,       (*empty)         );
+  ZXV__RESERVE(       zxVLI,,       (*reserve)       );
+  void (*grow)(       zxVLI *src, size_t setSize );
+  void (*growb)(      zxVLI *src, size_t setBits );
+  void (*shrink)(     zxVLI *src, size_t setSize );
+  void (*shrinkb)(    zxVLI *src, size_t setBits );
+  ZXV__SHRINK_TO_FIT( zxVLI,,       (*shrink_to_fit) );
+  void (*assign)(     zxVLI *src, size_t setSize );
+  void (*assignb)(    zxVLI *src, size_t setBits );
+  ZXV__ERASE(         zxVLI,,       (*erase)         );
+  void (*eraseb)(     zxVLI *src,
+    size_t firstBIt, size_t lastBit );
+  ZXV__SWAP(          zxVLI,,       (*swap)          );
+  ZXV__CLEAR(         zxVLI,,       (*clear)         );
+  ZXV__REVERSE(       zxVLI,,       (*reverse)       );
+  ZXV__COPY(          zxVLI, zxuc,, (*copy)          );
+  ZXV__AT(            zxVLI, zxuc,, (*at)            );
+  ZXV__OPADD(         zxVLI,,       (*opAdd)         );
+  zxVLI* (*opMvl)(    zxVLI       *src, size_t        bits );
+  zxVLI* (*opAnd)(    zxVLI       *src, zxVLI  const *val  );
+  zxVLI* (*opDiv)(    zxVLI       *src, zxVLI  const *val, zxVLI *remainder  );
+  zxVLI* (*opMul)(    zxVLI       *src, zxVLI  const *val  );
+  zxVLI* (*opMvr)(    zxVLI       *src, size_t        bits );
+  zxVLI* (*opNot)(    zxVLI       *src );
+  zxVLI* (*opOr)(     zxVLI       *src, zxVLI  const *val  );
+  zxVLI* (*opSub)(    zxVLI       *src, zxVLI  const *val  );
+  zxVLI* (*opXor)(    zxVLI       *src, zxVLI  const *val  );
+  ZXV__CPYEQL(        zxVLI,,       (*cpyEql)        );
+  zxVLI* (*cpyAdd)(   zxVLI       *src, zxVLI  const *cpy, zxVLI  const *val  );
+  zxVLI* (*cpyAnd)(   zxVLI       *src, zxVLI  const *cpy, zxVLI  const *val  );
+  zxVLI* (*cpyDiv)(   zxVLI       *src, zxVLI  const *cpy, zxVLI  const *val, zxVLI *remainder  );
+  zxVLI* (*cpyMul)(   zxVLI       *src, zxVLI  const *cpy, zxVLI  const *val  );
+  zxVLI* (*cpyMvl)(   zxVLI       *src, zxVLI  const *cpy, size_t        bits );
+  zxVLI* (*cpyMvr)(   zxVLI       *src, zxVLI  const *cpy, size_t        bits );
+  zxVLI* (*cpyNot)(   zxVLI       *src, zxVLI  const *cpy );
+  zxVLI* (*cpyOr)(    zxVLI       *src, zxVLI  const *cpy, zxVLI  const *val  );
+  zxVLI* (*cpySub)(   zxVLI       *src, zxVLI  const *cpy, zxVLI  const *val  );
+  zxVLI* (*cpyXor)(   zxVLI       *src, zxVLI  const *cpy, zxVLI  const *val  );
+  zxuc (*isNeg)( zxVLI const *src );
   /* i will be 0, SIZE_MAX or first non-equal byte from end */
-  bool   (*isEqual)( zxVLI const *src, zxVLI  const *val, size_t *i );
-  bool   (*cmpEQ)(   zxVLI const *src, zxVLI  const *val  );
-  bool   (*cmpNE)(   zxVLI const *src, zxVLI  const *val  );
-  bool   (*cmpMT)(   zxVLI const *src, zxVLI  const *val  );
-  bool   (*cmpME)(   zxVLI const *src, zxVLI  const *val  );
-  bool   (*cmpLT)(   zxVLI const *src, zxVLI  const *val  );
-  bool   (*cmpLE)(   zxVLI const *src, zxVLI  const *val  );
+  ZXV__ISEQUAL(       zxVLI,,       (*isEqual)       );
+  ZXV__CMP(           zxVLI,,       (*cmpEQ)         );
+  ZXV__CMP(           zxVLI,,       (*cmpNE)         );
+  ZXV__CMP(           zxVLI,,       (*cmpMT)         );
+  ZXV__CMP(           zxVLI,,       (*cmpME)         );
+  ZXV__CMP(           zxVLI,,       (*cmpLT)         );
+  ZXV__CMP(           zxVLI,,       (*cmpLE)         );
 } zx__vli;
 
 static zx__vli const zxvli =
 {
-  {{0}},
-  zxcInit_zxVLI,
-  zxcKill_zxVLI,
-  zxc_zxVLI_opAdd,
-  zxc_zxVLI_opAnd,
-  zxc_zxVLI_opDiv,
-  zxc_zxVLI_opMul,
-  zxc_zxVLI_opMvl,
-  zxc_zxVLI_opMvr,
-  zxc_zxVLI_opNot,
-  zxc_zxVLI_opOr,
-  zxc_zxVLI_opSub,
-  zxc_zxVLI_opXor,
-  zxc_zxVLI_cpyEql,
-  zxc_zxVLI_cpyAdd,
-  zxc_zxVLI_cpyAnd,
-  zxc_zxVLI_cpyDiv,
-  zxc_zxVLI_cpyMul,
-  zxc_zxVLI_cpyMvl,
-  zxc_zxVLI_cpyMvr,
-  zxc_zxVLI_cpyNot,
-  zxc_zxVLI_cpyOr,
-  zxc_zxVLI_cpySub,
-  zxc_zxVLI_cpyXor,
-  zxc_zxVLI_isEqual,
-  zxc_zxVLI_cmpEQ,
-  zxc_zxVLI_cmpNE,
-  zxc_zxVLI_cmpMT,
-  zxc_zxVLI_cmpME,
-  zxc_zxVLI_cmpLT,
-  zxc_zxVLI_cmpLE
+  zxVLI__init,    zxVLI__initU, {0},
+  zxVLI__initCpy, zxVLI__kill,
+  zxVLI_size,     zxVLI_bits,
+  zxVLI_max_size, zxVLI_max_bits,
+  zxVLI_resize,   zxVLI_resizeb,
+  zxVLI_empty,    zxVLI_reserve,
+  zxVLI_grow,     zxVLI_growb,
+  zxVLI_shrink,   zxVLI_shrinkb,
+  zxVLI_shrink_to_fit,
+  zxVLI_resize,   zxVLI_resizeb,
+  zxVLI_erase,    zxVLI_eraseb,
+  zxVLI_swap,     zxVLI_clear,
+  zxVLI_reverse,  zxVLI_copy,
+  zxVLI_at,
+  zxVLI_opAdd,    zxVLI_opMvl,
+  zxVLI_opAnd,    zxVLI_opDiv,
+  zxVLI_opMul,    zxVLI_opMvr,
+  zxVLI_opNot,    zxVLI_opOr,
+  zxVLI_opSub,    zxVLI_opXor,
+  zxVLI_cpyEql,
+  zxVLI_cpyAdd,   zxVLI_cpyAnd,
+  zxVLI_cpyDiv,   zxVLI_cpyMul,
+  zxVLI_cpyMvl,   zxVLI_cpyMvr,
+  zxVLI_cpyNot,   zxVLI_cpyOr,
+  zxVLI_cpySub,   zxVLI_cpyXor,
+  zxVLI_isNeg,    zxVLI_isEqual,
+  zxVLI_cmpEQ,    zxVLI_cmpNE,
+  zxVLI_cmpMT,    zxVLI_cmpME,
+  zxVLI_cmpLT,    zxVLI_cmpLE
 };
 
 ZXC_SHUT
@@ -149,57 +194,47 @@ ZXC_SHUT
 class zxVli : public zxVLI
 {
 public:
-  size_t bits( void ) { return m_bits; }
   zxVli( void );
-  zxVli( char          val );
-  zxVli( zxuchr const  val );
-  zxVli( zxschr const  val );
-  zxVli( zxusht const  val );
-  zxVli( zxssht const  val );
-  zxVli( zxulng const  val );
-  zxVli( zxslng const  val );
-  zxVli( zxuint const  val );
-  zxVli( zxsint const  val );
+  zxVli( char        val );
+  zxVli( zxuc const  val );
+  zxVli( zxsc const  val );
+  zxVli( zxus const  val );
+  zxVli( zxss const  val );
+  zxVli( zxul const  val );
+  zxVli( zxsl const  val );
+  zxVli( zxui const  val );
+  zxVli( zxsi const  val );
 #ifdef ZXILL
-  zxVli( zxuill const  val );
-  zxVli( zxsill const  val );
+  zxVli( zxull const  val );
+  zxVli( zxsll const  val );
 #endif
-  zxVli( zxVLI  const  val );
-  zxVli( zxVli  const &val );
-  ~zxVli( void );
-  void   resize( size_t       setCount )
+  zxVli( zxVLI  const *val )       { zxvli._initCpy( this, val );    }
+  zxVli( zxVli  const &val )       { zxvli._initCpy( this, &val );   }
+  ~zxVli( void )                   { zxvli._kill( this );            }
+  size_t size( void )              { return zxvli.size( this );      }
+  size_t bits( void )              { return zxvli.bits( this );      }
+  size_t max_size( void )          { return zxvli.max_size( this );  }
+  size_t max_bits( void )          { return zxvli.max_bits( this );  }
+  void resize(  size_t setSize )   { zxvli.resize( this, setSize );  }
+  void resizeb( size_t setBits )   { zxvli.resizeb( this, setBits ); }
+  zxVli& operator=   ( zxVli val ) { zxvli.cpyEql( this, &val );     }
+  zxVli  operator~   ( void )
   {
-    zxv.resize( &m_vector, setCount, NULL );
-    m_lastByte = setCount - 1;
-    m_bits = setCount * CHAR_BIT;
+    zxVli cpy( this );
+    zxvli.opNot( &cpy );
+    return cpy;
   }
-  void   resize( size_t       setCount,
-                 zxuchr const setNew )
-    { zxv.resize( &m_vector, setCount, &setNew ); }
-  void   rebits( size_t       setBits )
+  zxVli  operator&   ( zxVli val )
   {
-    size_t tmp = 0, setCount = zxc_size_udiv( setBits, CHAR_BIT, &tmp );
-    bool isNeg = ( m_isSigned && m_vector.m_data[ m_lastByte ] & m_lastBit );
-    if ( tmp )
-      ++setCount;
-    else
-      tmp = CHAR_BIT - 1;
-    zxv.resize( &m_vector, setCount, NULL );
-    m_bits     = setBits;
-    m_lastBit  = 1u << tmp;
-    m_lastByte = m_vector.m_count - 1;
-    if ( isNeg )
-    {
-      zxVli add = 1u;
-      add.m_bits = 1u;
-      zxvli.opNot( this );
-      zxvli.opAdd( this, &add );
-    }
+    zxVli cpy( this );
+    zxvli.opAnd( &cpy, &val );
+    return cpy;
   }
-  zxVli& operator=   ( zxVli val );
-  zxVli  operator~   ( void );
-  zxVli  operator&   ( zxVli val );
-  zxVli& operator&=  ( zxVli val );
+  zxVli& operator&=  ( zxVli val )
+  {
+    zxvli.opAnd( this, &val );
+    return *this;
+  }
   zxVli  operator^   ( zxVli val );
   zxVli& operator^=  ( zxVli val );
   zxVli  operator|   ( zxVli val );
@@ -222,13 +257,13 @@ public:
   zxVli& operator/=  ( zxVli val );
   zxVli  operator%   ( zxVli val );
   zxVli& operator%=  ( zxVli val );
-  bool   operator==  ( zxVli val );
-  bool   operator!   ( void );
-  bool   operator!=  ( zxVli val );
-  bool   operator>   ( zxVli val );
-  bool   operator>=  ( zxVli val );
-  bool   operator<   ( zxVli val );
-  bool   operator<=  ( zxVli val );
+  bool   operator==  ( zxVli val ) { return  zxvli.isEqual( this, &val, NULL ); }
+  bool   operator!   ( void )      { return  zxvli.isEqual( this, NULL, NULL ); }
+  bool   operator!=  ( zxVli val ) { return !zxvli.isEqual( this, &val, NULL ); }
+  bool   operator>   ( zxVli val ) { return  zxvli.cmpMT( this, &val );         }
+  bool   operator>=  ( zxVli val ) { return  zxvli.cmpME( this, &val );         }
+  bool   operator<   ( zxVli val ) { return  zxvli.cmpLT( this, &val );         }
+  bool   operator<=  ( zxVli val ) { return  zxvli.cmpLE( this, &val );         }
 };
 class zxVlu : public zxVli
 {

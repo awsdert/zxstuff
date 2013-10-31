@@ -2,10 +2,14 @@
 ZXSYS_EXP zxWINDOW* zxWINDOW_opDel( zxWINDOW* win )
 {
   zxWINDOWS *all = zxwin.allWindows();
-  size_t i = 0, stop;
-  if ( !win || !all->m_data[ win->m_wid ] )
+  size_t i = 0, stop = zx_win.size( all );
+  if ( !win || win->m_wid > stop || !all->m_data[ win->m_wid ] )
     return win; /* This reduces thread/parallel issues */
   all->m_data[ win->m_wid ] = NULL;
+  if ( win->opDelUsrObj )
+    win->opDelUsrObj( win->m_usrObj );
+  if ( win->opDelWinObj )
+    win->opDelWinObj( win->m_winObj );
   if ( win->m_delKids )
   {
     stop = zxv_size.size( &win->m_kids );

@@ -15,13 +15,13 @@ typedef enum zxENDIAN
 } zxEndian;
 
 ZXCORE zxEndian zxIntEndian( void );
-/* Will return malloc() buffer if des is NULL */
-ZXCORE zxuchr* zxcopy(
-  zxuchr* src, size_t ssize, zxEndian sen,
-	zxuchr* des, size_t dsize, zxEndian den );
-ZXCORE zxuchr* zxcopybits(
-  zxuchr* src, size_t sbits, zxEndian sen,
-	zxuchr* des, size_t dbits, zxEndian den,
+/* Will return malloc() buffer if dst is NULL */
+ZXCORE zxuc* zxcopy(
+  zxuc* src, size_t ssize, zxEndian sen,
+	zxuc* dst, size_t dsize, zxEndian den );
+ZXCORE zxuc* zxcopybits(
+  zxuc* src, size_t sbits, zxEndian sen,
+	zxuc* dst, size_t dbits, zxEndian den,
   size_t from, size_t to );
 
 ZXC_SHUT

@@ -5,22 +5,22 @@
 
 enum zxGFX_TYPE
 {
-	zxGFX_OGL = 0,
+  zxGFX_OGL = 0,
 #if ZXMSW
-	zxGFX_DX,
+  zxGFX_DX,
 #endif
-	zxGFX_SYS,
-	zxGFX_COUNT,
+  zxGFX_SYS,
+  zxGFX_COUNT,
 };
 
 enum zxSFX_TYPE
 {
-	zxSFX_OAL = 0,
+  zxSFX_OAL = 0,
 #ifdef ZXMSW
-	zxSFX_DX,
+  zxSFX_DX,
 #endif
-	zxSFX_SYS,
-	zxSFX_COUNT
+  zxSFX_SYS,
+  zxSFX_COUNT
 };
 
 #endif

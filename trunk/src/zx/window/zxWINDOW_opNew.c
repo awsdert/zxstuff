@@ -14,14 +14,14 @@ ZXSYS_EXP zxWINDOW* zxWINDOW_opNew( zxWINDOW* win )
   }
   else
   {
-    i = win->m_wid;
+    i = win->m_obj.gid;
     if ( i >= stop || ( all->m_data[ i ] && all->m_data[ i ] != win ) )
       i = stop;
   }
   if ( i >= stop )
     zx_win.grow( all, i + 1, NULL );
   *win = zxwin.def;
-  win->m_wid       = i;
+  win->m_obj.gid       = i;
   all->m_data[ i ] = win;
   zxevt._init( &win->m_events, NULL, 0 );
   return win;

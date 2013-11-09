@@ -1,4 +1,4 @@
 #include <zx/tbox.h>
-ZXEVENT( zxTBOX_onBlur ) { return zxDefWinEvt; }
-ZXEVENT( zxTBOX_onInit ) { return zxDefWinEvt; }
-ZXEVENT( zxTBOX_onKill ) { return zxDefWinEvt; }
+ZXEVENT( zxTBOX_onBlur ) { return 0; }
+ZXEVENT( zxTBOX_onInit ) { return 0; }
+ZXEVENT( zxTBOX_onKill ) { return 0; }

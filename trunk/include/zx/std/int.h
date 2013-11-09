@@ -37,8 +37,8 @@
 #endif
 
 /* This helps bypass compile issues when conforming to ansi c89/c90 */
-#ifndef _STDINT
-#define _STDINT
+#ifndef _STDINT_H
+#define _STDINT_H
 
 #ifdef ZXI8
 typedef   signed ZXI8   int8_t;

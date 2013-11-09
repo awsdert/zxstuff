@@ -1,7 +1,6 @@
 #pragma once
 #include "dec_fun.h"
-#ifndef ZXV_DEF_FUN_H
-#define ZXV_DEF_FUN_H
+#ifndef ZXV_DEF
 
 #define ZXV_DEF__INIT( NAME, T, EXP ) \
   ZXV__INIT( NAME, T, EXP ) \
@@ -26,6 +25,17 @@
   { \
     if ( !src ) return; \
     zxv._kill( &src->m_core ); \
+  }
+
+#define ZXV_DEF_TMPOBJ( NSO, NAME, T, EXP ) \
+  ZXV_TMPOBJ( NAME, T, EXP ) \
+  { \
+    NAME tmp = NSO.def; \
+    ZXASSERT( !src ) return tmp; \
+    tmp.m_core         = zxv.tmpobj( (void*)src ); \
+    tmp.m_core.m_size  = sizeof( T ); \
+    tmp.m_core.m_Tsize = tmp.m_core.m_size; \
+    return tmp; \
   }
 
 #define ZXV_DEF_SIZE( NAME, EXP ) \
@@ -97,15 +107,27 @@
     ZXASSERT( !src || !cpy ) return; \
     zxv.append( &src->m_core, &cpy->m_core, pos ); \
   }
-
-#define ZXV_DEF_PUSH_BACK( NAME, EXP ) \
-  ZXV_PUSH_BACK( NAME, EXP ) \
+  
+#define ZXV_DEF_PUSH( NAME, T, EXP ) \
+  ZXV_PUSH( NAME, T, EXP ) \
   { \
-    bool r = false; \
-    ZXASSERT( !src || !cpy ) return r; \
-    r = zxv.push_back( &src->m_core, &cpy->m_core ); \
-    return r; \
+    ZXASSERT( !src ) return false; \
+    return zxv.push( &src->m_core, (void*)&cpy, pos, unique ); \
+  }    
+
+#define ZXV_DEF_PUSH_BACK( NAME, T, EXP ) \
+  ZXV_PUSH_BACK( NAME, T, EXP ) \
+  { \
+    ZXASSERT( !src ) return false; \
+    return zxv.push_back( &src->m_core, (void*)&cpy, unique ); \
   }
+
+#define ZXV_DEF_POP( NAME, T, EXP ) \
+    ZXV_POP( NAME, T, EXP ) \
+    { \
+      ZXASSERT( !src ) return; \
+      zxv.pop( &src->m_core, (void*)&cmp, first, last ); \
+    }
 
 #define ZXV_DEF_POP_BACK( NAME, EXP ) \
   ZXV_POP_BACK( NAME, EXP ) \
@@ -206,10 +228,11 @@
     return !zxv.isEqual( &src->m_core, &cmp->m_core, NULL ); \
   }
 
-#define ZXV_DEF(         NAME, T, EXP ) \
+#define ZXV_DEF(    NSO, NAME, T, EXP ) \
   ZXV_DEF__INIT(         NAME, T, EXP ) \
   ZXV_DEF__INITCPY(      NAME, T, EXP ) \
   ZXV_DEF__KILL(         NAME,    EXP ) \
+  ZXV_DEF_TMPOBJ(   NSO, NAME, T, EXP ) \
   ZXV_DEF_SIZE(          NAME,    EXP ) \
   ZXV_DEF_MAX_SIZE(      NAME,    EXP ) \
   ZXV_DEF_RESIZE(        NAME, T, EXP ) \
@@ -220,7 +243,9 @@
   ZXV_DEF_SHRINK(        NAME,    EXP ) \
   ZXV_DEF_SHRINK_TO_FIT( NAME,    EXP ) \
   ZXV_DEF_APPEND(        NAME,    EXP ) \
-  ZXV_DEF_PUSH_BACK(     NAME,    EXP ) \
+  ZXV_DEF_PUSH(          NAME, T, EXP ) \
+  ZXV_DEF_PUSH_BACK(     NAME, T, EXP ) \
+  ZXV_DEF_POP(           NAME, T, EXP ) \
   ZXV_DEF_POP_BACK(      NAME,    EXP ) \
   ZXV_DEF_INSERT(        NAME,    EXP ) \
   ZXV_DEF_ERASE(         NAME,    EXP ) \
@@ -234,5 +259,39 @@
   ZXV_DEF_OPADD(         NAME, T, EXP ) \
   ZXV_DEF_CMPEQ(         NAME,    EXP ) \
   ZXV_DEF_CMPNE(         NAME,    EXP )
+
+#define ZXV_NS_DEF( NAME, DEFAULT ) \
+  NAME##__init, DEFAULT, \
+  NAME##__initCpy, \
+  NAME##__kill, \
+  NAME##_tmpobj, \
+  NAME##_size, \
+  NAME##_max_size, \
+  NAME##_resize, \
+  NAME##_capacity, \
+  NAME##_empty, \
+  NAME##_reserve, \
+  NAME##_grow, \
+  NAME##_shrink, \
+  NAME##_shrink_to_fit, \
+  NAME##_resize, \
+  NAME##_append, \
+  NAME##_push, \
+  NAME##_push_back, \
+  NAME##_pop, \
+  NAME##_pop_back, \
+  NAME##_insert, \
+  NAME##_erase, \
+  NAME##_swap, \
+  NAME##_clear, \
+  NAME##_reverse, \
+  NAME##_copy, \
+  NAME##_at, \
+  NAME##_isEqual, \
+  NAME##_cpyEql, \
+  NAME##_opAdd, \
+  NAME##_opAdd, \
+  NAME##_cmpEQ, \
+  NAME##_cmpNE
 
 #endif

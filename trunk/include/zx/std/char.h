@@ -7,9 +7,9 @@ ZXC_OPEN
 
 #define ZX_CHAR( m_txt ) m_txt
 
-ZXV_DEC( zxCHAR, char );
+ZXV_OBJ( zxCHAR, char );
 
-ZXV_DEC_2ND( zxCHAR, char, ZXCORE );
+ZXV_DEC( zxCHAR, char, ZXCORE );
 ZXCORE size_t zxCHAR_len( char const *text );
 ZXCORE void   zxCHAR__initW( zxCHAR       *dst,
                                  wide   const *text,
@@ -17,7 +17,7 @@ ZXCORE void   zxCHAR__initW( zxCHAR       *dst,
 
 ZXNSO( c )
 {
-  ZXV_DEC_BODY( zxCHAR, char );
+  ZXV_NS_DEC( zxCHAR, char );
   size_t (*len)( char const *text );
   /* _initC for zxstr usage */
   void   (*_initC)( zxCHAR *dst, char const *text, size_t len );
@@ -26,7 +26,7 @@ ZXNSO( c )
 
 static zxn_c const zxc =
 {
-  ZXV_DEF_BODY( zxCHAR, {0} ),
+  ZXV_NS_DEF( zxCHAR, {0} ),
   zxCHAR_len,
   zxCHAR__init,
   zxCHAR__initW

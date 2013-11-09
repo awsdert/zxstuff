@@ -1,16 +1,16 @@
 #include <zx/tbox.h>
-ZXSYS_EXP zxEvtCBR zxTBOX_onChar( zxEVENT* event )
+ZXSYS_EXP zxsl zxTBOX_onChar( zxEVENT* event )
 {
-  zxWINDOW  *win  = zxwin.getWindow( event->m_wid );
+  zxWINDOW  *win  = zxwin.getWindow( event->m_obj.gid );
   zxTBOX *tbox = NULL;
   zxTEXT    *text = NULL, ins = zxstr.def;
 #if ZXMSW
   WORD vk = LOWORD( event->m_mswWP );
   event->m_stopEvent = true;
   if ( win->m_win != zxWIN_TBOX )
-    return zxDefWinEvt;
+    return 0;
   tbox = (zxTBOX*)win;
-  text = &tbox->m_text;
+  text = win->m_txt;
 #if 1
   switch ( vk )
   {
@@ -39,7 +39,7 @@ ZXSYS_EXP zxEvtCBR zxTBOX_onChar( zxEVENT* event )
   text->m_full = zxstr.Grow( &text->.m_text, text->m_full, text->m_len );
   if ( tbox->m_text.m_text )
     GetWindowText( win->m_wh, text->m_text, text->m_len );
-  return zxDefWinEvt;
+  return 0;
 #endif
 #endif
 }

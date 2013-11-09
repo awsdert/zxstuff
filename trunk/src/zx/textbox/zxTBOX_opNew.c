@@ -8,8 +8,8 @@ ZXSYS_EXP zxTBOX* zxTBOX_opNew( zxWINDOW *win )
   win   = zxwin.opNew( win );
   tbox->m_win   = win;
   win->m_win    = zxWIN_TBOX;
-  win->m_winObj = tbox;
-  zxstr._init( &tbox->m_text, NULL, 0 );
+  win->m_wObj.obj = tbox;
+  zxstr._init( win->m_txt, NULL, 0 );
   tbox->m_pos  = 0;
 #if ZXMSW
   tbox->m_font = NULL;

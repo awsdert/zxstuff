@@ -1,10 +1,6 @@
 #include <zx/tbox.h>
-ZXSYS_EXP void zxTBOX_opDel( void* winObj )
+ZXSYS_EXP void zxTBOX_opDel( void* wObj, size_t type )
 {
-  zxTBOX* tbox = (zxTBOX*)winObj;
-  if ( !winObj || !zxwin.isKnown( tbox->m_win ) ||
-    tbox->m_win->m_winObj != winObj )
-    return;
-  /* The above simply defends against invald objects */
-  free( tbox );
+  if ( type == zxWIN_TBOX )
+    free( wObj );
 }

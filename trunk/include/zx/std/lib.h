@@ -41,5 +41,11 @@ ZXCORE void
     void*  ptr,
     zxuc   const val,
     size_t const size );
+ZXCORE bool
+  mcmp(
+    void const *src,
+    void const *cmp,
+    size_t size,
+    size_t *I );
 ZXC_SHUT
 #endif

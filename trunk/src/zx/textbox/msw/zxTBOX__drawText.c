@@ -3,7 +3,7 @@
 bool zxTBOX__drawText( zxTBOX *tbox, bool setCaret )
 {
   zxWINDOW *win = tbox->m_win;
-  zxTEXT  *text = &tbox->m_text;
+  zxTEXT  *text = win->m_txt;
   RECT    cRect = {0},
            rect = {0};
   POINT      pt = {0};
@@ -35,7 +35,7 @@ bool zxTBOX__setCaret( zxTBOX *tbox )
 {
   DWORD fc = tbox->m_pos, lc = tbox->m_pos;
   HWND  wh = tbox->m_win->m_wh;
-  if ( !SendMessage( wh, WM_SETTEXT, 0, (LPARAM)tbox->m_text.m_data ) ||
+  if ( !SendMessage( wh, WM_SETTEXT, 0, (LPARAM)tbox->m_win->m_txt->m_data ) ||
     !SendMessage( wh, EM_SETSEL, (WPARAM)fc, (LPARAM)lc ) ) return false;
   return true;
 }

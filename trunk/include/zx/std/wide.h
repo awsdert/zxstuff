@@ -7,8 +7,8 @@ ZXC_OPEN
 
 #define ZX_WIDE( m_txt ) L##m_txt
 
-ZXV_DEC( zxWIDE, wide );
-ZXV_DEC_2ND( zxWIDE, wide, ZXCORE );
+ZXV_OBJ( zxWIDE, wide );
+ZXV_DEC( zxWIDE, wide, ZXCORE );
 
 ZXCORE size_t zxWIDE_len(    wide const *text );
 ZXCORE void   zxWIDE__initC( zxWIDE       *dst,
@@ -17,7 +17,7 @@ ZXCORE void   zxWIDE__initC( zxWIDE       *dst,
 
 ZXNSO( w )
 {
-  ZXV_DEC_BODY( zxWIDE, wide );
+  ZXV_NS_DEC( zxWIDE, wide );
   size_t (*len)( wide const *text );
   /* _initW for zxstr usage */
   void   (*_initC)( zxWIDE *dst, char const *text, size_t len );
@@ -26,7 +26,7 @@ ZXNSO( w )
 
 static zxn_w const zxw =
 {
-  ZXV_DEF_BODY( zxWIDE, {0} ),
+  ZXV_NS_DEF( zxWIDE, {0} ),
   zxWIDE_len,
   zxWIDE__initC,
   zxWIDE__init

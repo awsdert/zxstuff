@@ -1,21 +1,15 @@
 #pragma once
 #include "app.h"
+#include "obj.h"
 
 #ifndef ZX_EVENT_H
 #define ZX_EVENT_H
 
 #if ZXMSW
-#define zxDefWinEvt DefWindowProc( \
-  event->m_wh, event->m_mswMsg, event->m_mswWP, event->m_mswLP )
-typedef LRESULT zxEvtCBR;
-#define zxCBack CALLBACK
-ZXSYS zxEvtCBR zxCBack
-  zxEVENT_onEvent( zxHwnd wh, UINT msg, WPARAM wp, LPARAM lp );
+ZXSYS LRESULT CALLBACK
+  zxEVENT_onEvent( HWND wh, UINT msg, WPARAM wp, LPARAM lp );
 #else
-#define zxDefWinEvt 0
-typedef zxsl    zxEvtCBR;
-#define zxCBack __stdcall
-ZXSYS zxEvtCBR zxCBack
+ZXSYS zxsl __stdcall
   zxEVENT_onEvent( zxHwnd wh, zxul msg, zxul *wp, zxul *lp );
 #endif
 
@@ -45,30 +39,28 @@ typedef enum zxEVT_enum
   zxEVT_MAX,
   zxEVT_MIN,
   zxEVT_RES,
-  zxEVT_SHOW_ACT,
-  zxEVT_HIDE_ACT,
-  zxEVT_MAX_ACT,
-  zxEVT_MIN_ACT,
-  zxEVT_RES_ACT,
-  zxEVT_SHOW_NOA,
-  zxEVT_HIDE_NOA,
-  zxEVT_MAX_NOA,
-  zxEVT_MIN_NOA,
-  zxEVT_RES_NOA,
-  zxEVT_OPEN,
-  zxEVT_SHUT,
+  zxEVT_ACTIVATE,
+  zxEVT_DISIVATE,
+  zxEVT_ENABLE,
+  zxEVT_DISABLE,
+  zxEVT_CREATE,
+  zxEVT_DESTROY,
   zxEVT_QUIT,
+  zxEVT_PAINT,
+  zxEVT_PAINTNC,
   zxEVT_COUNT
 } zxEVT;
 
+
+
 typedef struct zxEVENT_struct
 {
+  zxOBJ  m_obj;
   zxHwnd m_wh;
   zxEVT  m_evt;
   void*  m_ptr;
   zxul   m_ptrType; /* 0 if zxWINDOW */
   bool   m_stopEvent;
-  size_t m_wid;
 #if ZXMSW
   UINT   m_mswMsg;
   WPARAM m_mswWP;
@@ -76,7 +68,7 @@ typedef struct zxEVENT_struct
 #endif
 } zxEVENT;
 
-#define ZXEVENT( NAME ) zxEvtCBR NAME##( zxEVENT *event )
+#define ZXEVENT( FUN ) zxsl FUN( zxEVENT *event )
 typedef ZXEVENT( (*zxEvtPtr) );
 
 typedef struct zxEVTPTR_struct
@@ -85,9 +77,9 @@ typedef struct zxEVTPTR_struct
   zxEvtPtr proc;
 } zxEVTPTR;
 
-ZXV_DEC( zxEVENTS, zxEVTPTR );
+ZXV_OBJ( zxEVENTS, zxEVTPTR );
 
-ZXV_DEC_2ND( zxEVENTS, zxEVTPTR, ZXSYS );
+ZXV_DEC( zxEVENTS, zxEVTPTR, ZXSYS );
 
 /*
   These are not meant to be used in regular code;
@@ -123,35 +115,31 @@ ZXSYS ZXEVENT( zxEVENT_onHide  );
 ZXSYS ZXEVENT( zxEVENT_onMax   );
 ZXSYS ZXEVENT( zxEVENT_onMin   );
 ZXSYS ZXEVENT( zxEVENT_onRes   );
-ZXSYS ZXEVENT( zxEVENT_onShowAct );
-ZXSYS ZXEVENT( zxEVENT_onHideAct );
-ZXSYS ZXEVENT( zxEVENT_onMaxAct  );
-ZXSYS ZXEVENT( zxEVENT_onMinAct  );
-ZXSYS ZXEVENT( zxEVENT_onResAct  );
-ZXSYS ZXEVENT( zxEVENT_onShowNoa );
-ZXSYS ZXEVENT( zxEVENT_onHideNoa );
-ZXSYS ZXEVENT( zxEVENT_onMaxNoa  );
-ZXSYS ZXEVENT( zxEVENT_onMinNoa  );
-ZXSYS ZXEVENT( zxEVENT_onResNoa  );
-ZXSYS ZXEVENT( zxEVENT_onOpen );
-ZXSYS ZXEVENT( zxEVENT_onShut );
+ZXSYS ZXEVENT( zxEVENT_onActivate );
+ZXSYS ZXEVENT( zxEVENT_onDisivate );
+ZXSYS ZXEVENT( zxEVENT_onEnable  );
+ZXSYS ZXEVENT( zxEVENT_onDisable  );
+ZXSYS ZXEVENT( zxEVENT_onCreate );
+ZXSYS ZXEVENT( zxEVENT_onDestroy );
 ZXSYS ZXEVENT( zxEVENT_onQuit );
+ZXSYS ZXEVENT( zxEVENT_onPaint );
+ZXSYS ZXEVENT( zxEVENT_onPaintNC );
 
 ZXNSO( evt )
 {
   zxEvtPtr const events[ zxEVT_COUNT ];
-  ZXV_DEC_BODY( zxEVENTS, zxEVTPTR );
+  ZXV_NS_DEC( zxEVENTS, zxEVTPTR );
   bool (*addEvent)( zxEVENTS *events, zxEVTPTR event );
   void (*remEvent)( zxEVENTS *events, zxEVTPTR event );
   zxEVENTS* (*getDefEvents)( void );
 #if ZXMSW
-  zxEvtCBR (zxCBack *onEvent)( zxHwnd wh, UINT msg, WPARAM wp, LPARAM lp );
+  LRESULT (CALLBACK *onEvent)( HWND wh, UINT msg, WPARAM wp, LPARAM lp );
 #else
-  zxEvtCBR (zxCBack *onEvent)( zxHwnd wh, zxul msg, zxul* wp, zxul* lp );
+  zxsl    (__stdcall *onEvent)( zxHwnd wh, zxul msg, zxul* wp, zxul* lp );
 #endif
 } zxn_evt;
 
-static zxn_evt const zxevt = 
+static zxn_evt const zxevt =
 {
   {
     zxEVENT_onIdle,
@@ -178,21 +166,17 @@ static zxn_evt const zxevt =
     zxEVENT_onMax,
     zxEVENT_onMin,
     zxEVENT_onRes,
-    zxEVENT_onShowAct,
-    zxEVENT_onHideAct,
-    zxEVENT_onMaxAct,
-    zxEVENT_onMinAct,
-    zxEVENT_onResAct,
-    zxEVENT_onShowNoa,
-    zxEVENT_onHideNoa,
-    zxEVENT_onMaxNoa,
-    zxEVENT_onMinNoa,
-    zxEVENT_onResNoa,
-    zxEVENT_onOpen,
-    zxEVENT_onShut,
-    zxEVENT_onQuit
+    zxEVENT_onActivate,
+    zxEVENT_onDisivate,
+    zxEVENT_onEnable,
+    zxEVENT_onDisable,
+    zxEVENT_onCreate,
+    zxEVENT_onDestroy,
+    zxEVENT_onQuit,
+    zxEVENT_onPaint,
+    zxEVENT_onPaintNC
   },
-  ZXV_DEF_BODY( zxEVENTS, {0} ),
+  ZXV_NS_DEF( zxEVENTS, {0} ),
   zxEVENTS_addEvent,
   zxEVENTS_remEvent,
   zxEVENTS_getDefEvents,

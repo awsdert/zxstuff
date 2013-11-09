@@ -1,18 +1,18 @@
 #include <zx/tbox.h>
 ZXSYS_EXP ZXEVENT( zxTBOX_onFocus )
 {
-  zxWINDOW *win = zxwin.getWindow( event->m_wid );
+  zxWINDOW *win = zxwin.getWindow( event->m_obj.gid );
   zxTBOX  *tbox = NULL;
 #if ZXMSW
   /*TEXTMETRIC tm;*/
   HDC dc = NULL;
   event->m_stopEvent = true;
   if ( win->m_win != zxWIN_TBOX )
-    return zxDefWinEvt;
+    return 0;
   dc = GetDC( NULL );
   if ( !dc )
-    return zxDefWinEvt;
-  tbox = (zxTBOX*)win->m_winObj;
+    return 0;
+  tbox = (zxTBOX*)win->m_wObj.obj;
   zxtbox._setCaret( tbox );
   /*
   GetTextMetrics( dc, &tm );
@@ -25,5 +25,5 @@ ZXSYS_EXP ZXEVENT( zxTBOX_onFocus )
 #else
   event->m_stopEvent = true;
 #endif
-  return zxDefWinEvt;
+  return 0;
 }

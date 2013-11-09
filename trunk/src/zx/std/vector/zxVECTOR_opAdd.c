@@ -1,6 +1,6 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP zxVECTOR* zxVECTOR_opAdd( zxVECTOR *obj, zxVECTOR const *src )
+ZXV_OPADD( zxVECTOR, ZXCORE_EXP )
 {
-  zxv.push_back( obj, src );
-  return obj;
+  zxv.append( src, cpy, -1 );
+  return src;
 }

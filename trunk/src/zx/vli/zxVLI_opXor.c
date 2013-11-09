@@ -12,7 +12,7 @@ ZXCORE_EXP zxVLI* zxVLI_opXor( zxVLI *src, zxVLI const *val )
   if ( src->m_bits < end )
     end = src->m_bits;
   stop = end;
-	for ( ; stop >= CHAR_BIT; i += CHAR_BIT, ++j, stop -= CHAR_BIT )
+  for ( ; stop >= CHAR_BIT; i += CHAR_BIT, ++j, stop -= CHAR_BIT )
     SRC[ j ] ^= VAL[ j ];
   if ( i < end )
   {

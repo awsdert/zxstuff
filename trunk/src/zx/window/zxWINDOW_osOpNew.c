@@ -1,9 +1,9 @@
 #include <zx/window.h>
 #if ZXMSW
-ZXSYS_EXP zxsi zxWINDOW_mswOpNew( zxWINDOW *win )
+ZXSYS_EXP zxsi zxWINDOW_osOpNew( zxWINDOW *win )
 {
   zxWINDOW  *base = zxwin.getWindow( win->m_base );
-  zxTEXT    *text = &win->m_title;
+  zxTEXT    *text = win->m_txt;
   zxHwnd    baseWH = NULL;
   win->m_style |= CS_VREDRAW | CS_HREDRAW;
   if ( base && base != win )
@@ -33,11 +33,18 @@ ZXSYS_EXP zxsi zxWINDOW_mswOpNew( zxWINDOW *win )
     zxwin.mswATOMX[ win->m_win ] = RegisterClassEx( win->m_wcx );
   if ( !zxwin.mswATOMX[ win->m_win ] )
     return 1;
-  win->m_wh = CreateWindowEx( win->m_stylex,
-    win->m_wcx->lpszClassName, text->m_data, win->m_style,
-    win->m_x, win->m_y, win->m_w, win->m_h,
-    baseWH, (HMENU)win->m_wid,
-    win->m_wcx->hInstance, NULL );
+  if ( text )
+    win->m_wh = CreateWindowEx( win->m_stylex,
+      win->m_wcx->lpszClassName, text->m_data, win->m_style,
+      win->m_x, win->m_y, win->m_w, win->m_h,
+      baseWH, (HMENU)win->m_obj.gid,
+      win->m_wcx->hInstance, NULL );
+  else
+    win->m_wh = CreateWindowEx( win->m_stylex,
+      win->m_wcx->lpszClassName, ZXT(""), win->m_style,
+      win->m_x, win->m_y, win->m_w, win->m_h,
+      baseWH, (HMENU)win->m_obj.gid,
+      win->m_wcx->hInstance, NULL );
   if ( !win->m_wh )
     return 2;
   return 0;

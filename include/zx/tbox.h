@@ -8,7 +8,6 @@ ZXC_OPEN
 typedef ZXSOBJ( zxTBOX )
 {
   zxWINDOW *m_win;
-  zxTEXT    m_text;
   zxui      m_pos;
 #if ZXMSW
   DWORD     m_fc, m_lc;  
@@ -17,7 +16,7 @@ typedef ZXSOBJ( zxTBOX )
 } zxTBOX;
 
 ZXSYS zxTBOX*  zxTBOX_opNew( zxWINDOW* win    );
-ZXSYS void     zxTBOX_opDel( void*     winObj );
+ZXSYS void     zxTBOX_opDel( void*     winObj, size_t type );
 ZXSYS bool     zxTBOX__drawText( zxTBOX *tbox, bool setCaret );
 ZXSYS bool     zxTBOX__setCaret( zxTBOX *tbox );
 

@@ -1,12 +1,18 @@
 #include <zx/window.h>
 ZXSYS_EXP zxWINDOW* zxWINDOW_byHandle( zxHwnd wh )
 {
-  zxWINDOWS *all = zxwin.allWindows();
-  size_t i = 0, stop = zx_win.size( all );
+  zxOBJS *all = zxobj.allObjects();
+  zxOBJ *obj;
+  zxWINDOW* win;
+  size_t i = 0, stop = zxobj.size( all );
   for ( ; i < stop; ++i )
   {
-    if ( all->m_data[ i ]->m_wh == wh )
-      return all->m_data[ i ];
+    obj = &all->m_data[ i ];
+    if ( obj->type != zxOBJ_SYS_WIN )
+      continue;
+    win = (zxWINDOW*)obj->obj;
+    if ( win->m_wh == wh )
+      return win;
   }
   return NULL;
 }

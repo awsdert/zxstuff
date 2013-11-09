@@ -1,7 +1,7 @@
-#include "obj.h"
+#include "c.h"
 
-#ifndef ZXVECTOR_CPP_H
-#define ZXVECTOR_CPP_H
+#ifndef ZXV_CPP_H
+#define ZXV_CPP_H
 #if ZXCPP
 
 /*

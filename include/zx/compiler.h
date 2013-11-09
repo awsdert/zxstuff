@@ -11,12 +11,13 @@
 #define ZXATTR( ATTR )
 #endif
 
+#define ZX_MSG( MSG ) #MSG
 #if ZX_MSC
-#define ZXMSG( m_txt ) message( m_txt )
+#define ZXMSG( MSG ) message( ZX_MSG( MSG ) )
 #elif ZX_GCC || ZX_GPP
-#define ZXMSG( m_txt ) message m_txt
+#define ZXMSG( MSG ) message ZX_MSG( MSG )
 #else
-#define ZXMSG( m_txt ) m_txt
+#define ZXMSG( MSG ) ZX_MSG( MSG )
 #endif
 
 #define ZXUNUSED  ZXATTR( __unused__     )

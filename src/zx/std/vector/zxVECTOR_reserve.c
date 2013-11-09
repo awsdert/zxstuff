@@ -1,8 +1,10 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxVECTOR_reserve( zxVECTOR *obj, size_t minSize )
+ZXV_RESERVE( zxVECTOR, ZXCORE_EXP )
 {
-  size_t tmp = 0u, size = zxc_size_udiv( minSize, obj->m_Tsize, &tmp );
+  size_t tmp = 0u, size;
+  ZXASSERT( !src ) return;
+  size = zxc_size_udiv( minSize, src->m_Tsize, &tmp );
   if ( tmp )
     ++size;
-  zxv.grow( obj, size, NULL );
+  zxv.grow( src, size, NULL );
 }

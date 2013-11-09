@@ -1,8 +1,9 @@
 #include <zx/tbox.h>
 
-ZXV_DEF( zxWINDOWS, zxWINDOW*, ZXSYS_EXP )
+ZXV_DEF( zx_win, zxWINDOWS, zxWINDOW*, ZXSYS_EXP )
 
 static zxWINDOWS  zx_l_allWindows = {0};
+static zxWINDOW*  zx_l_rootWindow = NULL;
 static zxInstance zx_l_prevI = NULL, zx_l_thisI = NULL;
 static zxEVENTS   zx_l_events = {0};
 
@@ -12,12 +13,10 @@ ZXSYS_EXP zxsi zxapp__main(
   LPSTR      args,
   int        showAs )
 {
-#if !ZXALL
 #if ZXMSW
   MSG    msg = {0};
   HACCEL  acc = NULL;
-#endif
-  size_t i = 0, stop = zxWIN_COUNT;
+  size_t i = 0;
   zxWINDOW *root = NULL, *win;
   zxTBOX *tbox;
   zxWINDOWS *all = &zx_l_allWindows;
@@ -26,8 +25,7 @@ ZXSYS_EXP zxsi zxapp__main(
   zx_l_thisI = thisI;
   zx_win._init( all, NULL, 0 );
   zxevt._init( &zx_l_events, NULL, 0 );
-  root = zxwin.opNew( NULL );
-  for ( ; i < stop; ++i )
+  for ( ; i < zxWIN_COUNT; ++i )
     zxwin._initWCX( &zxwin.WCX[ i ] );
   for ( i = 0; i < zxEVT_COUNT; ++i )
   {
@@ -35,20 +33,25 @@ ZXSYS_EXP zxsi zxapp__main(
     ptr.proc = zxevt.events[ i ];
     zxevt.addEvent( &zx_l_events, ptr );
   }
-#endif
-#if ZXMSW
-  zxwin.WCX[ zxWIN_NULL  ].lpszClassName = ZXT("ZXWINDOW");
-  zxwin.WCX[ zxWIN_FRAME ].lpszClassName = ZXT("ZXFRAME");
+  InitCommonControls();
+#if 0
+  th = CreateWindowEx( 0u, WC_EDIT, WC_EDIT, WS_OVERLAPPEDWINDOW, 0, 0, 640, 480, NULL, NULL, thisI, NULL );
+  ShowWindow( th, SW_SHOW );
+#else
+  zxwin.WCX[ zxWIN_NULL  ].lpszClassName = WC_STATIC;
+  zxwin.WCX[ zxWIN_FRAME ].lpszClassName = WC_STATIC;
   i = zxWIN_TBOX;
-  zxwin.WCX[ i ].lpszClassName = ZXT("EDIT");
+  zxwin.WCX[ i ].lpszClassName = WC_EDIT;
   zxwin.WCX[ i ].hbrBackground = (HBRUSH)(COLOR_WINDOWFRAME);
+  root = zxwin.opNew( NULL );
+  zx_l_rootWindow = root;
   root->m_wcx = (zxWCX*)mnew( sizeof( zxWCX ), NULL );
   *root->m_wcx = zxwin.WCX[ zxWIN_NULL ];
   root->m_style = WS_OVERLAPPEDWINDOW;
   root->m_h     = 640;
   root->m_w     = 480;
-  zxstr._initC( &root->m_title, args, 0 );
-  zxwin.mswOpNew( root );
+  zxstr._initC( root->m_txt, args, 0 );
+  zxwin.osOpNew( root );
   tbox = zxtbox.opNew( NULL );
   win  = tbox->m_win;
   zxwin.setBase( win, root );
@@ -59,23 +62,28 @@ ZXSYS_EXP zxsi zxapp__main(
   win->m_stylex = WS_EX_CLIENTEDGE;
   win->m_wcx = (zxWCX*)mnew( sizeof( zxWCX ), NULL );
   *win->m_wcx = zxwin.WCX[ zxWIN_TBOX ];
-  zxwin.mswOpNew( win );
+  zxwin.osOpNew( win );
   ShowWindow( root->m_wh, showAs );
   UpdateWindow( root->m_wh );
   ShowWindow( win->m_wh,  showAs );
   UpdateWindow( win->m_wh );
+#endif
   while (GetMessage(&msg, NULL, 0, 0))
-	{
-		if ( /* !IsDialogMessage( msg.hwnd, &msg ) && /* */
+  {
+    if ( !IsDialogMessage( msg.hwnd, &msg ) &&
       !TranslateAccelerator( msg.hwnd, acc, &msg) )
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-	}
-	return zxFreeWindows( (int)msg.wParam );
+    {
+      TranslateMessage(&msg);
+      DispatchMessage(&msg);
+    }
+  }
+#if 0
+  return 0;
 #else
-  return zxFreeWindows( 0 );
+  return zxobj.freeAll( (int)msg.wParam );
+#endif
+#else
+  return zxobj.freeAll( 0 );
 #endif
 }
 
@@ -84,18 +92,19 @@ ZXSYS_EXP zxEVENTS* zxEVENTS_getDefEvents( void )
 {
   return &zx_l_events;
 }
+
 ZXSYS_EXP zxWINDOWS* zxWINDOW_allWindows( void )
 {
   return &zx_l_allWindows;
 }
 
-ZXSYS_EXP zxWINDOW*  const zxGetRootWindow( void )
+ZXSYS_EXP zxWINDOW*  zxWINDOW_getRootWindow( void )
 {
-  return zxwin.getWindow( 0 );
+  return zx_l_rootWindow;
 }
-ZXSYS_EXP zxHwnd     zxGetRootWH( void )
+ZXSYS_EXP zxHwnd     zxWINDOW_getRootWH( void )
 {
-  return zxwin.getWindow( 0 )->m_wh;
+  return zx_l_rootWindow->m_wh;
 }
 ZXSYS_EXP zxInstance zxGetPrevI( void )
 {

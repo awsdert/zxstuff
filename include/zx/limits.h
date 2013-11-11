@@ -1,4 +1,3 @@
-#pragma once
 #include "limits/all.h"
 #include "limits/char.h"
 #include "limits/short.h"
@@ -10,6 +9,7 @@
 #include "limits/bool.h"
 #include "std/arch.h"
 
+#pragma once
 #ifndef ZX_LIMITS_H
 #define ZX_LIMITS_H
 

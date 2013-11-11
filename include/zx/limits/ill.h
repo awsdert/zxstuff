@@ -1,5 +1,6 @@
-#pragma once
 #include "all.h"
+
+#pragma once
 #ifndef ZXILL_H
 
 #ifdef LLONG_MAX

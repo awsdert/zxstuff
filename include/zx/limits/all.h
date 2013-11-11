@@ -1,6 +1,6 @@
-#pragma once
 #include "../dll.h"
 
+#pragma once
 #if ZXCPP
 #include <cstddef>
 #include <climits>

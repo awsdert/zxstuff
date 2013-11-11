@@ -1,6 +1,6 @@
-#pragma once
 #include "std/text.h"
 
+#pragma once
 #ifndef ZX_APP_H
 #define ZX_APP_H
 

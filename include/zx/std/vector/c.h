@@ -1,8 +1,8 @@
-#pragma once
 #include "../lib.h"
 #include "../math.h"
 #include "def_fun.h"
 
+#pragma once
 #ifndef ZXV_C_H
 #define ZXV_C_H
 

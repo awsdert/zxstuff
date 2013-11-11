@@ -1,5 +1,6 @@
-#pragma once
 #include "short.h"
+
+#pragma once
 #ifndef ZXLONG_BITS
 
 #define ZXLONG_BITS ZX_MB( ULONG_MAX )

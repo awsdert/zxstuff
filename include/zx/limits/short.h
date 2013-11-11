@@ -1,5 +1,6 @@
-#pragma once
 #include "char.h"
+
+#pragma once
 #ifndef ZXSHRT_BITS
 
 #define ZXSHRT_BITS ZX_MB( USHRT_MAX )

@@ -1,5 +1,6 @@
 #include "all.h"
 
+#pragma once
 #ifndef __bool_true_false_are_defined
 #if !ZXCPP && !defined( _BOOL )
 #define _BOOL

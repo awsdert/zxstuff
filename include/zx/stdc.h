@@ -1,5 +1,6 @@
-#pragma once
 #include <stddef.h>
+
+#pragma once
 #ifndef ZX_STDC_H
 #define ZX_STDC_H
 

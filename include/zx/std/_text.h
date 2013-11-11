@@ -1,4 +1,3 @@
-#pragma once
 #include "vector.h"
 #include "math.h"
 #include <wchar.h>
@@ -9,6 +8,7 @@
 #include <string.h>
 #endif
 
+#pragma once
 #ifndef ZX_TEXT_H
 #define ZX_TEXT_H
 

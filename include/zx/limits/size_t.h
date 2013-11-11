@@ -1,5 +1,6 @@
-#pragma once
 #include "all.h"
+
+#pragma once
 #ifndef ZXSIZE_BITS
 
 #if ZXMSW == 64

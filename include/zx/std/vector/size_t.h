@@ -1,6 +1,6 @@
-#pragma once
 #include "cpp.h"
 
+#pragma once
 #ifndef ZXV_SIZE_H
 #define ZXV_SIZE_H
 

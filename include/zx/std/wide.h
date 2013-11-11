@@ -1,6 +1,6 @@
-#pragma once
 #include "_text.h"
 
+#pragma once
 #ifndef ZXWIDE_H
 #define ZXWIDE_H
 ZXC_OPEN

@@ -1,6 +1,6 @@
-#pragma once
 #include "vli.h"
 
+#pragma once
 #ifndef ZX_OBJ_H
 #define ZX_OBJ_H
 

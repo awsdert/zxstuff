@@ -1,7 +1,8 @@
-#pragma once
 #include "compiler.h"
 #include "std/arch.h"
-#ifndef ZXSYS_H
+
+#pragma once
+#ifndef ZXDLL_EXP
 
 ZXC_OPEN
 
@@ -60,7 +61,5 @@ typedef int BOOL;
 #endif
 
 ZXC_SHUT
-
-#define ZXSYS_H
 #endif
 

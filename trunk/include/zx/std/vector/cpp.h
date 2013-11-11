@@ -1,5 +1,6 @@
 #include "c.h"
 
+#pragma once
 #ifndef ZXV_CPP_H
 #define ZXV_CPP_H
 #if ZXCPP
@@ -16,22 +17,9 @@ public:
   zxVector( void )
     { zxv._init( this, sizeof( T ), NULL, 0 ); }
   zxVector( zxVector< T > const &src )
-  {
-    zxv._init( this, sizeof( T ), 
-    *this = zxv.def;
-    m_Tsize     = src.m_Tsize;
-    m_count     = src.m_count;
-    m_fullCount = src.m_fullCount;
-    m_size      = src.m_size;
-    m_fullSize  = src.m_fullSize;
-    m_data = (zxuc*)malloc( m_fullSize );
-    memcpy( m_data, src.m_data, m_fullSize );
-  }
+    { zxv._initCpy( this, &src ); }
   ~zxVector( void )
-  {
-    if ( m_data )
-      free( m_data );
-  }
+    { zxv._kill( this ); }
   /*
     Most of the work is already done so we just play with pointers now
 
@@ -41,7 +29,7 @@ public:
     default handlers.
   */
   virtual void   clear(    void )
-                            { zxv.erase( this, 0, m_count ); }
+                            { zxv.clear( this ); }
   virtual size_t size(     void )
                             { return zxv.size( this ); }
   virtual size_t max_size( void )

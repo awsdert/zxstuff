@@ -1,6 +1,6 @@
-#pragma once
 #include "_text.h"
 
+#pragma once
 #ifndef ZXCHAR_H
 #define ZXCHAR_H
 ZXC_OPEN

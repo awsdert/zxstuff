@@ -1,7 +1,7 @@
-#pragma once
 #include "app.h"
 #include "obj.h"
 
+#pragma once
 #ifndef ZX_EVENT_H
 #define ZX_EVENT_H
 

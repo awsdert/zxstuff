@@ -1,5 +1,6 @@
-#pragma once
 #include "all.h"
+
+#pragma once
 #ifndef ZXCHAR_BITS
 
 #define ZXCHAR_BITS CHAR_BIT

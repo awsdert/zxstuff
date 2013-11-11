@@ -1,5 +1,5 @@
-#pragma once
 #include "stdc.h"
+#pragma once
 #ifndef ZX_COMPILER_H
 #define ZX_COMPILER_H
 

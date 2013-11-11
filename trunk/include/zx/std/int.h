@@ -1,4 +1,3 @@
-#pragma once
 #include "../limits.h"
 #if ZXCPP
 #include <cstdint>
@@ -6,8 +5,9 @@
 #include <stdint.h>
 #endif
 
-#ifndef ZXSTD_INT_H
-#define ZXSTD_INT_H
+#pragma once
+#ifndef ZX_STD_INT_H
+#define ZX_STD_INT_H
 
 #ifdef ZXILL
 

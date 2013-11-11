@@ -1,5 +1,6 @@
-#pragma once
 #include "all.h"
+
+#pragma once
 #ifndef ZXINT_BITS
 
 #define ZXINT_BITS ZX_MB( UINT_MAX )

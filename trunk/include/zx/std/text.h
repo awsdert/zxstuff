@@ -1,10 +1,10 @@
-#pragma once
 #include "char.h"
 #include "wide.h"
 #if ZXMSW
 #include <tchar.h>
 #endif
 
+#pragma once
 #ifndef ZXTEXT_H
 #define ZXTEXT_H
 

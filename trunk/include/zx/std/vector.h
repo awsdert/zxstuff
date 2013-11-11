@@ -1,4 +1,3 @@
-#pragma once
 #include "vector/c.h"
 #include "vector/cpp.h"
 #include "vector/size_t.h"

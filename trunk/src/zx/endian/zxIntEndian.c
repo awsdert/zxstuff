@@ -1,5 +1,5 @@
 #include <zx/endian.h>
-ZXCORE_EXP zxEndian zxIntEndian( void )
+ZXCORE zxEndian zxIntEndian( void )
 {
   static zxul dword = 0x12345678;
   static zxuc *byte = (zxuc*)&dword;

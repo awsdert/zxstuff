@@ -1,5 +1,5 @@
 #include <zx/std/char.h>
-ZXV_INSERT( zxCHAR, ZXCORE_EXP )
+ZXV_INSERT( zxCHAR, ZXCORE, ZXCORE_CALL )
 {
   ZXASSERT( !src || !cpy )
     return;

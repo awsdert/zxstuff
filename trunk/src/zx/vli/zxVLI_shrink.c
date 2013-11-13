@@ -1,6 +1,6 @@
 ﻿/* USER: AWSDERT; DATE: 09/11/2013; TIME: 07:57 */
 #include <zx/vli.h>
-ZXCORE_EXP void zxVLI_shrink( zxVLI *src, size_t setSize )
+ZXCORE void zxVLI_shrink( zxVLI *src, size_t setSize )
 {
   size_t size = zxvli.size( src );
   ZXASSERT( !src ) return;
@@ -9,7 +9,7 @@ ZXCORE_EXP void zxVLI_shrink( zxVLI *src, size_t setSize )
   src->m_lastByte = setSize - 1;
   src->m_lastBit = zxuc_last;
 }
-ZXCORE_EXP void zxVLI_shrinkb( zxVLI *src, size_t setBits )
+ZXCORE void zxVLI_shrinkb( zxVLI *src, size_t setBits )
 {
   size_t size, bits = 0u;
   ZXASSERT( !src ) return;
@@ -26,7 +26,7 @@ ZXCORE_EXP void zxVLI_shrinkb( zxVLI *src, size_t setBits )
   else
     src->m_lastBit = zxuc_last;
 }
-ZXV_SHRINK_TO_FIT( zxVLI, ZXCORE_EXP )
+ZXV_SHRINK_TO_FIT( zxVLI, ZXCORE, ZXCORE_CALL )
 {
   ZXASSERT( !src ) return;
   zxvli.shrinkb( src, src->m_bits );

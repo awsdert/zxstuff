@@ -1,20 +1,20 @@
 #include <zx/vli.h>
 /* operator <<= */
-ZXCORE_EXP zxVLI* zxVLI_opMvr( zxVLI* src, size_t by )
+ZXVLI_OPMVR
 {
   size_t s = 0, F = 0, T = 0, t = 0, stop = zxvli.size( src );
   zxuc tbit = 1, fbit = 1, val = 0, *SRC;
-  if ( !src || !by )
+  if ( !src || !bits )
     return src;
   SRC = src->m_data;
-  if ( by >= src->m_bits )
+  if ( bits >= src->m_bits )
   {
     mset( SRC, 0, stop );
     if ( src->m_isSigned )
       SRC[ src->m_lastByte ] = src->m_lastBit;
     return src;
   }
-  for ( ; s < by; ++s )
+  for ( ; s < bits; ++s )
   {
     fbit <<= 1;
     if ( !fbit )
@@ -58,12 +58,12 @@ ZXCORE_EXP zxVLI* zxVLI_opMvr( zxVLI* src, size_t by )
   return src;
 }
 /* operator<<  */
-ZXCORE_EXP zxVLI* zxVLI_cpyMvr( zxVLI *dst, zxVLI const *src, size_t by )
+ZXVLI_CPYMVR
 {
   if ( dst )
   {
-    zxvli.cpyEql( dst, src );
-    zxvli.opMvr( dst, by );
+    zxvli.opEql( dst, src );
+    zxvli.opMvr( dst, bits );
   }
   return dst;
 }

@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxVECTOR_append( zxVECTOR *vec, zxVECTOR const *src, size_t pos )
+ZXCORE void zxVECTOR_append( zxVECTOR *vec, zxVECTOR const *src, size_t pos )
 {
   size_t d, s, i, j, f, t, stop;
   zxuc *VEC, *SRC;

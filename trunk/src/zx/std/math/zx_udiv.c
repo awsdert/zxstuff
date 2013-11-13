@@ -1,5 +1,5 @@
 #include <zx/std/math.h>
-ZXCORE_EXP ZX__UDIV_SRC( imax,   ZXIMAX )
+ZXCORE ZX__UDIV_SRC( imax,   ZXIMAX )
 size_t zxc_size_udiv( size_t src, size_t val, size_t *remainder ) { \
   size_t i = zxc_size_LastBitI;
   size_t des = 0u, quo = 0u, bit = zxc_size_LastBit, rem = 0u;
@@ -28,7 +28,7 @@ size_t zxc_size_udiv( size_t src, size_t val, size_t *remainder ) { \
     *remainder = quo;
   return des;
 }
-ZXCORE_EXP zxsm zx_imax_sdiv(  zxsm src, zxsm value, zxsm *remainder )
+ZXCORE zxsm zx_imax_sdiv(  zxsm src, zxsm value, zxsm *remainder )
 {
   zxsm rem = 0;
   bool sneg = ( src < 0 ), vneg = ( value < 0 );

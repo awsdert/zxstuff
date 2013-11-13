@@ -1,7 +1,7 @@
 #pragma once
-#include "int.h"
 #ifndef ZXMATH_H
 #define ZXMATH_H
+#include "int.h"
 
 ZXC_OPEN
 #define ZX___BASEMAX( B ) ( ZXUIMAX_MAX - ( ZXUIMAX_MAX % B ) )

@@ -1,5 +1,5 @@
 #include <zx/std/math.h>
-ZXCORE_EXP void zxm_i2s( zxui value, zxus* dst, zxuc i )
+ZXCORE void zxm_i2s( zxui value, zxus* dst, zxuc i )
 {
   zxus tmp[2] = { 0, 0 };
 #if ZXINT_BITS <= ZXSHORT_BITS

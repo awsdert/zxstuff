@@ -1,5 +1,5 @@
 #include <zx/std/char.h>
-ZXV_SHRINK( zxCHAR, ZXCORE_EXP )
+ZXV_SHRINK( zxCHAR, ZXCORE, ZXCORE_CALL )
 {
   ZXASSERT( !src ) return;
   zxv.shrink( &src->m_core, setCount );

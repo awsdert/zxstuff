@@ -1,5 +1,5 @@
 #include <zx/std/wide.h>
-ZXV_APPEND( zxWIDE, ZXCORE_EXP )
+ZXV_APPEND( zxWIDE, ZXCORE, ZXCORE_CALL )
 {
   if ( !src || !cpy || !cpy->m_core.m_data )
     return;

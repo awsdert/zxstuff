@@ -1,5 +1,5 @@
 #include <zx/vli.h>
-ZXV__KILL( zxVLI, ZXCORE_EXP )
+ZXV__KILL( zxVLI, ZXCORE, ZXCORE_CALL )
 {
   if ( !src ) return;
   zxv._kill( &src->m_core );

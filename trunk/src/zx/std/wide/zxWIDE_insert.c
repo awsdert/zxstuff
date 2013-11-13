@@ -1,5 +1,5 @@
 #include <zx/std/wide.h>
-ZXV_INSERT( zxWIDE, ZXCORE_EXP )
+ZXV_INSERT( zxWIDE, ZXCORE, ZXCORE_CALL )
 {
   ZXASSERT( !src || !cpy )
     return;

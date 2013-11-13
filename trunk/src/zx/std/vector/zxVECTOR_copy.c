@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP size_t zxVECTOR_copy(
+ZXCORE size_t zxVECTOR_copy(
   zxVECTOR const *vec,
   zxuc*          dst,
   size_t const   dstCount,

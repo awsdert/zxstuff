@@ -1,5 +1,5 @@
 #include <zx/proc.h>
-ZXSYS_EXP zxui zxo_zxPROC_getPE32_w( zxPE32* pe32, zxWIDE const *name )
+ZXSYS zxui zxo_zxPROC_getPE32_w( zxPE32* pe32, zxWIDE const *name )
 {
 #if ZXMSW
   size_t i = 0u, len;

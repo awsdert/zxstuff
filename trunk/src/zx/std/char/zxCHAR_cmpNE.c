@@ -1,5 +1,5 @@
 #include <zx/std/char.h>
-ZXCORE_EXP bool zxCHAR_cmpNE(
+ZXCORE bool zxCHAR_cmpNE(
   zxCHAR const *txt,
   zxCHAR const *src )
 {

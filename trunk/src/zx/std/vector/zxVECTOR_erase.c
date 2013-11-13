@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXV_ERASE( zxVECTOR, ZXCORE_EXP )
+ZXV_ERASE( zxVECTOR, ZXCORE, ZXCORE_CALL )
 {
   size_t i = first, s, f, t;
   zxuc *SRC;

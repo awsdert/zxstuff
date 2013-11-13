@@ -1,5 +1,5 @@
 #include <zx/window.h>
-ZXSYS_EXP int zxWINDOW_freeAll( int returnCode )
+ZXSYS int zxWINDOW_freeAll( int returnCode )
 {
   zxOBJS *all = zxobj.allObjects();
   zxOBJ  obj;

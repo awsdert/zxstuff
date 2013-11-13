@@ -1,10 +1,9 @@
 #pragma once
+#ifndef zxPROC_H
 #include "std/text.h"
 #if ZXMSW
 #include <tlhelp32.h>
 #endif
-
-#ifndef zxPROC_H
 
 ZXC_OPEN
 

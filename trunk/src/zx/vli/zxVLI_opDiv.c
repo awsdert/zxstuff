@@ -1,15 +1,12 @@
 #include <zx/vli.h>
 /* operator/= */
-ZXCORE_EXP zxVLI* zxVLI_opDiv(
-  zxVLI *src,
-  zxVLI const *val,
-  zxVLI *remainder )
+ZXVLI_OPDIV
 {
   size_t i = 0, pi = 0, I = 0, end = val->m_bits, stop = zxvli.size( src );
   zxVLI quo = *src, dst = zxvli.def, cpy = *src, rem = *src;
   zxuc bitl = 1u << (CHAR_BIT - 1), bit = bitl,
     *SRC = (zxuc*)src->m_data,
-    *VAL = (zxuc*)val->m_data, 
+    *VAL = (zxuc*)val->m_data,
     *REM, *DST, *QUO, *CPY;
   if ( remainder )
   {
@@ -94,11 +91,11 @@ ZXCORE_EXP zxVLI* zxVLI_opDiv(
   return src;
 }
 /* operator/ */
-ZXCORE_EXP zxVLI* zxVLI_cpyDiv( zxVLI *dst, zxVLI const *src, zxVLI const *val, zxVLI *remainder )
+ZXVLI_CPYDIV
 {
   if ( dst )
   {
-    zxvli.cpyEql( dst, src );
+    zxvli.opEql( dst, src );
     zxvli.opDiv( dst, val, remainder );
   }
   return dst;

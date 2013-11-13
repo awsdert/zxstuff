@@ -1,6 +1,6 @@
 #include <zx/std/vector.h>
 
-ZXV_PUSH_BACK( zxVECTOR, void*, ZXCORE_EXP )
+ZXV_PUSH_BACK( zxVECTOR, void*, ZXCORE, ZXCORE_CALL )
 {
   size_t i = 0, j = 0, stop = zxv.size( src );
   zxuc *SRC;

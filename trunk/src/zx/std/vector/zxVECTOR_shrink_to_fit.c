@@ -1,5 +1,5 @@
 #include <zx/std//vector.h>
-ZXCORE_EXP void zxVECTOR_shrink_to_fit( zxVECTOR* obj )
+ZXCORE void zxVECTOR_shrink_to_fit( zxVECTOR* obj )
 {
   ZXASSERT( !obj )
     return;

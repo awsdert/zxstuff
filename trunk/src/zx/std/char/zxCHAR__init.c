@@ -23,4 +23,4 @@ void zxCHAR__initW( zxCHAR *src, wide const *cpy, size_t len )
   zxv.erase( &src->m_core, len, len );
   free( dst );
 }
-ZXV_DEF__INITCPY( zxCHAR, char, ZXCORE_EXP )
+ZXV_DEF__INITCPY( zxCHAR, char, ZXCORE, ZXCORE_CALL )

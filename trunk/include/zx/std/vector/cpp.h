@@ -1,8 +1,8 @@
-#include "c.h"
-
 #pragma once
 #ifndef ZXV_CPP_H
 #define ZXV_CPP_H
+#include "c.h"
+
 #if ZXCPP
 
 /*

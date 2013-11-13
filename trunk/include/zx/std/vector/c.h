@@ -1,10 +1,7 @@
-#include "../lib.h"
-#include "../math.h"
-#include "def_fun.h"
-
 #pragma once
 #ifndef ZXV_C_H
 #define ZXV_C_H
+#include "def_fun.h"
 
 ZXC_OPEN
 
@@ -27,14 +24,14 @@ ZXCORE void   zxVECTOR__init(
   size_t         Tsize,
   void     const *cpy,
   size_t         count );
-ZXV__DEC( zxVECTOR, void*, void, ZXCORE );
+ZXV__DEC( zxVECTOR, void*, void, ZXCORE, ZXCORE_CALL );
 
 ZXNSO( v )
 {
   void (*_init)(
     zxVECTOR   *src, size_t Tsize,
     void const *cpy, size_t count );
-  ZXV__NS_DEC( zxVECTOR, void*, void );
+  ZXV__NS_DEC( zxVECTOR, void*, void, ZXCORE_CALL );
 } zxn_v;
 
 static const zxn_v zxv = { ZXV_NS_DEF( zxVECTOR, {0} ) };

@@ -1,7 +1,7 @@
 #include <zx/window.h>
-ZXV_DEF( zxevt, zxEVENTS, zxEVTPTR, ZXSYS_EXP )
+ZXV_DEF( zxevt, zxEVENTS, zxEVTPTR, ZXSYS, ZXSYS_CALL )
 #if ZXMSW
-ZXSYS_EXP LRESULT CALLBACK zxEVENT_onEvent(
+ZXSYS LRESULT CALLBACK zxEVENT_onEvent(
   HWND   wh,
   UINT   msg,
   WPARAM wp,
@@ -100,7 +100,7 @@ ZXSYS_EXP LRESULT CALLBACK zxEVENT_onEvent(
   return DefWindowProc( wh, msg, wp, lp );
 }
 #else
-ZXSYS_EXP zxsl zxCBack
+ZXSYS zxsl zxCBack
   zxEVENT_onEvent( zxHwnd wh, zxul msg, zxul *wp, zxul *lp )
   { return 0; }
 #endif

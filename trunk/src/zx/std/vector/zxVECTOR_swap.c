@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXV_SWAP( zxVECTOR, ZXCORE_EXP )
+ZXV_SWAP( zxVECTOR, ZXCORE, ZXCORE_CALL )
 {
   zxVECTOR tmp;
   void **srcPtr, **dstPtr;

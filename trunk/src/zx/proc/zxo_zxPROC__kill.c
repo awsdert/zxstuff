@@ -1,5 +1,5 @@
 #include <zx/proc.h>
-ZXSYS_EXP void zxo_zxPROC__kill( zxPROC *proc )
+ZXSYS void zxo_zxPROC__kill( zxPROC *proc )
 {
   if ( !proc )
     return;

@@ -1,17 +1,8 @@
 #pragma once
-#include "std/int.h"
-#ifndef __cplusplus
-
-#include <stdio.h>
-
-#else
-
-#include <cstdio>
-
-#endif
-
 #ifndef zxSeek_h
 #define zxSeek_h
+#include "std/int.h"
+#include "std/io.h"
 
 typedef enum zxSeek_enum
 {

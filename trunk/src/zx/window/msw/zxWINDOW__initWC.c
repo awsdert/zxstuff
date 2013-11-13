@@ -1,5 +1,5 @@
 #include <zx/window.h>
-ZXSYS_EXP void zxWINDOW__initWC( zxWC *wc )
+ZXSYS void zxWINDOW__initWC( zxWC *wc )
 {
  *wc = zxwin.defWC;
 #if ZXMSW

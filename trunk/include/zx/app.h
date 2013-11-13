@@ -1,8 +1,7 @@
-#include "std/text.h"
-
 #pragma once
-#ifndef ZX_APP_H
-#define ZX_APP_H
+#ifndef ZXAPP_H
+#define ZXAPP_H
+#include "obj.h"
 
 ZXC_OPEN
 
@@ -17,34 +16,38 @@ typedef void*     zxInstance;
 #endif
 
 #ifdef ZXCONSOLE
-ZXSYS int zxapp__main( int argc, zxch *argv[] );
+ZXSYS int ZXSYS_CALL zxapp__main( int argc, zxch *argv[] );
 #else
-ZXSYS int
+ZXSYS int ZXSYS_CALL
   zxapp__main(
     zxInstance prevI,
     zxInstance thisI,
     LPSTR      cmdl,
     int        showAs );
 #endif
-ZXSYS zxTEXT const* zxapp_getTitle( void );
-ZXSYS void zxapp_setTitle( zxTEXT const *txt );
+ZXSYS zxTEXT* ZXSYS_CALL zxapp_getTitle( void );
+ZXSYS void    ZXSYS_CALL zxapp_setTitle( zxch const *txt );
 
 typedef struct zxn_app_struct
 {
 #ifdef ZXCONSOLE
-  int (*_main)( int argc, zxch *argv[] );
+  int (ZXSYS_CALL *_main)( int argc, zxch *argv[] );
 #else
-  int (*_main)(
+  int (ZXSYS_CALL *_main)(
     zxInstance thisI,
     zxInstance prevI,
     LPSTR      cmdl,
     int        showAs );
 #endif
+  zxTEXT* (ZXSYS_CALL *getTitle)( void );
+  void    (ZXSYS_CALL *setTitle)( zxch const *txt );
 } zxn_app;
 
 static zxn_app zxapp =
 {
-  zxapp__main
+  zxapp__main,
+  zxapp_getTitle,
+  zxapp_setTitle
 };
 
 ZXC_SHUT

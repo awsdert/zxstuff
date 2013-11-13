@@ -1,8 +1,8 @@
 #pragma once
 #include "../event.h"
 
-#ifndef ZXWINDOW_ALL_H
-#define ZXWINDOW_ALL_H
+#ifndef ZXWIN_ALL_H
+#define ZXWIN_ALL_H
 
 ZXC_OPEN
 

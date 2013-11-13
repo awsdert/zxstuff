@@ -1,5 +1,5 @@
 #include <zx/window.h>
-ZXSYS_EXP zxWINDOW* zxWINDOW_opNew( zxWINDOW* win )
+ZXSYS zxWINDOW* zxWINDOW_opNew( zxWINDOW* win )
 {
   zxWINDOWS *all = zxwin.allWindows();
   size_t i = 0, stop = zx_win.size( all );

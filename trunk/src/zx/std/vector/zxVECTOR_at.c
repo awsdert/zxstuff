@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXV_AT( zxVECTOR, void, ZXCORE_EXP )
+ZXV_AT( zxVECTOR, void, ZXCORE, ZXCORE_CALL )
 {
   ZXASSERT( !src || !src->m_data || i >= src->m_count )
     return NULL;

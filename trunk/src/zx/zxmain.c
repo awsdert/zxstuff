@@ -1,13 +1,41 @@
 #include <zx/tbox.h>
 
-ZXV_DEF( zx_win, zxWINDOWS, zxWINDOW*, ZXSYS_EXP )
+ZXV_DEF( zx_win, zxWINDOWS, zxWINDOW*, ZXSYS, ZXSYS_CALL )
 
 static zxWINDOWS  zx_l_allWindows = {0};
 static zxWINDOW*  zx_l_rootWindow = NULL;
 static zxInstance zx_l_prevI = NULL, zx_l_thisI = NULL;
 static zxEVENTS   zx_l_events = {0};
 
-ZXSYS_EXP zxsi zxapp__main(
+/*
+#if ZXMSW && defined( ZXBUILD_SYS )
+extern "C" ZXSYS BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
+{
+    switch (fdwReason)
+    {
+        case DLL_PROCESS_ATTACH:
+            // attach to process
+            // return FALSE to fail DLL load
+            break;
+
+        case DLL_PROCESS_DETACH:
+            // detach from process
+            break;
+
+        case DLL_THREAD_ATTACH:
+            // attach to thread
+            break;
+
+        case DLL_THREAD_DETACH:
+            // detach from thread
+            break;
+    }
+    return TRUE; // succesful
+}
+#endif
+/* */
+
+ZXSYS zxsi zxapp__main(
   zxInstance thisI,
   zxInstance prevI,
   LPSTR      args,
@@ -88,29 +116,29 @@ ZXSYS_EXP zxsi zxapp__main(
 }
 
 /* DO NOT MODIFY */
-ZXSYS_EXP zxEVENTS* zxEVENTS_getDefEvents( void )
+ZXSYS zxEVENTS* zxEVENTS_getDefEvents( void )
 {
   return &zx_l_events;
 }
 
-ZXSYS_EXP zxWINDOWS* zxWINDOW_allWindows( void )
+ZXSYS zxWINDOWS* zxWINDOW_allWindows( void )
 {
   return &zx_l_allWindows;
 }
 
-ZXSYS_EXP zxWINDOW*  zxWINDOW_getRootWindow( void )
+ZXSYS zxWINDOW*  zxWINDOW_getRootWindow( void )
 {
   return zx_l_rootWindow;
 }
-ZXSYS_EXP zxHwnd     zxWINDOW_getRootWH( void )
+ZXSYS zxHwnd     zxWINDOW_getRootWH( void )
 {
   return zx_l_rootWindow->m_wh;
 }
-ZXSYS_EXP zxInstance zxGetPrevI( void )
+ZXSYS zxInstance zxGetPrevI( void )
 {
   return zx_l_prevI;
 }
-ZXSYS_EXP zxInstance zxGetThisI( void )
+ZXSYS zxInstance zxGetThisI( void )
 {
   return zx_l_thisI;
 }

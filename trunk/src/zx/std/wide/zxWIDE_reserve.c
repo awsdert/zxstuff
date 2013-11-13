@@ -1,5 +1,5 @@
 #include <zx/std/wide.h>
-ZXV_RESERVE( zxWIDE, ZXCORE_EXP )
+ZXV_RESERVE( zxWIDE, ZXCORE, ZXCORE_CALL )
 {
   ZXASSERT( !src ) return;
   minSize += sizeof( wide );

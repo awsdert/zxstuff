@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxVECTOR_clear( zxVECTOR *obj )
+ZXCORE void zxVECTOR_clear( zxVECTOR *obj )
 {
   if ( !obj )
     return;

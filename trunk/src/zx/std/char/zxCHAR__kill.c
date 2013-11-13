@@ -1,5 +1,5 @@
 #include <zx/std/char.h>
-ZXCORE_EXP void zxCHAR__kill( zxCHAR *src )
+ZXV__KILL( zxCHAR, ZXCORE, ZXCORE_CALL )
 {
   if ( !src )
     return;

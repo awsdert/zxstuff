@@ -1,5 +1,5 @@
 #include <zx/vli.h>
-ZXCORE_EXP bool zxVLI_isEqual( zxVLI const *src, zxVLI const *val, size_t* I )
+ZXCORE bool zxVLI_isEqual( zxVLI const *src, zxVLI const *val, size_t* I )
 {
   size_t pi = 0, i = 0;
   bool isVS = false;
@@ -115,18 +115,13 @@ ZXCORE_EXP bool zxVLI_isEqual( zxVLI const *src, zxVLI const *val, size_t* I )
   }
   return true;
 }
-ZXCORE_EXP zxVLI* zxVLI_cpyEql( zxVLI *dst, zxVLI const *src )
+ZXVLI_OPEQL
 {
-  if ( dst )
+  if ( src )
   {
-    zxvli._kill( dst );
-    if ( src )
-    {
-      *dst = *src;
-      dst->m_core.m_data = malloc( dst->m_core.m_size );
-      mcpy( dst->m_core.m_data,
-        src->m_core.m_data, dst->m_core.m_size );
-    }
+    zxvli._kill( src );
+    if ( val )
+      zxv.opEql( &src->m_core, &val->m_core );
   }
-  return dst;
+  return src;
 }

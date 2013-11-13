@@ -1,9 +1,7 @@
-#include "app.h"
-#include "obj.h"
-
 #pragma once
-#ifndef ZX_EVENT_H
-#define ZX_EVENT_H
+#ifndef ZXEVT_H
+#define ZXEVT_H
+#include "app.h"
 
 #if ZXMSW
 ZXSYS LRESULT CALLBACK
@@ -79,7 +77,7 @@ typedef struct zxEVTPTR_struct
 
 ZXV_OBJ( zxEVENTS, zxEVTPTR );
 
-ZXV_DEC( zxEVENTS, zxEVTPTR, ZXSYS );
+ZXV_DEC( zxEVENTS, zxEVTPTR, ZXSYS, ZXSYS_CALL );
 
 /*
   These are not meant to be used in regular code;
@@ -89,7 +87,7 @@ ZXV_DEC( zxEVENTS, zxEVTPTR, ZXSYS );
 
 ZXSYS bool zxEVENTS_addEvent( zxEVENTS* events, zxEVTPTR event );
 ZXSYS void zxEVENTS_remEvent( zxEVENTS* events, zxEVTPTR event );
-ZXSYS zxEVENTS* zxEVENTS_getDefEvents( void );
+ZXSYS zxEVENTS* ZXCORE_CALL zxEVENTS_getDefEvents( void );
 
 ZXSYS ZXEVENT( zxEVENT_onIdle  );
 ZXSYS ZXEVENT( zxEVENT_onInit  );
@@ -128,7 +126,7 @@ ZXSYS ZXEVENT( zxEVENT_onPaintNC );
 ZXNSO( evt )
 {
   zxEvtPtr const events[ zxEVT_COUNT ];
-  ZXV_NS_DEC( zxEVENTS, zxEVTPTR );
+  ZXV_NS_DEC( zxEVENTS, zxEVTPTR, ZXSYS_CALL );
   bool (*addEvent)( zxEVENTS *events, zxEVTPTR event );
   void (*remEvent)( zxEVENTS *events, zxEVTPTR event );
   zxEVENTS* (*getDefEvents)( void );

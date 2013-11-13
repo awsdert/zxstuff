@@ -1,2 +1,2 @@
 #include <zx/std/wide.h>
-ZXV_DEF_REVERSE( zxWIDE, ZXCORE_EXP )
+ZXV_DEF_REVERSE( zxWIDE, ZXCORE, ZXCORE_CALL )

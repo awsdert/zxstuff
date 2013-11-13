@@ -1,6 +1,6 @@
 ﻿/* USER: AWSDERT; DATE: 09/11/2013; TIME: 07:38 */
 #include <zx/std/char.h>
-ZXV_PUSH( zxCHAR, char, ZXCORE_EXP )
+ZXV_PUSH( zxCHAR, char, ZXCORE, ZXCORE_CALL )
 {
   size_t stop;
   ZXASSERT( !src ) return false;

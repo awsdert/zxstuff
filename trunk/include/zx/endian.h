@@ -1,8 +1,8 @@
-#include "std/int.h"
-#include "std/lib.h"
-
+#pragma once
 #ifndef ZXENDIAN_H
 #define ZXENDIAN_H
+#include "std/int.h"
+#include "std/lib.h"
 
 ZXC_OPEN
 

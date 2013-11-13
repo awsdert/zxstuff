@@ -1,6 +1,6 @@
 #include <zx/vli.h>
 /* operator+=  */
-ZXCORE_EXP zxVLI* zxVLI_opAdd( zxVLI *src, zxVLI const *val )
+ZXVLI_OPADD
 {
   zxuc
     cBit = 0u,
@@ -70,11 +70,11 @@ ZXCORE_EXP zxVLI* zxVLI_opAdd( zxVLI *src, zxVLI const *val )
   }
   return src;
 }
-ZXCORE_EXP zxVLI* zxVLI_cpyAdd( zxVLI *dst, zxVLI const *src, zxVLI const *val )
+ZXVLI_CPYADD
 {
   if ( dst )
   {
-    zxvli.cpyEql( dst, src );
+    zxvli.opEql( dst, src );
     zxvli.opAdd( dst, val );
   }
   return dst;

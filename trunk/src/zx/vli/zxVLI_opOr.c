@@ -1,6 +1,6 @@
 #include <zx/vli.h>
 /* operator|=  */
-ZXCORE_EXP zxVLI* zxVLI_opOr( zxVLI *src, zxVLI const *val )
+ZXVLI_OPOR
 {
   size_t i = 0, j = 0,
     end = val->m_bits, stop = zxvli.size( val );
@@ -29,11 +29,11 @@ ZXCORE_EXP zxVLI* zxVLI_opOr( zxVLI *src, zxVLI const *val )
   return src;
 }
 /* operator|   */
-ZXCORE_EXP zxVLI* zxVLI_cpyOr( zxVLI *dst, zxVLI const *src, zxVLI const *val )
+ZXVLI_CPYOR
 {
   if ( dst )
   {
-    zxvli.cpyEql( dst, src );
+    zxvli.opEql( dst, src );
     zxvli.opOr( dst, val );
   }
   return dst;

@@ -1,5 +1,5 @@
 #include <zx/std/wide.h>
-ZXCORE_EXP void zxWIDE__kill( zxWIDE *src )
+ZXCORE void zxWIDE__kill( zxWIDE *src )
 {
   if ( !src )
     return;

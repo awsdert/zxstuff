@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxVECTOR_insert(
+ZXCORE void zxVECTOR_insert(
   zxVECTOR       *vec,
   zxVECTOR const *src,
   size_t          pos )

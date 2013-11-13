@@ -1,5 +1,5 @@
 #include <zx/std/char.h>
-ZXV_GROW( zxCHAR, char, ZXCORE_EXP )
+ZXV_GROW( zxCHAR, char, ZXCORE, ZXCORE_CALL )
 {
   ZXASSERT( !src ) return;
   zxv.grow( &src->m_core, setCount + 1, (zxuc*)&setNew );

@@ -1,6 +1,6 @@
 ﻿/* USER: Lee DATE: 04/11/2013; TIME: 06:30 */
 #include <zx/std/lib.h>
-ZXCORE_EXP bool mcmp(
+ZXCORE bool mcmp(
     void const *src,
     void const *cmp,
     size_t size,

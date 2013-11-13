@@ -1,5 +1,5 @@
 #include <zx/tbox.h>
-ZXSYS_EXP zxsl zxTBOX_onKeyD( zxEVENT* event )
+ZXSYS zxsl zxTBOX_onKeyD( zxEVENT* event )
 {
   zxWINDOW  *win  = zxwin.getWindow( event->m_obj.gid ), *base;
   zxTBOX *tbox = NULL;

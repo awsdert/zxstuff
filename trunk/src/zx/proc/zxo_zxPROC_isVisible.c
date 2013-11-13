@@ -1,5 +1,5 @@
 #include <zx/proc.h>
-ZXSYS_EXP bool zxo_zxPROC_isVisible( zxPID const pid, zxui* err )
+ZXSYS bool zxo_zxPROC_isVisible( zxPID const pid, zxui* err )
 {
 #if ZXMSW
   zx___PID ptr = {0,0,0};

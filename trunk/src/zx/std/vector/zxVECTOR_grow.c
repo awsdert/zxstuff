@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXV_GROW( zxVECTOR, void*, ZXCORE_EXP )
+ZXV_GROW( zxVECTOR, void*, ZXCORE, ZXCORE_CALL )
 {
   size_t d, t, size;
   zxuc *SRC;

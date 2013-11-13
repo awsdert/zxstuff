@@ -1,5 +1,5 @@
 #include <zx/std/wide.h>
-ZXV_RESIZE( zxWIDE, wide, ZXCORE_EXP )
+ZXV_RESIZE( zxWIDE, wide, ZXCORE, ZXCORE_CALL )
 {
   ZXASSERT( !src ) return;
   zxv.resize( &src->m_core, setCount + 1, (zxuc*)&setNew );

@@ -1,5 +1,5 @@
 #include <zx/std/char.h>
-ZXV_APPEND( zxCHAR, ZXCORE_EXP )
+ZXV_APPEND( zxCHAR, ZXCORE, ZXCORE_CALL )
 {
   if ( !src || !cpy || !cpy->m_core.m_data )
     return;

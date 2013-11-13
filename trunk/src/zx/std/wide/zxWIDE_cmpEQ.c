@@ -1,2 +1,2 @@
 #include <zx/std/wide.h>
-ZXV_DEF_CMPEQ( zxWIDE, ZXCORE_EXP )
+ZXV_DEF_CMPEQ( zxWIDE, ZXCORE, ZXCORE_CALL )

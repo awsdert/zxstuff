@@ -1,6 +1,6 @@
 #include <zx/vli.h>
 
-ZXCORE_EXP bool zxVLI_cmpEQ( zxVLI const *src, zxVLI const *val )
+ZXCORE bool zxVLI_cmpEQ( zxVLI const *src, zxVLI const *val )
 {
   return zxvli.isEqual( src, val, NULL );
 }

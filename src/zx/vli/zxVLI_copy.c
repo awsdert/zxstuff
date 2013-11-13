@@ -1,6 +1,6 @@
 #include <zx/vli.h>
-ZXV_DEF_COPY( zxVLI, zxuc, ZXCORE_EXP )
-ZXV_CLEAR( zxVLI, ZXCORE_EXP )
+ZXV_DEF_COPY( zxVLI, zxuc, ZXCORE, ZXCORE_CALL )
+ZXV_CLEAR( zxVLI, ZXCORE, ZXCORE_CALL )
 {
   ZXASSERT( !src ) return;
   zxv.clear( &src->m_core );
@@ -9,7 +9,7 @@ ZXV_CLEAR( zxVLI, ZXCORE_EXP )
   src->m_lastBit  = 0u;
   src->m_lastByte = 0u;
 }
-ZXV_SWAP( zxVLI, ZXCORE_EXP )
+ZXV_SWAP( zxVLI, ZXCORE, ZXCORE_CALL )
 {
   zxVLI tmp;
   ZXASSERT( !src || !dst ) return;

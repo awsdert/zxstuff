@@ -1,5 +1,5 @@
 #include <zx/std/char.h>
-ZXCORE_EXP zxum zxCHAR_2UI( zxCHAR const *txt, zxuc base )
+ZXCORE zxum zxCHAR_2UI( zxCHAR const *txt, zxuc base )
 {
   size_t i = 0u, len;
   char const *cmp = zx___cBase;
@@ -23,7 +23,7 @@ ZXCORE_EXP zxum zxCHAR_2UI( zxCHAR const *txt, zxuc base )
   }
   return val;
 }
-ZXCORE_EXP zxsm zx_c2i( zxCHAR const *txt, zxuc base )
+ZXCORE zxsm zx_c2i( zxCHAR const *txt, zxuc base )
 {
   if ( !txt )
     return 0;

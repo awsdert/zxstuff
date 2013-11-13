@@ -1,5 +1,5 @@
 #include <zx/std/char.h>
-ZXV_OPADD( zxCHAR, ZXCORE_EXP )
+ZXV_OPADD( zxCHAR, ZXCORE, ZXCORE_CALL )
 {
   size_t stop;
   ZXASSERT( !src || !cpy ) return src;

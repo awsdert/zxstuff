@@ -1,5 +1,5 @@
 #include <zx/proc.h>
-ZXSYS_EXP bool zxo_zxPROC__init( zxPROC *proc, zxTEXT const *txt )
+ZXSYS bool zxo_zxPROC__init( zxPROC *proc, zxTEXT const *txt )
 {
   if ( !proc )
     return false;

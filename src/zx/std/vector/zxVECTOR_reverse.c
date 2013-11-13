@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxVECTOR_reverse( zxVECTOR *obj )
+ZXCORE void zxVECTOR_reverse( zxVECTOR *obj )
 {
   size_t i, d, s;
   zxuc *tmp, *VEC;

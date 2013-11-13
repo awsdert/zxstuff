@@ -1,5 +1,5 @@
 #include <zx/std/char.h>
-ZXV_RESERVE( zxCHAR, ZXCORE_EXP )
+ZXV_RESERVE( zxCHAR, ZXCORE, ZXCORE_CALL )
 {
   ZXASSERT( !src ) return;
   minSize += sizeof( char );

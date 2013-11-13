@@ -1,8 +1,7 @@
-#include "vli.h"
-
 #pragma once
 #ifndef ZX_OBJ_H
 #define ZX_OBJ_H
+#include "vli.h"
 
 ZXC_OPEN
 
@@ -27,20 +26,20 @@ typedef ZXSOBJ( zxOBJ )
 } zxOBJ;
 
 ZXV_OBJ( zxOBJS, zxOBJ );
-ZXV_DEC( zxOBJS, zxOBJ, ZXCORE );
-ZXCORE void    zxOBJS_setFocus( zxOBJ );
-ZXCORE zxOBJ   zxOBJS_getFocus( void );
-ZXCORE zxOBJS* zxOBJS_allObjects( void );
-ZXCORE int     zxOBJS_freeAll( int returnCode );
+ZXV_DEC( zxOBJS, zxOBJ, ZXCORE, ZXCORE_CALL );
+ZXCORE zxOBJS* ZXCORE_CALL zxOBJS_allObjects( void );
+ZXCORE void    ZXCORE_CALL zxOBJS_setFocus( zxOBJ );
+ZXCORE zxOBJ   ZXCORE_CALL zxOBJS_getFocus( void );
+ZXCORE int     ZXCORE_CALL zxOBJS_freeAll( int returnCode );
 
 ZXNSO( obj )
 {
   zxOBJ defObj;
-  ZXV_NS_DEC( zxOBJS, zxOBJ );
-  zxOBJS* (*allObjects)( void );
-  void    (*setFocus)( zxOBJ obj );
-  zxOBJ   (*getFocus)( void );
-  int     (*freeAll)( int returnCode );
+  ZXV_NS_DEC( zxOBJS, zxOBJ, ZXCORE_CALL );
+  zxOBJS* (ZXCORE_CALL *allObjects)( void );
+  void    (ZXCORE_CALL *setFocus)( zxOBJ obj );
+  zxOBJ   (ZXCORE_CALL *getFocus)( void );
+  int     (ZXCORE_CALL *freeAll)( int returnCode );
 } zxn_obj;
 
 static zxn_obj zxobj =

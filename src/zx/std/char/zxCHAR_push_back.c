@@ -1,5 +1,5 @@
 #include <zx/std/char.h>
-ZXV_PUSH_BACK( zxCHAR, char, ZXCORE_EXP )
+ZXV_PUSH_BACK( zxCHAR, char, ZXCORE, ZXCORE_CALL )
 {
   size_t stop;
   ZXASSERT( !src ) return false;

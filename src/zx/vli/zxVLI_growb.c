@@ -1,5 +1,5 @@
 #include <zx/vli.h>
-ZXCORE_EXP void zxVLI_growb( zxVLI* src, size_t setBits )
+ZXCORE void zxVLI_growb( zxVLI* src, size_t setBits )
 {
   zxuc   def = 0u, last = zxvli.isNeg( src );
   size_t size, bits = 0u;
@@ -21,7 +21,7 @@ ZXCORE_EXP void zxVLI_growb( zxVLI* src, size_t setBits )
 }
 
 
-ZXCORE_EXP void zxVLI_resizeb( zxVLI *src, size_t setBits )
+ZXCORE void zxVLI_resizeb( zxVLI *src, size_t setBits )
 {
   ZXASSERT( !src ) return;
   if ( setBits >= src->m_bits )
@@ -32,5 +32,5 @@ ZXCORE_EXP void zxVLI_resizeb( zxVLI *src, size_t setBits )
 
 
 
-ZXV_DEF_AT( zxVLI, zxuc, ZXCORE_EXP )
+ZXV_DEF_AT( zxVLI, zxuc, ZXCORE, ZXCORE_CALL )
 

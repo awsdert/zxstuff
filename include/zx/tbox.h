@@ -1,7 +1,7 @@
 #pragma once
+#ifndef ZXTBOX_H
+#define ZXTBOX_H
 #include "window.h"
-#ifndef zxTBOX_H
-#define zxTBOX_H
 
 ZXC_OPEN
 

@@ -1,5 +1,5 @@
 #include <zx/window.h>
-ZXSYS_EXP zxWINDOW* zxWINDOW_byHandle( zxHwnd wh )
+ZXSYS zxWINDOW* zxWINDOW_byHandle( zxHwnd wh )
 {
   zxOBJS *all = zxobj.allObjects();
   zxOBJ *obj;

@@ -1,11 +1,11 @@
 #include <zx/window.h>
-ZXSYS_EXP zxWINDOW* zxWINDOW_getKid( zxWINDOW *win, size_t i )
+ZXSYS zxWINDOW* zxWINDOW_getKid( zxWINDOW *win, size_t i )
 {
   if ( !win || !zxv_size.at( &win->m_kids, i ) )
     return NULL;
   return zxwin.getWindow( win->m_kids.m_data[ i ] );
 }
-ZXSYS_EXP zxWINDOW* zxWINDOW_getNext( zxWINDOW *win, bool nextKid )
+ZXSYS zxWINDOW* zxWINDOW_getNext( zxWINDOW *win, bool nextKid )
 {
   zxWINDOW *base;
   zxvSIZE *kids;
@@ -30,7 +30,7 @@ ZXSYS_EXP zxWINDOW* zxWINDOW_getNext( zxWINDOW *win, bool nextKid )
   }
   return zxwin.getNext( base, false );
 }
-ZXSYS_EXP zxWINDOW* zxWINDOW_getPrev( zxWINDOW *win )
+ZXSYS zxWINDOW* zxWINDOW_getPrev( zxWINDOW *win )
 {
   zxWINDOW *base;
   zxvSIZE *kids;

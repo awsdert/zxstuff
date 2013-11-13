@@ -1,5 +1,5 @@
 #include <zx/std/lib.h>
-ZXCORE_EXP void* mrenew(
+ZXCORE void* mrenew(
   void*  dst,
   size_t count,
   size_t const Tsize,

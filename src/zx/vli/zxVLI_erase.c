@@ -1,6 +1,6 @@
 ﻿/* USER: AWSDERT; DATE: 09/11/2013; TIME: 08:00 */
 #include <zx/vli.h>
-ZXV_ERASE( zxVLI, ZXCORE_EXP )
+ZXV_ERASE( zxVLI, ZXCORE, ZXCORE_CALL )
 {
   size_t size;
   ZXASSERT( !src ) return;
@@ -10,7 +10,7 @@ ZXV_ERASE( zxVLI, ZXCORE_EXP )
   src->m_lastByte = size - 1;
   src->m_lastBit = zxuc_last;
 }
-ZXCORE_EXP void zxVLI_eraseb( zxVLI *src, size_t firstBit,  size_t lastBit )
+ZXCORE void zxVLI_eraseb( zxVLI *src, size_t firstBit,  size_t lastBit )
 {
   zxuc* data, B= 1, S = 1;
   size_t i = 0, b = 0, s = 0, size;

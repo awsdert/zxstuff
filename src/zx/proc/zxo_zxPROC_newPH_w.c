@@ -1,5 +1,5 @@
 #include <zx/proc.h>
-ZXSYS_EXP zxui zxo_zxPROC_newPH_w( zxPH* ph, DWORD access, BOOL inherit, zxWIDE const *name )
+ZXSYS zxui zxo_zxPROC_newPH_w( zxPH* ph, DWORD access, BOOL inherit, zxWIDE const *name )
 {
 #if ZXMSW
   zxPE32 pe32 = {0};

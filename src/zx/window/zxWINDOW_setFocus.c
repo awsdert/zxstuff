@@ -1,6 +1,6 @@
 ﻿/* USER: AWSDERT; DATE: 07/11/2013; TIME: 18:11 */
 #include <zx/window.h>
-ZXSYS_EXP void zxWINDOW_setFocus( zxWINDOW* win )
+ZXSYS void zxWINDOW_setFocus( zxWINDOW* win )
 {
   zxOBJ obj = zxobj.defObj;
   if ( win )

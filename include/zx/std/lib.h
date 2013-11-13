@@ -1,12 +1,13 @@
 #pragma once
-#include "../limits.h"
+#ifndef ZXSTDLIB
+#define ZXSTDLIB
+#include "int.h"
 #if ZXCPP
 #include <cstdlib>
 #else
 #include <stdlib.h>
 #endif
-#ifndef ZXSTDLIB
-#define ZXSTDLIB
+
 ZXC_OPEN
 
 #define ZXNEW( PTR, NAME, COPY ) \

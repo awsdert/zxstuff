@@ -1,5 +1,5 @@
 #include <zx/vli.h>
-ZXCORE_EXP zxVLI* zxVLI_opMul( zxVLI *src, zxVLI const *val )
+ZXVLI_OPMUL
 {
   size_t s = 0, pi = 0, I = 0, stop = zxvli.size( src );
   zxVLI des = zxvli.def, tmp = des;
@@ -36,11 +36,11 @@ ZXCORE_EXP zxVLI* zxVLI_opMul( zxVLI *src, zxVLI const *val )
   free( tmp.m_data );
   return src;
 }
-ZXCORE_EXP zxVLI* zxVLI_cpyMul( zxVLI *dst, zxVLI const *src, zxVLI const *val )
+ZXVLI_CPYMUL
 {
   if ( dst )
   {
-    zxvli.cpyEql( dst, src );
+    zxvli.opEql( dst, src );
     zxvli.opMul( dst, val );
   }
   return dst;

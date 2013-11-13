@@ -1,5 +1,5 @@
 #include <zx/tbox.h>
-ZXSYS_EXP zxTBOX* zxTBOX_opNew( zxWINDOW *win )
+ZXSYS zxTBOX* zxTBOX_opNew( zxWINDOW *win )
 {
   zxTBOX   *tbox = (zxTBOX*)mnew( sizeof( zxTBOX ), NULL );
   zxEVENTS *evts = zxevt.getDefEvents();

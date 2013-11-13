@@ -1,5 +1,5 @@
 #include <zx/window.h>
-ZXSYS_EXP void zxWINDOW_addKid( zxWINDOW *win, zxWINDOW *kid )
+ZXSYS void zxWINDOW_addKid( zxWINDOW *win, zxWINDOW *kid )
 {
   if ( !win || kid )
     return;

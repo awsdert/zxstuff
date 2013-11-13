@@ -1,5 +1,5 @@
 #include <zx/proc.h>
-ZXSYS_EXP BOOL ZXCB zx___enumWindowsIsVisible( HWND wh, LPARAM lp )
+ZXSYS BOOL ZXCB zx___enumWindowsIsVisible( HWND wh, LPARAM lp )
 {
 #if ZXMSW
   zxPID pid = 0u;

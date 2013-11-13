@@ -1,5 +1,5 @@
 #include <zx/proc.h>
-ZXSYS_EXP zxui zxo_zxPROC_newPHId( zxPH* ph, DWORD access, BOOL inherit, zxPID pid )
+ZXSYS zxui zxo_zxPROC_newPHId( zxPH* ph, DWORD access, BOOL inherit, zxPID pid )
 {
 #if ZXMSW
   if ( !ph )

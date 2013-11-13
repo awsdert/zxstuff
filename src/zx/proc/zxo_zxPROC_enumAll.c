@@ -1,5 +1,5 @@
 #include <zx/proc.h>
-ZXSYS_EXP zxui zxo_zxPROC_enumAll( zxPROC **plist, bool visibleOnly )
+ZXSYS zxui zxo_zxPROC_enumAll( zxPROC **plist, bool visibleOnly )
 {
 #if ZXMSW
   HANDLE shot = NULL;
@@ -43,7 +43,7 @@ ZXSYS_EXP zxui zxo_zxPROC_enumAll( zxPROC **plist, bool visibleOnly )
         ++i; ++j;
       }
       while ( i < len &&
-        ( pl[ j ].m_pe32.dwSize = pe32.dwSize ) && 
+        ( pl[ j ].m_pe32.dwSize = pe32.dwSize ) &&
         Process32Next( shot, &pl[ j ].m_pe32 ) );
     }
     else

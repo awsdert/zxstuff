@@ -1,6 +1,6 @@
 #include <zx/vli.h>
 /* operator-= */
-ZXCORE_EXP zxVLI* zxVLI_opSub( zxVLI* src, zxVLI const *val )
+ZXVLI_OPSUB
 {
   zxuc add1_val = 1u;
   zxVLI  add1 = zxvli.def;
@@ -18,11 +18,11 @@ ZXCORE_EXP zxVLI* zxVLI_opSub( zxVLI* src, zxVLI const *val )
   zxvli.opAdd( src, val );
   return src;
 }
-ZXCORE_EXP zxVLI* zxVLI_cpySub( zxVLI *dst, zxVLI const *src, zxVLI const *val )
+ZXVLI_CPYSUB
 {
   if ( dst )
   {
-    zxvli.cpyEql( dst, src );
+    zxvli.opEql( dst, src );
     zxvli.opSub( dst, val );
   }
   return dst;

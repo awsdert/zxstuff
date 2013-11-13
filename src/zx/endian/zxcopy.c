@@ -1,5 +1,5 @@
 #include <zx/endian.h>
-ZXCORE_EXP zxuc* zxcopy(
+ZXCORE zxuc* zxcopy(
   zxuc* src, size_t ssize, zxEndian sen,
   zxuc* des, size_t dsize, zxEndian den )
 {

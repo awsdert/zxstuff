@@ -1,5 +1,5 @@
 #include <zx/window.h>
-ZXSYS_EXP zxWINDOW* zxWINDOW_opDel( zxWINDOW* win )
+ZXSYS zxWINDOW* zxWINDOW_opDel( zxWINDOW* win )
 {
   zxOBJS *all = zxobj.allObjects();
   size_t i = 0, stop = zxobj.size( all );

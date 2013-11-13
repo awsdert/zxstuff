@@ -1,10 +1,7 @@
 #pragma once
-#include "std/text.h"
-#include "app.h"
-#include "window/msw.h"
-
 #ifndef ZX_WINDOW_H
 #define ZX_WINDOW_H
+#include "window/msw.h"
 
 ZXC_OPEN
 
@@ -33,11 +30,11 @@ typedef struct zxWINDOW_struct
 } zxWINDOW;
 
 ZXV_OBJ( zxWINDOWS, zxWINDOW* );
-ZXV_DEC( zxWINDOWS, zxWINDOW*, ZXSYS );
+ZXV_DEC( zxWINDOWS, zxWINDOW*, ZXSYS, ZXSYS_CALL );
 
 ZXNSO( _win )
 {
-  ZXV_NS_DEC( zxWINDOWS, zxWINDOW* );
+  ZXV_NS_DEC( zxWINDOWS, zxWINDOW*, ZXSYS_CALL );
 } zxn__win;
 
 static zxn__win const zx_win =
@@ -92,7 +89,7 @@ static zxWINDOW*
   @param returnCode The value you want returned
 **/
 ZXSYS void       zxWINDOW_setFocus( zxWINDOW* win );
-ZXSYS zxWINDOW * zxWINDOW_getFocus( void ); 
+ZXSYS zxWINDOW * zxWINDOW_getFocus( void );
 ZXSYS int        zxWINDOW_freeAll( int returnCode );
 
 ZXSYS void zx_FreeWC( void );
@@ -128,7 +125,7 @@ ZXNSO( win )
   zxWINDOW*  (*opNew)(      zxWINDOW *win );
   zxWINDOW*  (*opDel)(      zxWINDOW* win );
   void       (*setFocus)( zxWINDOW* win );
-  zxWINDOW * (*getFocus)( void ); 
+  zxWINDOW * (*getFocus)( void );
   int        (*freeAll)( int returnCode );
 } zxn_win;
 

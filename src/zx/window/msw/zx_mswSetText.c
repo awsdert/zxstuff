@@ -1,6 +1,6 @@
 #include <zx/tbox.h>
 #if ZXMSW
-ZXSYS_EXP zxui zx_mswSetText(
+ZXSYS zxui zx_mswSetText(
   HWND wh,
   zxTEXT* text,
   int line,

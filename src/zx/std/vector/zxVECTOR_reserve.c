@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXV_RESERVE( zxVECTOR, ZXCORE_EXP )
+ZXV_RESERVE( zxVECTOR, ZXCORE, ZXCORE_CALL )
 {
   size_t tmp = 0u, size;
   ZXASSERT( !src ) return;

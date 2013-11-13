@@ -1,5 +1,5 @@
 #include <zx/proc.h>
-ZXSYS_EXP bool zxo_zxPROC_getPE32Id( zxPE32* pe32, zxPID pid )
+ZXSYS bool zxo_zxPROC_getPE32Id( zxPE32* pe32, zxPID pid )
 {
 #if ZXMSW
   HANDLE shot = NULL;

@@ -1,5 +1,5 @@
 #include <zx/vli.h>
-ZXCORE_EXP zxuc zxVLI_isNeg( zxVLI const *src )
+ZXCORE zxuc zxVLI_isNeg( zxVLI const *src )
 {
   zxuc last = 0u, bit = 1u;
   ZXASSERT( !src ) return 0u;

@@ -1,12 +1,15 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP void zxVECTOR__kill( zxVECTOR *obj )
+ZXV__KILL( zxVECTOR, ZXCORE, ZXCORE_CALL )
 {
   size_t Tsize;
-  if ( !obj )
+  void **ptr;
+  if ( !src )
     return;
-  Tsize = obj->m_Tsize;
-  if ( obj->m_data )
-    free( obj->m_data );
-  *obj = zxv.def;
-  obj->m_Tsize = Tsize;
+  ptr   = src->m_ptr;
+  Tsize = src->m_Tsize;
+  if ( src->m_data )
+    free( src->m_data );
+  *src = zxv.def;
+  src->m_Tsize = Tsize;
+  src->m_ptr   = ptr;
 }

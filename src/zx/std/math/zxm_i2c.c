@@ -1,5 +1,5 @@
 #include <zx/std/math.h>
-ZXCORE_EXP void zxm_i2c( zxui value, zxuc* dst, zxuc i )
+ZXCORE void zxm_i2c( zxui value, zxuc* dst, zxuc i )
 {
   zxuc tmp[ 4 ] = {0,0,0,0};
 #if ZXINT_BITS <= CHAR_BIT

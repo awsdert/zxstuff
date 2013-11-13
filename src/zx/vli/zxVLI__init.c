@@ -1,10 +1,10 @@
 #include <zx/vli.h>
-ZXV__INITCPY( zxVLI, ZXCORE_EXP )
+ZXV__INITCPY( zxVLI, ZXCORE, ZXCORE_CALL )
 {
   ZXASSERT( !src || !cpy ) return;
   zxv._initCpy( &src->m_core, &cpy->m_core );
 }
-ZXCORE_EXP void zxVLI__init( zxVLI *src, zxsm value )
+ZXCORE void zxVLI__init( zxVLI *src, zxsm value )
 {
   size_t size = sizeof( zxsm );
   ZXASSERT( !src ) return;
@@ -18,7 +18,7 @@ ZXCORE_EXP void zxVLI__init( zxVLI *src, zxsm value )
   src->m_lastByte = size - 1;
   src->m_lastBit = zxuc_last;
 }
-ZXCORE_EXP void zxVLI__initU( zxVLI *src, zxum value )
+ZXCORE void zxVLI__initU( zxVLI *src, zxum value )
 {
   size_t size = sizeof( zxsm );
   ZXASSERT( !src ) return;

@@ -1,6 +1,6 @@
 #include <zx/vli.h>
 /* operator~=  */
-ZXCORE_EXP zxVLI* zxVLI_opNot( zxVLI* src )
+ZXVLI_OPNOT
 {
   size_t i = 0, j = 0, stop = zxvli.size( src );
   zxuc bit = 0u, *SRC;
@@ -24,11 +24,11 @@ ZXCORE_EXP zxVLI* zxVLI_opNot( zxVLI* src )
   return src;
 }
 /* operator~   */
-ZXCORE_EXP zxVLI* zxVLI_cpyNot( zxVLI *dst, zxVLI const *src )
+ZXVLI_CPYNOT
 {
   if ( dst )
   {
-    zxvli.cpyEql( dst, src );
+    zxvli.opEql( dst, src );
     zxvli.opNot( dst );
   }
   return dst;

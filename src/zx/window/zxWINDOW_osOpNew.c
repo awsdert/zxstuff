@@ -1,6 +1,6 @@
 #include <zx/window.h>
 #if ZXMSW
-ZXSYS_EXP zxsi zxWINDOW_osOpNew( zxWINDOW *win )
+ZXSYS zxsi zxWINDOW_osOpNew( zxWINDOW *win )
 {
   zxWINDOW  *base = zxwin.getWindow( win->m_base );
   zxTEXT    *text = win->m_txt;

@@ -1,13 +1,13 @@
 #include <zx/vli.h>
 /* operator <<= */
-ZXCORE_EXP zxVLI* zxVLI_opMvl( zxVLI* src, size_t by )
+ZXVLI_OPMVL
 {
   size_t s = 0, F = 0, T = 0, t = 0;
   zxuc bitl = 1u << ( CHAR_BIT - 1 ), tbit = bitl, fbit = bitl, val = 0,
     *SRC = (zxuc*)src->m_core.m_data;
-  if ( !src || !by )
+  if ( !src || !bits )
     return src;
-  if ( by >= src->m_bits )
+  if ( bits >= src->m_bits )
   {
     mset( SRC, 0, src->m_core.m_size );
     if ( src->m_isSigned )
@@ -16,7 +16,7 @@ ZXCORE_EXP zxVLI* zxVLI_opMvl( zxVLI* src, size_t by )
   }
   T = src->m_lastByte;
   F = T;
-  for ( ; s < by; ++s )
+  for ( ; s < bits; ++s )
   {
     fbit >>= 1;
     if ( !fbit )
@@ -60,12 +60,12 @@ ZXCORE_EXP zxVLI* zxVLI_opMvl( zxVLI* src, size_t by )
   return src;
 }
 /* operator<<  */
-ZXCORE_EXP zxVLI* zxVLI_cpyMvl( zxVLI *dst, zxVLI const *src, size_t by )
+ZXVLI_CPYMVL
 {
   if ( dst )
   {
-    zxvli.cpyEql( dst, src );
-    zxvli.opMvl( dst, by );
+    zxvli.opEql( dst, src );
+    zxvli.opMvl( dst, bits );
   }
   return dst;
 }

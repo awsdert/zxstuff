@@ -1,6 +1,6 @@
 ﻿/* USER: AWSDERT; DATE: 09/11/2013; TIME: 07:25 */
 #include <zx/std/wide.h>
-ZXV_PUSH( zxWIDE, wide, ZXCORE_EXP )
+ZXV_PUSH( zxWIDE, wide, ZXCORE, ZXCORE_CALL )
 {
   size_t stop;
   ZXASSERT( !src ) return false;

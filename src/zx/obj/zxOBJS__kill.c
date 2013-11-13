@@ -1,6 +1,6 @@
 ﻿/* USER: AWSDERT; DATE: 09/11/2013; TIME: 07:43 */
 #include <zx/obj.h>
-ZXV__KILL( zxOBJS, ZXCORE_EXP )
+ZXV__KILL( zxOBJS, ZXCORE, ZXCORE_CALL )
 {
   size_t i = 0, stop = zxobj.size( src );
   zxOBJ obj;

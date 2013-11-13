@@ -1,6 +1,6 @@
 ﻿/* USER: Lee; DATE: 04/11/2013; TIME: 06:37*/
 #include <zx/std/vector.h>
-ZXV_PUSH( zxVECTOR, void*, ZXCORE_EXP )
+ZXV_PUSH( zxVECTOR, void*, ZXCORE, ZXCORE_CALL )
 {
   size_t i = 0, j = 0, k = 0, stop = zxv.size( src ), size;
   zxuc *SRC;

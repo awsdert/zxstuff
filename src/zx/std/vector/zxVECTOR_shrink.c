@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXV_SHRINK( zxVECTOR, ZXCORE_EXP )
+ZXV_SHRINK( zxVECTOR, ZXCORE, ZXCORE_CALL )
 {
   size_t size = 0;
   ZXASSERT( !src )

@@ -1,5 +1,5 @@
 #include <zx/vli.h>
-ZXCORE_EXP bool zxVLI_cmpLE( zxVLI const *src, zxVLI const *val )
+ZXCORE bool zxVLI_cmpLE( zxVLI const *src, zxVLI const *val )
 {
   size_t i = 0;
   zxuc *SRC = (zxuc*)src->m_core.m_data,

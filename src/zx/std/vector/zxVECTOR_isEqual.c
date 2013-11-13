@@ -1,5 +1,5 @@
 #include <zx/std/vector.h>
-ZXCORE_EXP bool zxVECTOR_isEqual( zxVECTOR const *vec, zxVECTOR const *cmp, size_t* i )
+ZXCORE bool zxVECTOR_isEqual( zxVECTOR const *vec, zxVECTOR const *cmp, size_t* i )
 {
   size_t cs = 0, c = 0, j = 0, k, m;
   zxuc *VEC, *CMP;

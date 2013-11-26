@@ -14,6 +14,20 @@ typedef enum zxWIN_enum
   zxWIN_COUNT
 } zxWIN;
 
+typedef struct zxCOLOR_struct
+{
+  zxuc r, g, b, o;
+} zxCOLOR;
+
+typedef struct zxFONT_struct
+{
+  UINT    style;
+  int     weight;
+  int     w, h;
+  zxCOLOR color;
+  zxch   *family;
+} zxFONT;
+
 #if ZXALL
 typedef struct zxFONT_struct
 {

@@ -51,7 +51,7 @@ ZXSYS zxui zxo_zxPROC_newPHId( zxPH *ph,
                                zxPID pid );
 ZXSYS bool zxo_zxPROC_isVisible( zxPID const pid, zxui *errorCode );
 
-typedef struct zxn_zxPROC_struct
+ZXNSO( proc )
 {
   zxPROC const def;
   bool (*_init)(     zxPROC *proc, zxTEXT const *text );
@@ -64,9 +64,9 @@ typedef struct zxn_zxPROC_struct
   zxui (*newPH_w)(   zxPH* ph, DWORD access, BOOL inherit, zxWIDE const *name );
   zxui (*newPHId)(   zxPH* ph, DWORD access, BOOL inherit, zxPID pid );
   bool (*isVisible)( zxPID const pid, zxui *errorCode );
-} zxn_zxPROC;
+} zxn_proc;
 
-static zxn_zxPROC zxproc = {
+static zxn_proc zxproc = {
   {0},
   zxo_zxPROC__init,
   zxo_zxPROC__kill,

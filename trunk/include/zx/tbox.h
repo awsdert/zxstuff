@@ -1,6 +1,6 @@
 #pragma once
-#ifndef ZXTBOX_H
-#define ZXTBOX_H
+#ifndef ZX_TBOX_H
+#define ZX_TBOX_H
 #include "window.h"
 
 ZXC_OPEN
@@ -8,57 +8,19 @@ ZXC_OPEN
 typedef ZXSOBJ( zxTBOX )
 {
   zxWINDOW *m_win;
-  zxui      m_pos;
-#if ZXMSW
-  DWORD     m_fc, m_lc;  
-  HFONT     m_font;
-#endif
+  size_t    m_fc, m_lc;
 } zxTBOX;
-
-ZXSYS zxTBOX*  zxTBOX_opNew( zxWINDOW* win    );
-ZXSYS void     zxTBOX_opDel( void*     winObj, size_t type );
-ZXSYS bool     zxTBOX__drawText( zxTBOX *tbox, bool setCaret );
-ZXSYS bool     zxTBOX__setCaret( zxTBOX *tbox );
-
-ZXSYS ZXEVENT( zxTBOX_onInit  );
-ZXSYS ZXEVENT( zxTBOX_onKill  );
-ZXSYS ZXEVENT( zxTBOX_onCmd   );
-ZXSYS ZXEVENT( zxTBOX_onChar  );
-ZXSYS ZXEVENT( zxTBOX_onKeyD  );
-ZXSYS ZXEVENT( zxTBOX_onKeyU  );
-ZXSYS ZXEVENT( zxTBOX_onFocus );
-ZXSYS ZXEVENT( zxTBOX_onBlur  );
 
 ZXNSO( tbox )
 {
-  zxEvtPtr const events[ zxEVT_COUNT ];
-  zxTBOX   const def;
+  zxTBOX const def;
   bool    (*_drawText)( zxTBOX *tbox, bool setCaret );
   bool    (*_setCaret)( zxTBOX *tbox );
   zxTBOX* (*opNew)( zxWINDOW* win    );
   opDelVoid opDel;
 } zxn_tbox;
 
-static zxn_tbox const zxtbox =
-{
-  {
-    NULL,
-    zxTBOX_onInit,
-    zxTBOX_onKill,
-    zxTBOX_onCmd,
-    zxTBOX_onChar,
-    zxTBOX_onKeyD,
-    zxTBOX_onKeyU,
-    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
-    zxTBOX_onFocus,
-    zxTBOX_onBlur,
-    NULL
-  }, {0},
-  zxTBOX__drawText,
-  zxTBOX__setCaret,
-  zxTBOX_opNew,
-  zxTBOX_opDel
-};
+extern zxn_tbox const zxtbox;
 
 ZXC_SHUT
 

@@ -28,7 +28,7 @@ ZXSYS int ZXSYS_CALL
 ZXSYS zxTEXT* ZXSYS_CALL zxapp_getTitle( void );
 ZXSYS void    ZXSYS_CALL zxapp_setTitle( zxch const *txt );
 
-typedef struct zxn_app_struct
+ZXNSO( app )
 {
 #ifdef ZXCONSOLE
   int (ZXSYS_CALL *_main)( int argc, zxch *argv[] );

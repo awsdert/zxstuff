@@ -12,93 +12,49 @@ enum
   zxOBJ_SYS_COUNT
 };
 
+#if ZXMSW
+/* This speeds things up as well as saves space */
+typedef RECT  zxRECT;
+typedef POINT zxPOINT;
+#else
+typedef zxRECT_struct
+{
+  zxsl left, top, righ, bottom;
+} zxRECT;
+typedef zxPOINT_struct
+{
+  zxsl x, y;
+} zxPOINT;
+#endif
+
 typedef struct zxWINDOW_struct
 {
-  size_t    m_base;
+  size_t    m_base, m_wid, m_oid;
   zxvSIZE   m_kids;
   bool      m_class;
-  zxOBJ     m_obj, m_wObj, m_uObj;
+  zxOBJ     m_wObj, m_uObj;
   zxul      m_style, m_stylex;
   bool      m_delKids;
   zxsi      m_x, m_y, m_w, m_h;
-  zxTEXT   *m_txt;
+  zxTEXT    m_txt;
   zxWIN     m_win;
   /* System Specfic */
   zxWCX    *m_wcx;
-  zxHwnd    m_wh;
-  zxEVENTS  m_events;
+  zxCOLOR   m_bgc;
+  zxRECT    m_wRect, m_cRect;
+  bool      m_mutex;
 } zxWINDOW;
-
-ZXV_OBJ( zxWINDOWS, zxWINDOW* );
-ZXV_DEC( zxWINDOWS, zxWINDOW*, ZXSYS, ZXSYS_CALL );
-
-ZXNSO( _win )
-{
-  ZXV_NS_DEC( zxWINDOWS, zxWINDOW*, ZXSYS_CALL );
-} zxn__win;
-
-static zxn__win const zx_win =
-{
-  ZXV_NS_DEF( zxWINDOWS, {0} )
-};
 
 ZXSYS zxInstance zxGetPrevI( void );
 ZXSYS zxInstance zxGetThisI( void );
-ZXSYS void       zxWINDOW__initWC(    zxWC     *wc  );
-ZXSYS void       zxWINDOW__initWCX(   zxWCX    *wcx );
-ZXSYS zxHwnd     zxWINDOW_getHandle(  size_t    wid );
-ZXSYS zxWINDOW*  zxWINDOW_getRootWindow( void );
-ZXSYS zxHwnd     zxWINDOW_getRootWH( void );
-ZXSYS zxWINDOW*  zxWINDOW_getWindow(  size_t    wid );
-ZXSYS bool       zxWINDOW_isKnown(    zxWINDOW* win );
-ZXSYS zxWINDOWS* zxWINDOW_allWindows( void );
-ZXSYS zxWINDOW*  zxWINDOW_newWindow( zxWINDOW* win );
-ZXSYS zxWINDOW*  zxWINDOW_delWindow( zxWINDOW* win );
-ZXSYS zxWINDOW*  zxWINDOW_byHandle(   zxHwnd    wh );
-ZXSYS zxuc       zxWINDOW_setCaret(
-  zxWINDOW *win, zxui      line, zxui      pos );
 
-#if ZXMSW
-ZXSYS zxuc       zxWINDOW_mswSetText(
-  zxWINDOW *win,
-  zxTEXT   *txt,
-  zxui     line,
-  zxui     pos,
-  HBRUSH   bg );
-#endif
-
-ZXSYS  zxsi       zxWINDOW_osOpNew( zxWINDOW *win );
-ZXSYS  zxWINDOW*  zxWINDOW_opNew(    zxWINDOW *win );
-ZXSYS  zxWINDOW*  zxWINDOW_opDel(    zxWINDOW *win );
-ZXSYS  void       zxWINDOW_setBase(  zxWINDOW *win, zxWINDOW *base );
-ZXSYS  void       zxWINDOW_addKid(   zxWINDOW *win, zxWINDOW *kid  );
-ZXSYS  void       zxWINDOW_remKid(   zxWINDOW *win, zxWINDOW *kid  );
-ZXSYS  zxWINDOW*  zxWINDOW_getKid(   zxWINDOW *win, size_t    i    );
-ZXSYS  zxWINDOW*  zxWINDOW_getNext( zxWINDOW *win, bool nextKid );
-ZXSYS  zxWINDOW*  zxWINDOW_getPrev( zxWINDOW *win );
-/* Added for completeness */
-static void
-  (*zxWINDOW_setParent)(             zxWINDOW *win, zxWINDOW *parent ) = zxWINDOW_setBase;
-static void
-  (*zxWINDOW_addChild)(              zxWINDOW *win, zxWINDOW *child ) = zxWINDOW_addKid;
-static void
-  (*zxWINDOW_remChild)(              zxWINDOW *win, zxWINDOW *child ) = zxWINDOW_remKid;
-static zxWINDOW*
-  (*zxWINDOW_getChild)(   zxWINDOW *win, size_t    i    ) = zxWINDOW_getKid;
-/**
-  @param returnCode The value you want returned
-**/
-ZXSYS void       zxWINDOW_setFocus( zxWINDOW* win );
-ZXSYS zxWINDOW * zxWINDOW_getFocus( void );
-ZXSYS int        zxWINDOW_freeAll( int returnCode );
-
-ZXSYS void zx_FreeWC( void );
 
 ZXNSO( win )
 {
   zxWINDOW  def;
+  zxRECT    defRECT;
   zxWC      defWC;
-  zxWCX     WCX[ zxWIN_COUNT ], defWCX;
+  zxWCX     (*defWCX)( size_t type );
   zxsi       (*osOpNew)(  zxWINDOW  *win );
 #if ZXMSW
   ATOM      mswATOMX[ zxWIN_COUNT ];
@@ -110,7 +66,6 @@ ZXNSO( win )
   zxHwnd     (*getRootWH)( void );
   zxWINDOW*  (*getWindow)(  size_t    wid );
   bool       (*isKnown)(    zxWINDOW* win );
-  zxWINDOWS* (*allWindows)( void );
   zxWINDOW*  (*byHandle)(   zxHwnd    wh );
   void       (*setBase)(    zxWINDOW *win, zxWINDOW *base );
   void       (*setParent)(  zxWINDOW *win, zxWINDOW *base );
@@ -127,40 +82,13 @@ ZXNSO( win )
   void       (*setFocus)( zxWINDOW* win );
   zxWINDOW * (*getFocus)( void );
   int        (*freeAll)( int returnCode );
+  bool       (*show)(   zxWINDOW *win );
+  bool       (*hide)(   zxWINDOW *win );
+  bool       (*update)( zxWINDOW *win );
+  zxWINDOW*  (*fromPoint)( zxPOINT pt, zxus maxDepth );
 } zxn_win;
 
-static zxn_win zxwin =
-{
-  {0}, {0}, {0}, {0},
-  zxWINDOW_osOpNew,
-#if ZXMSW
-  {0},
-#endif
-  zxWINDOW__initWC,
-  zxWINDOW__initWCX,
-  zxWINDOW_getHandle,
-  zxWINDOW_getRootWindow,
-  zxWINDOW_getRootWH,
-  zxWINDOW_getWindow,
-  zxWINDOW_isKnown,
-  zxWINDOW_allWindows,
-  zxWINDOW_byHandle,
-  zxWINDOW_setBase,
-  zxWINDOW_setBase,
-  zxWINDOW_addKid,
-  zxWINDOW_remKid,
-  zxWINDOW_getKid,
-  zxWINDOW_addKid,
-  zxWINDOW_remKid,
-  zxWINDOW_getKid,
-  zxWINDOW_getNext,
-  zxWINDOW_getPrev,
-  zxWINDOW_opNew,
-  zxWINDOW_opDel,
-  zxWINDOW_setFocus,
-  zxWINDOW_getFocus,
-  zxWINDOW_freeAll
-};
+extern zxn_win const zxwin;
 
 ZXC_SHUT
 
@@ -208,11 +136,10 @@ public:
   }
   zxWindow* getChild( size_t i )
     { return getKid( i ); }
-  static zxWINDOWS* allWindows( void ) { return zxwin.allWindows(); }
   static zxWindow*  getWindow( size_t wid )
   {
     zxWINDOW* win = zxwin.getWindow( wid );
-    if ( !win || win->m_win < zxWIN_CPP_NULL )
+    if ( !win || !win->m_class )
       return NULL;
     return (zxWindow*)win;
   }

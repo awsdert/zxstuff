@@ -6,9 +6,8 @@
   ZXV__INIT( NAME, T, EXP, CALL ) \
   { \
     ZXASSERT( !src ) return; \
-    zxv._init( &src->m_core, sizeof( T ), cpy, count ); \
-    src->m_core.m_ptr = (void**)&( src->m_data ); \
-    src->m_data = (T*)src->m_core.m_data; \
+    zxv._init( &src->m_core, sizeof( T ), cpy, count, \
+      (void**)&src->m_data ); \
   }
 
 #define ZXV_DEF__INITCPY( NAME, T, EXP, CALL ) \
@@ -25,17 +24,6 @@
   { \
     if ( !src ) return; \
     zxv._kill( &src->m_core ); \
-  }
-
-#define ZXV_DEF_TMPOBJ( NSO, NAME, T, EXP, CALL ) \
-  ZXV_TMPOBJ( NAME, T, EXP, CALL ) \
-  { \
-    NAME tmp = NSO.def; \
-    ZXASSERT( !src ) return tmp; \
-    tmp.m_core         = zxv.tmpobj( (void*)src ); \
-    tmp.m_core.m_size  = sizeof( T ); \
-    tmp.m_core.m_Tsize = tmp.m_core.m_size; \
-    return tmp; \
   }
 
 #define ZXV_DEF_SIZE( NAME, EXP, CALL ) \
@@ -228,11 +216,10 @@
     return !zxv.isEqual( &src->m_core, &cmp->m_core, NULL ); \
   }
 
-#define ZXV_DEF(    NSO, NAME, T, EXP, CALL ) \
+#define ZXV_DEF(         NAME, T, EXP, CALL ) \
   ZXV_DEF__INIT(         NAME, T, EXP, CALL ) \
   ZXV_DEF__INITCPY(      NAME, T, EXP, CALL ) \
   ZXV_DEF__KILL(         NAME,    EXP, CALL ) \
-  ZXV_DEF_TMPOBJ(   NSO, NAME, T, EXP, CALL ) \
   ZXV_DEF_SIZE(          NAME,    EXP, CALL ) \
   ZXV_DEF_MAX_SIZE(      NAME,    EXP, CALL ) \
   ZXV_DEF_RESIZE(        NAME, T, EXP, CALL ) \
@@ -260,11 +247,10 @@
   ZXV_DEF_CMPEQ(         NAME,    EXP, CALL ) \
   ZXV_DEF_CMPNE(         NAME,    EXP, CALL )
 
-#define ZXV_NS_DEF( NAME, DEFAULT ) \
-  NAME##__init, DEFAULT, \
+#define ZXV_NS_DEF( NAME ) \
+  NAME##__init, {0}, \
   NAME##__initCpy, \
   NAME##__kill, \
-  NAME##_tmpobj, \
   NAME##_size, \
   NAME##_max_size, \
   NAME##_resize, \

@@ -1,25 +1,20 @@
-#include <zx/window.h>
+#include "zxwin.h"
 ZXSYS int zxWINDOW_freeAll( int returnCode )
 {
-  zxOBJS *all = zxobj.allObjects();
-  zxOBJ  obj;
-  size_t i = 0, stop = zxobj.size( all );
+  zxvWH  *all  =  zxwh.all();
+  zxOBJ   obj;
+  zxWH    wh;
+  size_t i = 0, stop = zxwh.size( all );
   zxWINDOW* win;
   for ( ; i < stop; ++i )
   {
-    obj = all->m_data[ i ];
+    wh = all->m_data[ i ];
+    obj= wh.win;
     if ( obj.type != zxOBJ_SYS_WIN )
       continue;
-    win = (zxWINDOW*)obj.obj;
-    if ( win )
-    {
-      if ( win->m_uObj.del )
-        win->m_uObj.del( win->m_uObj.obj, win->m_uObj.type );
-      if ( win->m_wObj.del )
-        win->m_wObj.del( win->m_wObj.obj, win->m_win );
-      free( win );
-      all->m_data[ i ] = zxobj.defObj;
-    }
+    win = zxwin.opDel( (zxWINDOW*)obj.obj );
+    if ( !win )
+      all->m_data[ i ] = zxwh.defWH;
   }
   return zxobj.freeAll( returnCode );
 }

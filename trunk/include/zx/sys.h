@@ -1,8 +1,7 @@
-#include "compiler.h"
-#include "std/arch.h"
-
 #pragma once
 #ifndef ZXDLL_EXP
+#include "compiler.h"
+#include "std/arch.h"
 
 ZXC_OPEN
 
@@ -31,6 +30,7 @@ ZXC_OPEN
 
 #include <wchar.h>
 #include <windows.h>
+#include <windowsx.h>
 
 #define ZXDLL_EXP __declspec(dllexport)
 #define ZXDLL_IMP __declspec(dllimport)

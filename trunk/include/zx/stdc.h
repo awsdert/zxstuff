@@ -1,8 +1,7 @@
-#include <stddef.h>
-
 #pragma once
 #ifndef ZX_STDC_H
 #define ZX_STDC_H
+#include <stddef.h>
 
 #ifdef __cplusplus
 #define ZXCPP __cplusplus
@@ -103,6 +102,8 @@
 #else
 #define ZXUWIDE 0
 #endif
+
+#define ZXAPPEND( STR1, STR2 ) STR1##STR2
 
 typedef unsigned char  zxuc;
 typedef   signed char  zxsc;

@@ -27,7 +27,7 @@ ZXNSO( w )
 
 static zxn_w const zxw =
 {
-  ZXV_NS_DEF( zxWIDE, {0} ),
+  ZXV_NS_DEF( zxWIDE ),
   zxWIDE_len,
   zxWIDE__initC,
   zxWIDE__init

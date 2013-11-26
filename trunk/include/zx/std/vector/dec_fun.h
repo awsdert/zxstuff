@@ -26,11 +26,6 @@
 #define ZXV__KILL(      NAME,    DLL, CALL ) \
   ZXV___KILL( NAME, DLL, CALL NAME##__kill )
 
-#define ZXV__TMPOBJ(    NAME, T, DLL, FUN  ) DLL NAME \
-  FUN( T *src )
-#define ZXV_TMPOBJ(     NAME, T, DLL, CALL ) \
-  ZXV__TMPOBJ( NAME, T, DLL, CALL NAME##_tmpobj )
-
 #define ZXV__SIZE(      NAME,    DLL, FUN  ) DLL size_t \
   FUN( NAME const *src )
 #define ZXV_SIZE(       NAME,    DLL, CALL ) \
@@ -170,7 +165,6 @@
 #define ZXV__DEC( NAME, T, T2, DLL, CALL ) \
   ZXV__INITCPY(      NAME,     DLL, CALL ); \
   ZXV__KILL(         NAME,     DLL, CALL ); \
-  ZXV_TMPOBJ(        NAME, T2, DLL, CALL ); \
   ZXV_SIZE(          NAME,     DLL, CALL ); \
   ZXV_MAX_SIZE(      NAME,     DLL, CALL ); \
   ZXV_RESIZE(        NAME, T,  DLL, CALL ); \
@@ -210,7 +204,6 @@
   NAME const def; \
   ZXV___INITCPY(      NAME,,      (CALL *_initCpy)      ); \
   ZXV___KILL(         NAME,,      (CALL *_kill)         ); \
-  ZXV__TMPOBJ(        NAME, T2,,  (CALL *tmpobj)        ); \
   ZXV__SIZE(          NAME,,      (CALL *size)          ); \
   ZXV__MAX_SIZE(      NAME,,      (CALL *max_size)      ); \
   ZXV__RESIZE(        NAME, T,,   (CALL *resize)        ); \

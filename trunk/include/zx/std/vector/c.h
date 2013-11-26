@@ -21,20 +21,28 @@ typedef ZXSOBJ( zxVECTOR )
 
 ZXCORE void   zxVECTOR__init(
   zxVECTOR       *src,
-  size_t         Tsize,
+  size_t          Tsize,
   void     const *cpy,
-  size_t         count );
+  size_t          count,
+  void          **ptr );
 ZXV__DEC( zxVECTOR, void*, void, ZXCORE, ZXCORE_CALL );
 
 ZXNSO( v )
 {
   void (*_init)(
     zxVECTOR   *src, size_t Tsize,
-    void const *cpy, size_t count );
+    void const *cpy, size_t count, void **ptr );
   ZXV__NS_DEC( zxVECTOR, void*, void, ZXCORE_CALL );
 } zxn_v;
 
-static const zxn_v zxv = { ZXV_NS_DEF( zxVECTOR, {0} ) };
+extern zxn_v const zxv;
+
+#define ZX__PRAG( MSG ) _Pragma( #MSG )
+#define ZX_PRAG( MSG ) ZX__PRAG( message ZXMSG( MSG ) )
+#define ZXPRAG( MSG ) ZX_PRAG( MSG )
+/*
+ZXPRAG( ZXV__INIT( zxVECTOR, void, ZXCORE, ZXCORE_CALL ) )
+/* */
 
 ZXC_SHUT
 

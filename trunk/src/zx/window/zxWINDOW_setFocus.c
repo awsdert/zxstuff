@@ -2,9 +2,10 @@
 #include <zx/window.h>
 ZXSYS void zxWINDOW_setFocus( zxWINDOW* win )
 {
-  zxOBJ obj = zxobj.defObj;
-  if ( win )
-    zxobj.setFocus( win->m_obj );
-  else
-    zxobj.setFocus( obj );
+  zxWH *wh = NULL;
+  if ( !win )
+    return;
+  wh = zxwh.byId( win->m_wid );
+  /*
+  zxobj.setFocus( wh->objs, win->m_obj );*/
 }

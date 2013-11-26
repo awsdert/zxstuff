@@ -1,7 +1,6 @@
-#include "all.h"
-
 #pragma once
 #ifndef ZXSIZE_BITS
+#include "all.h"
 
 #if ZXMSW == 64
 #define ZXSIZE_TYPE __int64

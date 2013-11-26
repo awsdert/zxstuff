@@ -5,6 +5,5 @@ ZXV_APPEND( zxCHAR, ZXCORE, ZXCORE_CALL )
     return;
   --src->m_core.m_count;
   zxv.append( &src->m_core, &cpy->m_core, pos );
-  src->m_data = (char*)src->m_core.m_data;
   src->m_data[ src->m_core.m_count - 1 ] = 0u;
 }

@@ -1,7 +1,6 @@
-#include "all.h"
-
 #pragma once
 #ifndef ZXCHAR_BITS
+#include "all.h"
 
 #define ZXCHAR_BITS CHAR_BIT
 #define ZXUCHAR_MAX UCHAR_MAX

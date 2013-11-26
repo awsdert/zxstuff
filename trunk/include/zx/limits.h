@@ -1,3 +1,6 @@
+#pragma once
+#ifndef ZX_LIMITS_H
+#define ZX_LIMITS_H
 #include "limits/all.h"
 #include "limits/char.h"
 #include "limits/short.h"
@@ -8,11 +11,6 @@
 #include "limits/size_t.h"
 #include "limits/bool.h"
 #include "std/arch.h"
-
-#pragma once
-#ifndef ZX_LIMITS_H
-#define ZX_LIMITS_H
-
 
 static zxui   const zxuc_bits   = CHAR_BIT;
 static zxuc   const zxuc_last   = ZX_LB( CHAR_BIT );

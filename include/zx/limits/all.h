@@ -1,6 +1,7 @@
-#include "../dll.h"
-
 #pragma once
+#ifndef ZX_LIMITS_ALL_H
+#define ZX_LIMITS_ALL_H
+#include "../dll.h"
 #if ZXCPP
 #include <cstddef>
 #include <climits>
@@ -8,9 +9,6 @@
 #include <stddef.h>
 #include <limits.h>
 #endif
-
-#ifndef ZXLIMITS_ALL_H
-#define ZXLIMITS_ALL_H
 
 #define ZX__MB( UV, M ) (((UV)&(ZXB1U<<(CHAR_BIT*(M))))!=0U)
 #define ZX_MB1( UV, M ) ZX__MB( UV, M ) + ZX__MB( UV, M + 1 )

@@ -1,6 +1,8 @@
+#pragma once
+#ifndef ZX_LIMITS_BOOL_H
+#define ZX_LIMITS_BOOL_H
 #include "all.h"
 
-#pragma once
 #ifndef __bool_true_false_are_defined
 #if !ZXCPP && !defined( _BOOL )
 #define _BOOL
@@ -13,10 +15,10 @@ ZXC_SHUT
 #define __bool_true_false_are_defined
 #endif
 
-#ifndef ZXPRINTFBOOL
 #if !ZXCPP
 #define ZXPRINTFBOOL int
 #else
 #define ZXPRINTFBOOL bool
 #endif
+
 #endif

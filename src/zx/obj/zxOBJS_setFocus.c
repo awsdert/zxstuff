@@ -1,15 +1,18 @@
-﻿/* USER: AWSDERT; DATE: 07/11/2013; TIME: 18:14 */
-#include <zx/obj.h>
-size_t zx_l_gidFocus = 0;
-ZXCORE void ZXCORE_CALL zxOBJS_setFocus( zxOBJ obj )
+﻿#include "zxobj.h"
+static size_t zx_l_allObjectsFocus = 0;
+ZXCORE void ZXCORE_CALL zxvOBJ_setFocus( zxOBJ obj )
 {
-  zx_l_gidFocus = obj.gid;
+  zx_l_allObjectsFocus  = obj.id;
 }
-ZXCORE zxOBJ ZXCORE_CALL zxOBJS_getFocus( void )
+ZXCORE bool ZXCORE_CALL zxvOBJ_hasFocus( zxOBJ obj )
 {
-  zxOBJS *all = zxobj.allObjects();
-  size_t size = zxobj.size( all );
-  if ( zx_l_gidFocus >= size )
-    zx_l_gidFocus = 0;
-  return all->m_data[ zx_l_gidFocus ];
+  return ( obj.id == zx_l_allObjectsFocus );
+}
+ZXCORE zxOBJ ZXCORE_CALL zxvOBJ_getFocus( void )
+{
+  zxvOBJ *src = zxobj.all();
+  size_t size = zxobj.size( src );
+  if ( zx_l_allObjectsFocus >= size )
+    return zxobj.defObj;
+  return src->m_data[ zx_l_allObjectsFocus ];
 }

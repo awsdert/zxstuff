@@ -1,7 +1,7 @@
-#include "stdc.h"
 #pragma once
 #ifndef ZX_COMPILER_H
 #define ZX_COMPILER_H
+#include "stdc.h"
 
 #define ZXNSO( NAME ) typedef struct zxn_##NAME##_struct
 
@@ -11,14 +11,17 @@
 #define ZXATTR( ATTR )
 #endif
 
-#define ZX_MSG( MSG ) #MSG
+#define ZX_ASSTR( TXT ) #TXT
+#define ZXASSTR( TXT ) ZX_ASSTR( TXT )
+#define ZXTXT( TXT ) TXT
+
 #if ZX_MSC
-#define ZXMSG( MSG ) message( ZX_MSG( MSG ) )
-#elif ZX_GCC || ZX_GPP
-#define ZXMSG( MSG ) message ZX_MSG( MSG )
+#define ZX_MSG( MSG ) ( ZXASSTR( MSG ) )
 #else
-#define ZXMSG( MSG ) ZX_MSG( MSG )
+#define ZX_MSG( MSG ) ZXASSTR( MSG )
 #endif
+
+#define ZXMSG( MSG ) ZX_MSG( MSG )
 
 #define ZXUNUSED  ZXATTR( __unused__     )
 #define ZXSTDCALL ZXATTR( __stdcall__    )

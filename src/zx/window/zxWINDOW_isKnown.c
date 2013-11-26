@@ -1,7 +1,7 @@
 #include <zx/window.h>
 ZXSYS bool zxWINDOW_isKnown( zxWINDOW *win )
 {
-  zxOBJS *all = zxobj.allObjects();
+  zxvOBJ *all = zxobj.all();
   size_t i = 0, stop = zxobj.size( all );
   for ( ; i < stop; ++i )
   {

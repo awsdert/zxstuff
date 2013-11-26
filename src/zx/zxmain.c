@@ -1,11 +1,7 @@
-#include <zx/tbox.h>
+#include "tbox/zxtbox.h"
 
-ZXV_DEF( zx_win, zxWINDOWS, zxWINDOW*, ZXSYS, ZXSYS_CALL )
-
-static zxWINDOWS  zx_l_allWindows = {0};
 static zxWINDOW*  zx_l_rootWindow = NULL;
 static zxInstance zx_l_prevI = NULL, zx_l_thisI = NULL;
-static zxEVENTS   zx_l_events = {0};
 
 /*
 #if ZXMSW && defined( ZXBUILD_SYS )
@@ -34,7 +30,6 @@ extern "C" ZXSYS BOOL APIENTRY DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVO
 }
 #endif
 /* */
-
 ZXSYS zxsi zxapp__main(
   zxInstance thisI,
   zxInstance prevI,
@@ -43,43 +38,41 @@ ZXSYS zxsi zxapp__main(
 {
 #if ZXMSW
   MSG    msg = {0};
-  HACCEL  acc = NULL;
   size_t i = 0;
   zxWINDOW *root = NULL, *win;
+  zxWH *wh = NULL;
   zxTBOX *tbox;
-  zxWINDOWS *all = &zx_l_allWindows;
-  zxEVTPTR ptr;
+  zxTEXT  txtArgs;
+  zxWCX wcx = {0};
+  zxvOBJ *all = zxobj.all();
+  zxEVT ptr = {0};
   zx_l_prevI = prevI;
   zx_l_thisI = thisI;
-  zx_win._init( all, NULL, 0 );
-  zxevt._init( &zx_l_events, NULL, 0 );
-  for ( ; i < zxWIN_COUNT; ++i )
-    zxwin._initWCX( &zxwin.WCX[ i ] );
-  for ( i = 0; i < zxEVT_COUNT; ++i )
-  {
-    ptr.type = (zxEVT)i;
-    ptr.proc = zxevt.events[ i ];
-    zxevt.addEvent( &zx_l_events, ptr );
-  }
+  /* Init */
   InitCommonControls();
-#if 0
-  th = CreateWindowEx( 0u, WC_EDIT, WC_EDIT, WS_OVERLAPPEDWINDOW, 0, 0, 640, 480, NULL, NULL, thisI, NULL );
-  ShowWindow( th, SW_SHOW );
-#else
-  zxwin.WCX[ zxWIN_NULL  ].lpszClassName = WC_STATIC;
-  zxwin.WCX[ zxWIN_FRAME ].lpszClassName = WC_STATIC;
-  i = zxWIN_TBOX;
-  zxwin.WCX[ i ].lpszClassName = WC_EDIT;
-  zxwin.WCX[ i ].hbrBackground = (HBRUSH)(COLOR_WINDOWFRAME);
+  zxobj._init( all, NULL, 0 );
+  zxwh._init( zxwh.all(), NULL, 0 );
+    /* WCX */
+  wcx = zxwin.defWCX( zxWIN_NULL );
+  RegisterClassEx( &wcx );
+  wcx = zxwin.defWCX( zxWIN_TBOX );
+  RegisterClassEx( &wcx );
+  /* Root */
   root = zxwin.opNew( NULL );
-  zx_l_rootWindow = root;
-  root->m_wcx = (zxWCX*)mnew( sizeof( zxWCX ), NULL );
-  *root->m_wcx = zxwin.WCX[ zxWIN_NULL ];
   root->m_style = WS_OVERLAPPEDWINDOW;
   root->m_h     = 640;
   root->m_w     = 480;
-  zxstr._initC( root->m_txt, args, 0 );
+  root->m_bgc.r = 0x99;
+  root->m_bgc.g = 0x99;
+  root->m_bgc.b = 0x99;
+  zxstr._initC( &txtArgs, args, 0 );
+  zxstr.append( &root->m_txt, &txtArgs, 0 );
+  zxstr._kill( &txtArgs );
+  zx_l_rootWindow = root;
   zxwin.osOpNew( root );
+  zxwin.show(    root );
+  zxwin.update(  root );
+  /* Tbox */
   tbox = zxtbox.opNew( NULL );
   win  = tbox->m_win;
   zxwin.setBase( win, root );
@@ -87,23 +80,17 @@ ZXSYS zxsi zxapp__main(
   win->m_y = 5;
   win->m_h = 30;
   win->m_w = 100;
+  win->m_bgc.r = 0xFF;
+  win->m_bgc.g = 0xFF;
+  win->m_bgc.b = 0xFF;
   win->m_stylex = WS_EX_CLIENTEDGE;
-  win->m_wcx = (zxWCX*)mnew( sizeof( zxWCX ), NULL );
-  *win->m_wcx = zxwin.WCX[ zxWIN_TBOX ];
-  zxwin.osOpNew( win );
-  ShowWindow( root->m_wh, showAs );
-  UpdateWindow( root->m_wh );
-  ShowWindow( win->m_wh,  showAs );
-  UpdateWindow( win->m_wh );
-#endif
-  while (GetMessage(&msg, NULL, 0, 0))
+  zxwin.osOpNew( win  );
+  zxwin.show(    win  );
+  zxwin.update(  win  );
+  while (GetMessage(&msg, msg.hwnd, 0, 0))
   {
-    if ( !IsDialogMessage( msg.hwnd, &msg ) &&
-      !TranslateAccelerator( msg.hwnd, acc, &msg) )
-    {
-      TranslateMessage(&msg);
-      DispatchMessage(&msg);
-    }
+    TranslateMessage( &msg );
+    DispatchMessage(  &msg );
   }
 #if 0
   return 0;
@@ -111,19 +98,94 @@ ZXSYS zxsi zxapp__main(
   return zxobj.freeAll( (int)msg.wParam );
 #endif
 #else
-  return zxobj.freeAll( 0 );
+  return 0;
 #endif
 }
 
 /* DO NOT MODIFY */
-ZXSYS zxEVENTS* zxEVENTS_getDefEvents( void )
+ZXSYS bool zxWINDOW_show( zxWINDOW *win )
 {
-  return &zx_l_events;
+  zxWH *wh;
+  ZXASSERT( !win ) return false;
+  wh = zxwh.byId( win->m_wid );
+  if ( !wh->wh ) return false;
+  return ShowWindow( wh->wh, SW_SHOW );
+}
+ZXSYS bool zxWINDOW_hide( zxWINDOW *win )
+{
+  zxWH *wh;
+  ZXASSERT( !win ) return false;
+  wh = zxwh.byId( win->m_wid );
+  if ( !wh->wh ) return false;
+  return ShowWindow( wh->wh, SW_HIDE );
+}
+ZXSYS bool zxWINDOW_update( zxWINDOW *win )
+{
+  zxWH *wh;
+  ZXASSERT( !win ) return false;
+  wh = zxwh.byId( win->m_wid );
+  if ( !wh->wh ) return false;
+  UpdateWindow( wh->wh );
+  if ( IsWindowVisible( wh->wh ) )
+  {
+    GetClientRect( wh->wh, &win->m_cRect );
+    GetClientRect( wh->wh, &win->m_wRect );
+    return true;
+  }
+  win->m_wRect = zxwin.defRECT;
+  win->m_cRect = zxwin.defRECT;
+  return true;
 }
 
-ZXSYS zxWINDOWS* zxWINDOW_allWindows( void )
+ZXSYS zxWINDOW*  zxWINDOW__fromPoint( zxWINDOW* win, zxPOINT pt,
+  zxus maxDepth, zxus depth )
 {
-  return &zx_l_allWindows;
+  zxWINDOW *kid = NULL;
+  zxvSIZE *kids = &win->m_kids;
+  zxRECT   rect = win->m_cRect;
+  size_t i = 0, stop;
+  if ( depth < maxDepth )
+  {
+    stop = zxv_size.size( kids );
+    for ( ; i < stop; ++i )
+    {
+      kid = zxwin.getWindow( kids->m_data[ i ] );
+      kid = zxWINDOW__fromPoint( kid, pt, maxDepth, depth + 1 );
+      if ( kid )
+        return kid;
+    }
+  }
+  if ( pt.x < rect.left || pt.x > rect.right ||
+     pt.y < rect.top || pt.y > rect.bottom )
+    return NULL;
+  return win;
+}
+
+ZXSYS zxWINDOW*  zxWINDOW_fromPoint( zxPOINT pt, zxus maxDepth )
+{
+  zxOBJ   obj;
+  zxvOBJ *all = zxobj.all();
+  zxWINDOW *win = NULL, *kid = NULL;
+  zxRECT rect;
+  size_t i = 0, stop = zxobj.size( all );
+  for ( ; i < stop; ++i )
+  {
+    obj = all->m_data[ i ];
+    if ( obj.type == zxOBJ_SYS_WIN )
+    {
+      win = (zxWINDOW*)obj.obj;
+      rect = win->m_cRect;
+      if ( pt.x < rect.left || pt.x > rect.right ||
+        pt.y < rect.top || pt.y > rect.bottom )
+        continue;
+      if ( maxDepth )
+        kid = zxWINDOW__fromPoint( win, pt, maxDepth, 1 );
+      if ( kid )
+        win = kid;
+      return win;
+    }
+  }
+  return NULL;
 }
 
 ZXSYS zxWINDOW*  zxWINDOW_getRootWindow( void )
@@ -132,7 +194,7 @@ ZXSYS zxWINDOW*  zxWINDOW_getRootWindow( void )
 }
 ZXSYS zxHwnd     zxWINDOW_getRootWH( void )
 {
-  return zx_l_rootWindow->m_wh;
+  return zxwh.byId( zx_l_rootWindow->m_wid )->wh;
 }
 ZXSYS zxInstance zxGetPrevI( void )
 {

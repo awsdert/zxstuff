@@ -1,8 +1,8 @@
 #include <zx/window.h>
-ZXSYS zxWINDOW* zxWINDOW_getWindow( size_t gid )
+ZXSYS zxWINDOW* zxWINDOW_getWindow( size_t wid )
 {
-  zxOBJ *obj = zxobj.at( zxobj.allObjects(), gid );
-  if ( obj && obj->type == zxOBJ_SYS_WIN )
-    return (zxWINDOW*)obj->obj;
+  zxWH *wh = zxwh.byId( wid );
+  if ( wh && wh->win.type == zxOBJ_SYS_WIN )
+    return (zxWINDOW*)wh->win.obj;
   return NULL;
 }

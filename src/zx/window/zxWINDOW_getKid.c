@@ -25,7 +25,7 @@ ZXSYS zxWINDOW* zxWINDOW_getNext( zxWINDOW *win, bool nextKid )
     return zxwin.getWindow( kids->m_data[ 0 ] );
   for ( ; i < stop; ++i )
   {
-    if ( kids->m_data[ i ] != win->m_obj.gid )
+    if ( kids->m_data[ i ] != win->m_wid )
       return zxwin.getWindow( kids->m_data[ i ] );
   }
   return zxwin.getNext( base, false );
@@ -43,7 +43,7 @@ ZXSYS zxWINDOW* zxWINDOW_getPrev( zxWINDOW *win )
   stop = zxv_size.size( kids );
   for ( i = stop - 1; i < stop; --i, --stop )
   {
-    if ( kids->m_data[ i ] == win->m_obj.gid )
+    if ( kids->m_data[ i ] == win->m_wid )
       break;
   }
   if ( i > 0 )

@@ -1,8 +1,7 @@
-#include "ill.h"
-#include "int.h"
-
 #pragma once
 #ifndef ZXIMAX
+#include "ill.h"
+#include "int.h"
 
 #ifdef ZXUILL_MAX
 #define ZXIMAX      ZXILL

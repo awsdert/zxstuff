@@ -1,7 +1,6 @@
-#include "all.h"
-
 #pragma once
 #ifndef ZXILL_H
+#include "all.h"
 
 #ifdef LLONG_MAX
 #define ZXUILL_MAX ULLONG_MAX

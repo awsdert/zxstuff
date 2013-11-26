@@ -152,7 +152,7 @@ ZXCORE zxsm   zxGetSMax(    zxuc* src, size_t size );
 ZXCORE size_t   zxGetSize_t(  zxuc* src, size_t size );
 ZXCORE ssize_t  zxGetSSize_t( zxuc* src, size_t size );
 
-typedef struct zx___vli
+ZXNSO( vli )
 {
   void (ZXCORE_CALL *_init)(  zxVLI *src, zxim value );
   void (ZXCORE_CALL *_initU)( zxVLI *src, zxum value );
@@ -205,9 +205,9 @@ typedef struct zx___vli
   ZXVLI_PTR__CMP( EQ ); ZXVLI_PTR__CMP( NE );
   ZXVLI_PTR__CMP( MT ); ZXVLI_PTR__CMP( ME );
   ZXVLI_PTR__CMP( LT ); ZXVLI_PTR__CMP( LE );
-} zx__vli;
+} zxn_vli;
 
-static zx__vli const zxvli =
+static zxn_vli const zxvli =
 {
   zxVLI__init,    zxVLI__initU, {0},
   zxVLI__initCpy, zxVLI__kill,

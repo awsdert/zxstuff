@@ -27,7 +27,7 @@ ZXNSO( c )
 
 static zxn_c const zxc =
 {
-  ZXV_NS_DEF( zxCHAR, {0} ),
+  ZXV_NS_DEF( zxCHAR ),
   zxCHAR_len,
   zxCHAR__init,
   zxCHAR__initW

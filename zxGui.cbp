@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="zxGui" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="msw86_gcc">
+				<Option platforms="Windows;" />
+				<Option output="bin/zxGui_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxGui_$(TARGET_NAME)/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-D_WIN32" />
+					<Add directory="include" />
+					<Add directory="$(IncludePath)" />
+				</Compiler>
+				<Linker>
+					<Add library="zxs_$(TARGET_NAME).lib" />
+					<Add directory="lib" />
+					<Add directory="$(LibraryPath)" />
+				</Linker>
+			</Target>
+			<Target title="msw86_cpp_gcc">
+				<Option platforms="Windows;" />
+				<Option output="bin/zxGui_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxGui_$(TARGET_NAME)/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-D_WIN32" />
+					<Add directory="include" />
+					<Add directory="$(IncludePath)" />
+				</Compiler>
+				<Linker>
+					<Add library="zxs_$(TARGET_NAME).lib" />
+					<Add directory="lib" />
+					<Add directory="$(LibraryPath)" />
+				</Linker>
+			</Target>
+			<Target title="msw86d_gcc">
+				<Option platforms="Windows;" />
+				<Option output="bin/zxGui_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxGui_$(TARGET_NAME)/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-D_WIN32" />
+					<Add option="-D_DEBUG" />
+					<Add directory="include" />
+					<Add directory="$(IncludePath)" />
+				</Compiler>
+				<Linker>
+					<Add library="zxs_$(TARGET_NAME).lib" />
+					<Add directory="lib" />
+					<Add directory="$(LibraryPath)" />
+				</Linker>
+			</Target>
+			<Target title="msw86d_cpp_gcc">
+				<Option platforms="Windows;" />
+				<Option output="bin/zxGui_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxGui_$(TARGET_NAME)/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-D_WIN32" />
+					<Add option="-D_DEBUG" />
+					<Add directory="include" />
+					<Add directory="$(IncludePath)" />
+				</Compiler>
+				<Linker>
+					<Add library="zxs_$(TARGET_NAME).lib" />
+					<Add directory="lib" />
+					<Add directory="$(LibraryPath)" />
+				</Linker>
+			</Target>
+			<Target title="msw86_vc">
+				<Option platforms="Windows;" />
+				<Option output="bin/zxGui_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxGui_$(TARGET_NAME)/" />
+				<Option type="0" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/TC" />
+					<Add option="/Gd" />
+					<Add option="/Gm" />
+					<Add option="/W3" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/D_WIN32" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(Include)" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="user32" />
+					<Add library="comctl32" />
+				</Linker>
+			</Target>
+			<Target title="msw86_cpp_vc">
+				<Option platforms="Windows;" />
+				<Option output="bin/zxGui_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxGui_$(TARGET_NAME)/" />
+				<Option type="0" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/TP" />
+					<Add option="/Gd" />
+					<Add option="/Gm" />
+					<Add option="/W3" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/D_WIN32" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(Include)" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="user32" />
+					<Add library="comctl32" />
+				</Linker>
+			</Target>
+			<Target title="msw86d_vc">
+				<Option platforms="Windows;" />
+				<Option output="bin/zxGui_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxGui_$(TARGET_NAME)/" />
+				<Option type="0" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/TC" />
+					<Add option="/Gd" />
+					<Add option="/Gm" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/Zi" />
+					<Add option="/D_WIN32" />
+					<Add option="/D_DEBUG" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(Include)" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="/DEBUG" />
+					<Add library="user32" />
+					<Add library="comctl32" />
+				</Linker>
+			</Target>
+			<Target title="msw86d_cpp_vc">
+				<Option platforms="Windows;" />
+				<Option output="lib/zxGui_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxGui_$(TARGET_NAME)/" />
+				<Option type="0" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/TP" />
+					<Add option="/Gd" />
+					<Add option="/Gm" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/Zi" />
+					<Add option="/D_WIN32" />
+					<Add option="/D_DEBUG" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(Include)" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="/DEBUG" />
+					<Add library="user32" />
+					<Add library="comctl32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-DZXUSE_DLL" />
+			<Add directory="include" />
+		</Compiler>
+		<Linker>
+			<Add library="zxs_$(TARGET_NAME)" />
+			<Add directory="lib" />
+		</Linker>
+		<Unit filename="zxGui.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="zxGui.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="zxs" />
+		<Option compiler="gcc" />
+		<Option extended_obj_names="1" />
+		<Build>
+			<Target title="msw86_gcc">
+				<Option output="lib/zxs_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxs_$(TARGET_NAME)/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-shared" />
+					<Add option="-D_WIN32" />
+				</Compiler>
+				<Linker>
+					<Add library="user32" />
+					<Add library="comctl32" />
+				</Linker>
+			</Target>
+			<Target title="msw86_cpp_gcc">
+				<Option output="lib/zxs_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxs_$(TARGET_NAME)/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-shared" />
+					<Add option="-D_WIN32" />
+				</Compiler>
+				<Linker>
+					<Add library="user32" />
+					<Add library="comctl32" />
+				</Linker>
+			</Target>
+			<Target title="msw86d_gcc">
+				<Option output="lib/zxs_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxs_$(TARGET_NAME)/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-shared" />
+					<Add option="-D_WIN32" />
+					<Add option="-D_DEBUG" />
+				</Compiler>
+				<Linker>
+					<Add library="user32" />
+					<Add library="comctl32" />
+				</Linker>
+			</Target>
+			<Target title="msw86d_cpp_gcc">
+				<Option output="lib/zxs_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxs_$(TARGET_NAME)/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-shared" />
+					<Add option="-D_WIN32" />
+					<Add option="-D_DEBUG" />
+				</Compiler>
+				<Linker>
+					<Add library="user32" />
+					<Add library="comctl32" />
+				</Linker>
+			</Target>
+			<Target title="msw86_vc">
+				<Option output="lib/zxs_$(TARGET_NAME)" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxs_$(TARGET_NAME)/" />
+				<Option type="3" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/TC" />
+					<Add option="/Gd" />
+					<Add option="/Gm" />
+					<Add option="/W3" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/Zi" />
+					<Add option="/D_WIN32" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(Include)" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="/DEBUG" />
+					<Add library="kernel32" />
+					<Add library="gdi32" />
+					<Add library="user32" />
+					<Add library="comctl32" />
+					<Add library="shell32" />
+				</Linker>
+			</Target>
+			<Target title="msw86_cpp_vc">
+				<Option output="lib/zxs_$(TARGET_NAME)" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxs_$(TARGET_NAME)/" />
+				<Option type="3" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/TP" />
+					<Add option="/Gd" />
+					<Add option="/Gm" />
+					<Add option="/W3" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/Zi" />
+					<Add option="/D_WIN32" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(Include)" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="/DEBUG" />
+					<Add library="kernel32" />
+					<Add library="gdi32" />
+					<Add library="user32" />
+					<Add library="comctl32" />
+					<Add library="shell32" />
+				</Linker>
+			</Target>
+			<Target title="msw86d_vc">
+				<Option output="lib/zxs_$(TARGET_NAME)" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxs_$(TARGET_NAME)/" />
+				<Option type="3" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/TC" />
+					<Add option="/Gd" />
+					<Add option="/Gm" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/Zi" />
+					<Add option="/D_WIN32" />
+					<Add option="/D_DEBUG" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(Include)" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="/DEBUG" />
+					<Add library="kernel32" />
+					<Add library="gdi32" />
+					<Add library="user32" />
+					<Add library="comctl32" />
+					<Add library="shell32" />
+				</Linker>
+			</Target>
+			<Target title="msw86d_cpp_vc">
+				<Option output="lib/zxs_$(TARGET_NAME)" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxs_$(TARGET_NAME)/" />
+				<Option type="3" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/TP" />
+					<Add option="/Gd" />
+					<Add option="/Gm" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/Zi" />
+					<Add option="/D_WIN32" />
+					<Add option="/D_DEBUG" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(Include)" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="/DEBUG" />
+					<Add library="kernel32" />
+					<Add library="gdi32" />
+					<Add library="user32" />
+					<Add library="comctl32" />
+					<Add library="shell32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-DZXBUILD_DLL" />
+			<Add directory="$(PROJECT_DIR)include" />
+		</Compiler>
+		<UnitsGlob directory="include/zx" recursive="1" wildcard="*.h" />
+		<UnitsGlob directory="src/zx" recursive="1" wildcard="*.c" />
+		<UnitsGlob directory="src/zx" recursive="1" wildcard="*.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

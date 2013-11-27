@@ -9,7 +9,6 @@ ZXEVENT( zxTBOX_onChar )
   CHAR vk = LOBYTE( scancode ), xk = HIBYTE( scancode );
   if ( win->m_win != zxWIN_TBOX )
     return 0;
-  event->m_stopEvent = true;
   tbox = (zxTBOX*)win->m_wObj.obj;
   text = &win->m_txt;
 #if 1
@@ -35,6 +34,7 @@ ZXEVENT( zxTBOX_onChar )
     ++tbox->m_fc;
     tbox->m_lc = tbox->m_fc;
   }
+  event->m_stopEvent = true;
   if ( !zxtbox._drawText( tbox, true ) )
     return 3;
   return 0;

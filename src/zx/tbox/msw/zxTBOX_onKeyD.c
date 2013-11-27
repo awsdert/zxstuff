@@ -14,14 +14,18 @@ ZXEVENT( zxTBOX_onKeyD )
   switch ( vk )
   {
   case VK_DELETE:
-    zxstr.erase( text, tbox->m_fc, tbox->m_lc );
+    if ( tbox->m_fc < zxstr.size( text ) )
+      zxstr.erase( text, tbox->m_fc, tbox->m_lc );
+    tbox->m_lc = tbox->m_fc;
     break;
+  case VK_UP:
   case VK_LEFT:
     if ( tbox->m_fc > 0u )
       --tbox->m_fc;
     if ( !( xk & VK_SHIFT ) )
       tbox->m_lc = tbox->m_fc;
     break;
+  case VK_DOWN:
   case VK_RIGHT:
     if ( tbox->m_lc < zxstr.size( text ) )
       ++tbox->m_lc;

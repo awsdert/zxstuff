@@ -2,7 +2,10 @@
 #include "zxwin.h"
 ZXSYS zxWINDOW* zxWINDOW_getFocus( void )
 {
-  zxOBJ obj = zxobj.getFocus();
+  zxWH *wh = zxwh.byHwnd( GetFocus() );
+  zxOBJ obj = {0};
+  if ( wh )
+    obj = wh->win;
   if ( obj.type == zxOBJ_SYS_WIN )
     return (zxWINDOW*)obj.obj;
   return NULL;

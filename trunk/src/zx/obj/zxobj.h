@@ -3,11 +3,12 @@
 #define ZX__OBJ_H
 #include <zx/obj.h>
 
-ZXV_DEC( zxvOBJ, zxOBJ, ZXCORE, ZXCORE_CALL );
-ZXCORE zxvOBJ* ZXCORE_CALL zxvOBJ_all( void );
-ZXCORE void    ZXCORE_CALL zxvOBJ_setFocus( zxOBJ obj );
-ZXCORE bool    ZXCORE_CALL zxvOBJ_hasFocus( zxOBJ obj );
-ZXCORE zxOBJ   ZXCORE_CALL zxvOBJ_getFocus( void );
-ZXCORE int     ZXCORE_CALL zxvOBJ_freeAll( int returnCode );
+ZXV_DEC( zxvOBJ, zxOBJ,, ZXCORE_CALL );
+zxvOBJ* ZXCORE_CALL zxvOBJ_all( void );
+void    ZXCORE_CALL zxvOBJ_setFocus( zxOBJ obj );
+bool    ZXCORE_CALL zxvOBJ_hasFocus( zxOBJ obj );
+zxOBJ   ZXCORE_CALL zxvOBJ_getFocus( void );
+int     ZXCORE_CALL zxvOBJ_freeAll( int returnCode );
+size_t  ZXCORE_CALL zxvOBJ_getNewId( void );
 
 #endif

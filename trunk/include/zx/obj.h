@@ -37,6 +37,7 @@ ZXNSO( obj )
   bool    (ZXCORE_CALL *hasFocus)( zxOBJ obj );
   zxOBJ   (ZXCORE_CALL *getFocus)( void );
   int     (ZXCORE_CALL *freeAll)( int returnCode );
+  size_t  (ZXCORE_CALL *getNewId)( void );
 } zxn_obj;
 
 extern zxn_obj const zxobj;

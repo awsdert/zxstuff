@@ -19,8 +19,8 @@ ZXSYS zxWCX zxWINDOW_defWCX( size_t type )
 }
 ZXEVENT( zxWINDOW_onDestroy )
 {
-  zxWH *wh = zxwh.byHwnd( event->m_wh );
-  if ( !wh->wid )
+  zxWH *wh = zxwh.byId( event->m_wid );
+  if ( wh && !wh->wid )
     PostQuitMessage( 0 );
   return 0;
 }

@@ -1,6 +1,6 @@
 ﻿#include "zxobj.h"
-zxvOBJ zx_l_allObjects = {0};
-ZXSYS zxvOBJ* ZXCORE_CALL zxvOBJ_all( void )
+static zxvOBJ zx_l_allObjects = {0};
+zxvOBJ* ZXCORE_CALL zxvOBJ_all( void )
 {
   return &zx_l_allObjects;
 }

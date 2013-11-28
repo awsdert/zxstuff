@@ -10,7 +10,7 @@ ZXCORE void zxVLI__init( zxVLI *src, zxsm value )
   ZXASSERT( !src ) return;
   *src = zxvli.def;
   src->m_isSigned = true;
-  src->m_core.m_ptr = &src->m_data;
+  src->m_core.m_ptr = (void**)&src->m_data;
   zxv.grow( &src->m_core, size,  NULL );
   zxcopy( (zxuc*)&value, size, zxIntEndian(),
      src->m_data, size, zxENDIAN_BIG );
@@ -23,7 +23,7 @@ ZXCORE void zxVLI__initU( zxVLI *src, zxum value )
   size_t size = sizeof( zxsm );
   ZXASSERT( !src ) return;
   *src = zxvli.def;
-  src->m_core.m_ptr = &src->m_data;
+  src->m_core.m_ptr = (void**)&src->m_data;
   zxv.grow( &src->m_core, size,  NULL );
   zxcopy( (zxuc*)&value, size, zxIntEndian(),
      src->m_data, size, zxENDIAN_BIG );

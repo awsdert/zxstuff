@@ -28,24 +28,16 @@ ZXEVENT( zxWINDOW_onQuit )
 {
   return zxwin.freeAll( 0 );
 }
-ZXEVENT( zxWINDOW_onCurLD )
-{
-  if ( GetFocus() != event->m_wh )
-    SetFocus( event->m_wh );
-  return 0;
-}
 ZXEVENT( zxWINDOW_onEvent )
 {
   switch ( event->m_msg )
   {
     case ZXWM_DESTROY:
       return zxWINDOW_onDestroy( event );
-    case ZXWM_CURLD:
-      return zxWINDOW_onCurLD(   event );
     case ZXWM_QUIT:
       return zxWINDOW_onQuit(    event );
     case ZXWM_KEYD:
       return zxWINDOW_onKeyD(    event );
   }
-  return 0;
+  return zxEVENT_onEvent( event );
 }

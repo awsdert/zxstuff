@@ -1,9 +1,9 @@
 #include <zx/std/lib.h>
 ZXCORE void* mrenew(
-  void*  dst,
+  void   *dst,
   size_t count,
   size_t const Tsize,
-  void*  const cpy,
+  void   const *cpy,
   size_t setCount )
 {
   size_t size = Tsize * setCount, i = 0;

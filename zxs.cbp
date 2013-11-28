@@ -20,6 +20,7 @@
 				<Linker>
 					<Add library="user32" />
 					<Add library="comctl32" />
+					<Add library="gdi32" />
 				</Linker>
 			</Target>
 			<Target title="msw86_cpp_gcc">
@@ -36,6 +37,7 @@
 				<Linker>
 					<Add library="user32" />
 					<Add library="comctl32" />
+					<Add library="gdi32" />
 				</Linker>
 			</Target>
 			<Target title="msw86d_gcc">
@@ -53,6 +55,7 @@
 				<Linker>
 					<Add library="user32" />
 					<Add library="comctl32" />
+					<Add library="gdi32" />
 				</Linker>
 			</Target>
 			<Target title="msw86d_cpp_gcc">
@@ -70,6 +73,7 @@
 				<Linker>
 					<Add library="user32" />
 					<Add library="comctl32" />
+					<Add library="gdi32" />
 				</Linker>
 			</Target>
 			<Target title="msw86_vc">

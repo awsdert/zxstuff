@@ -8,7 +8,7 @@ ZXEVENT( zxTBOX_onChar )
   SHORT scancode = VkKeyScanW( LOWORD( event->m_wp ) );
   CHAR vk = LOBYTE( scancode ), xk = HIBYTE( scancode );
   if ( win->m_win != zxWIN_TBOX )
-    return 0;
+    return zxWINDOW_onEvent( event );
   tbox = (zxTBOX*)win->m_wObj.obj;
   text = &win->m_txt;
 #if 1

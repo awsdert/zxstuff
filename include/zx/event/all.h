@@ -30,9 +30,13 @@ ZXC_OPEN
 #define ZXEM_FOCUS      0x20000
 
 typedef zxul zxMSG;
+typedef struct zxPOINT_struct
+{
+  zxsl x, y;
+} zxPOINT;
 
 ZXSYS zxsl __stdcall
-  zxEVENT_onEvent( zxHwnd wh, zxul msg, zxul *wp, zxul *lp );
+  zxEVENT__onEvent( zxHwnd wh, zxul msg, zxul *wp, zxul *lp );
 
 ZXC_SHUT
 

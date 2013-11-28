@@ -1,22 +1,15 @@
 #include <zx/std/vector.h>
-ZXCORE size_t zxVECTOR_copy(
-  zxVECTOR const *vec,
-  zxuc*          dst,
-  size_t const   dstCount,
-  size_t const   from )
+ZXV_COPY( zxVECTOR, void, ZXCORE, ZXCORE_CALL )
 {
-  size_t d, s, f, t, i = 0, j;
-  zxuc *VEC;
-  if ( !vec || !vec->m_size || dst || dstCount )
+  size_t to, size;
+  zxuc *SRC;
+  if ( !src || !src->m_data || !dst || !count || from >= src->m_count )
     return 0;
-  VEC = (zxuc*)vec->m_data;
-  d = t = 0;
-  s = from;
-  f = from * vec->m_Tsize;
-  for ( ; s < vec->m_count && d < dstCount; ++s, ++i )
-  {
-    for ( j = 0; j < vec->m_Tsize; ++j, ++f, ++t )
-      dst[ t ] = VEC[ f ];
-  }
-  return i;
+  SRC = (zxuc*)src->m_data;
+  to = from + count;
+  if ( to >= src->m_count )
+    to = src->m_count - 1;
+  size = to - from;
+  mcpy( dst, &SRC[ from * src->m_Tsize ], size * src->m_Tsize );
+  return size;
 }

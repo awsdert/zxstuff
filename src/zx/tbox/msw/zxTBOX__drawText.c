@@ -79,6 +79,7 @@ bool zxTBOX__drawText( zxTBOX *tbox, bool setCaret )
     ExtTextOut(
       hdc, lRect.left, lRect.top, ETO_CLIPPED, &lRect,
       text->m_data, zxstr.size(text) - tbox->m_lc, NULL );
+  ReleaseDC( wh->wh, hdc );
   return true;
 }
 bool zxTBOX__setCaret( zxTBOX *tbox )

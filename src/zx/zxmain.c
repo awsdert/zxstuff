@@ -92,11 +92,9 @@ ZXSYS zxsi zxapp__main(
     TranslateMessage( &msg );
     DispatchMessage(  &msg );
   }
-#if 0
-  return 0;
-#else
-  return zxobj.freeAll( (int)msg.wParam );
-#endif
+  DestroyWindow( zxwh.byId( root->m_wid )->wh );
+  DestroyWindow( zxwh.byId(  win->m_wid )->wh );
+  return zxwin.freeAll( 0 );
 #else
   return 0;
 #endif

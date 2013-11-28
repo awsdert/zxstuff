@@ -6,8 +6,9 @@
 ZXC_OPEN
 
 ZXV_DEC( zxvEVT, zxEVT, ZXSYS, ZXSYS_CALL );
-ZXSYS ZXEVENT( zxEVENT_onCurLD   );
-ZXSYS ZXEVENT( zxEVENT_onFocus   );
+ZXEVENT( zxEVENT_onCurLD   );
+ZXEVENT( zxEVENT_onFocus   );
+ZXEVENT( zxEVENT_onEvent   );
 
 ZXC_SHUT
 

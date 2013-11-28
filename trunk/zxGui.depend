@@ -8,7 +8,7 @@
 1384881113 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\tbox.h
 	"window.h"
 
-1385369397 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\window.h
+1385656006 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\window.h
 	"window/msw.h"
 
 1384623364 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\window\msw.h
@@ -22,7 +22,7 @@
 	"event/all.h"
 	"event/msw.h"
 
-1385475472 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\event\all.h
+1385655936 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\event\all.h
 	"../app.h"
 
 1385467317 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\app.h
@@ -156,6 +156,6 @@
 	"std/int.h"
 	"std/lib.h"
 
-1385475472 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\event\msw.h
+1385655959 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\event\msw.h
 	"all.h"
 

@@ -2,19 +2,35 @@
 zxn_evt const zxevt =
 {
   ZXV_NS_DEF( zxvEVT ),
-  zxEVENT_onEvent
+  zxEVENT__onEvent
 };
-ZXSYS ZXEVENT( zxEVENT_onCurLD )
+
+ZXEVENT( zxEVENT_onFocus )
 {
-  if ( GetFocus() == event->m_wh )
-    return 0;
-  SetFocus( event->m_wh );
-  event->m_stopEvent = true;
+  zxWH *wh = zxwh.byId( event->m_wid );
+  zxobj.setFocus( wh->win );
   return 0;
 }
-ZXSYS ZXEVENT( zxEVENT_onFocus )
+ZXEVENT( zxEVENT_onCurLD )
 {
-  /*zxobj.setFocus( event->m_obj );*/
+  zxHwnd  hwnd = NULL;
+  zxPOINT pt = {0};
+  pt.x = GET_X_LPARAM( event->m_lp );
+  pt.y = GET_Y_LPARAM( event->m_lp );
+  hwnd = ChildWindowFromPointEx( NULL, pt, CWP_ALL );
+  if ( GetFocus() != hwnd )
+    SetFocus( hwnd );
   return 0;
 }
 
+ZXEVENT( zxEVENT_onEvent )
+{
+  switch ( event->m_msg )
+  {
+  case ZXWM_FOCUS:
+    return zxEVENT_onFocus( event );
+  case ZXWM_CURLD:
+    return zxEVENT_onCurLD( event );
+  }
+  return 0;
+}

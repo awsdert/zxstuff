@@ -2,6 +2,7 @@
 #ifndef ZX__WIN_H
 #define ZX__WIN_H
 #include <zx/window.h>
+#include "../event/zxevt.h"
 
 ZXSYS void       zxWINDOW__initWC(    zxWC     *wc  );
 ZXSYS void       zxWINDOW__initWCX(   zxWCX    *wcx );

@@ -26,9 +26,10 @@ ZXC_OPEN
 #define ZXWM_APPCMD     WM_APPCOMMAND
 
 typedef UINT zxMSG;
+typedef POINT zxPOINT;
 
 ZXSYS LRESULT CALLBACK
-  zxEVENT_onEvent( HWND wh, UINT msg, WPARAM wp, LPARAM lp );
+  zxEVENT__onEvent( HWND wh, UINT msg, WPARAM wp, LPARAM lp );
 
 ZXC_SHUT
 

@@ -15,16 +15,11 @@ enum
 #if ZXMSW
 /* This speeds things up as well as saves space */
 typedef RECT  zxRECT;
-typedef POINT zxPOINT;
 #else
 typedef zxRECT_struct
 {
   zxsl left, top, righ, bottom;
 } zxRECT;
-typedef zxPOINT_struct
-{
-  zxsl x, y;
-} zxPOINT;
 #endif
 
 typedef struct zxWINDOW_struct

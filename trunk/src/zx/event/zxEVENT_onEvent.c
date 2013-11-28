@@ -1,14 +1,15 @@
 #include "zxevt.h"
+#include "../window/zxwin.h"
 ZXV_DEF( zxvEVT, zxEVT, ZXSYS, ZXSYS_CALL )
 #if ZXMSW
-ZXSYS LRESULT CALLBACK zxEVENT_onEvent(
+ZXSYS LRESULT CALLBACK zxEVENT__onEvent(
   HWND   hwnd,
   UINT   msg,
   WPARAM wp,
   LPARAM lp )
 #else
 ZXSYS zxsl zxCBack
-  zxEVENT_onEvent( zxHwnd wh, zxul msg, zxul *wp, zxul *lp )
+  zxEVENT__onEvent( zxHwnd wh, zxul msg, zxul *wp, zxul *lp )
 #endif
 {
   zxWH *wh = zxwh.byHwnd( hwnd );

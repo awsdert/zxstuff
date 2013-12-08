@@ -6,19 +6,16 @@ bool zxTBOX__drawText( zxTBOX *tbox, bool setCaret )
   zxCOLOR  *clr = &win->m_bgc;
   zxWH      *wh = zxwh.byId( win->m_wid );
   zxTEXT  *text = &win->m_txt;
-  RECT    cRect = {0},
+  zxRECT  cRect = {0},
           wRect = {0},
           fRect = {0},
           sRect = {0},
           lRect = {0};
   POINT      pt = {0};
   TEXTMETRIC tm = {0};
-  COLORREF  bgc = RGB(  clr->r,  clr->g,  clr->b ),
-            fgc = RGB( ~clr->r, ~clr->g, ~clr->b );
-  HBRUSH    bgh = CreateSolidBrush( bgc ),
-            fgh = CreateSolidBrush( fgc );
   HDC       hdc = GetDC( wh->wh );
-  size_t i = 0, len = zxstr.size( text );
+  zxui i = 0, len = zxstr.size( text ), format =
+    DT_EDITCONTROL | DT_LEFT | DT_NOPREFIX | DT_SINGLELINE | DT_VCENTER;
   if ( !hdc )
     return false;
   GetTextMetrics( hdc, &tm );
@@ -30,55 +27,34 @@ bool zxTBOX__drawText( zxTBOX *tbox, bool setCaret )
   wRect.right  -= pt.x;
   wRect.top    += pt.y;
   wRect.bottom -= pt.y;
-  FillRect( hdc, &wRect, win->m_wcx->hbrBackground );
-  if ( tbox->m_fc == tbox->m_lc )
+  FillRect( hdc, &wRect, CreateSolidBrush( RGB(  clr->r,  clr->g,  clr->b ) ) );
+  SetTextColor( hdc, RGB( ~clr->r, ~clr->g, ~clr->b ) );
+  /* Draw text & caret  */
+  if ( len )
+    DrawText( hdc, text->m_data, len, &wRect, format );
+  if ( !len || tbox->m_fc >= tbox->m_lc )
   {
-    ExtTextOut(
-      hdc, wRect.left, wRect.top, ETO_CLIPPED, &wRect,
-      text->m_data, zxstr.size( text ), NULL );
     if ( setCaret )
       SetCaretPos( ( tbox->m_fc * tm.tmAveCharWidth ) -
         ( pt.x >> 1 ), ( pt.y >> 1 ) );
-    ReleaseDC( wh->wh, hdc );
-    return true;
+    goto zxTBOX__drawText_return;
   }
+  /* calculate first none selected characters */
   lRect = sRect = fRect = wRect;
-  for
-  (
-    fRect.right = fRect.left;
-    i < tbox->m_fc && fRect.right < wRect.right;
-    fRect.right += tm.tmAveCharWidth
-  );
+  fRect.right = fRect.left;
+  do fRect.right += tm.tmAveCharWidth;
+  while ( i < tbox->m_fc && fRect.right < wRect.right );
   if ( i == tbox->m_fc )
-  {
     sRect.left = fRect.right;
-    ExtTextOut(
-      hdc, wRect.left, wRect.top, ETO_CLIPPED, &fRect,
-      text->m_data, tbox->m_fc, NULL );
-  }
-  for
-  (
-    sRect.right = sRect.left;
-    i < tbox->m_lc && sRect.right < wRect.right;
-    sRect.right += tm.tmAveCharWidth
-  );
+  /* calculate seleceted characters */
+  sRect.right = sRect.left;
+  do sRect.right += tm.tmAveCharWidth;
+  while ( i < tbox->m_lc && sRect.right < wRect.right );
   if ( i == tbox->m_lc )
-  {
-    lRect.left = sRect.right;
-    ExtTextOut(
-      hdc, sRect.left, sRect.top, ETO_CLIPPED, &sRect,
-      &text->m_data[ tbox->m_fc ], tbox->m_lc - tbox->m_fc, NULL );
-  }
-  for
-  (
-    lRect.right = lRect.left;
-    i < len && lRect.right < wRect.right;
-    lRect.right += tm.tmAveCharWidth
-  );
-  if ( i == len )
-    ExtTextOut(
-      hdc, lRect.left, lRect.top, ETO_CLIPPED, &lRect,
-      text->m_data, zxstr.size(text) - tbox->m_lc, NULL );
+    InvertRect( hdc, &sRect );
+  /* Finish */
+zxTBOX__drawText_return:
+  InvalidateRect( wh->wh, &cRect, TRUE );
   ReleaseDC( wh->wh, hdc );
   return true;
 }
@@ -86,8 +62,15 @@ bool zxTBOX__setCaret( zxTBOX *tbox )
 {
   DWORD fc = tbox->m_fc, lc = tbox->m_lc;
   HWND  wh = zxwh.byId( tbox->m_win->m_wid )->wh;
-  if ( !SendMessage( wh, WM_SETTEXT, 0, (LPARAM)tbox->m_win->m_txt.m_data ) ||
-    !SendMessage( wh, EM_SETSEL, (WPARAM)fc, (LPARAM)lc ) ) return false;
+  if ( !SendMessage( wh, EM_SETSEL, (WPARAM)fc, (LPARAM)fc ) )
+    return false;
   return true;
+}
+bool zxTBOX__setText( zxTBOX *tbox )
+{
+  HWND  wh = zxwh.byId( tbox->m_win->m_wid )->wh;
+  if ( !SetWindowText( wh, tbox->m_win->m_txt.m_data ) )
+    return false;
+  return zxTBOX__setCaret( tbox );
 }
 #endif

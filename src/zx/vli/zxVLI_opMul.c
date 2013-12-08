@@ -1,9 +1,10 @@
 #include <zx/vli.h>
 ZXVLI_OPMUL
 {
-  size_t s = 0, pi = 0, I = 0, stop = zxvli.size( src );
+  size_t s = 0, pi = 0, I = 0;
+  zxui stop = zxvli.size( src );
   zxVLI des = zxvli.def, tmp = des;
-  zxuc bit = zx_char_LastBit, *SRC, *VAL;
+  zxuc bit = zxuc_last, *SRC, *VAL;
   if ( !src )
     return NULL;
   SRC = src->m_data;
@@ -27,7 +28,7 @@ ZXVLI_OPMUL
     bit >>= 1;
     if ( !bit )
     {
-      bit = zx_char_LastBit;
+      bit = zxuc_last;
       --I;
     }
   }

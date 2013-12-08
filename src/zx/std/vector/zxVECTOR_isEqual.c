@@ -1,39 +1,26 @@
 #include <zx/std/vector.h>
-ZXCORE bool zxVECTOR_isEqual( zxVECTOR const *vec, zxVECTOR const *cmp, size_t* i )
+ZXV_ISEQUAL( zxVECTOR, ZXCORE, ZXCORE_CALL )
 {
-  size_t cs = 0, c = 0, j = 0, k, m;
-  zxuc *VEC, *CMP;
-  if ( i )
-    *i = SIZE_MAX;
-  if ( vec == cmp )
+  size_t k = 0;
+  if ( I )
+    *I = UINT_MAX;
+  if ( src == cmp )
     return true;
-  ZXASSERT( !vec || !cmp )
+  ZXASSERT( !src || !cmp )
     return false;
-  VEC = (zxuc*)vec->m_data;
-  CMP = (zxuc*)cmp->m_data;
-  cs = vec->m_count;
-  c  = cs - 1;
-  if ( i )
-    *i = c;
-  if ( vec->m_count != cmp->m_count ||
-    vec->m_size != cmp->m_size ||
-    vec->m_Tsize != cmp->m_Tsize )
+  if ( I )
+    *I = src->m_count - 1;
+  if ( src->m_count != cmp->m_count ||
+    src->m_size != cmp->m_size ||
+    src->m_Tsize != cmp->m_Tsize )
     return false;
-  m = vec->m_size;
-  for ( ; c != cs; --c, --cs )
+  if ( !mcmp( src->m_data, cmp->m_data, src->m_size, &k ) )
   {
-    k = m -= vec->m_Tsize;
-    for ( j = 0; j < vec->m_Tsize; ++j, ++k )
-    {
-      if ( VEC[ k ] != CMP[ k ] )
-      {
-        if ( i )
-          *i = c;
-        return false;
-      }
-    }
+    if ( I )
+      *I = ( k / src->m_Tsize ) & UINT_MAX;
+    return false;
   }
-  if ( i )
-    *i = 0;
+  if ( I )
+    *I = 0;
   return true;
 }

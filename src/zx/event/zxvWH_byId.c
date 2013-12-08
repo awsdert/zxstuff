@@ -1,5 +1,5 @@
 #include "zxwh.h"
-ZXSYS zxWH* ZXSYS_CALL zxvWH_byId( size_t wid )
+zxWH* ZXSYS_CALL zxvWH_byId( zxui wid )
 {
   return zxwh.at( zxwh.all(), wid );
 }

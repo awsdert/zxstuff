@@ -4,13 +4,13 @@ ZXCORE zxum zxCHAR_2UI( zxCHAR const *txt, zxuc base )
   size_t i = 0u, len;
   char const *cmp = zx___cBase;
   zxuc b;
-  zxum val = 0u;
+  zxum val = 0u, mval = ZXUIMAX_MAX - ( base * base );
   if ( !txt || base < 2u || base > zx___baseLen )
     return 0u;
   len = zxc.size( txt );
   if ( !len )
     len = zxc.len( txt->m_data );
-  for ( ; i < len && val < zx___baseMax[ base ]; ++i )
+  for ( ; i < len && val <= mval; ++i )
   {
     for ( b = 0u; b < base; ++b )
     {
@@ -18,6 +18,7 @@ ZXCORE zxum zxCHAR_2UI( zxCHAR const *txt, zxuc base )
       {
         val *= b;
         val += b;
+        break;
       }
     }
   }

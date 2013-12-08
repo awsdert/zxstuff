@@ -5,10 +5,11 @@
 #include <zx/tbox.h>
 #include "../window/zxwin.h"
 
-ZXSYS zxTBOX*  zxTBOX_opNew( zxWINDOW* win    );
-ZXSYS void     zxTBOX_opDel( void*     winObj, size_t type );
-ZXSYS bool     zxTBOX__drawText( zxTBOX *tbox, bool setCaret );
-ZXSYS bool     zxTBOX__setCaret( zxTBOX *tbox );
+zxTBOX*  zxTBOX_opNew( zxWINDOW* win    );
+void     zxTBOX_opDel( void*     winObj, size_t type );
+bool     zxTBOX__setText(  zxTBOX *tbox );
+bool     zxTBOX__drawText( zxTBOX *tbox, bool setCaret );
+bool     zxTBOX__setCaret( zxTBOX *tbox );
 
 ZXEVENT( zxTBOX_onEvent );
 ZXEVENT( zxTBOX_onInit  );

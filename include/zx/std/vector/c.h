@@ -15,7 +15,7 @@ typedef ZXSOBJ( zxVECTOR )
   void**  m_ptr;
   bool    m_isFixed;
   size_t  m_Tsize;
-  size_t  m_count, m_fullCount;
+  zxui    m_count, m_fullCount;
   size_t  m_size,  m_fullSize;
 } zxVECTOR;
 
@@ -23,7 +23,7 @@ ZXCORE void   zxVECTOR__init(
   zxVECTOR       *src,
   size_t          Tsize,
   void     const *cpy,
-  size_t          count,
+  zxui            count,
   void          **ptr );
 ZXV__DEC( zxVECTOR, void*, void, ZXCORE, ZXCORE_CALL );
 
@@ -31,7 +31,7 @@ ZXNSO( v )
 {
   void (*_init)(
     zxVECTOR   *src, size_t Tsize,
-    void const *cpy, size_t count, void **ptr );
+    void const *cpy, zxui count, void **ptr );
   ZXV__NS_DEC( zxVECTOR, void*, void, ZXCORE_CALL );
 } zxn_v;
 

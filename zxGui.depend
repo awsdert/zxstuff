@@ -5,10 +5,10 @@
 1382801143 c:\me\prjs\cpp\zxstuff\svn\trunk\zxgui.h
 	<zx/tbox.h>
 
-1384881113 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\tbox.h
+1385853160 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\tbox.h
 	"window.h"
 
-1385656006 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\window.h
+1385852866 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\window.h
 	"window/msw.h"
 
 1384623364 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\window\msw.h
@@ -18,7 +18,7 @@
 1385569861 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\window\all.h
 	"../event.h"
 
-1385467040 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\event.h
+1385851493 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\event.h
 	"event/all.h"
 	"event/msw.h"
 
@@ -28,15 +28,15 @@
 1385467317 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\app.h
 	"obj.h"
 
-1385573367 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\obj.h
+1385851409 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\obj.h
 	"vli.h"
 
-1385467317 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\vli.h
+1385908674 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\vli.h
 	"std/math.h"
 	"std/text.h"
 	"endian.h"
 
-1384326194 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\math.h
+1385907087 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\math.h
 	"int.h"
 
 1384326239 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\int.h
@@ -66,7 +66,7 @@
 1384325497 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\dll.h
 	"sys.h"
 
-1385152821 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\sys.h
+1386498690 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\sys.h
 	"compiler.h"
 	"std/arch.h"
 	<wchar.h>
@@ -76,7 +76,7 @@
 1384459121 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\compiler.h
 	"stdc.h"
 
-1384448536 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\stdc.h
+1385849454 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\stdc.h
 	<stddef.h>
 	<cassert>
 	<assert.h>
@@ -112,7 +112,7 @@
 	"char.h"
 	"wide.h"
 
-1384937111 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\char.h
+1385852547 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\char.h
 	"_text.h"
 
 1384325939 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\_text.h
@@ -123,18 +123,19 @@
 	<string.h>
 	<tchar.h>
 
-1384325823 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector.h
+1385851555 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector.h
 	"vector/c.h"
 	"vector/cpp.h"
 	"vector/size_t.h"
+	"vector/zxui.h"
 
-1384936153 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\c.h
+1385888146 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\c.h
 	"def_fun.h"
 
 1384936535 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\def_fun.h
 	"dec_fun.h"
 
-1384936501 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\dec_fun.h
+1385898596 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\dec_fun.h
 	"../lib.h"
 	"../math.h"
 
@@ -149,7 +150,7 @@
 1384936887 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\size_t.h
 	"cpp.h"
 
-1384937078 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\wide.h
+1385852772 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\wide.h
 	"_text.h"
 
 1384325564 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\endian.h
@@ -158,4 +159,7 @@
 
 1385655959 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\event\msw.h
 	"all.h"
+
+1385851293 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\zxui.h
+	"cpp.h"
 

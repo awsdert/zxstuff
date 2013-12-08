@@ -1,7 +1,7 @@
 #include <zx/std/wide.h>
 ZXV_PUSH_BACK( zxWIDE, wide, ZXCORE, ZXCORE_CALL )
 {
-  size_t stop;
+  zxui stop;
   ZXASSERT( !src ) return false;
   if ( !zxv.push_back( &src->m_core, (void* const)&cpy, unique ) )
     return false;

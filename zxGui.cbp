@@ -14,14 +14,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-D_WIN32" />
-					<Add directory="include" />
-					<Add directory="$(IncludePath)" />
 				</Compiler>
-				<Linker>
-					<Add library="zxs_$(TARGET_NAME).lib" />
-					<Add directory="lib" />
-					<Add directory="$(LibraryPath)" />
-				</Linker>
 			</Target>
 			<Target title="msw86_cpp_gcc">
 				<Option platforms="Windows;" />
@@ -31,14 +24,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-D_WIN32" />
-					<Add directory="include" />
-					<Add directory="$(IncludePath)" />
 				</Compiler>
-				<Linker>
-					<Add library="zxs_$(TARGET_NAME).lib" />
-					<Add directory="lib" />
-					<Add directory="$(LibraryPath)" />
-				</Linker>
 			</Target>
 			<Target title="msw86d_gcc">
 				<Option platforms="Windows;" />
@@ -49,14 +35,7 @@
 				<Compiler>
 					<Add option="-D_WIN32" />
 					<Add option="-D_DEBUG" />
-					<Add directory="include" />
-					<Add directory="$(IncludePath)" />
 				</Compiler>
-				<Linker>
-					<Add library="zxs_$(TARGET_NAME).lib" />
-					<Add directory="lib" />
-					<Add directory="$(LibraryPath)" />
-				</Linker>
 			</Target>
 			<Target title="msw86d_cpp_gcc">
 				<Option platforms="Windows;" />
@@ -67,14 +46,7 @@
 				<Compiler>
 					<Add option="-D_WIN32" />
 					<Add option="-D_DEBUG" />
-					<Add directory="include" />
-					<Add directory="$(IncludePath)" />
 				</Compiler>
-				<Linker>
-					<Add library="zxs_$(TARGET_NAME).lib" />
-					<Add directory="lib" />
-					<Add directory="$(LibraryPath)" />
-				</Linker>
 			</Target>
 			<Target title="msw86_vc">
 				<Option platforms="Windows;" />
@@ -90,11 +62,7 @@
 					<Add option="/Zc:wchar_t" />
 					<Add option="/D_WIN32" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$(Include)" />
-				</ResourceCompiler>
 				<Linker>
-					<Add library="user32" />
 					<Add library="comctl32" />
 				</Linker>
 			</Target>
@@ -112,11 +80,7 @@
 					<Add option="/Zc:wchar_t" />
 					<Add option="/D_WIN32" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$(Include)" />
-				</ResourceCompiler>
 				<Linker>
-					<Add library="user32" />
 					<Add library="comctl32" />
 				</Linker>
 			</Target>
@@ -137,12 +101,8 @@
 					<Add option="/D_WIN32" />
 					<Add option="/D_DEBUG" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$(Include)" />
-				</ResourceCompiler>
 				<Linker>
 					<Add option="/DEBUG" />
-					<Add library="user32" />
 					<Add library="comctl32" />
 				</Linker>
 			</Target>
@@ -163,12 +123,31 @@
 					<Add option="/D_WIN32" />
 					<Add option="/D_DEBUG" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$(Include)" />
-				</ResourceCompiler>
 				<Linker>
 					<Add option="/DEBUG" />
-					<Add library="user32" />
+					<Add library="comctl32" />
+				</Linker>
+			</Target>
+			<Target title="msw64d_vc">
+				<Option platforms="Windows;" />
+				<Option output="bin/zxGui_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxGui_$(TARGET_NAME)/" />
+				<Option type="0" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/TC" />
+					<Add option="/Gd" />
+					<Add option="/Gm" />
+					<Add option="/Od" />
+					<Add option="/W3" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/Zi" />
+					<Add option="/D_WIN64" />
+					<Add option="/D_DEBUG" />
+					<Add option="/D_AMD64_" />
+				</Compiler>
+				<Linker>
+					<Add option="/DEBUG" />
 					<Add library="comctl32" />
 				</Linker>
 			</Target>

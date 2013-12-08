@@ -2,7 +2,7 @@
 #include <zx/vli.h>
 ZXV_RESERVE( zxVLI, ZXCORE, ZXCORE_CALL )
 {
-  zxvli.grow( src, minSize );
+  zxvli.grow( src, minSize & ZXUINT_MAX );
 }
 ZXCORE void zxVLI_reserveb( zxVLI *src, size_t minBits )
 {

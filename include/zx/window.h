@@ -24,8 +24,8 @@ typedef zxRECT_struct
 
 typedef struct zxWINDOW_struct
 {
-  size_t    m_base, m_wid, m_oid;
-  zxvSIZE   m_kids;
+  zxui      m_base, m_wid, m_oid;
+  zxvUI     m_kids;
   bool      m_class;
   zxOBJ     m_wObj, m_uObj;
   zxul      m_style, m_stylex;
@@ -56,20 +56,20 @@ ZXNSO( win )
 #endif
   void       (*_initWC)(    zxWC     *wc  );
   void       (*_initWCX)(   zxWCX    *wcx );
-  zxHwnd     (*getHandle)(  size_t    wid );
+  zxHwnd     (*getHandle)(  zxui      wid );
   zxWINDOW*  (*getRootWindow)(  void );
   zxHwnd     (*getRootWH)( void );
-  zxWINDOW*  (*getWindow)(  size_t    wid );
+  zxWINDOW*  (*getWindow)(  zxui      wid );
   bool       (*isKnown)(    zxWINDOW* win );
   zxWINDOW*  (*byHandle)(   zxHwnd    wh );
   void       (*setBase)(    zxWINDOW *win, zxWINDOW *base );
   void       (*setParent)(  zxWINDOW *win, zxWINDOW *base );
   void       (*addKid)(     zxWINDOW *win, zxWINDOW *base );
   void       (*remKid)(     zxWINDOW *win, zxWINDOW *base );
-  zxWINDOW*  (*getKid)(     zxWINDOW *win, size_t    i    );
+  zxWINDOW*  (*getKid)(     zxWINDOW *win, zxui      i    );
   void       (*addChild)(   zxWINDOW *win, zxWINDOW *base );
   void       (*remChild)(   zxWINDOW *win, zxWINDOW *base );
-  zxWINDOW*  (*getChild)(   zxWINDOW *win, size_t    i    );
+  zxWINDOW*  (*getChild)(   zxWINDOW *win, zxui      i    );
   zxWINDOW*  (*getNext)( zxWINDOW *win, bool nextKid );
   zxWINDOW*  (*getPrev)( zxWINDOW *win );
   zxWINDOW*  (*opNew)(      zxWINDOW *win );

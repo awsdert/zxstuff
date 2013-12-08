@@ -87,13 +87,13 @@ ZXSYS zxsi zxapp__main(
   zxwin.osOpNew( win  );
   zxwin.show(    win  );
   zxwin.update(  win  );
-  while (GetMessage(&msg, msg.hwnd, 0, 0))
+  GetMessage(&msg, msg.hwnd, 0, 0);
+  do
   {
     TranslateMessage( &msg );
     DispatchMessage(  &msg );
   }
-  DestroyWindow( zxwh.byId( root->m_wid )->wh );
-  DestroyWindow( zxwh.byId(  win->m_wid )->wh );
+  while( GetMessage(&msg, msg.hwnd, 0, 0) );
   return zxwin.freeAll( 0 );
 #else
   return 0;
@@ -139,12 +139,12 @@ ZXSYS zxWINDOW*  zxWINDOW__fromPoint( zxWINDOW* win, zxPOINT pt,
   zxus maxDepth, zxus depth )
 {
   zxWINDOW *kid = NULL;
-  zxvSIZE *kids = &win->m_kids;
+  zxvUI   *kids = &win->m_kids;
   zxRECT   rect = win->m_cRect;
-  size_t i = 0, stop;
+  zxui i = 0, stop;
   if ( depth < maxDepth )
   {
-    stop = zxv_size.size( kids );
+    stop = zxv_ui.size( kids );
     for ( ; i < stop; ++i )
     {
       kid = zxwin.getWindow( kids->m_data[ i ] );

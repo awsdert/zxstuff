@@ -2,28 +2,32 @@
 #include <zx/std/vector.h>
 ZXV_PUSH( zxVECTOR, void*, ZXCORE, ZXCORE_CALL )
 {
-  size_t i = 0, j = 0, k = 0, stop = zxv.size( src ), size;
+  zxui i = 0, stop;
+  size_t t = 0, f = 0, Tsize;
   zxuc *SRC;
   ZXASSERT( !src )
     return false;
-  size = src->m_Tsize;
-  SRC = (zxuc*)src->m_data;
+  stop  = src->m_count;
+  Tsize = src->m_Tsize;
+  SRC   = (zxuc*)src->m_data;
   if ( unique )
   {
-    for ( ; i < stop; ++i, j += size )
+    for ( ; i < stop; ++i, t += Tsize )
     {
-        if ( mcmp( &SRC[ j ], cpy, size, NULL ) )
-            return true;
+      if ( mcmp( &SRC[ t ], cpy, Tsize, NULL ) )
+          return true;
     }
   }
   zxv.grow( src, stop + 1, cpy );
   if ( zxv.size( src ) == stop )
     return false;
-  if ( pos > stop )
-    pos = stop;
-  for ( ++stop, i = pos, j = i * size, k = j + size;
-    i < stop; ++i, j += size, k += size )
-    mcpy( &SRC[ k ], &SRC[ j ], size );
-  mcpy( &SRC[ pos * size ], cpy, size );
+  if ( pos >= stop )
+    return true;
+  i = src->m_count;
+  t = src->m_size - Tsize;
+  f = src->m_size - (Tsize << 1 );
+  for ( ; i > pos; --i, t -= Tsize, f -= Tsize )
+    mcpy( &SRC[ t ], &SRC[ f ], Tsize );
+  mcpy( &SRC[ t ], cpy, Tsize );
   return true;
 }

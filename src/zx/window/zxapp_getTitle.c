@@ -7,5 +7,5 @@ ZXSYS void zxapp_setTitle( zxch const *txt )
   zxstr._kill( &zx_l_appTitle );
   if ( !txt )
     return;
-  zxstr._init( &zx_l_appTitle, txt, zxstr.len( txt ) );
+  zxstr._init( &zx_l_appTitle, txt, strlen( txt ) & ZXUINT_MAX );
 }

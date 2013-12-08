@@ -8,12 +8,13 @@ ZXC_OPEN
 typedef ZXSOBJ( zxTBOX )
 {
   zxWINDOW *m_win;
-  size_t    m_fc, m_lc;
+  zxui      m_fc, m_lc;
 } zxTBOX;
 
 ZXNSO( tbox )
 {
   zxTBOX const def;
+  bool    (*_setText)(  zxTBOX *tbox );
   bool    (*_drawText)( zxTBOX *tbox, bool setCaret );
   bool    (*_setCaret)( zxTBOX *tbox );
   zxTBOX* (*opNew)( zxWINDOW* win    );

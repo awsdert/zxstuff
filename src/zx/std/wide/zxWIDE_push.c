@@ -2,7 +2,7 @@
 #include <zx/std/wide.h>
 ZXV_PUSH( zxWIDE, wide, ZXCORE, ZXCORE_CALL )
 {
-  size_t stop;
+  zxui stop;
   ZXASSERT( !src ) return false;
   if ( !zxv.push( &src->m_core, (void* const)&cpy, pos, unique ) )
     return false;

@@ -6,7 +6,7 @@ ZXV__INITCPY( zxVLI, ZXCORE, ZXCORE_CALL )
 }
 ZXCORE void zxVLI__init( zxVLI *src, zxsm value )
 {
-  size_t size = sizeof( zxsm );
+  zxui size = sizeof( zxsm ) & ZXUINT_MAX;
   ZXASSERT( !src ) return;
   *src = zxvli.def;
   src->m_isSigned = true;
@@ -20,7 +20,7 @@ ZXCORE void zxVLI__init( zxVLI *src, zxsm value )
 }
 ZXCORE void zxVLI__initU( zxVLI *src, zxum value )
 {
-  size_t size = sizeof( zxsm );
+  zxui size = sizeof( zxsm ) & ZXUINT_MAX;
   ZXASSERT( !src ) return;
   *src = zxvli.def;
   src->m_core.m_ptr = (void**)&src->m_data;

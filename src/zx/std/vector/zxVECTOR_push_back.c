@@ -2,18 +2,21 @@
 
 ZXV_PUSH_BACK( zxVECTOR, void*, ZXCORE, ZXCORE_CALL )
 {
-  size_t i = 0, j = 0, stop = zxv.size( src );
+  zxui i = 0, stop = zxv.size( src );
+  size_t j = 0;
   zxuc *SRC;
   ZXASSERT( !src )
     return false;
   SRC = (zxuc*)src->m_data;
-  if ( unique )
+  if ( unique && stop )
   {
-    for ( ; i < stop; ++i, j += src->m_Tsize )
+    do
     {
-        if ( mcmp( &SRC[ j ], cpy, src->m_Tsize, NULL ) )
-            return true;
+      if ( mcmp( &SRC[ j ], cpy, src->m_Tsize, NULL ) )
+        return true;
+      ++i; j += src->m_Tsize;
     }
+    while ( i < stop );
   }
   zxv.grow( src, stop + 1, cpy );
   if ( zxv.size( src ) == stop )

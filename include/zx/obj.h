@@ -21,7 +21,8 @@ typedef void (*opDelVoid)( void* obj, size_t type );
 
 typedef ZXSOBJ( zxOBJ )
 {
-  size_t id, type, subType;
+  zxui   id;
+  size_t type, subType;
   void  *obj;
   opDelVoid del;
 } zxOBJ;
@@ -37,7 +38,7 @@ ZXNSO( obj )
   bool    (ZXCORE_CALL *hasFocus)( zxOBJ obj );
   zxOBJ   (ZXCORE_CALL *getFocus)( void );
   int     (ZXCORE_CALL *freeAll)( int returnCode );
-  size_t  (ZXCORE_CALL *getNewId)( void );
+  zxui    (ZXCORE_CALL *getNewId)( void );
 } zxn_obj;
 
 extern zxn_obj const zxobj;

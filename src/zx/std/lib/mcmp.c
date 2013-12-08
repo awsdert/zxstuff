@@ -18,19 +18,23 @@ ZXCORE bool mcmp(
     }
     if ( !cmp )
     {
-        for ( ; i < size; --i, --size )
-        {
-            if ( SRC[ i ] != 0u )
-                break;
-        }
+      do
+      {
+        if ( SRC[ i ] != 0u )
+          break;
+        --i; --size;
+      }
+      while ( i < size );
     }
     else
     {
-       for ( ; i < size; --i, --size )
+       do
        {
-           if ( SRC[ i ] == CMP[ i ] )
-               break;
+        if ( SRC[ i ] == CMP[ i ] )
+          break;
+        --i; --size;
        }
+       while ( i < size );
     }
     if ( I )
         *I = i;

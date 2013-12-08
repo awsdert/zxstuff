@@ -1,7 +1,7 @@
 #include <zx/std/vector.h>
 void zxVECTOR__init(
   zxVECTOR   *src, size_t Tsize,
-  void const *cpy, size_t count,
+  void const *cpy, zxui   count,
   void      **ptr )
 {
   ZXASSERT( !src ) return;

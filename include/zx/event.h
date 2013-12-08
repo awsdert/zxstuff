@@ -9,11 +9,13 @@ ZXC_OPEN
 typedef struct zxEVENT_struct
 {
   zxHwnd  m_wh;
-  size_t  m_wid;
+  zxui    m_wid;
   zxMSG   m_msg;
+  zxus    m_cmd;
   zxOBJ   m_obj;
   bool    m_stopEvent;
-  long    m_wp, m_lp;
+  WPARAM  m_wp;
+  LPARAM  m_lp;
 } zxEVENT;
 
 #define ZX_EVENT( FUN ) zxsl FUN( zxEVENT *event )
@@ -22,7 +24,8 @@ typedef ZX_EVENT( (__stdcall *zxEvtPtr) );
 
 typedef struct zxEVT_struct
 {
-  size_t   wid, oid, t, subType;
+  zxui     wid, oid;
+  size_t   type, subType;
   zxMSG    msg;
   zxEvtPtr proc;
 } zxEVT;
@@ -44,10 +47,10 @@ extern zxn_evt const zxevt;
 typedef struct zxWH_struct
 {
   zxHwnd   wh;
-  size_t   wid;
+  zxui     wid;
   zxOBJ    win;
   zxEvtPtr onEvent;
-  zxvSIZE  objs;
+  zxvUI    objs;
 } zxWH;
 
 ZXV_OBJ( zxvWH, zxWH );
@@ -58,7 +61,7 @@ ZXNSO( wh )
   ZXV_NS_DEC( zxvWH, zxWH, ZXSYS_CALL );
   zxvWH* (ZXSYS_CALL *all)( void );
   zxWH*  (ZXSYS_CALL *byHwnd)( zxHwnd wh );
-  zxWH*  (ZXSYS_CALL *byId)( size_t wid );
+  zxWH*  (ZXSYS_CALL *byId)( zxui wid );
 } zxn_wh;
 
 extern zxn_wh const zxwh;

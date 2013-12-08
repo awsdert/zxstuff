@@ -10,102 +10,64 @@
 				<Option platforms="Windows;" />
 				<Option output="bin/zxCmd_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/zxCmd_$(TARGET_NAME)" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
-					<Add option="-DZX_MSW" />
-					<Add option="-DZXUSE_DLL" />
-					<Add option="-D_CONSOLE" />
-					<Add option="-DZXCONSOLE" />
-					<Add directory="include" />
-					<Add directory="$(IncludePath)" />
+					<Add option="-D_WIN32" />
+					<Add option="-D_DEBUG" />
 				</Compiler>
-				<Linker>
-					<Add library="zxs_$(TARGET_NAME).lib" />
-					<Add directory="lib" />
-					<Add directory="$(LibraryPath)" />
-				</Linker>
 			</Target>
 			<Target title="msw86_cpp_gcc">
 				<Option platforms="Windows;" />
 				<Option output="bin/zxCmd_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/zxCmd_$(TARGET_NAME)" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
-					<Add option="-DZX_MSW" />
-					<Add option="-DZXUSE_DLL" />
-					<Add option="-D_CONSOLE" />
-					<Add option="-DZXCONSOLE" />
-					<Add directory="include" />
-					<Add directory="$(IncludePath)" />
+					<Add option="-D_WIN32" />
 				</Compiler>
-				<Linker>
-					<Add library="zxs_$(TARGET_NAME).lib" />
-					<Add directory="lib" />
-					<Add directory="$(LibraryPath)" />
-				</Linker>
 			</Target>
 			<Target title="msw86d_gcc">
 				<Option platforms="Windows;" />
 				<Option output="bin/zxCmd_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/zxCmd_$(TARGET_NAME)" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
-					<Add option="-DZX_MSW" />
-					<Add option="-DZXUSE_DLL" />
-					<Add option="-D_CONSOLE" />
-					<Add option="-DWIN32" />
+					<Add option="-D_WIN32" />
 					<Add option="-D_DEBUG" />
-					<Add directory="include" />
-					<Add directory="$(IncludePath)" />
 				</Compiler>
-				<Linker>
-					<Add library="zxs_$(TARGET_NAME).lib" />
-					<Add directory="lib" />
-					<Add directory="$(LibraryPath)" />
-				</Linker>
 			</Target>
 			<Target title="msw86_gcc">
 				<Option platforms="Windows;" />
 				<Option output="bin/zxCmd_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/zxCmd_$(TARGET_NAME)" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
 				<Compiler>
-					<Add option="-DZX_MSW" />
-					<Add option="-DZXUSE_DLL" />
-					<Add option="-D_CONSOLE" />
-					<Add option="-DWIN32" />
-					<Add option="-DNDEBUG" />
-					<Add directory="include" />
-					<Add directory="$(IncludePath)" />
+					<Add option="-D_WIN32" />
 				</Compiler>
-				<Linker>
-					<Add library="zxs_$(TARGET_NAME).lib" />
-					<Add directory="lib" />
-					<Add directory="$(LibraryPath)" />
-				</Linker>
 			</Target>
 			<Target title="msw86_vc">
 				<Option platforms="Windows;" />
 				<Option output="bin/zxCmd_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/zxCmd_$(TARGET_NAME)" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="msvc10" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="/TC" />
 					<Add option="/Gd" />
 					<Add option="/Gm" />
 					<Add option="/W3" />
 					<Add option="/Zc:wchar_t" />
+					<Add option="/D_WIN32" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$(Include)" />
-				</ResourceCompiler>
 				<Linker>
-					<Add library="user32" />
 					<Add library="comctl32" />
 				</Linker>
 			</Target>
@@ -113,20 +75,18 @@
 				<Option platforms="Windows;" />
 				<Option output="bin/zxCmd_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/zxCmd_$(TARGET_NAME)" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="msvc10" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="/TP" />
 					<Add option="/Gd" />
 					<Add option="/Gm" />
 					<Add option="/W3" />
 					<Add option="/Zc:wchar_t" />
+					<Add option="/D_WIN32" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$(Include)" />
-				</ResourceCompiler>
 				<Linker>
-					<Add library="user32" />
 					<Add library="comctl32" />
 				</Linker>
 			</Target>
@@ -134,8 +94,9 @@
 				<Option platforms="Windows;" />
 				<Option output="bin/zxCmd_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/zxCmd_$(TARGET_NAME)" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="msvc10" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="/TC" />
 					<Add option="/Gd" />
@@ -143,13 +104,11 @@
 					<Add option="/W3" />
 					<Add option="/Zc:wchar_t" />
 					<Add option="/Zi" />
+					<Add option="/D_WIN32" />
+					<Add option="/D_DEBUG" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$(Include)" />
-				</ResourceCompiler>
 				<Linker>
 					<Add option="/DEBUG" />
-					<Add library="user32" />
 					<Add library="comctl32" />
 				</Linker>
 			</Target>
@@ -157,8 +116,9 @@
 				<Option platforms="Windows;" />
 				<Option output="bin/zxCmd_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/zxCmd_$(TARGET_NAME)" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="msvc10" />
+				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="/TP" />
 					<Add option="/Gd" />
@@ -166,17 +126,47 @@
 					<Add option="/W3" />
 					<Add option="/Zc:wchar_t" />
 					<Add option="/Zi" />
+					<Add option="/D_WIN32" />
+					<Add option="/D_DEBUG" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="$(Include)" />
-				</ResourceCompiler>
 				<Linker>
 					<Add option="/DEBUG" />
-					<Add library="user32" />
+					<Add library="comctl32" />
+				</Linker>
+			</Target>
+			<Target title="msw64d_vc">
+				<Option platforms="Windows;" />
+				<Option output="bin/zxCmd_$(TARGET_NAME)" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/zxCmd_$(TARGET_NAME)" />
+				<Option type="1" />
+				<Option compiler="msvc10" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="/TC" />
+					<Add option="/Gd" />
+					<Add option="/Gm" />
+					<Add option="/W3" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/Zi" />
+					<Add option="/D_WIN64" />
+					<Add option="/D_DEBUG" />
+					<Add option="/D_AMD64_" />
+				</Compiler>
+				<Linker>
+					<Add option="/DEBUG" />
 					<Add library="comctl32" />
 				</Linker>
 			</Target>
 		</Build>
+		<Compiler>
+			<Add option="-DZXCONSOLE" />
+			<Add option="-DZXUSE_DLL" />
+			<Add directory="include" />
+		</Compiler>
+		<Linker>
+			<Add library="zxs_$(TARGET_NAME)" />
+			<Add directory="lib" />
+		</Linker>
 		<Unit filename="zxCmd.c">
 			<Option compilerVar="CC" />
 		</Unit>

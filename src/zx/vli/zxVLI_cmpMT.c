@@ -1,7 +1,7 @@
 #include <zx/vli.h>
 ZXCORE bool zxVLI_cmpMT( zxVLI const *src, zxVLI const *val )
 {
-  size_t i = 0;
+  zxui i = 0;
   zxuc *SRC = (zxuc*)src->m_core.m_data,
     *VAL = (zxuc*)val->m_core.m_data;
   if ( !zxvli.isEqual( src, val, &i ) )

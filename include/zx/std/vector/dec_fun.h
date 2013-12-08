@@ -12,7 +12,7 @@
   } NAME
 
 #define ZXV___INIT(     NAME, T, DLL, FUN  ) DLL void \
-  FUN( NAME *src, T const *cpy, size_t count )
+  FUN( NAME *src, T const *cpy, zxui count )
 #define ZXV__INIT(      NAME, T, DLL, CALL ) \
   ZXV___INIT( NAME, T, DLL, CALL NAME##__init )
 
@@ -26,18 +26,18 @@
 #define ZXV__KILL(      NAME,    DLL, CALL ) \
   ZXV___KILL( NAME, DLL, CALL NAME##__kill )
 
-#define ZXV__SIZE(      NAME,    DLL, FUN  ) DLL size_t \
+#define ZXV__SIZE(      NAME,    DLL, FUN  ) DLL zxui \
   FUN( NAME const *src )
 #define ZXV_SIZE(       NAME,    DLL, CALL ) \
   ZXV__SIZE( NAME, DLL, CALL NAME##_size )
 
-#define ZXV__MAX_SIZE(  NAME,    DLL, FUN  ) DLL size_t \
+#define ZXV__MAX_SIZE(  NAME,    DLL, FUN  ) DLL zxui \
   FUN( NAME const *src )
 #define ZXV_MAX_SIZE(   NAME,    DLL, CALL ) \
   ZXV__MAX_SIZE( NAME, DLL, CALL NAME##_max_size )
 
 #define ZXV__RESIZE(    NAME, T, DLL, FUN  ) DLL void \
-  FUN( NAME       *src, size_t setCount, T const setNew )
+  FUN( NAME       *src, zxui setCount, T const setNew )
 #define ZXV_RESIZE(     NAME, T, DLL, CALL ) \
   ZXV__RESIZE( NAME, T, DLL, CALL NAME##_resize )
 
@@ -57,12 +57,12 @@
   ZXV__RESERVE( NAME, DLL, CALL NAME##_reserve )
 
 #define ZXV__GROW(      NAME, T, DLL, FUN  ) DLL void \
-  FUN( NAME       *src, size_t setCount, T const setNew )
+  FUN( NAME       *src, zxui setCount, T const setNew )
 #define ZXV_GROW(       NAME, T, DLL, CALL ) \
   ZXV__GROW( NAME, T, DLL, CALL NAME##_grow )
 
 #define ZXV__SHRINK(    NAME,    DLL, FUN  ) DLL void \
-  FUN( NAME       *src, size_t setCount )
+  FUN( NAME       *src, zxui setCount )
 #define ZXV_SHRINK(         NAME,    DLL, CALL ) \
   ZXV__SHRINK( NAME, DLL, CALL NAME##_shrink )
 
@@ -76,12 +76,12 @@
   ZXV__ASSIGN( NAME, T, DLL, CALL NAME##_assign )
 
 #define ZXV__APPEND(        NAME,    DLL, FUN  ) DLL void \
-  FUN( NAME *src, NAME const *cpy, size_t pos )
+  FUN( NAME *src, NAME const *cpy, zxui pos )
 #define ZXV_APPEND(         NAME,    DLL, CALL ) \
   ZXV__APPEND( NAME, DLL, CALL NAME##_append )
 
 #define ZXV__PUSH(          NAME, T, DLL, FUN  ) DLL bool \
-  FUN( NAME *src, T const cpy, size_t pos, bool unique )
+  FUN( NAME *src, T const cpy, zxui pos, bool unique )
 #define ZXV_PUSH(           NAME, T, DLL, CALL ) \
   ZXV__PUSH( NAME, T, DLL, CALL NAME##_push )
 
@@ -91,7 +91,7 @@
   ZXV__PUSH_BACK( NAME, T, DLL, CALL NAME##_push_back )
 
 #define ZXV__POP(           NAME, T, DLL, FUN  ) DLL void \
-  FUN( NAME *src, T const cmp, size_t first, size_t last )
+  FUN( NAME *src, T const cmp, zxui first, zxui last )
 #define ZXV_POP(            NAME, T, DLL, CALL ) \
   ZXV__POP( NAME, T, DLL, CALL NAME##_pop )
 
@@ -101,12 +101,12 @@
   ZXV__POP_BACK( NAME, DLL, CALL NAME##_pop_back )
 
 #define ZXV__INSERT(        NAME,    DLL, FUN  ) DLL void \
-  FUN( NAME *src, NAME const *cpy, size_t pos )
+  FUN( NAME *src, NAME const *cpy, zxui pos )
 #define ZXV_INSERT(         NAME,    DLL, CALL ) \
   ZXV__INSERT( NAME, DLL, CALL NAME##_insert )
 
 #define ZXV__ERASE(         NAME,    DLL, FUN  ) DLL void \
-  FUN( NAME *src, size_t first, size_t last )
+  FUN( NAME *src, zxui first, zxui last )
 #define ZXV_ERASE(          NAME,    DLL, CALL ) \
   ZXV__ERASE( NAME, DLL, CALL NAME##_erase )
 
@@ -127,17 +127,17 @@
 
 #define ZXV__COPY(          NAME, T, DLL, FUN  ) DLL size_t \
   FUN( NAME const *src, T *dst, \
-    size_t const count, size_t const from )
+    zxui const count, zxui const from )
 #define ZXV_COPY(           NAME, T, DLL, CALL ) \
   ZXV__COPY( NAME, T, DLL, CALL NAME##_copy )
 
 #define ZXV__AT(            NAME, T, DLL, FUN  ) DLL T* \
-  FUN( NAME const *src, size_t i )
+  FUN( NAME const *src, zxui i )
 #define ZXV_AT(             NAME, T, DLL, CALL ) \
   ZXV__AT( NAME, T, DLL, CALL NAME##_at )
 
 #define ZXV__ISEQUAL(       NAME,    DLL, FUN  ) DLL bool \
-  FUN( NAME const *src, NAME const *cmp, size_t *I )
+  FUN( NAME const *src, NAME const *cmp, zxui *I )
 #define ZXV_ISEQUAL(        NAME,    DLL, CALL ) \
   ZXV__ISEQUAL( NAME, DLL, CALL NAME##_isEqual )
 

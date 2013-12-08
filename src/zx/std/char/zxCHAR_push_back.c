@@ -1,7 +1,7 @@
 #include <zx/std/char.h>
 ZXV_PUSH_BACK( zxCHAR, char, ZXCORE, ZXCORE_CALL )
 {
-  size_t stop;
+  zxui stop;
   ZXASSERT( !src ) return false;
   if ( !zxv.push_back( &src->m_core, (void* const)&cpy, unique ) )
     return false;

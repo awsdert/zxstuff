@@ -1,8 +1,8 @@
-#include <zx/window.h>
+#include "zxwin.h"
 ZXSYS zxWINDOW* zxWINDOW_opDel( zxWINDOW* win )
 {
   zxvOBJ *all = zxobj.all();
-  size_t i = 0, stop = zxobj.size( all );
+  zxui i = 0, stop = zxobj.size( all );
   zxWH *wh = NULL;
   zxOBJ obj = {0};
    /* This reduces thread/parallel issues */
@@ -20,16 +20,18 @@ ZXSYS zxWINDOW* zxWINDOW_opDel( zxWINDOW* win )
     win->m_wObj.del( win->m_wObj.obj, win->m_wObj.type );
   if ( win->m_delKids )
   {
-    stop = zxv_size.size( &win->m_kids );
+    stop = zxv_ui.size( &win->m_kids );
     for ( ; i < stop; ++i )
       zxwin.opDel( zxwin.getWindow( win->m_kids.m_data[ i ] ) );
   }
-  zxv_size._kill( &win->m_kids );
+  zxv_ui._kill( &win->m_kids );
   if ( !win->m_class )
   {
     *win = zxwin.def;
     free( win );
     win = NULL;
   }
+  if ( IsWindow( wh->wh ) )
+    DestroyWindow( wh->wh );
   return win;
 }

@@ -2,13 +2,14 @@
 ZXCORE void zxVLI_growb( zxVLI* src, size_t setBits )
 {
   zxuc   def = 0u, last = zxvli.isNeg( src );
-  size_t size, bits = 0u;
+  zxui   size;
+  size_t bits = 0u;
   ZXASSERT( !src ) return;
   if ( setBits <= src->m_bits )
     return;
   if ( last )
     def = UCHAR_MAX;
-  size = zxc_size_udiv( setBits, CHAR_BIT, &bits );
+  size = zxdivu_size( setBits, CHAR_BIT, &bits ) & ZXUINT_MAX;
   if ( bits )
     ++size;
   zxv.grow( &src->m_core, size, &def );

@@ -10,8 +10,12 @@ ZXCORE void* mnewa(
   {
     if ( cpy )
     {
-      for ( ; i < size; i += Tsize )
+      do
+      {
         mcpy( &ptr[ i ], cpy, Tsize );
+        i += Tsize;
+      }
+      while ( i < size );
     }
     else
       mset( ptr, 0, size );

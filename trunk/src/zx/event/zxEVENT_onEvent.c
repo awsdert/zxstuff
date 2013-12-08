@@ -16,16 +16,22 @@ ZXSYS zxsl zxCBack
   zxEVENT  event = {0};
   zxsl     cbr = 0;
   if ( !wh || !wh->onEvent )
-    return DefWindowProc( hwnd, msg, wp, lp );
+    goto zxEVENT__onEvent_return;
   event.m_wh  = hwnd;
   event.m_wid = wh->wid;
   event.m_msg = msg;
   event.m_wp  = wp;
   event.m_lp  = lp;
-  cbr = wh->onEvent( &event );
+  if ( msg == ZXWM_CMD )
+    event.m_cmd = HIWORD( wp );
+#if 1
+  if ( msg == ZXWM_FOCUS && wh->wid )
+    PostQuitMessage( 0 );
+  else
+#endif
+    cbr = wh->onEvent( &event );
   if ( cbr != 0 )
     return cbr;
-  if ( event.m_stopEvent )
-    return 0;
+zxEVENT__onEvent_return:
   return DefWindowProc( hwnd, msg, wp, lp );
 }

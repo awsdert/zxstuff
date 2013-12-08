@@ -1,7 +1,7 @@
 #include <zx/std/wide.h>
 ZXV_OPADD( zxWIDE, ZXCORE, ZXCORE_CALL )
 {
-  size_t stop;
+  zxui stop;
   ZXASSERT( !src || !cpy ) return src;
   zxv.opAdd( &src->m_core, &cpy->m_core );
   stop = zxw.size( src );

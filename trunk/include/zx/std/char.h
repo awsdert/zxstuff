@@ -11,18 +11,15 @@ ZXV_OBJ( zxCHAR, char );
 
 ZXV_DEC( zxCHAR, char, ZXCORE, ZXCORE_CALL );
 ZXCORE size_t ZXCORE_CALL zxCHAR_len( char const *text );
-ZXCORE void   ZXCORE_CALL zxCHAR__initW(
-  zxCHAR       *dst,
-  wide   const *text,
-  size_t        len );
+ZXV___INIT( zxCHAR, wide, ZXCORE, ZXCORE_CALL zxCHAR__initW );
 
 ZXNSO( c )
 {
   ZXV_NS_DEC( zxCHAR, char, ZXCORE_CALL );
   size_t (*len)( char const *text );
   /* _initC for zxstr usage */
-  void   (ZXCORE_CALL *_initC)( zxCHAR *dst, char const *text, size_t len );
-  void   (ZXCORE_CALL *_initW)( zxCHAR *dst, wide const *text, size_t len );
+  ZXV___INIT( zxCHAR, char,, (ZXCORE_CALL *_initC) );
+  ZXV___INIT( zxCHAR, wide,, (ZXCORE_CALL *_initw) );
 } zxn_c;
 
 static zxn_c const zxc =

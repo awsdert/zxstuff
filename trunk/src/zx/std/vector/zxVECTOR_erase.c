@@ -1,7 +1,8 @@
 #include <zx/std/vector.h>
 ZXV_ERASE( zxVECTOR, ZXCORE, ZXCORE_CALL )
 {
-  size_t i = first, s, f, t;
+  zxui i = first, s;
+  size_t f, t;
   zxuc *SRC;
   ZXASSERT( !src ) return;
   SRC = (zxuc*)src->m_data;

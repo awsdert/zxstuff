@@ -1,16 +1,21 @@
 #include <zx/std/vector.h>
-ZXCORE void zxVECTOR_reverse( zxVECTOR *obj )
+ZXCORE void zxVECTOR_reverse( zxVECTOR *src )
 {
-  size_t i, d, s;
-  zxuc *tmp, *VEC;
-  ZXASSERT( !obj )
+  size_t i = 0, d = 0, s;
+  zxuc *TMP, *SRC;
+  ZXASSERT( !src )
     return;
-  VEC = (zxuc*)obj->m_data;
-  tmp = (zxuc*)malloc( obj->m_size );
-  mcpy( tmp, obj->m_data, obj->m_size );
-  s = obj->m_size - obj->m_Tsize;
-  for ( i = 0, d = 0; i < obj->m_count;
-    ++i, d += obj->m_Tsize, s -= obj->m_Tsize )
-    mcpy( &VEC[ d ], &tmp[ s ], obj->m_Tsize );
-  free( tmp );
+  if ( !src->m_count )
+    return;
+  SRC = (zxuc*)src->m_data;
+  TMP = (zxuc*)malloc( src->m_size );
+  mcpy( TMP, src->m_data, src->m_size );
+  s = src->m_size - src->m_Tsize;
+  do
+  {
+    mcpy( &SRC[ d ], &TMP[ s ], src->m_Tsize );
+    ++i; d += src->m_Tsize; s -= src->m_Tsize;
+  }
+  while ( i < src->m_count );
+  free( TMP );
 }

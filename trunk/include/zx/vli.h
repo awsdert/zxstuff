@@ -16,34 +16,7 @@ typedef struct zxVLI_struct
   zxuc     m_lastBit;
   bool     m_isSigned;
 } zxVLI;
-/* Behaves as constructor would and assumes object has not been used already */
-ZXCORE void   zxVLI__init(  zxVLI *src, zxsm value );
-ZXCORE void   zxVLI__initU( zxVLI *src, zxum value );
-ZXV__INITCPY( zxVLI, ZXCORE, ZXCORE_CALL );
-ZXV__KILL(    zxVLI, ZXCORE, ZXCORE_CALL );
-/* Sizing */
-ZXV_SIZE( zxVLI, ZXCORE, ZXCORE_CALL );
-ZXV__SIZE( zxVLI, ZXCORE, ZXCORE_CALL zxVLI_bits );
-ZXV_MAX_SIZE( zxVLI, ZXCORE, ZXCORE_CALL );
-ZXV__MAX_SIZE( zxVLI, ZXCORE, ZXCORE_CALL zxVLI_max_bits );
-ZXCORE void   ZXCORE_CALL zxVLI_resize(  zxVLI *src, size_t setSize );
-ZXCORE void   ZXCORE_CALL zxVLI_resizeb( zxVLI *src, size_t setSize );
-ZXV_EMPTY(    zxVLI, ZXCORE, ZXCORE_CALL );
-ZXV_RESERVE(  zxVLI, ZXCORE, ZXCORE_CALL );
-ZXCORE void   ZXCORE_CALL zxVLI_grow(    zxVLI *src, size_t setSize );
-ZXCORE void   ZXCORE_CALL zxVLI_growb(   zxVLI *src, size_t setBits );
-ZXCORE void   ZXCORE_CALL zxVLI_shrink(  zxVLI *src, size_t setSize );
-ZXCORE void   ZXCORE_CALL zxVLI_shrinkb( zxVLI *src, size_t setSize );
-ZXV_SHRINK_TO_FIT( zxVLI,       ZXCORE, ZXCORE_CALL );
-ZXV_ERASE(         zxVLI,       ZXCORE, ZXCORE_CALL );
-ZXCORE void   ZXCORE_CALL zxVLI_eraseb( zxVLI *src,
-  size_t firstBit, size_t lastBit );
-ZXV_SWAP(          zxVLI,       ZXCORE, ZXCORE_CALL );
-ZXV_CLEAR(         zxVLI,       ZXCORE, ZXCORE_CALL );
-ZXV_COPY(          zxVLI, zxuc, ZXCORE, ZXCORE_CALL );
-ZXV_REVERSE(       zxVLI,       ZXCORE, ZXCORE_CALL );
-ZXV_AT(            zxVLI, zxuc, ZXCORE, ZXCORE_CALL );
-/* Returns src */
+
 #define ZXVLI___OP( FUN, DLL ) \
   DLL zxVLI* FUN( zxVLI *src, zxVLI const *val )
 #define ZXVLI__OP( FUN ) \
@@ -115,28 +88,6 @@ ZXV_AT(            zxVLI, zxuc, ZXCORE, ZXCORE_CALL );
 #define ZXVLI_CMPLT ZXVLI__CMP( LT )
 #define ZXVLI_CMPLE ZXVLI__CMP( LE )
 
-ZXVLI_OPEQL;
-
-ZXVLI_OPADD;  ZXVLI_OPAND;
-ZXVLI_OPDIV;  ZXVLI_OPMUL;
-ZXVLI_OPMVL;  ZXVLI_OPMVR;
-ZXVLI_OPNOT;  ZXVLI_OPOR;
-ZXVLI_OPSUB;  ZXVLI_OPXOR;
-
-ZXVLI_CPYADD; ZXVLI_CPYAND;
-ZXVLI_CPYDIV; ZXVLI_CPYMUL;
-ZXVLI_CPYMVL; ZXVLI_CPYMVR;
-ZXVLI_CPYNOT; ZXVLI_CPYOR;
-ZXVLI_CPYSUB; ZXVLI_CPYXOR;
-
-ZXVLI_CMPEQ;  ZXVLI_CMPNE;
-ZXVLI_CMPMT;  ZXVLI_CMPME;
-ZXVLI_CMPLT;  ZXVLI_CMPLE;
-
-/* Returns the max for the last byte if not zero */
-ZXCORE zxuc ZXCORE_CALL zxVLI_isNeg( zxVLI const *src );
-ZXV_ISEQUAL( zxVLI, ZXCORE, ZXCORE_CALL );
-
 ZXCORE zxus   zxGetUSht(    zxuc* src, size_t size );
 ZXCORE zxss   zxGetSSht(    zxuc* src, size_t size );
 ZXCORE zxul   zxGetULng(    zxuc* src, size_t size );
@@ -159,21 +110,21 @@ ZXNSO( vli )
   zxVLI const def;
   ZXV___INITCPY(      zxVLI,,       (ZXCORE_CALL *_initCpy)      );
   ZXV___KILL(         zxVLI,,       (ZXCORE_CALL *_kill)         );
-  ZXV__SIZE(          zxVLI,,       (ZXCORE_CALL *size)          );
-  ZXV__SIZE(          zxVLI,,       (ZXCORE_CALL *bits)          );
-  ZXV__MAX_SIZE(      zxVLI,,       (ZXCORE_CALL *max_size)      );
-  ZXV__MAX_SIZE(      zxVLI,,       (ZXCORE_CALL *max_bits)      );
-  void (ZXCORE_CALL *resize)(     zxVLI *src, size_t setSize );
-  void (ZXCORE_CALL *resizeb)(    zxVLI *src, size_t setBits );
+  zxui   (ZXCORE_CALL *size)(       zxVLI const *src );
+  size_t (ZXCORE_CALL *bits)(       zxVLI const *src );
+  zxui   (ZXCORE_CALL *max_size)(   zxVLI const *src );
+  size_t (ZXCORE_CALL *max_bits)(   zxVLI const *src );
+  void   (ZXCORE_CALL *resize)(     zxVLI *src, zxui   size );
+  void   (ZXCORE_CALL *resizeb)(    zxVLI *src, size_t bits );
   ZXV__EMPTY(         zxVLI,,       (ZXCORE_CALL *empty)         );
   ZXV__RESERVE(       zxVLI,,       (ZXCORE_CALL *reserve)       );
-  void (ZXCORE_CALL *grow)(       zxVLI *src, size_t setSize );
-  void (ZXCORE_CALL *growb)(      zxVLI *src, size_t setBits );
-  void (ZXCORE_CALL *shrink)(     zxVLI *src, size_t setSize );
-  void (ZXCORE_CALL *shrinkb)(    zxVLI *src, size_t setBits );
+  void (ZXCORE_CALL *grow)(       zxVLI *src, zxui   size );
+  void (ZXCORE_CALL *growb)(      zxVLI *src, size_t bits );
+  void (ZXCORE_CALL *shrink)(     zxVLI *src, zxui   size );
+  void (ZXCORE_CALL *shrinkb)(    zxVLI *src, size_t bits );
   ZXV__SHRINK_TO_FIT( zxVLI,,       (ZXCORE_CALL *shrink_to_fit) );
-  void (ZXCORE_CALL *assign)(     zxVLI *src, size_t setSize );
-  void (ZXCORE_CALL *assignb)(    zxVLI *src, size_t setBits );
+  void (ZXCORE_CALL *assign)(     zxVLI *src, zxui   size );
+  void (ZXCORE_CALL *assignb)(    zxVLI *src, size_t bits );
   ZXV__ERASE(         zxVLI,,       (ZXCORE_CALL *erase)         );
   void (ZXCORE_CALL *eraseb)(     zxVLI *src,
     size_t firstBIt, size_t lastBit );
@@ -207,40 +158,7 @@ ZXNSO( vli )
   ZXVLI_PTR__CMP( LT ); ZXVLI_PTR__CMP( LE );
 } zxn_vli;
 
-static zxn_vli const zxvli =
-{
-  zxVLI__init,    zxVLI__initU, {0},
-  zxVLI__initCpy, zxVLI__kill,
-  zxVLI_size,     zxVLI_bits,
-  zxVLI_max_size, zxVLI_max_bits,
-  zxVLI_resize,   zxVLI_resizeb,
-  zxVLI_empty,    zxVLI_reserve,
-  zxVLI_grow,     zxVLI_growb,
-  zxVLI_shrink,   zxVLI_shrinkb,
-  zxVLI_shrink_to_fit,
-  zxVLI_resize,   zxVLI_resizeb,
-  zxVLI_erase,    zxVLI_eraseb,
-  zxVLI_swap,     zxVLI_clear,
-  zxVLI_reverse,  zxVLI_copy,
-  zxVLI_at,       zxVLI_opEql,
-
-  zxVLI_opAdd,    zxVLI_opAnd,
-  zxVLI_opDiv,    zxVLI_opMul,
-  zxVLI_opMvl,    zxVLI_opMvr,
-  zxVLI_opNot,    zxVLI_opOr,
-  zxVLI_opSub,    zxVLI_opXor,
-
-  zxVLI_cpyAdd,   zxVLI_cpyAnd,
-  zxVLI_cpyDiv,   zxVLI_cpyMul,
-  zxVLI_cpyMvl,   zxVLI_cpyMvr,
-  zxVLI_cpyNot,   zxVLI_cpyOr,
-  zxVLI_cpySub,   zxVLI_cpyXor,
-
-  zxVLI_isNeg,    zxVLI_isEqual,
-  zxVLI_cmpEQ,    zxVLI_cmpNE,
-  zxVLI_cmpMT,    zxVLI_cmpME,
-  zxVLI_cmpLT,    zxVLI_cmpLE
-};
+extern zxn_vli const zxvli;
 
 ZXC_SHUT
 

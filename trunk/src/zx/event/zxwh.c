@@ -1,5 +1,5 @@
 #include "zxwh.h"
-ZXV_DEF( zxvWH, zxWH, ZXSYS, ZXSYS_CALL )
+ZXV_DEF( zxvWH, zxWH,, ZXSYS_CALL )
 zxn_wh const zxwh =
 {
   {0},

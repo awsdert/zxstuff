@@ -4,7 +4,7 @@ ZXCORE void zxVLI_shrink( zxVLI *src, size_t setSize )
 {
   size_t size = zxvli.size( src );
   ZXASSERT( !src ) return;
-  zxv.shrink( &src->m_core, setSize );
+  zxv.shrink( &src->m_core, setSize & ZXUINT_MAX );
   src->m_bits = CHAR_BIT * setSize;
   src->m_lastByte = setSize - 1;
   src->m_lastBit = zxuc_last;
@@ -15,10 +15,10 @@ ZXCORE void zxVLI_shrinkb( zxVLI *src, size_t setBits )
   ZXASSERT( !src ) return;
   if ( setBits >= src->m_bits )
     return;
-  size = zxc_size_udiv( setBits, CHAR_BIT, &bits );
+  size = zxdivu_size( setBits, CHAR_BIT, &bits );
   if ( bits )
     ++size;
-  zxv.shrink( &src->m_core, size );
+  zxv.shrink( &src->m_core, size & ZXUINT_MAX );
   src->m_bits     = setBits;
   src->m_lastByte = size - 1;
   if ( bits )

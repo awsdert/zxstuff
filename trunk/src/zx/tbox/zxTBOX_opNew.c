@@ -1,5 +1,5 @@
 #include "zxtbox.h"
-ZXSYS zxTBOX* zxTBOX_opNew( zxWINDOW *win )
+zxTBOX* zxTBOX_opNew( zxWINDOW *win )
 {
   zxTBOX *tbox = (zxTBOX*)mnew( sizeof( zxTBOX ), NULL );
   zxWH *wh = NULL;
@@ -15,6 +15,7 @@ ZXSYS zxTBOX* zxTBOX_opNew( zxWINDOW *win )
     zxwin.opDel( win );
     return NULL;
   }
+  wh->win.subType = zxWIN_TBOX;
   wh->onEvent = zxTBOX_onEvent;
   return tbox;
 }

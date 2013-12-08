@@ -22,10 +22,6 @@ ZXC_OPEN
 #define ZXALL 32
 #endif
 
-#if defined( __CONSOLE ) || defined( _CONSOLE ) || defined( CONSOLE )
-#define ZXCONSOLE
-#endif
-
 #if ZXMSW
 
 #include <wchar.h>

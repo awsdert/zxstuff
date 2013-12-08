@@ -1,0 +1,134 @@
+# depslib dependency file v1.0
+1382820378 source:c:\me\prjs\cpp\zxstuff\svn\trunk\zxcmd.c
+	<zx/std/text.h>
+	<zx/std/io.h>
+
+1384325939 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\text.h
+	"char.h"
+	"wide.h"
+
+1385852547 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\char.h
+	"_text.h"
+
+1384325939 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\_text.h
+	"vector.h"
+	"math.h"
+	<wchar.h>
+	<string>
+	<string.h>
+	<tchar.h>
+
+1385851555 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector.h
+	"vector/c.h"
+	"vector/cpp.h"
+	"vector/size_t.h"
+	"vector/zxui.h"
+
+1385888146 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\c.h
+	"def_fun.h"
+
+1384936535 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\def_fun.h
+	"dec_fun.h"
+
+1385898596 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\dec_fun.h
+	"../lib.h"
+	"../math.h"
+
+1385228869 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\lib.h
+	"int.h"
+	<cstdlib>
+	<stdlib.h>
+
+1384326239 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\int.h
+	"../limits.h"
+	<cstdint>
+	<stdint.h>
+
+1384335030 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\limits.h
+	"limits/all.h"
+	"limits/char.h"
+	"limits/short.h"
+	"limits/long.h"
+	"limits/ill.h"
+	"limits/int.h"
+	"limits/imax.h"
+	"limits/size_t.h"
+	"limits/bool.h"
+	"std/arch.h"
+
+1384335155 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\limits\all.h
+	"../dll.h"
+	<cstddef>
+	<climits>
+	<stddef.h>
+	<limits.h>
+
+1384325497 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\dll.h
+	"sys.h"
+
+1386498690 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\sys.h
+	"compiler.h"
+	"std/arch.h"
+	<wchar.h>
+	<windows.h>
+	<windowsx.h>
+
+1384459121 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\compiler.h
+	"stdc.h"
+
+1385849454 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\stdc.h
+	<stddef.h>
+	<cassert>
+	<assert.h>
+
+1382508993 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\arch.h
+
+1384335167 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\limits\char.h
+	"all.h"
+
+1384335233 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\limits\short.h
+	"char.h"
+
+1384335223 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\limits\long.h
+	"short.h"
+
+1384335201 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\limits\ill.h
+	"all.h"
+
+1384335211 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\limits\int.h
+	"all.h"
+
+1384335194 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\limits\imax.h
+	"ill.h"
+	"int.h"
+
+1384335244 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\limits\size_t.h
+	"all.h"
+
+1384335151 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\limits\bool.h
+	"all.h"
+
+1385907087 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\math.h
+	"int.h"
+
+1384325526 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\cpp.h
+	"c.h"
+
+1384936887 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\size_t.h
+	"cpp.h"
+
+1385851293 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\vector\zxui.h
+	"cpp.h"
+
+1385852772 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\wide.h
+	"_text.h"
+
+1377278705 c:\me\prjs\cpp\zxstuff\svn\trunk\include\zx\std\io.h
+	"../sys.h"
+	<cstdio>
+	<stdio.h>
+	<io.h>
+	<cstdio>
+	<stdio.h>
+	<io.h>
+

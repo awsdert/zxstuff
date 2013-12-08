@@ -2,7 +2,8 @@
 #include <zx/std/vector.h>
 ZXV_POP( zxVECTOR, void*, ZXCORE, ZXCORE_CALL )
 {
-  size_t i, j, stop = zxv.size( src ), size;
+  zxui i, stop = zxv.size( src );
+  size_t j, size;
   zxuc *SRC;
   if ( zxv.empty( src ) ) return;
   SRC = (zxuc*)src->m_data;
